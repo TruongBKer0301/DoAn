@@ -1,0 +1,114 @@
+﻿@model IEnumerable<LapTopBD.Models.Category>
+
+<!-- Navbar Start -->
+<div class="container-fluid menu-parent">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="menu-container">
+                <div class="menu">
+                    <ul>
+                        <li><a class="title-menu" href="@Url.Action("Index", "Home")">Trang Chủ</a></li>
+                        <li>
+                            <a class="title-menu" href="@Url.Action("Index", "Shop")">Sản Phẩm</a>
+                            <ul>
+                                <!-- MacBook -->
+                                <li>
+                                    <a href="#">MacBook</a> <!-- Ghi cứng -->
+                                    <ul>
+                                        @foreach (var category in Model.Where(c => c.CategoryName == "MACBOOK"))
+                                        {
+                                            @foreach (var subCategory in category.SubCategories)
+                                            {
+                                                <li>
+                                                    <a href="#">@subCategory.SubCategoryName</a> <!-- Hiển thị danh mục con -->
+                                                </li>
+                                            }
+                                        }
+                                    </ul>
+                                </li>
+                                <!-- Asus -->
+                                <li>
+                                    <a href="#">Asus</a> <!-- Ghi cứng -->
+                                    <ul>
+                                        @foreach (var category in Model.Where(c => c.CategoryName == "ASUS"))
+                                        {
+                                            @foreach (var subCategory in category.SubCategories)
+                                            {
+                                                <li>
+                                                    <a href="#">@subCategory.SubCategoryName</a> <!-- Hiển thị danh mục con -->
+                                                </li>
+                                            }
+                                        }
+                                    </ul>
+                                </li>
+                                <!-- Dell -->
+                                <li>
+                                    <a href="#">Dell</a> <!-- Ghi cứng -->
+                                    <ul>
+                                        @foreach (var category in Model.Where(c => c.CategoryName == "DELL"))
+                                        {
+                                            @foreach (var subCategory in category.SubCategories)
+                                            {
+                                                <li>
+                                                    <a href="#">@subCategory.SubCategoryName</a> <!-- Hiển thị danh mục con -->
+                                                </li>
+                                            }
+                                        }
+                                    </ul>
+                                </li>
+                                <!-- Lenovo -->
+                                <li>
+                                    <a href="#">Lenovo</a> <!-- Ghi cứng -->
+                                    <ul>
+                                        @foreach (var category in Model.Where(c => c.CategoryName == "LENOVO"))
+                                        {
+                                            @foreach (var subCategory in category.SubCategories)
+                                            {
+                                                <li>
+                                                    <a href="#">@subCategory.SubCategoryName</a> <!-- Hiển thị danh mục con -->
+                                                </li>
+                                            }
+                                        }
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="title-menu" href="#">Giới Thiệu</a>
+                            @* <ul>
+                                <li><a href="#">Today</a></li>
+                                <li><a href="#">Calendar</a></li>
+                                <li><a href="#">Sport</a></li>
+                            </ul> *@
+                        </li>
+                        <li>
+                            <a class="title-menu" href="#">Liên Hệ</a>
+                            @* <ul>
+                                <li>
+                                    <a href="#">School</a>
+                                    <ul>
+                                        <li><a href="#">Lidership</a></li>
+                                        <li><a href="#">History</a></li>
+                                        <li><a href="#">Locations</a></li>
+                                        <li><a href="#">Careers</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Study</a>
+                                    <ul>
+                                        <li><a href="#">Undergraduate</a></li>
+                                        <li><a href="#">Masters</a></li>
+                                        <li><a href="#">International</a></li>
+                                        <li><a href="#">Online</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Empty sub</a></li>
+                            </ul> *@
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Navbar End -->

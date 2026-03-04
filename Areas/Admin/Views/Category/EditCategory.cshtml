@@ -1,0 +1,35 @@
+﻿@model LapTopBD.ViewModels.CategoryViewModel
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Chỉnh sửa Danh mục";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 col-sm-12 mx-auto">
+            <h2 class="text-center mb-4">Chỉnh sửa Danh mục</h2>
+
+            <form id="editCategoryForm">
+                <input type="hidden" asp-for="Id" />
+
+                <div class="form-group">
+                    <label for="CategoryName">Tên danh mục</label>
+                    <input asp-for="CategoryName" class="form-control" id="CategoryName" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="Description">Mô tả</label>
+                    <textarea asp-for="CategoryDescription" class="form-control" id="Description"></textarea>
+                </div>
+                <div class="mt-3 d-flex justify-content-between">
+                    <button type="button" id="saveCategoryBtn" class="btn btn-primary btn-block">Lưu</button>
+                    <a asp-action="ListCategory" class="btn btn-secondary btn-block">Hủy</a>
+                </div>
+
+                <div id="message" class="mt-3"></div>
+            </form>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,63 @@
+﻿@model LapTopBD.Models.ViewModels.Admin.AdminDashboardViewModel
+
+@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Admin Dashboard</h2>
+
+    <div class="row">
+        <!-- Card: Tổng số người dùng -->
+        <div class="col-md-4 mb-4">
+            <div class="card text-white bg-primary shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-white">Tổng số người dùng</h5>
+                    <p class="card-text display-4">@Model.TotalUsers</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Tổng số đơn hàng -->
+        <div class="col-md-4 mb-4">
+            <div class="card text-white bg-success shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title  text-white">Tổng số đơn hàng</h5>
+                    <p class="card-text display-4">@Model.TotalOrders</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Tổng số sản phẩm -->
+        <div class="col-md-4 mb-4">
+            <div class="card text-white bg-info shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title  text-white">Tổng số sản phẩm</h5>
+                    <p class="card-text display-4">@Model.TotalProducts</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border: none;
+        border-radius: 10px;
+        transition: transform 0.3s;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+    .card-title {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+    }
+
+    .card-text {
+        font-weight: bold;
+    }
+</style>

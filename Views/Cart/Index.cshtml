@@ -1,0 +1,111 @@
+﻿@model IEnumerable<LapTopBD.Models.CartItem>
+
+@* 
+<!-- Page Header Start -->
+<div class="container-fluid bg-secondary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+        <h1 class="font-weight-semi-bold text-uppercase mb-3">Giỏ Hàng</h1>
+        <div class="d-inline-flex">
+            <p class="m-0"><a href="@Url.Action("Index", "Home")">Trang Chủ</a></p>
+            <p class="m-0 px-2">-</p>
+            <p class="m-0">Giỏ Hàng</p>
+        </div>
+    </div>
+</div> *@
+<!-- Cart Start -->
+<div class="custom-container pt-5">
+    <div class="row px-xl-5">
+        <div class="col-lg-8 table-responsive mb-5">
+            <table class="custom-table text-center mb-0">
+                <thead class="custom-table-head">
+                    <tr>
+                        <th>Sản phẩm</th>
+                        <th>Giá</th>
+                        <th>Số lượng</th>
+                        <th>Tổng</th>
+                        <th>Xóa</th>
+                    </tr>
+                </thead>
+                <tbody class="align-middle">
+                    @if (Model.Any())
+                    {
+                        foreach (var item in Model)
+                        {
+                            var total = item.Quantity * item.Product ?.ProductPrice;
+                            <tr class="custom-table-row">
+                                <td class="align-middle">
+                                    <img src="@item.Product?.ProductImage1" alt="" style="width: 50px;"> @item.Product?.ProductName
+                                </td>
+                                <td class="align-middle custom-price">@item.Product?.ProductPrice.ToString("#,##0 VNĐ")</td>
+                                <td class="align-middle">
+                                    <div class="custom-quantity-group mx-auto" data-price="@item.Product.ProductPrice" data-shipping-charge="@item.Product.ShippingCharge">
+                                        <div class="input-group-btn">
+                                            <button class="custom-quantity-btn btn-minus" data-id="@item.Id">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+                                        </div>
+                                        <input type="text" class="custom-quantity-input" value="@item.Quantity">
+                                        <div class="input-group-btn">
+                                            <button class="custom-quantity-btn btn-plus" data-id="@item.Id">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="align-middle">
+                                    <span class="custom-total">@((item.Product.ProductPrice * item.Quantity).ToString("#,##0 VNĐ"))</span>
+                                </td>
+                                <td class="align-middle">
+                                    <button class="custom-btn btn-remove" data-id="@item.Id">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5" class="text-center">Giỏ hàng của bạn đang trống!</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Phần Tóm Tắt Giỏ Hàng -->
+        <div class="col-lg-4">
+            <form class="mb-5" action="">
+                <div class="input-group">
+                    <input type="text" class="custom-input p-4" placeholder="Mã giảm giá">
+                    <div class="input-group-append">
+                        <button class="custom-btn mt-2">Áp dụng</button>
+                    </div>
+                </div>
+            </form>
+            <div class="custom-card mb-5">
+                <div class="custom-card-header">
+                    <h4 class="font-weight-semi-bold m-0 text-white">Tóm tắt giỏ hàng</h4>
+                </div>
+                <div class="custom-card-body">
+                    <div class="d-flex justify-content-between mb-3 pt-1">
+                        <h6 class="font-weight-medium">Tạm tính</h6>
+                        <h6 id="subtotal" class="custom-price">@Model.Sum(item => item.Quantity * item.Product.ProductPrice).ToString("#,##0 VNĐ")</h6>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <h6 class="font-weight-medium">Phí vận chuyển</h6>
+                        <h6 id="shipping" class="custom-price">@Model.Sum(item => item.Product.ShippingCharge).ToString("#,##0 VNĐ")</h6>
+                    </div>
+                </div>
+                <div class="custom-card-footer">
+                    <div class="d-flex justify-content-between mt-2">
+                        <h5 class="font-weight-bold p-2">Tổng cộng</h5>
+                        <h5 id="grand-total" class="custom-total">@((Model.Sum(item => item.Quantity * item.Product.ProductPrice) + Model.Sum(item => item.Product.ShippingCharge)).ToString("#,##0 VNĐ"))</h5>
+                    </div>
+                    <a href="@Url.Action("Checkout", "Cart")" class="custom-btn custom-btn-block my-3">Tiến hành thanh toán</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Cart End -->

@@ -1,0 +1,92 @@
+﻿@model List<LapTopBD.ViewModels.BannerViewModel>
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Quản lý Banner";
+}
+
+<h1 class="text-center">Quản lý Banner</h1>
+
+<!-- Nút mở modal -->
+<button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addBannerModal">Thêm Banner</button>
+
+<!-- Modal thêm/sửa banner -->
+<div class="modal fade" id="addBannerModal" tabindex="-1" aria-labelledby="addBannerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addBannerModalLabel">Thêm Banner</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addBannerForm" enctype="multipart/form-data">
+                    <input type="hidden" id="bannerId" name="Id" value="0" />
+                    <div class="form-group">
+                        <label for="bannerTitle">Tiêu đề</label>
+                        <input type="text" class="form-control" id="bannerTitle" name="Title" required>
+                    </div>
+                    <div class="banner-group">
+                        <label for="bannerImage">Hình ảnh</label>
+                        <div class="banner-upload-area">
+                            <input type="file" class="banner-file-input" id="bannerImage" name="ImageFile" accept="image/*">
+                            <span class="banner-upload-hint">
+                                <i class="ri-image-add-fill"></i>
+                            </span>
+                            <img id="bannerPreview" class="banner-image-preview hidden" src="#" alt="Ảnh xem trước">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bannerStatus">Trạng thái</label>
+                        <select class="form-control" id="bannerStatus" name="Status">
+                            <option value="true">Hiển thị</option>
+                            <option value="false">Ẩn</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-primary mt-3" id="saveBannerBtn">Lưu</button> <!-- Đổi type="submit" thành type="button" -->
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bảng danh sách banner -->
+<table id="sortable" class="list" cellspacing="0">
+    <tr class="parent-title">
+        <th>Hình ảnh</th>
+        <th>Tiêu đề</th>
+        <th>Trạng thái</th>
+        <th>Vị trí</th>
+        <th>Hành động</th>
+    </tr>
+    <tbody>
+        @foreach (var banner in Model)
+        {
+            <tr data-id="@banner.Id">
+                <td>
+                    <img width="150" src="@banner.ImageUrl" alt="@banner.Title" class="drag-handle" />
+                </td>
+                <td class="title">
+                    <span>@banner.Title</span>
+                </td>
+                <td class="status">
+                    <span class="@(banner.Status ? "active" : "inactive")">
+                        @(banner.Status ? "Hiển thị" : "Ẩn")
+                    </span>
+                </td>
+                <td class="create-date">
+                    <span>@banner.Position</span>
+                </td>
+                <td class="action">
+                    <a href="@Url.Action("EditBanner", "Banner", new { id = banner.Id })">
+                        <i class="ri-pencil-line"></i>
+                    </a>
+                    <a href="javascript:void(0);" class="delete-banner" data-id="@banner.Id">
+                        <i class="ri-delete-bin-6-line"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="mt-3" id="message"></div>
