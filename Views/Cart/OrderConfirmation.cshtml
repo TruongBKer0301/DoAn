@@ -1,0 +1,66 @@
+﻿@model List<LapTopBD.Models.Order>
+@{
+    ViewData["Title"] = "Xác nhận đơn hàng";
+}
+
+<!-- Page Header Start -->
+<div class="container-fluid bg-secondary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+        <h1 class="font-weight-semi-bold text-uppercase mb-3">Xác nhận đơn hàng</h1>
+        <div class="d-inline-flex">
+            <p class="m-0"><a href="@Url.Action("Index", "Home")">Trang Chủ</a></p>
+            <p class="m-0 px-2">-</p>
+            <p class="text-danger m-0">Xác nhận đơn hàng</p>
+        </div>
+    </div>
+</div>
+
+<div class="custom-container">
+    <h3 class="mb-4">Cảm ơn bạn đã đặt hàng!</h3>
+    <div class="custom-table-container">
+        <table class="custom-table">
+            <thead class="custom-table-head">
+                <tr>
+                    <th>Mã đơn hàng</th>
+                    <th>Sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Tổng tiền</th>
+                    <th>Phương thức thanh toán</th>
+                    <th>Trạng thái</th>
+                    <th>Ngày đặt</th>
+                    <th>Hủy đơn</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    <tr class="custom-table-row" data-order-id="@order.Id">
+                        <td>@order.Id</td>
+                        <td>@order.Product.ProductName</td>
+                        <td>@order.Quantity</td>
+                        <td class="custom-total">@order.TotalPrice.ToString("N0") VNĐ</td>
+                        <td>@order.PaymentMethod</td>
+                        <td class="order-status">@order.OrderStatus</td>
+                        <td>@order.OrderDate.ToString("dd/MM/yyyy")</td>
+                        <td class="cancel-action">
+                            @if (order.OrderStatus == "Pending")
+                            {
+                                <button class="custom-btn btn-cancel" data-id="@order.Id">Hủy</button>
+                            }
+                            else if (order.OrderStatus == "Cancelled")
+                            {
+                                <span class="custom-text-muted text-success">Đã hủy</span>
+                            }
+                            else
+                            {
+                                <span class="custom-text-muted">Không thể hủy</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="mt-2" id="message"></div>
+    <a href="@Url.Action("Index", "Home")" class="custom-btn">Tiếp tục mua sắm</a>
+</div>

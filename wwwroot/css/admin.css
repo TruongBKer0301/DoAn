@@ -1,0 +1,300 @@
+﻿@font-face {
+    font-family: 'lcgallery';
+    src: url('/wwwroot/css/fonts/lc_lightbox.eot');
+    src: url('/wwwroot/css/fonts/lc_lightbox.eot#iefix') format('embedded-opentype'), url('/wwwroot/css/fonts/lc_lightbox.ttf') format('truetype'), url('/wwwroot/css/fonts/lc_lightbox.woff') format('woff'), url('/wwwroot/css/fonts/lc_lightbox.svg#lcgallery') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+.text-danger {
+    color: #dc3545 !important;
+}
+
+/*#region DashBoard Admin */
+/* Dashboard Card */
+.dashboard-card {
+    border: none;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+    .dashboard-card .card-body {
+        padding: 20px;
+    }
+
+    .dashboard-card h5 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+        opacity: 0.9;
+    }
+
+    .dashboard-card h2 {
+        font-size: 2.5rem;
+        margin: 0;
+    }
+
+    .dashboard-card i {
+        opacity: 0.8;
+    }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dashboard-card h2 {
+        font-size: 2rem;
+    }
+
+    .dashboard-card i {
+        font-size: 2.5rem;
+    }
+}
+
+
+/*#endregion */
+
+/*#region Cấu trúc bảng của admin table */
+
+.list {
+    width: 80%;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin: auto;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+    .list tr th {
+        background: #2b59f7;
+        color: #fff;
+        text-align: center;
+        padding: 15px 5px;
+    }
+
+    .list tr td {
+        padding: 10px 5px;
+        text-align: center;
+    }
+
+        /* Avatar */
+        .list tr td.avatar img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+        }
+
+        /* Fullname + Role */
+        .list tr td.title span:first-child {
+            font-weight: 600;
+            color: #15ebf9;
+            display: block;
+        }
+
+        .list tr td.title span:last-child {
+            color: #777;
+        }
+
+        /* Status */
+        .list tr td.status span {
+            background: #777;
+            color: #fff;
+            border-radius: 15px;
+            padding: 4px 10px;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+            .list tr td.status span.active {
+                background: #1df21f;
+            }
+
+            .list tr td.status span.inactive {
+                background: #ff0802;
+            }
+
+            .list tr td.status span.pending {
+                background: #f39c12;
+            }
+
+        /* Actions */
+        .list tr td.action {
+            width: 150px;
+            text-align: center;
+        }
+
+            .list tr td.action a {
+                width: 30px;
+                height: 30px;
+                text-decoration: none;
+                border-radius: 5px;
+                background: #8B6D3B;
+                color: #fff;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                margin: 0 3px;
+            }
+
+                .list tr td.action a:nth-child(1) {
+                    background: #1070ff;
+                }
+
+                .list tr td.action a:nth-child(2) {
+                    background: #f42727;
+                }
+
+
+/*#endregion */
+
+/*#region Custom Xem trước ảnh */
+
+.upload-container {
+    text-align: center;
+}
+
+.upload-box {
+    width: 100%;
+    max-width: 200px; /* Giới hạn chiều rộng tối đa */
+    height: 150px;
+    border: 2px dashed #aaa;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden; /* Ngăn nội dung tràn ra ngoài */
+    cursor: pointer;
+    background: #f8f8f8;
+    transition: 0.3s;
+}
+
+    .upload-box:hover {
+        border-color: #333;
+    }
+
+    .upload-box img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+        .upload-box img.d-none {
+            display: none;
+        }
+
+    .upload-box span {
+        font-size: 14px;
+        color: #666;
+    }
+
+.form-group {
+    position: relative;
+    overflow: visible;
+}
+
+
+.form-control-file, .avatar-input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    z-index: 10; /* Đảm bảo chỉ nằm trên .upload-box */
+}
+
+.upload-instruction i {
+    font-size: 45px;
+    color: #666666bd;
+    margin-top: 10px;
+    opacity: 0.5;
+}
+
+.avatar-upload-container .upload-box {
+    max-width: 200px;
+    height: 200px;
+    margin: 0 auto;
+}
+
+    .avatar-upload-container .upload-box img {
+        border-radius: 10px;
+        border: 3px solid #f6eeee;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+        .avatar-upload-container .upload-box img:hover {
+            border-color: #0056b3;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+.avatar-upload-container label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+    display: block;
+    font-family: 'Arial', sans-serif;
+}
+
+
+/*#endregion */
+
+
+
+
+/* CSS riêng cho banner */
+.banner-group {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.banner-upload-area {
+    width: 100%;
+    max-width: 100%; /* Banner full width */
+    height: 200px;
+    border: 2px dashed #aaa;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background: #f8f8f8;
+    transition: 0.3s;
+}
+
+    .banner-upload-area:hover {
+        border-color: #333;
+    }
+
+.banner-file-input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.banner-upload-hint i {
+    font-size: 45px;
+    color: #666666bd;
+    margin-top: 10px;
+    opacity: 0.5;
+}
+
+.banner-image-preview {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+    .banner-image-preview.hidden {
+        display: none;
+    }

@@ -1,0 +1,166 @@
+﻿@model LapTopBD.Models.ViewModels.CheckoutViewModel
+@{
+    ViewData["Title"] = "Thanh toán";
+}
+
+<!-- Page Header Start -->
+<div class="container-fluid bg-secondary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+        <h1 class="font-weight-semi-bold text-uppercase mb-3">Thanh Toán</h1>
+        <div class="d-inline-flex">
+            <p class="m-0"><a href="@Url.Action("Index", "Home")">Trang Chủ</a></p>
+            <p class="m-0 px-2">-</p>
+            <p class="text-danger m-0">Thanh toán</p>
+        </div>
+    </div>
+</div>
+
+<div class="custom-container">
+    <div class="row">
+        <!-- Thông tin giao hàng -->
+        <div class="col-lg-6">
+            <h3 class="mb-4">Thông tin giao hàng</h3>
+            <form id="checkoutForm">
+                <div class="custom-form-group">
+                    <label>Họ tên</label>
+                    <input type="text" class="custom-input" name="Name" value="@Model.Name" required />
+                    <small class="custom-text-muted">Kiểm tra và chỉnh sửa nếu cần.</small>
+                </div>
+                <div class="custom-form-group">
+                    <label>Số điện thoại</label>
+                    <input type="text" class="custom-input" name="ContactNo" value="@Model.ContactNo" required />
+                    <small class="custom-text-muted">Kiểm tra và chỉnh sửa nếu cần.</small>
+                </div>
+                <div class="custom-form-group">
+                    <label>Thành phố <span class="custom-total">*</span></label>
+                    <input type="text" class="custom-input" name="City" value="@Model.City" required />
+                </div>
+                <div class="custom-form-group">
+                    <label>Quận/Huyện <span class="custom-total">*</span></label>
+                    <input type="text" class="custom-input" name="District" value="@Model.District" required />
+                </div>
+                <div class="custom-form-group">
+                    <label>Phường/Xã <span class="custom-total">*</span></label>
+                    <input type="text" class="custom-input" name="Ward" value="@Model.Ward" required />
+                </div>
+                <div class="custom-form-group">
+                    <label>Địa chỉ cụ thể <span class="custom-total">*</span></label>
+                    <input type="text" class="custom-input" name="Address" value="@Model.Address" required />
+                    <small class="custom-text-muted">Ví dụ: Số 123, Đường ABC.</small>
+                </div>
+                <div class="custom-form-group">
+                    <label>Phương thức thanh toán</label>
+                    <select class="custom-select" name="PaymentMethod" required>
+                        <option value="COD">Thanh toán khi nhận hàng (COD)</option>
+                        <option value="Online">Thanh toán trực tuyến</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+
+        <!-- Thông tin giỏ hàng -->
+        <div class="col-lg-6">
+            <h3 class="mb-4">Thông tin đơn hàng</h3>
+            <table class="custom-table">
+                <thead class="custom-table-head">
+                    <tr>
+                        <th>Ảnh sản phẩm</th>
+                        <th>Sản phẩm</th>
+                        <th>Số lượng</th>
+                        <th>Giá</th>
+                        <th>Tổng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.CartItems)
+                    {
+                        <tr class="custom-table-row">
+                            <td><img  width="150" src="@item.ProductImage"/></td>
+                            <td>@item.ProductName</td>
+                            <td>@item.Quantity</td>
+                            <td class="custom-price">@item.ProductPrice.ToString("N0") VNĐ</td>
+                            <td class="custom-total">@item.Subtotal.ToString("N0") VNĐ</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3">Tổng cộng</td>
+                        <td class="custom-total">@Model.TotalPrice.ToString("N0") VNĐ</td>
+                    </tr>
+                </tfoot>
+            </table>
+            <button type="button" class="custom-btn custom-btn-block" onclick="submitCheckout()">Đặt hàng</button>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function submitCheckout() {
+            var formData = $('#checkoutForm').serializeArray();
+            var data = {};
+            formData.forEach(item => {
+                data[item.name] = item.value;
+            });
+
+            // Kiểm tra các trường bắt buộc trước khi gửi
+            if (!data.City || data.City.trim() === '') {
+                showMessage('Vui lòng nhập thành phố!', 'danger');
+                return;
+            }
+            if (!data.District || data.District.trim() === '') {
+                showMessage('Vui lòng nhập quận/huyện!', 'danger');
+                return;
+            }
+            if (!data.Ward || data.Ward.trim() === '') {
+                showMessage('Vui lòng nhập phường/xã!', 'danger');
+                return;
+            }
+            if (!data.Address || data.Address.trim() === '') {
+                showMessage('Vui lòng nhập địa chỉ cụ thể!', 'danger');
+                return;
+            }
+            if (!data.PaymentMethod || data.PaymentMethod.trim() === '') {
+                showMessage('Vui lòng chọn phương thức thanh toán!', 'danger');
+                return;
+            }
+
+            // Debug: Kiểm tra dữ liệu gửi đi
+            console.log("Dữ liệu gửi đi:", data);
+
+            $.ajax({
+                url: '@Url.Action("Checkout", "Cart")',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                success: function (response) {
+                    console.log("Phản hồi từ server:", response);
+                    if (response.success) {
+                        showMessage(response.message, 'success');
+                        setTimeout(function () {
+                            window.location.href = response.redirectUrl || '/';
+                        }, 2000);
+                    } else {
+                        showMessage(response.message, 'danger');
+                    }
+                },
+                error: function (xhr) {
+                    console.error('AJAX Error:', xhr.responseText);
+                    showMessage('Đã xảy ra lỗi! Vui lòng thử lại.', 'danger');
+                }
+            });
+        }
+
+        function showMessage(message, type) {
+            var messageDiv = $('#message');
+            if (messageDiv.length === 0) {
+                messageDiv = $('<div id="message"></div>').insertAfter('#checkoutForm');
+            }
+            messageDiv.html(`<div class="alert alert-${type}">${message}</div>`);
+            setTimeout(function () {
+                messageDiv.html('');
+            }, 3000);
+        }
+    </script>
+}

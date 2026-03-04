@@ -1,0 +1,144 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!-- Product New -->
+<div class="container-fluid">
+    <div class="text-center">
+        <h2 class="section-title px-5"><span class="px-2">Sản phẩm mới</span></h2>
+    </div>
+    <div class="owl-carousel product-carousel owl-theme product-new">
+        @if (ViewBag.NewProducts != null && ViewBag.NewProducts.Count > 0)
+        {
+            @foreach (var product in (ViewBag.NewProducts as List<LapTopBD.ViewModels.ProductViewModel>) ?? new List<LapTopBD.ViewModels.ProductViewModel>())
+            {
+                // Sửa lại logic kiểm tra hasDiscount
+                var hasDiscount = product.ProductPriceBeforeDiscount.HasValue && product.ProductPriceBeforeDiscount.Value > product.ProductPrice;
+                var discountPercentage = hasDiscount ? (1 - product.ProductPrice / product.ProductPriceBeforeDiscount.GetValueOrDefault()) * 100 : 0;
+
+                <div class="item" data-aos="fade-up" data-aos-duration="2500">
+                    <div class="card shadow h-100">
+                        <div class="ratio ratio-1x1">
+                            <a href="@Url.Action("Detail", "Home", new { slug = product.Slug })">
+                                <img src="@product.ProductImage1" alt="@product.ProductName" />
+                            </a>
+                            @if (product.ProductAvailability == "Hết hàng")
+                            {
+                                <span class="discount-tag out-of-stock">Hết hàng</span>
+                            }
+                            else if (hasDiscount)
+                            {
+                                <span class="discount-tag">Giảm @((int)discountPercentage)%</span>
+                            }
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                <a href="@Url.Action("Detail", "Home", new { slug = product.Slug })">
+                                    <p class="card-text">@product.ProductName</p>
+                                </a>
+                            </div>
+                            <div class="price-wrapper">
+                                @if (hasDiscount)
+                                {
+                                    <div class="original-price">@(product.ProductPriceBeforeDiscount?.ToString("N0") ?? "") VND</div>
+                                    <div class="discount-price">@product.ProductPrice.ToString("N0") VND</div>
+                                }
+                                else
+                                {
+                                    <div class="original-price">@product.ProductPrice.ToString("N0") VND</div>
+                                }
+                            </div>
+                            @if (product.ProductAvailability == "Hết hàng")
+                            {
+                                <button class="btn-add-to-cart bg-danger" id="add-to-cart-btn">
+                                    <i class=" ri-phone-fill"></i> Tạm thời hết hàng
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="btn-add-to-cart" id="add-to-cart-btn" data-product-id="@product.Id">
+                                    <i class="fas fa-shopping-cart"></i> Thêm vào giỏ hàng
+                                </button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p>Không có sản phẩm mới nào để hiển thị.</p>
+        }
+    </div>
+</div>
+<!-- Product New End -->
+<!-- Product Hot Deal -->
+<div class="container-fluid">
+    <div class="text-center">
+        <h2 class="section-title px-5"><span class="px-2">Hot Deal</span></h2>
+    </div>
+    <div class="owl-carousel product-carousel owl-theme product-hot-deal">
+        @if (ViewBag.HotDeals != null && ViewBag.HotDeals.Count > 0)
+        {
+            @foreach (var product in (ViewBag.HotDeals as List<LapTopBD.ViewModels.ProductViewModel>) ?? new List<LapTopBD.ViewModels.ProductViewModel>())
+            {
+                // Sửa lại logic kiểm tra hasDiscount
+                var hasDiscount = product.ProductPriceBeforeDiscount.HasValue && product.ProductPriceBeforeDiscount.Value > product.ProductPrice;
+                var discountPercentage = hasDiscount ? (1 - product.ProductPrice / product.ProductPriceBeforeDiscount.GetValueOrDefault()) * 100 : 0;
+
+                <div class="item" data-aos="fade-up" data-aos-duration="2500">
+                    <div class="card shadow h-100">
+                        <div class="ratio ratio-1x1">
+                            <a href="@Url.Action("Detail", "Home", new { slug = product.Slug })">
+                                <img src="@product.ProductImage1" alt="@product.ProductName" />
+                            </a>
+                            @if (product.ProductAvailability == "Hết hàng")
+                            {
+                                <span class="discount-tag out-of-stock">Hết hàng</span>
+                            }
+                            else if (hasDiscount)
+                            {
+                                <span class="discount-tag">Giảm @((int)discountPercentage)%</span>
+                            }
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                <a href="@Url.Action("Detail", "Home", new { slug = product.Slug })">
+                                    <p class="card-text">@product.ProductName</p>
+                                </a>
+                            </div>
+                            <div class="price-wrapper">
+                                @if (hasDiscount)
+                                {
+                                    <div class="original-price">@(product.ProductPriceBeforeDiscount?.ToString("N0") ?? "") VND</div>
+                                    <div class="discount-price">@product.ProductPrice.ToString("N0") VND</div>
+                                }
+                                else
+                                {
+                                    <div class="original-price">@product.ProductPrice.ToString("N0") VND</div>
+                                }
+                            </div>
+                            @if (product.ProductAvailability == "Hết hàng")
+                            {
+                                <button class="btn-add-to-cart bg-danger" id="add-to-cart-btn">
+                                    <i class=" ri-phone-fill"></i> Tạm thời hết hàng
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="btn-add-to-cart" id="add-to-cart-btn" data-product-id="@product.Id">
+                                    <i class="fas fa-shopping-cart"></i> Thêm vào giỏ hàng
+                                </button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p>Không có sản phẩm khuyến mãi nào để hiển thị.</p>
+        }
+    </div>
+</div>
+<!-- Product Hot Deal End -->

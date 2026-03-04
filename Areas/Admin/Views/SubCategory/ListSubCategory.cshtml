@@ -1,0 +1,117 @@
+﻿@model List<LapTopBD.ViewModels.SubCategoryViewModel>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Danh sách Danh Mục Phụ";
+}
+
+<h1 class="text-center">Danh sách Danh Mục Phụ</h1>
+
+<!-- Nút mở modal cho SubCategory -->
+<button id="addSubCategoryBtn" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addSubCategoryModal">Thêm Danh Mục Phụ</button>
+
+<!-- Modal thêm danh mục phụ -->
+<div class="modal fade" id="addSubCategoryModal" tabindex="-1" role="dialog" aria-labelledby="addSubCategoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen-sm-down" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addSubCategoryModalLabel">Thêm Danh Mục Phụ Mới</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addSubCategoryForm">
+                    <div class="form-group">
+                        <label for="CategoryId">Danh mục chính</label>
+                        <select class="form-control" id="CategoryId" required>
+                            <option value="">Chọn danh mục chính</option>
+                            @foreach (var category in ViewBag.Categories)
+                            {
+                                <option value="@category.Id">@category.CategoryName</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="NewSubCategoryName">Tên danh mục phụ</label>
+                        <input type="text" class="form-control" id="NewSubCategoryName" required />
+                    </div>
+                    <button type="button" class="btn btn-primary mt-3" id="saveNewSubCategoryBtn">Thêm Danh Mục Phụ</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Danh sách danh mục phụ -->
+<table class="list" cellspacing="0">
+    <thead>
+        <tr class="parent-title">
+            <th>Tên danh mục phụ</th>
+            <th>Danh mục chính</th>
+            <th>Ngày tạo</th>
+            <th>Ngày cập nhật</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var subCategory in Model)
+        {
+            <tr>
+                <td class="title">
+                    <span>@subCategory.SubCategoryName</span>
+                </td>
+                <td>@subCategory.CategoryName</td>
+                <td class="create-date">
+                    <span>@(subCategory.CreationDate ?? "Không có dữ liệu")</span>
+                </td>
+                <td class="update-date">
+                    <span class="@(subCategory.UpdationDate == null ? "text-danger" : "")">@(subCategory.UpdationDate ?? "Chưa cập nhật")</span>
+                </td>
+                <td class="action">
+                    <a href="@Url.Action("EditSubCategory", "SubCategory", new { id = subCategory.Id })">
+                        <i class="ri-pencil-line"></i>
+                    </a>
+                    <a href="javascript:void(0);" class="delete-subcategory" data-id="@subCategory.Id">
+                        <i class="ri-delete-bin-6-line"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="mt-3 " id="message"></div>
+<!-- Phân trang -->
+@if (ViewBag.TotalPages > 1)
+{
+    <nav aria-label="Page navigation" class="d-flex justify-content-center mt-3">
+        <ul class="pagination">
+            <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("ListSubCategory", new { page = 1 })">««</a>
+            </li>
+            <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("ListSubCategory", new { page = ViewBag.CurrentPage - 1 })">«</a>
+            </li>
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                if (i <= 3 || i == ViewBag.TotalPages || (i >= ViewBag.CurrentPage - 1 && i <= ViewBag.CurrentPage + 1))
+                {
+                    <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("ListSubCategory", new { page = i })">@i</a>
+                    </li>
+                }
+                else if (i == 4 && ViewBag.CurrentPage > 4)
+                {
+                    <li class="page-item disabled"><a class="page-link">...</a></li>
+                }
+                else if (i == ViewBag.TotalPages - 1 && ViewBag.CurrentPage < ViewBag.TotalPages - 3)
+                {
+                    <li class="page-item disabled"><a class="page-link">...</a></li>
+                }
+            }
+            <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("ListSubCategory", new { page = ViewBag.CurrentPage + 1 })">»</a>
+            </li>
+            <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("ListSubCategory", new { page = ViewBag.TotalPages })">»»</a>
+            </li>
+        </ul>
+    </nav>
+}

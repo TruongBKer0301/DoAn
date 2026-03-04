@@ -1,0 +1,227 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>LAPTOP | BD Nơi cung cấp laptop chất lượng - uy tín hàng đầu Bình Dương</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="~/css/loading-overlay.jquery.css" rel="stylesheet" />
+    <link href="~/css/aos.css" rel="stylesheet" />
+    <link href="~/css/owl.carousel.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="~/css/icons.min.css" rel="stylesheet" />
+    <link href="~/css/styletemp.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+
+
+</head>
+
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid">
+        <div class="row border-bottom py-2 px-xl-5">
+            <div class="col-lg-6 d-none d-lg-block">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-dark" href="">Liên hệ</a>
+                    <span class="text-muted px-2">|</span>
+                    <a class="text-dark" href="">Chính sách bảo hành</a>
+                    <span class="text-muted px-2">|</span>
+                    <a class="text-dark" href="">Chính sách giao hàng</a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-fb px-2" href="">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="text-x px-2" href="">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a class="text-youtube pl-2" href="">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center py-3 px-xl-5">
+            <div class="col-lg-3 d-none d-lg-block ">
+                <a href="@Url.Action("Index", "Home")" class="text-decoration-none">
+                    <img class="logo-shop" src="~/images/laptop.png" /> <span class=" blockquote text-x  px-2 font-weight-bold">LAPTOP | BD</span>
+                </a>
+            </div>
+            <div class="col-lg-5 col-6 text-left">
+                <form id="searchForm" method="get" action="@Url.Action("Index", "Shop")">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="searchInput" name="search" placeholder="Search for products">
+                        <div class="input-group-append">
+                            <span class="input-group-text bg-transparent text-primary">
+                                <i class="fa fa-search"></i>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-4 col-6 text-right">
+                <a href="@Url.Action("OrderConfirmation", "Cart")" class="btn">
+                    <i class="ri-shopping-bag-3-fill"></i>
+                    <span class="badge shopping-count">0</span>
+                </a>
+                <a href="@Url.Action("Index", "Cart")" class="btn">
+                    <i class="ri-shopping-cart-2-fill"></i>
+                    <span class="badge cart-count">0</span>
+                </a>
+                @if (User?.Identity?.IsAuthenticated ?? false)
+                {
+                    var userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value ?? "User";
+                    <button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="d-flex align-items-center">
+                            <i class="ri-user-3-fill"></i>
+                            <span class="text-start ms-xl-2">
+                                <span class="d-none d-xl-inline-block ms-1 ml-1 ">
+                                    @userName
+                                </span>
+                            </span>
+                        </span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end">
+                        <h6 class="dropdown-header">Xin chào @userName!</h6>
+                        <form action="@Url.Action("Logout", "UserAuth")" method="post" style="display:inline;">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="dropdown-item" style="background:none;border:none;padding:0;color:inherit;text-align:left;width:100%;">
+                                <i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>
+                                <span class="align-middle">Đăng xuất</span>
+                            </button>
+                        </form>
+                    </div>
+                }
+                else
+                {
+                    <a href="@Url.Action("Login", "UserAuth")" class="btn" id="login-link">
+                        <i class="ri-user-3-fill"></i>
+                        <span class="badge">Đăng nhập / Đăng ký</span>
+                    </a>
+                }
+            </div>
+
+        </div>
+    </div>
+    <!-- Topbar End -->
+    <!-- Include Navbar -->
+    @await Component.InvokeAsync("Navbar")
+
+    <!-- Include Banner -->
+    @if (ViewBag.ShowBanner ?? true)
+    {
+        @await Component.InvokeAsync("Banner")
+    }
+    <!-- Page Content -->
+    <div class="content">
+        @RenderBody()
+    </div>
+    @RenderSection("Scripts", required: false)
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
+        <div class="row px-xl-5 pt-5">
+            <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
+                <a href="@Url.Action("Index", "Home")" class="text-decoration-none">
+                    <img class="logo-shop" src="~/images/laptop.png" /> <span class=" blockquote text-x  px-2 font-weight-bold">LAPTOP | BD</span>
+                </a>
+                <p>Cung cấp sản phẩm chất lượng với giá tốt nhất. Sự hài lòng của bạn là niềm vui của chúng tôi!</p>
+                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>TRƯỜNG ĐẠI HỌC CÔNG NGHIỆP - TP HỒ CHÍ MINH</p>
+                <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>admin@gmail.com</p>
+                <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+84 123 456 789</p>
+            </div>
+            <div class="col-lg-8 col-md-12">
+                <div class="row">
+                    <div class="col-md-4 mb-5">
+                        <h5 class="font-weight-bold text-dark mb-4">Liên kết</h5>
+                        <div class="d-flex flex-column justify-content-start">
+                            <a class="text-dark mb-2" href="index.html"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
+                            <a class="text-dark mb-2" href="shop.html"><i class="fa fa-angle-right mr-2"></i>Cửa hàng</a>
+                            <a class="text-dark mb-2" href="detail.html"><i class="fa fa-angle-right mr-2"></i>Chi tiết sản phẩm</a>
+                            <a class="text-dark mb-2" href="cart.html"><i class="fa fa-angle-right mr-2"></i>Giỏ hàng</a>
+                            <a class="text-dark mb-2" href="checkout.html"><i class="fa fa-angle-right mr-2"></i>Thanh toán</a>
+                            <a class="text-dark" href="contact.html"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-5">
+                        <h5 class="font-weight-bold text-dark mb-4">Liên kết</h5>
+                        <div class="d-flex flex-column justify-content-start">
+                            <a class="text-dark mb-2" href="index.html"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
+                            <a class="text-dark mb-2" href="shop.html"><i class="fa fa-angle-right mr-2"></i>Cửa hàng</a>
+                            <a class="text-dark mb-2" href="detail.html"><i class="fa fa-angle-right mr-2"></i>Chi tiết sản phẩm</a>
+                            <a class="text-dark mb-2" href="cart.html"><i class="fa fa-angle-right mr-2"></i>Giỏ hàng</a>
+                            <a class="text-dark mb-2" href="checkout.html"><i class="fa fa-angle-right mr-2"></i>Thanh toán</a>
+                            <a class="text-dark" href="contact.html"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-5">
+                        <h5 class="font-weight-bold text-dark mb-4">Đăng ký nhận tin</h5>
+                        <form action="">
+                            <div class="form-group">
+                                <input type="text" class="form-control border-0 py-4" placeholder="Tên của bạn" required="required" />
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control border-0 py-4" placeholder="Email của bạn"
+                                       required="required" />
+                            </div>
+                            <div>
+                                <button class="btn btn-primary btn-block border-0 py-3" type="submit">Đăng ký ngay</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row border-top border-light mx-xl-5 py-4">
+            <div class="col-md-6 px-xl-0">
+                <p class="mb-md-0 text-center text-md-left text-dark">
+                    &copy; <a class="text-dark font-weight-semi-bold" href="#">2025</a>
+                   
+                </p>
+            </div>
+            <div class="col-md-6 px-xl-0 text-center text-md-right">
+                <img class="img-fluid" src="img/payments.png" alt="Các phương thức thanh toán">
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="~/js/jquery-3.7.1.min.js"></script>
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/loading-overlay.jquery.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/lord-icon-2.1.0.js"></script>
+    <script src="~/js/aos.js"></script>
+    <!-- Contact Javascript File -->
+    @*  <script src="mail/jqBootstrapValidation.min.js"></script>
+    <script src="mail/contact.js"></script> *@
+
+    <!-- Template Javascript -->
+    <script src="~/js/main.js"></script>
+    <script src="~/js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,208 @@
+﻿@model LapTopBD.ViewModels.ProductViewModel
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Chỉnh sửa sản phẩm";
+}
+
+<div id="main-content">
+    <h1 class="text-center">Chỉnh sửa sản phẩm</h1>
+
+    <form id="editProductForm" enctype="multipart/form-data" class="mt-4">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="row">
+            <!-- Cột trái -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="ProductName">Tên sản phẩm</label>
+                    <input asp-for="ProductName" class="form-control" required />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="CategoryId">Danh mục</label>
+                    <select asp-for="CategoryId" class="form-control" id="editCategoryId" required>
+                        <option value="">-- Chọn danh mục --</option>
+                        @foreach (var category in ViewBag.Categories)
+                        {
+                            if (category.Id == Model.CategoryId)
+                            {
+                                <option value="@category.Id" selected>@category.CategoryName</option>
+                            }
+                            else
+                            {
+                                <option value="@category.Id">@category.CategoryName</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="SubCategoryId">Danh mục phụ</label>
+                    <select asp-for="SubCategoryId" class="form-control" id="editSubCategoryId" required>
+                        <option value="">-- Chọn danh mục phụ --</option>
+                        @foreach (var subCategory in ViewBag.SubCategories)
+                        {
+                            if (subCategory.Id == Model.SubCategoryId)
+                            {
+                                <option value="@subCategory.Id" selected>@subCategory.SubCategoryName</option>
+                            }
+                            else
+                            {
+                                <option value="@subCategory.Id">@subCategory.SubCategoryName</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <!-- Giá & Giá gốc chung một hàng -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="ProductPrice">Giá</label>
+                            <input asp-for="ProductPrice" type="number" class="form-control" required />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="ProductPriceBeforeDiscount">Giá gốc</label>
+                            <input asp-for="ProductPriceBeforeDiscount" type="number" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ProductAvailability">Tình trạng</label>
+                    <select id="ProductAvailability" name="ProductAvailability" class="form-control">
+                        <option value="true">Còn hàng</option>
+                        <option value="false">Hết hàng</option>
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Promotion">Khuyến mãi</label>
+                    <input asp-for="Promotion" class="form-control" />
+                </div>
+            </div>
+
+            <!-- Cột phải -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Brand">Hãng</label>
+                    <input asp-for="Brand" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="CPU">CPU</label>
+                    <input asp-for="CPU" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="RAM">RAM</label>
+                    <input asp-for="RAM" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Storage">Lưu trữ</label>
+                    <input asp-for="Storage" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="GPU">GPU</label>
+                    <input asp-for="GPU" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="VGA">Card màn hình</label>
+                    <input asp-for="VGA" class="form-control" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Upload ảnh -->
+        <div class="row mt-3">
+            <!-- Cột trái chứa ảnh -->
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group upload-container">
+                            <label>Ảnh 1</label>
+                            <div class="upload-box">
+                                <input type="file" id="editProductImage1" name="ProductImages" class="form-control-file file-input" accept="image/*" />
+                                <span class="upload-instruction" style="@(!string.IsNullOrEmpty(Model.ProductImage1) ? "display: none;" : "")">
+                                    <i class="ri-image-add-fill"></i>
+                                </span>
+                                @if (!string.IsNullOrEmpty(Model.ProductImage1))
+                                {
+                                    <img id="previewImage1" src="@Model.ProductImage1" class="img-preview" style="display: block;" alt="Ảnh 1" />
+                                }
+                                else
+                                {
+                                    <img id="previewImage1" class="img-preview d-none" alt="Ảnh 1" />
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group upload-container">
+                            <label>Ảnh 2</label>
+                            <div class="upload-box">
+                                <input type="file" id="editProductImage2" name="ProductImages" class="form-control-file file-input" accept="image/*" />
+                                <span class="upload-instruction" style="@(!string.IsNullOrEmpty(Model.ProductImage2) ? "display: none;" : "")">
+                                    <i class="ri-image-add-fill"></i>
+                                </span>
+                                @if (!string.IsNullOrEmpty(Model.ProductImage2))
+                                {
+                                    <img id="previewImage2" src="@Model.ProductImage2" class="img-preview" style="display: block;" alt="Ảnh 2" />
+                                }
+                                else
+                                {
+                                    <img id="previewImage2" class="img-preview d-none" alt="Ảnh 2" />
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group upload-container">
+                            <label>Ảnh 3</label>
+                            <div class="upload-box">
+                                <input type="file" id="editProductImage3" name="ProductImages" class="form-control-file file-input" accept="image/*"  />
+                                <span class="upload-instruction" style="@(!string.IsNullOrEmpty(Model.ProductImage3) ? "display: none;" : "")">
+                                    <i class="ri-image-add-fill"></i>
+                                </span>
+                                @if (!string.IsNullOrEmpty(Model.ProductImage3))
+                                {
+                                    <img id="previewImage3" src="@Model.ProductImage3" class="img-preview" style="display: block;" alt="Ảnh 3" />
+                                }
+                                else
+                                {
+                                    <img id="previewImage3" class="img-preview d-none" alt="Ảnh 3" />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cột phải chứa Mô tả -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="ProductDescription">Mô tả sản phẩm</label>
+                    <textarea asp-for="ProductDescription" id="editor" class="form-control" rows="6"></textarea>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Nút hành động -->
+        <div class="text-right mt-3">
+            <button type="button" id="saveEditProductBtn" class="btn btn-primary">Lưu</button>
+            <a asp-action="ListProducts" class="btn btn-secondary">Hủy</a>
+        </div>
+
+        <div id="message" class="mt-3"></div>
+    </form>
+</div>
