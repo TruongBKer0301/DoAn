@@ -10,28 +10,28 @@ namespace LapTopBD.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(AuthenticationSchemes = "AdminAuth")]
-    [Route("products")]
-    public class ProductsController : Controller
+    [Route("product")]
+    public class ProductController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ProductsController(ApplicationDbContext context)
+        public ProductController(ApplicationDbContext context)
         {
             _context = context;
         }
 
         [HttpGet]
-        [Route("list-products")]
-        public async Task<IActionResult> ListProducts(int page = 1, int pageSize = 3) 
+        [Route("list-product")]
+        public async Task<IActionResult> ListProduct(int page = 1, int pageSize = 3) 
         {
-            var totalItems = await _context.Products.CountAsync();
+            var totalItems = await _context.Product.CountAsync();
             var totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
 
             if (totalPages == 0) totalPages = 1;
             if (page < 1) page = 1;
             if (page > totalPages) page = totalPages;
 
-            var products = await _context.Products
+            var Product = await _context.Product
                 .Include(p => p.Category)
                 .Include(p => p.SubCategory)
                 .Include(p => p.Admin)
@@ -48,9 +48,13 @@ namespace LapTopBD.Areas.Admin.Controllers
                     ProductImage1 = p.ProductImage1,
                     ProductImage2 = p.ProductImage2,
                     ProductImage3 = p.ProductImage3,
-                    ProductAvailability = p.ProductAvailability ? "Còn hàng" : "Hết hàng",
+                    quantity = p.quantity,
                     ProductPrice = p.ProductPrice,
-                    ProductPriceBeforeDiscount = p.ProductPriceBeforeDiscount
+                    ProductPriceBeforeDiscount = p.ProductPriceBeforeDiscount,
+                    PIN = p.PIN,
+                    SIZE = p.SIZE,
+                    BONUS = p.BONUS,
+                    WEIGHT = p.WEIGHT
                 })
                 .ToListAsync();
 
@@ -60,7 +64,7 @@ namespace LapTopBD.Areas.Admin.Controllers
             ViewBag.TotalPages = totalPages;
             ViewBag.CurrentPage = page;
 
-            return View("ListProducts", products);
+            return View("ListProduct", Product);
         }
 
         //Thêm sản phẩm
@@ -111,13 +115,17 @@ namespace LapTopBD.Areas.Admin.Controllers
                     VGA = model.VGA,
                     Promotion = model.Promotion,
                     ProductDescription = model.ProductDescription,
-                    ProductAvailability = model.ProductAvailability == "Còn hàng",
+                    quantity = model.quantity ,
                     PostingDate = DateTime.Now,
                     UpdationDate = DateTime.Now,
-                    AdminId = adminId // Gán AdminId để tránh lỗi FK
+                    AdminId = adminId, // Gán AdminId để tránh lỗi FK
+                    PIN = model.PIN,
+                    SIZE = model.SIZE,
+                    WEIGHT = model.WEIGHT,
+                    BONUS   = model.BONUS
                 };
 
-                _context.Products.Add(newProduct);
+                _context.Product.Add(newProduct);
                 await _context.SaveChangesAsync();
 
                 // Lưu ảnh sản phẩm
@@ -146,7 +154,7 @@ namespace LapTopBD.Areas.Admin.Controllers
                     }
                 }
 
-                _context.Products.Update(newProduct);
+                _context.Product.Update(newProduct);
                 await _context.SaveChangesAsync();
 
                 return Json(new
@@ -170,9 +178,9 @@ namespace LapTopBD.Areas.Admin.Controllers
         [HttpGet]
         [Authorize(Roles = "Admin")]
         [Route("edit-product/{id}")]
-        public async Task<IActionResult> EditProducts(int id)
+        public async Task<IActionResult> EditProduct(int id)
         {
-            var product = await _context.Products
+            var product = await _context.Product
                 .Include(p => p.Category)
                 .Include(p => p.SubCategory)
                 .Include(p => p.Admin)
@@ -199,32 +207,36 @@ namespace LapTopBD.Areas.Admin.Controllers
                 VGA = product.VGA,
                 Promotion = product.Promotion,
                 ProductDescription = product.ProductDescription,
-                ProductAvailability = product.ProductAvailability ? "Còn hàng" : "Hết hàng",
+                quantity = product.quantity,
                 ProductImage1 = product.ProductImage1,
                 ProductImage2 = product.ProductImage2,
                 ProductImage3 = product.ProductImage3,
                 AdminName = product.Admin != null ? product.Admin.FullName : "Không rõ",
                 CategoryName = product.Category != null ? product.Category.CategoryName : "Không rõ",
-                SubCategoryName = product.SubCategory != null ? product.SubCategory.SubCategoryName : "N/A"
+                SubCategoryName = product.SubCategory != null ? product.SubCategory.SubCategoryName : "N/A",
+                PIN = product.PIN,
+                SIZE = product.SIZE,
+                WEIGHT = product.WEIGHT,
+                BONUS = product.BONUS
             };
 
             ViewBag.Categories = await _context.Categories.ToListAsync();
             ViewBag.SubCategories = await _context.SubCategories.ToListAsync();
 
-            return View("EditProducts", model);
+            return View("EditProduct", model);
         }
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [Route("edit-product/{id}")]
-        public async Task<IActionResult> EditProducts(int id, [FromForm] ProductViewModel model, List<IFormFile> ProductImages)
+        public async Task<IActionResult> EditProduct(int id, [FromForm] ProductViewModel model, List<IFormFile> ProductImages)
         {
 
             try
             {
 
                 // Kiểm tra sản phẩm tồn tại
-                var product = await _context.Products.FindAsync(id);
+                var product = await _context.Product.FindAsync(id);
                 if (product == null)
                 {
                     return Json(new { success = false, message = "Sản phẩm không tồn tại!" });
@@ -267,7 +279,11 @@ namespace LapTopBD.Areas.Admin.Controllers
                 product.VGA = model.VGA;
                 product.Promotion = model.Promotion;
                 product.ProductDescription = model.ProductDescription;
-                product.ProductAvailability = model.ProductAvailability == "true";
+                product.quantity = model.quantity;
+                product.SIZE = model.SIZE;
+                product.PIN = model.PIN;
+                product.WEIGHT = model.WEIGHT;
+                product.BONUS = model.BONUS;
 
                 product.UpdationDate = DateTime.Now;
                 product.AdminId = adminId;
@@ -317,16 +333,16 @@ namespace LapTopBD.Areas.Admin.Controllers
                 }
 
                 // Cập nhật database
-                _context.Products.Update(product);
+                _context.Product.Update(product);
                 await _context.SaveChangesAsync();
-                Console.WriteLine($"Dữ liệu nhận được: ProductAvailability = {model.ProductAvailability}");
+                Console.WriteLine($"Dữ liệu nhận được: quantity = {model.quantity}");
                
                 return Json(new
                 {
                     success = true,
                     message = "Cập nhật sản phẩm thành công!",
                     productId = product.Id,
-                    productAvailability = product.ProductAvailability, // Trả về giá trị để kiểm tra
+                    quantity = product.quantity, // Trả về giá trị để kiểm tra
                     productImage1 = product.ProductImage1,
                     productImage2 = product.ProductImage2,
                     productImage3 = product.ProductImage3
@@ -346,12 +362,12 @@ namespace LapTopBD.Areas.Admin.Controllers
         {
             try
             {
-                var product = await _context.Products.FindAsync(productId);
+                var product = await _context.Product.FindAsync(productId);
                 if (product == null)
                 {
                     return Json(new { success = false, message = "Không tìm thấy sản phẩm." });
                 }
-                _context.Products.Remove(product);
+                _context.Product.Remove(product);
                 await _context.SaveChangesAsync();
                 return Json(new { success = true, message = "Xoá sản phẩm thành công!" });
             }

@@ -17,12 +17,10 @@ namespace LapTopBD.Models
         [Required, StringLength(255)]
         public string? CategoryName { get; set; }
 
-        public string? CategoryDescription { get; set; }
-
         public DateTime? CreationDate { get; set; } = DateTime.Now;
         public DateTime? UpdationDate { get; set; }
 
-        public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+        public virtual ICollection<Product> Product { get; set; } = new List<Product>();
         public virtual ICollection<SubCategory> SubCategories { get; set; } = new List<SubCategory>();
     }
 }

@@ -13,7 +13,7 @@ namespace LapTopBD.Models
         [Required, StringLength(100)]
         public string? Username { get; set; }
 
-        [Required, StringLength(20)]
+        [Required, StringLength(255)]
         public string? Password { get; set; }
 
         public string? FullName { get; set; }
@@ -26,7 +26,7 @@ namespace LapTopBD.Models
         [Required, StringLength(20)]
         public string Status { get; set; } = "Hoạt động";
 
-        public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+        public virtual ICollection<Product> Product { get; set; } = new List<Product>();
         public virtual ICollection<Category> Categories { get; set; } = new List<Category>();
     }
 }

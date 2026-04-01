@@ -298,3 +298,15 @@
     .banner-image-preview.hidden {
         display: none;
     }
+
+.table {
+    table-layout: fixed !important;
+    width: 100%;
+}
+
+    .table td.address {
+        max-width: 200px;
+        white-space: nowrap !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }

@@ -34,8 +34,8 @@ namespace LapTopBD.Areas.Admin.Controllers
             var viewModel = new AdminDashboardViewModel
             {
                 TotalUsers = await _context.Users.CountAsync(), // Đếm tổng số người dùng
-                TotalOrders = await _context.Orders.CountAsync(), // Đếm tổng số đơn hàng
-                TotalProducts = await _context.Products.CountAsync() // Đếm tổng số sản phẩm
+                TotalOrders = await _context.Order.CountAsync(), // Đếm tổng số đơn hàng
+                TotalProduct = await _context.Product.CountAsync() // Đếm tổng số sản phẩm
             };
 
             return View(viewModel);

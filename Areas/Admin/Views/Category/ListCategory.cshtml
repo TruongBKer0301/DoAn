@@ -23,10 +23,7 @@
                         <label for="NewCategoryName">Tên danh mục</label>
                         <input type="text" class="form-control" id="NewCategoryName" required />
                     </div>
-                    <div class="form-group">
-                        <label for="NewCategoryDescription">Mô tả</label>
-                        <textarea class="form-control" id="NewCategoryDescription"></textarea>
-                    </div>
+
                     <button type="button" class="btn btn-primary mt-3" id="saveNewCategoryBtn">Thêm Danh Mục</button>
                 </form>
             </div>
@@ -39,7 +36,6 @@
     <thead>
         <tr class="parent-title">
             <th>Tên danh mục</th>
-            <th>Mô tả</th>
             <th>Ngày tạo</th>
             <th>Ngày cập nhật</th>
             <th>Người tạo</th>
@@ -53,7 +49,6 @@
                 <td class="title">
                     <span>@category.CategoryName</span>
                 </td>
-                <td>@category.CategoryDescription</td>
                 <td class="create-date">
                     <span>@(category.CreationDate ?? "Không có dữ liệu")</span>
                 </td>

@@ -33,7 +33,7 @@ namespace LapTopBD.Controllers
                 HttpContext.User = result.Principal;
             }
           
-            var newProducts = await _context.Products
+            var newProduct = await _context.Product
                 .Include(p => p.Category)
                 .Include(p => p.SubCategory)
                 .OrderByDescending(p => p.PostingDate)
@@ -49,12 +49,12 @@ namespace LapTopBD.Controllers
                     CategoryName = p.Category != null ? p.Category.CategoryName : string.Empty,
                     SubCategoryId = p.SubCategoryId,
                     SubCategoryName = p.SubCategory != null ? p.SubCategory.SubCategoryName : null,
-                    ProductAvailability = p.ProductAvailability ? "Còn hàng" : "Hết hàng",
+                    quantity = p.quantity,
                     Slug = p.Slug
                 })
                 .ToListAsync();
 
-            var hotDeals = await _context.Products
+            var hotDeals = await _context.Product
                 .Include(p => p.Category)
                 .Include(p => p.SubCategory)
                 .Where(p => p.ProductPriceBeforeDiscount.HasValue && p.ProductPriceBeforeDiscount > p.ProductPrice)
@@ -73,12 +73,12 @@ namespace LapTopBD.Controllers
                     CategoryName = p.Category != null ? p.Category.CategoryName : string.Empty,
                     SubCategoryId = p.SubCategoryId,
                     SubCategoryName = p.SubCategory != null ? p.SubCategory.SubCategoryName : null,
-                    ProductAvailability = p.ProductAvailability ? "Còn hàng" : "Hết hàng",
+                    quantity = p.quantity,
                     Slug = p.Slug
                 })
                 .ToListAsync();
 
-            ViewBag.NewProducts = newProducts;
+            ViewBag.NewProduct = newProduct;
             ViewBag.HotDeals = hotDeals ?? new List<ProductViewModel>();
             ViewBag.ShowBanner = true;
 
@@ -99,7 +99,7 @@ namespace LapTopBD.Controllers
                 return NotFound("Slug không hợp lệ.");
             }
 
-            var product = await _context.Products
+            var product = await _context.Product
                 .Include(p => p.Category)
                 .Include(p => p.SubCategory)
                 .Include(p => p.ProductReviews)
@@ -126,7 +126,7 @@ namespace LapTopBD.Controllers
                     CategoryName = p.Category != null ? p.Category.CategoryName : string.Empty,
                     SubCategoryId = p.SubCategoryId,
                     SubCategoryName = p.SubCategory != null ? p.SubCategory.SubCategoryName : null,
-                    ProductAvailability = p.ProductAvailability ? "Còn hàng" : "Hết hàng",
+                    quantity = p.quantity,
                     Reviews = p.ProductReviews
                         .OrderByDescending(pr => pr.ReviewDate) 
                         .ToList(), 
@@ -140,7 +140,7 @@ namespace LapTopBD.Controllers
                 return NotFound("Sản phẩm không tồn tại.");
             }
 
-            var relatedProducts = await _context.Products
+            var relatedProduct = await _context.Product
                 .Include(p => p.Category)
                 .Include(p => p.SubCategory)
                 .Where(p => p.CategoryId == product.CategoryId && p.Id != product.Id)
@@ -152,13 +152,13 @@ namespace LapTopBD.Controllers
                     ProductImage1 = p.ProductImage1,
                     ProductPrice = p.ProductPrice,
                     ProductPriceBeforeDiscount = p.ProductPriceBeforeDiscount,
-                    ProductAvailability = p.ProductAvailability ? "Còn hàng" : "Hết hàng",
+                    quantity = p.quantity,
                     Slug = p.Slug
                 })
                 .ToListAsync();
 
             ViewBag.ShowBanner = false;
-            ViewBag.RelatedProducts = relatedProducts;
+            ViewBag.RelatedProduct = relatedProduct;
             ViewBag.TotalReviews = product.TotalReviews;
 
             return View(product);
@@ -167,8 +167,8 @@ namespace LapTopBD.Controllers
         [HttpGet]
         public async Task<IActionResult> UpdateAllSlugs()
         {
-            var products = await _context.Products.ToListAsync();
-            foreach (var product in products)
+            var Product = await _context.Product.ToListAsync();
+            foreach (var product in Product)
             {
                 product.Slug = SlugHelper.GenerateSlug((product.ProductName ?? ""));
             }
@@ -181,7 +181,7 @@ namespace LapTopBD.Controllers
         public async Task<IActionResult> SubmitReview(ProductReviewViewModel reviewModel)
         {
             // Lấy sản phẩm để kiểm tra hợp lệ
-            var product = await _context.Products.FindAsync(reviewModel.ProductId);
+            var product = await _context.Product.FindAsync(reviewModel.ProductId);
             if (product == null)
             {
                 return NotFound("Sản phẩm không tồn tại.");
@@ -200,7 +200,7 @@ namespace LapTopBD.Controllers
                 TempData["ErrorMessage"] = "Bạn cần đăng nhập để gửi đánh giá.";
 
                 // Get the product for redirection
-                var products = await _context.Products.FindAsync(reviewModel.ProductId);
+                var Product = await _context.Product.FindAsync(reviewModel.ProductId);
                 return RedirectToAction("Detail", new { slug = product?.Slug });
             }
 

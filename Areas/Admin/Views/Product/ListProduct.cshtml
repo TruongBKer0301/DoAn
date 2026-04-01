@@ -62,8 +62,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="ProductAvailability">Tình trạng</label>
-                                <input type="text" class="form-control" id="ProductAvailability" required />
+                                <label for="ProductAvailability">Số lượng</label>
+                                <input type="number" class="form-control" id="quantity" required />
                             </div>
                             <div class="form-group">
                                 <label for="Promotion">Khuyến mãi</label>
@@ -102,6 +102,27 @@
                                 <label for="VGA">Card màn hình</label>
                                 <input type="text" class="form-control" id="VGA" />
                             </div>
+
+                            <div class="form-group">
+                                <label for="PIN">Thời lượng pin</label>
+                                <input type="text" class="form-control" id="PIN" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="WEIGHT">Khối lượng</label>
+                                <input type="text" class="form-control" id="WEIGHT" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="SIZE">Kích thước</label>
+                                <input type="text" class="form-control" id="SIZE" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="BONUS">Thông tin bổ sung</label>
+                                <input type="text" class="form-control" id="BONUS" />
+                            </div>
+
                         </div>
                     </div>
 
@@ -175,7 +196,7 @@
             <th>Ảnh</th>
             <th>Tên sản phẩm</th>
             <th>Danh mục</th>
-            <th>Tình trạng</th>
+            <th>Số lượng</th>
             <th>Giá</th>
             <th>Giá gốc</th>
             <th>Hành động</th>
@@ -210,13 +231,13 @@
                 </td>
                 <td>@product.ProductName</td>
                 <td>@product.CategoryName</td>
-                <td>@product.ProductAvailability</td>
+                <td>@product.quantity</td>
                 <td>@product.ProductPrice.ToString("N0") VNĐ</td>
                 <td>
                     @(product.ProductPriceBeforeDiscount.HasValue ? product.ProductPriceBeforeDiscount.Value.ToString("N0") + " VNĐ" : "Không có")
                 </td>
                 <td class="action">
-                    <a href="@Url.Action("EditProducts", "Products", new { id = product.Id })">
+                    <a href="@Url.Action("EditProduct", "Product", new { id = product.Id })">
                         <i class="ri-pencil-line"></i>
                     </a>
                     <a href="javascript:void(0);" class="delete-product" data-id="@product.Id">
@@ -235,12 +256,12 @@
         <ul class="pagination">
             <!-- Nút về trang đầu -->
             <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
-                <a class="page-link" href="@Url.Action("ListProducts", new { page = 1 })">&laquo;&laquo;</a>
+                <a class="page-link" href="@Url.Action("ListProduct", new { page = 1 })">&laquo;&laquo;</a>
             </li>
 
             <!-- Nút lùi một trang -->
             <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
-                <a class="page-link" href="@Url.Action("ListProducts", new { page = ViewBag.CurrentPage - 1 })">&laquo;</a>
+                <a class="page-link" href="@Url.Action("ListProduct", new { page = ViewBag.CurrentPage - 1 })">&laquo;</a>
             </li>
 
             @for (int i = 1; i <= ViewBag.TotalPages; i++)
@@ -249,7 +270,7 @@
                 if (i <= 3 || i == ViewBag.TotalPages || (i >= ViewBag.CurrentPage - 1 && i <= ViewBag.CurrentPage + 1))
                 {
                     <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
-                        <a class="page-link" href="@Url.Action("ListProducts", new { page = i })">@i</a>
+                        <a class="page-link" href="@Url.Action("ListProduct", new { page = i })">@i</a>
                     </li>
                 }
                 // Hiển thị dấu "..." khi có khoảng cách lớn
@@ -265,12 +286,12 @@
 
             <!-- Nút tiến một trang -->
             <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
-                <a class="page-link" href="@Url.Action("ListProducts", new { page = ViewBag.CurrentPage + 1 })">&raquo;</a>
+                <a class="page-link" href="@Url.Action("ListProduct", new { page = ViewBag.CurrentPage + 1 })">&raquo;</a>
             </li>
 
             <!-- Nút đến trang cuối -->
             <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
-                <a class="page-link" href="@Url.Action("ListProducts", new { page = ViewBag.TotalPages })">&raquo;&raquo;</a>
+                <a class="page-link" href="@Url.Action("ListProduct", new { page = ViewBag.TotalPages })">&raquo;&raquo;</a>
             </li>
         </ul>
     </nav>

@@ -29,7 +29,6 @@ namespace LapTopBD.Controllers
                 {
                     Id = c.Id,
                     CategoryName = c.CategoryName,
-                    CategoryDescription = c.CategoryDescription,
                     AdminId = c.AdminId
                     // Không lấy AdminName
                 })
@@ -47,7 +46,7 @@ namespace LapTopBD.Controllers
                         Id = sc.Id,
                         CategoryId = sc.CategoryId,
                         SubCategoryName = sc.SubCategoryName
-                       
+
                     })
                     .ToListAsync();
                 ViewBag.SubCategories = subCategories;
@@ -60,7 +59,7 @@ namespace LapTopBD.Controllers
             ViewBag.SortBy = sortBy;
 
             // Query sản phẩm với join chỉ để lấy CategoryName (nếu cần)
-            var products = from p in _context.Products
+            var products = from p in _context.Product
                            join c in _context.Categories on p.CategoryId equals c.Id
                            join sc in _context.SubCategories on p.SubCategoryId equals sc.Id into subCatGroup
                            from sc in subCatGroup.DefaultIfEmpty() // Left join vì SubCategoryId có thể null
@@ -73,14 +72,13 @@ namespace LapTopBD.Controllers
                                SubCategoryId = p.SubCategoryId,
                                SubCategoryName = sc != null ? sc.SubCategoryName : null, // Lấy SubCategoryName nếu có
                                ProductName = p.ProductName,
-                               ProductCompany = p.ProductCompany,
                                ProductPrice = p.ProductPrice,
                                ProductPriceBeforeDiscount = p.ProductPriceBeforeDiscount,
                                ProductDescription = p.ProductDescription,
                                ProductImage1 = p.ProductImage1,
                                ProductImage2 = p.ProductImage2,
                                ProductImage3 = p.ProductImage3,
-                               ProductAvailability = p.ProductAvailability ? "Còn hàng" : "Hết hàng",
+                               quantity = p.quantity,
                                ShippingCharge = p.ShippingCharge,
                                PostingDate = p.PostingDate,
                                UpdationDate = p.UpdationDate,
@@ -112,7 +110,6 @@ namespace LapTopBD.Controllers
             if (!string.IsNullOrEmpty(search))
             {
                 products = products.Where(p => (p.ProductName != null && p.ProductName.Contains(search)) ||
-                                              (p.ProductCompany != null && p.ProductCompany.Contains(search)) ||
                                               (p.Brand != null && p.Brand.Contains(search)));
             }
 

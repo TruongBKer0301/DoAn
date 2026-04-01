@@ -16,7 +16,6 @@ namespace LapTopBD.ViewModels
 
 
         public string? ProductName { get; set; }
-        public string? ProductCompany { get; set; }
         public decimal ProductPrice { get; set; }
         public decimal? ProductPriceBeforeDiscount { get; set; }
         public string? ProductDescription { get; set; }
@@ -26,7 +25,7 @@ namespace LapTopBD.ViewModels
         public string? ProductImage3 { get; set; }
 
         public int ShippingCharge { get; set; }
-        public string? ProductAvailability { get; set; }
+        public int quantity { get; set; }
 
         public DateTime PostingDate { get; set; }
         public DateTime? UpdationDate { get; set; }
@@ -39,6 +38,10 @@ namespace LapTopBD.ViewModels
         public string? VGA { get; set; }
         public string? Promotion { get; set; }
         public string? Slug { get; set; }
+        public string? SIZE { get; set; }
+        public string? WEIGHT { get; set; }
+        public string? PIN { get; set; }
+        public string? BONUS { get; set; }
         public List<ProductReview> Reviews { get; set; } = new List<ProductReview>();
         public double AverageRating { get; set; } // Trung bình số sao
         public int TotalReviews { get; set; } // Tổng số đánh giá

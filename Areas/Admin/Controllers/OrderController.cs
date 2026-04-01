@@ -21,7 +21,7 @@ namespace LapTopBD.Areas.Admin.Controllers
         [Route("list-orders")]
         public async Task<IActionResult> ListOrders()
         {
-            var orders = await _context.Orders
+            var orders = await _context.Order
                 .Include(o => o.User)
                 .Include(o => o.Product)
                 .Select(o => new
@@ -56,7 +56,7 @@ namespace LapTopBD.Areas.Admin.Controllers
                 var endDate = nowUtc.Date.AddDays(1).AddTicks(-1); // Cuối ngày hôm nay
 
                 // Đếm số lượng đơn hàng trong 3 ngày gần nhất, không tính đơn hàng đã hủy
-                var newOrdersCount = await _context.Orders
+                var newOrdersCount = await _context.Order
                     .Where(o => o.OrderDate >= startDate && o.OrderDate <= endDate && o.OrderStatus != "Cancelled")
                     .CountAsync();
 
@@ -74,7 +74,7 @@ namespace LapTopBD.Areas.Admin.Controllers
         {
             try
             {
-                var order = await _context.Orders.FindAsync(orderId);
+                var order = await _context.Order.FindAsync(orderId);
                 if (order == null)
                 {
                     return Json(new { success = false, message = "Đơn hàng không tồn tại!" });
@@ -89,7 +89,7 @@ namespace LapTopBD.Areas.Admin.Controllers
 
                 // Cập nhật trạng thái
                 order.OrderStatus = status;
-                _context.Orders.Update(order);
+                _context.Order.Update(order);
                 await _context.SaveChangesAsync();
 
                 return Json(new { success = true, message = "Cập nhật trạng thái đơn hàng thành công!" });
