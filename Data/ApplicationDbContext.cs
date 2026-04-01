@@ -11,9 +11,9 @@ namespace LapTopBD.Data
         public DbSet<Admin> admin { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<SubCategory> SubCategories { get; set; }
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Product> Product { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Order> Orders { get; set; }
+        public DbSet<Order> Order { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<OrderTrackHistory> OrderTrackHistories { get; set; }
         public DbSet<ProductReview> ProductReviews { get; set; }
@@ -33,13 +33,13 @@ namespace LapTopBD.Data
             // Thiết lập các ràng buộc quan hệ
             modelBuilder.Entity<Product>()
                 .HasOne(p => p.Category)
-                .WithMany(c => c.Products)
+                .WithMany(c => c.Product)
                 .HasForeignKey(p => p.CategoryId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Product>()
                 .HasOne(p => p.SubCategory)
-                .WithMany(sc => sc.Products)
+                .WithMany(sc => sc.Product)
                 .HasForeignKey(p => p.SubCategoryId)
                 .OnDelete(DeleteBehavior.SetNull);
 

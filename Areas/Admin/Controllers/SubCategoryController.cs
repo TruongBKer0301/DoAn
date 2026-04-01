@@ -90,7 +90,7 @@ namespace LapTopBD.Areas.Admin.Controllers
                     return Json(new { success = false, message = "Danh mục chính không tồn tại." });
                 }
 
-                // Lấy thông tin admin từ Claims (giả định bạn lưu AdminId trong Claims giống ProductsController)
+                // Lấy thông tin admin từ Claims (giả định bạn lưu AdminId trong Claims giống ProductController)
                 var adminIdClaim = User.FindFirst("AdminId");
                 if (adminIdClaim == null)
                 {

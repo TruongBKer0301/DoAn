@@ -13,9 +13,9 @@
                             <ul>
                                 <!-- MacBook -->
                                 <li>
-                                    <a href="#">MacBook</a> <!-- Ghi cứng -->
+                                    <a href="@Url.Action("Index", "Shop", new { categoryId = 1 })">Điện Thoại</a> <!-- Ghi cứng -->
                                     <ul>
-                                        @foreach (var category in Model.Where(c => c.CategoryName == "MACBOOK"))
+                                        @foreach (var category in Model.Where(c => c.CategoryName == "Điện thoại"))
                                         {
                                             @foreach (var subCategory in category.SubCategories)
                                             {
@@ -28,9 +28,9 @@
                                 </li>
                                 <!-- Asus -->
                                 <li>
-                                    <a href="#">Asus</a> <!-- Ghi cứng -->
+                                    <a href="@Url.Action("Index", "Shop", new { categoryId = 2 })">LapTop</a> <!-- Ghi cứng -->
                                     <ul>
-                                        @foreach (var category in Model.Where(c => c.CategoryName == "ASUS"))
+                                        @foreach (var category in Model.Where(c => c.CategoryName == "Laptop"))
                                         {
                                             @foreach (var subCategory in category.SubCategories)
                                             {

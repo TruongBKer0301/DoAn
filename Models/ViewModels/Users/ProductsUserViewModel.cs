@@ -1,6 +1,6 @@
 ﻿namespace LapTopBD.ViewModels
 {
-    public class ProductsUserViewModel
+    public class ProductUserViewModel
     {
         public int Id { get; set; }
         public int AdminId { get; set; }
@@ -14,7 +14,6 @@
 
 
         public string? ProductName { get; set; }
-        public string? ProductCompany { get; set; }
         public decimal ProductPrice { get; set; }
         public decimal? ProductPriceBeforeDiscount { get; set; }
         public string? ProductDescription { get; set; }
@@ -36,5 +35,12 @@
         public string? GPU { get; set; }
         public string? VGA { get; set; }
         public string? Promotion { get; set; }
+        public string? SIZE { get; set; }
+        public string? WEIGHT { get; set; }
+        public string? PIN { get; set; }
+        public string? BONUS { get; set; }
+
+        public int quantity { get; set; }
+
     }
 }

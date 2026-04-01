@@ -50,8 +50,8 @@ namespace LapTopBD.Controllers
                 return Json(new { success = false, message = "Vui lòng đăng nhập!" });
             }
 
-            var product = await _context.Products.FindAsync(productId);
-            if (product == null || !product.ProductAvailability)
+            var product = await _context.Product.FindAsync(productId);
+            if (product == null || product.quantity < 1)
             {
                 return Json(new { success = false, message = "Sản phẩm hiện tại đã hết hàng vui lòng liên hệ bên dưới để được tư vấn!" });
             }
@@ -99,7 +99,7 @@ namespace LapTopBD.Controllers
                 return Json(new { success = false, message = "Không tìm thấy sản phẩm trong giỏ hàng!" });
             }
 
-            if (cartItem.Product == null || !cartItem.Product.ProductAvailability)
+            if (cartItem.Product == null || cartItem.Product.quantity < 1)
             {
                 return Json(new { success = false, message = "Sản phẩm không còn sẵn có!" });
             }
@@ -176,7 +176,7 @@ namespace LapTopBD.Controllers
                 return Json(new { success = false, orderCount = 0 });
             }
 
-            int orderCount = await _context.Orders
+            int orderCount = await _context.Order
                 .Where(o => o.UserId == userId && o.OrderStatus != "Cancelled")
                 .CountAsync();
 
@@ -299,7 +299,7 @@ namespace LapTopBD.Controllers
             // Tạo đơn hàng cho từng sản phẩm trong giỏ hàng
             foreach (var item in cartItems)
             {
-                var product = await _context.Products.FindAsync(item.ProductId);
+                var product = await _context.Product.FindAsync(item.ProductId);
                 if (product == null)
                 {
                     Console.WriteLine($"[DEBUG] Sản phẩm {item.ProductId} không tồn tại");
@@ -308,6 +308,10 @@ namespace LapTopBD.Controllers
 
                 var order = new Order
                 {
+                    City = model.City,
+                    District = model.District,
+                    Ward = model.Ward,
+                    Address = model.Address,
                     UserId = userId,
                     ProductId = item.ProductId,
                     Quantity = item.Quantity,
@@ -317,7 +321,7 @@ namespace LapTopBD.Controllers
                     TotalPrice = item.Product.ProductPrice * item.Quantity // Lưu TotalPrice
                 };
 
-                _context.Orders.Add(order);
+                _context.Order.Add(order);
             }
 
             // Cập nhật thông tin giao hàng của user
@@ -355,7 +359,7 @@ namespace LapTopBD.Controllers
             }
 
             // Lấy đơn hàng mới nhất của user
-            var orders = await _context.Orders
+            var orders = await _context.Order
                 .Include(o => o.Product)
                 .Where(o => o.UserId == userId)
                 .OrderByDescending(o => o.OrderDate)
@@ -378,7 +382,7 @@ namespace LapTopBD.Controllers
             }
 
             // Tìm đơn hàng
-            var order = await _context.Orders
+            var order = await _context.Order
                 .FirstOrDefaultAsync(o => o.Id == orderId && o.UserId == userId);
 
             if (order == null)
@@ -396,7 +400,7 @@ namespace LapTopBD.Controllers
 
             // Cập nhật trạng thái đơn hàng thành "Cancelled"
             order.OrderStatus = "Cancelled";
-            _context.Orders.Update(order);
+            _context.Order.Update(order);
 
             try
             {

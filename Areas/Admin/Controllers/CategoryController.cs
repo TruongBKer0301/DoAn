@@ -38,7 +38,6 @@ namespace LapTopBD.Areas.Admin.Controllers
                 {
                     Id = c.Id,
                     CategoryName = c.CategoryName,
-                    CategoryDescription = c.CategoryDescription,
                     CreationDate = c.CreationDate.HasValue ? c.CreationDate.Value.ToString("dd/MM/yyyy") : "N/A",
                     UpdationDate = c.UpdationDate.HasValue ? c.UpdationDate.Value.ToString("dd/MM/yyyy") : "Chưa Cập Nhật",
                     AdminName = c.Admin != null ? c.Admin.FullName : string.Empty
@@ -92,7 +91,6 @@ namespace LapTopBD.Areas.Admin.Controllers
                 var category = new Category
                 {
                     CategoryName = model.CategoryName,
-                    CategoryDescription = model.CategoryDescription,
                     CreationDate = DateTime.Now,
                     AdminId = adminId
                 };
@@ -107,7 +105,6 @@ namespace LapTopBD.Areas.Admin.Controllers
                     message = "Danh mục đã được thêm thành công!",
                     categoryId = category.Id,
                     categoryName = category.CategoryName,
-                    categoryDescription = category.CategoryDescription ?? "",
                     creationDate = category.CreationDate.Value.ToString("dd/MM/yyyy"),
                     updationDate = category.UpdationDate.HasValue ? category.UpdationDate.Value.ToString("dd/MM/yyyy") : "Chưa cập nhật",
                     adminName = admin.FullName
@@ -135,7 +132,6 @@ namespace LapTopBD.Areas.Admin.Controllers
             {
                 Id = category.Id,
                 CategoryName = category.CategoryName,
-                CategoryDescription = category.CategoryDescription
             };
 
             return View("EditCategory", model);
@@ -168,7 +164,6 @@ namespace LapTopBD.Areas.Admin.Controllers
                 }
 
                 category.CategoryName = model.CategoryName;
-                category.CategoryDescription = model.CategoryDescription;
                 category.UpdationDate = DateTime.Now;
 
                 _context.Categories.Update(category);

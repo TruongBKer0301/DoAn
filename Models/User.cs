@@ -26,10 +26,10 @@ namespace LapTopBD.Models
         public DateTime? UpdationDate { get; set; }
 
         // Thông tin địa chỉ
-        [ StringLength(255)]
+        [StringLength(255)]
         public string? City { get; set; }  // Thành phố
 
-        [ StringLength(255)]
+        [StringLength(255)]
         public string? District { get; set; } // Quận/Huyện
 
         [StringLength(255)]
@@ -37,6 +37,8 @@ namespace LapTopBD.Models
 
         [StringLength(500)]
         public string? Address { get; set; } // Địa chỉ cụ thể (số nhà, tên đường, v.v.)
+
+
 
         // Quan hệ với đơn hàng & danh sách yêu thích
         public virtual ICollection<Order> Orders { get; set; } = new List<Order>();

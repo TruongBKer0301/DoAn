@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LapTopBD.Models
 {
-    [Table("products")]
+    [Table("Product")]
     public class Product
     {
         [Key]
@@ -29,8 +29,6 @@ namespace LapTopBD.Models
         [Required, StringLength(255)]
         public string? ProductName { get; set; }
 
-        public string? ProductCompany { get; set; }
-
         [Required]
         public decimal ProductPrice { get; set; }
 
@@ -46,7 +44,7 @@ namespace LapTopBD.Models
         public int ShippingCharge { get; set; }
 
         [Required, StringLength(255)]
-        public bool ProductAvailability { get; set; }
+        public int quantity { get; set; }
         public DateTime PostingDate { get; set; } = DateTime.Now;
 
         public DateTime? UpdationDate { get; set; }
@@ -58,8 +56,15 @@ namespace LapTopBD.Models
         public string? GPU { get; set; }
 
         public string? VGA { get; set; }
+
+        public string? SIZE { get; set; }
+
+        public string? WEIGHT { get; set; }
+
+        public string? PIN { get; set; }
+        public string? BONUS { get; set; }
         public string? Promotion { get; set; }
-         public string? Slug { get; set; }
+        public string? Slug { get; set; }
 
         public virtual ICollection<Wishlist> Wishlists { get; set; } = new List<Wishlist>();
         public virtual ICollection<ProductReview> ProductReviews { get; set; } = new List<ProductReview>();

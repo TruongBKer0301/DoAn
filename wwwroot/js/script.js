@@ -236,14 +236,11 @@ $(function () {
         e.preventDefault();
 
         let categoryName = $("#NewCategoryName").val();
-        let categoryDescription = $("#NewCategoryDescription").val();
 
         console.log("CategoryName:", categoryName);
-        console.log("CategoryDescription:", categoryDescription);
 
         let formData = new FormData();
         formData.append("CategoryName", categoryName);
-        formData.append("CategoryDescription", categoryDescription);
 
         $.ajax({
             url: "/category/add-category",
@@ -257,7 +254,6 @@ $(function () {
                     let newRow = `
                         <tr>
                             <td class="title"><span>${response.categoryName}</span></td>
-                            <td>${response.categoryDescription}</td>
                             <td class="create-date"><span>${response.creationDate}</span></td>
                             <td class="update-date"><span>${response.updationDate}</span></td> <!-- Sử dụng giá trị từ server -->
                             <td>${response.adminName}</td>
@@ -274,7 +270,6 @@ $(function () {
 
                     $('#addCategoryModal').modal('hide');
                     $("#NewCategoryName").val('');
-                    $("#NewCategoryDescription").val('');
                     showMessage(response.message, "success");
                 } else {
                     showMessage(response.message, "danger");
@@ -294,7 +289,6 @@ $(function () {
         let formData = new FormData();
         formData.append("Id", $("#Id").val());
         formData.append("CategoryName", $("#CategoryName").val());
-        formData.append("CategoryDescription", $("#Description").val());
 
         $.ajax({
             url: "/category/edit-category/" + $("#Id").val(),
@@ -673,7 +667,7 @@ $(function () {
         if (files.length > 0) formData.append("ProductImages", files[0]);
 
         $.ajax({
-            url: "/products/add-product",
+            url: "/product/add-product",
             type: "POST",
             data: formData,
             processData: false,
@@ -709,7 +703,7 @@ $(function () {
                         <td>${parseInt($("#ProductPrice").val()).toLocaleString('vi-VN')} VNĐ</td>
                         <td>${$("#ProductPriceBeforeDiscount").val() ? parseInt($("#ProductPriceBeforeDiscount").val()).toLocaleString('vi-VN') + ' VNĐ' : 'Không có'}</td>
                         <td class="action">
-                            <a href="/products/edit-product/${response.productId}">
+                            <a href="/product/edit-product/${response.productId}">
                                 <i class="ri-pencil-line"></i>
                             </a>
                            <a href="javascript:void(0);" class="text-danger delete-product" data-id="${response.productId}">
@@ -757,7 +751,12 @@ $(function () {
         formData.append("VGA", $("#VGA").val());
         formData.append("Promotion", $("#Promotion").val());
         formData.append("ProductDescription", $("#editor").val());
-        formData.append("ProductAvailability", $("#ProductAvailability").val());
+        formData.append("quantity", $("#quantity").val());
+
+        formData.append("PIN", $("#PIN").val());
+        formData.append("WEIGHT", $("#WEIGHT").val());
+        formData.append("SIZE", $("#SIZE").val());
+        formData.append("BONUS", $("#BONUS").val());
 
         // Thêm ảnh vào formData
         var files = $("#editProductImage1")[0].files;
@@ -768,7 +767,7 @@ $(function () {
         if (files.length > 0) formData.append("ProductImages", files[0]);
 
         $.ajax({
-            url: `/products/edit-product/${productId}`,
+            url: `/product/edit-product/${productId}`,
             type: "POST",
             data: formData,
             processData: false,
@@ -789,12 +788,12 @@ $(function () {
                         </td>
                         <td>${$("#ProductName").val()}</td>
                         <td>${$("#editCategoryId option:selected").text()}</td>
-                        <td>${$("#ProductAvailability").val() === "true" ? "Còn hàng" : "Hết hàng"}</td>
+                        <td>${$("#quantity").val()}</td>
                         <td>${$("#Promotion").val() || 'Không có'}</td>
                         <td>${parseInt($("#ProductPrice").val()).toLocaleString('vi-VN')} VNĐ</td>
                         <td>${$("#ProductPriceBeforeDiscount").val() ? parseInt($("#ProductPriceBeforeDiscount").val()).toLocaleString('vi-VN') + ' VNĐ' : 'Không có'}</td>
                         <td class="text-center">
-                            <a href="/products/edit-product/${response.productId}" class="btn btn-warning btn-sm">
+                            <a href="/product/edit-product/${response.productId}" class="btn btn-warning btn-sm">
                                 <i class="ri-pencil-line"></i>
                             </a>
                             <button class="btn btn-danger btn-sm delete-product" data-id="${response.productId}">
@@ -808,13 +807,26 @@ $(function () {
                     $(`#productTable tbody tr:contains(${response.productId})`).replaceWith(updatedRow);
 
                     // Chuyển hướng về trang danh sách
-                    window.location.href = "/products/list-products";
+
+                    setTimeout(() => {
+                        window.location.href = "/product/list-product";
+                    }, 2000);
                 } else {
                     showMessage(response.message, "danger");
                 }
             },
-            error: function () {
-                $("#message").html('<div class="alert alert-danger">Có lỗi xảy ra khi cập nhật sản phẩm!</div>');
+            error: function (xhr) {
+                console.log(xhr); 
+
+                let msg = "Có lỗi xảy ra!";
+
+                if (xhr.responseJSON?.message) {
+                    msg = xhr.responseJSON.message;
+                } else if (xhr.responseText) {
+                    msg = xhr.responseText;
+                }
+
+                showMessage(msg, "danger");
             }
         });
     });
@@ -828,7 +840,7 @@ $(function () {
         if (!confirm("Bạn có chắc chắn muốn xóa sản phẩm này?")) return;
 
         $.ajax({
-            url: "/products/delete-product", 
+            url: "/product/delete-product", 
             type: "POST",
             data: { productId: productId }, 
             headers: {
@@ -1371,7 +1383,7 @@ function loadSubCategories(categorySelector, subCategorySelector) {
     $(subCategorySelector).empty().append('<option value="">-- Chọn danh mục phụ --</option>');
     if (categoryId) {
         $.ajax({
-            url: `/products/get-sub-categories?categoryId=${categoryId}`,
+            url: `/product/get-sub-categories?categoryId=${categoryId}`,
             type: "GET",
             success: (data) => {
                 $.each(data, (index, subCategory) => {
