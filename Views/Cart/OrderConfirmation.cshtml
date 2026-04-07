@@ -16,6 +16,15 @@
 </div>
 
 <div class="custom-container">
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+
     <h3 class="mb-4">Cảm ơn bạn đã đặt hàng!</h3>
     <div class="custom-table-container">
         <table class="custom-table">

@@ -6,16 +6,24 @@ using LapTopBD.Data;
 using Microsoft.AspNetCore.Authentication;
 using LapTopBD.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using LapTopBD.Utilities;
 
 namespace LapTopBD.Controllers
 {
     public class CartController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IVnPayService _vnPayService;
+        private readonly IPendingCheckoutStore _pendingCheckoutStore;
 
-        public CartController(ApplicationDbContext context)
+        public CartController(
+            ApplicationDbContext context,
+            IVnPayService vnPayService,
+            IPendingCheckoutStore pendingCheckoutStore)
         {
             _context = context;
+            _vnPayService = vnPayService;
+            _pendingCheckoutStore = pendingCheckoutStore;
         }
 
         public async Task<IActionResult> Index()
@@ -244,30 +252,6 @@ namespace LapTopBD.Controllers
         public async Task<IActionResult> Checkout([FromBody] CheckoutViewModel model)
         {
             var userId = await GetUserIdAsync();
-            Console.WriteLine($"[DEBUG] Checkout POST - UserId: {userId}");
-
-            // Kiểm tra dữ liệu nhận được sau khi ánh xạ
-            Console.WriteLine($"[DEBUG] Dữ liệu nhận được - Name: '{model.Name}', ContactNo: '{model.ContactNo}', City: '{model.City}', District: '{model.District}', Ward: '{model.Ward}', Address: '{model.Address}', PaymentMethod: '{model.PaymentMethod}'");
-
-            if (!ModelState.IsValid)
-            {
-                Console.WriteLine("[DEBUG] ModelState không hợp lệ");
-                var cartItemsForView = await _context.CartItems
-                    .Include(c => c.Product)
-                    .Where(c => c.UserId == userId)
-                    .Select(c => new LapTopBD.Models.ViewModels.CartItem
-                    {
-                        ProductId = c.ProductId,
-                        ProductName = c.Product.ProductName,
-                        ProductPrice = c.Product.ProductPrice,
-                        Quantity = c.Quantity
-                    })
-                    .ToListAsync();
-
-                model.CartItems = cartItemsForView;
-                model.TotalPrice = cartItemsForView.Sum(item => item.Subtotal);
-                return View(model);
-            }
 
             if (userId == 0)
             {
@@ -287,8 +271,6 @@ namespace LapTopBD.Controllers
                 return Json(new { success = false, message = "Giỏ hàng của bạn đang trống!" });
             }
 
-            // Kiểm tra thông tin giao hàng
-            Console.WriteLine($"[DEBUG] Thông tin giao hàng - City: '{model.City}', District: '{model.District}', Ward: '{model.Ward}', Address: '{model.Address}', PaymentMethod: '{model.PaymentMethod}'");
             if (string.IsNullOrWhiteSpace(model.City) || string.IsNullOrWhiteSpace(model.District) ||
                 string.IsNullOrWhiteSpace(model.Ward) || string.IsNullOrWhiteSpace(model.Address))
             {
@@ -296,14 +278,181 @@ namespace LapTopBD.Controllers
                 return Json(new { success = false, message = "Vui lòng nhập đầy đủ thông tin địa chỉ giao hàng!" });
             }
 
-            // Tạo đơn hàng cho từng sản phẩm trong giỏ hàng
+            var normalizedPaymentMethod = NormalizePaymentMethod(model.PaymentMethod);
+            if (string.IsNullOrEmpty(normalizedPaymentMethod))
+            {
+                return Json(new { success = false, message = "Phương thức thanh toán không hợp lệ!" });
+            }
+
+            if (normalizedPaymentMethod == "VNPAY")
+            {
+                var pendingItems = cartItems
+                    .Where(item => item.Product != null)
+                    .Select(item => new PendingCheckoutItem
+                    {
+                        ProductId = item.ProductId,
+                        Quantity = item.Quantity,
+                        UnitPrice = item.Product!.ProductPrice
+                    })
+                    .ToList();
+
+                if (pendingItems.Count == 0)
+                {
+                    return Json(new { success = false, message = "Không tìm thấy sản phẩm hợp lệ trong giỏ hàng!" });
+                }
+
+                var totalPrice = ConvertToVnPayAmount(pendingItems.Sum(item => item.UnitPrice * item.Quantity));
+                var transactionRef = $"{userId}{DateTime.UtcNow:yyyyMMddHHmmssfff}";
+
+                var pendingCheckout = new PendingCheckoutData
+                {
+                    UserId = userId,
+                    Name = model.Name,
+                    ContactNo = model.ContactNo,
+                    City = model.City,
+                    District = model.District,
+                    Ward = model.Ward,
+                    Address = model.Address,
+                    TransactionRef = transactionRef,
+                    TotalPrice = totalPrice,
+                    Items = pendingItems
+                };
+
+                await _pendingCheckoutStore.SaveAsync(pendingCheckout);
+
+                var orderInfo = $"Thanh toan don hang {transactionRef}";
+                var paymentUrl = _vnPayService.CreatePaymentUrl(HttpContext, totalPrice, orderInfo, transactionRef);
+
+                return Json(new { success = true, message = "Đang chuyển đến cổng thanh toán VNPay...", redirectUrl = paymentUrl });
+            }
+
+            var checkoutResult = await CreateOrdersFromCartAsync(userId, model, cartItems, "COD");
+            if (!checkoutResult.Success)
+            {
+                return Json(new { success = false, message = checkoutResult.Message });
+            }
+
+            Console.WriteLine("[DEBUG] Thanh toán COD thành công");
+            return Json(new { success = true, message = "Đặt hàng thành công!", redirectUrl = Url.Action("OrderConfirmation") });
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> VnPayReturn()
+        {
+            var userId = await GetUserIdAsync();
+
+            var paymentResult = _vnPayService.ProcessReturn(Request.Query);
+            if (!paymentResult.IsValidSignature)
+            {
+                TempData["Error"] = "Chữ ký VNPay không hợp lệ. Vui lòng thử lại.";
+                return RedirectToAction("Checkout");
+            }
+
+            if (!paymentResult.IsSuccess)
+            {
+                TempData["Error"] = "Thanh toán VNPay không thành công hoặc đã bị hủy.";
+                return RedirectToAction("Checkout");
+            }
+
+            var pendingCheckout = await _pendingCheckoutStore.GetAsync(paymentResult.TransactionRef);
+            if (pendingCheckout == null)
+            {
+                if (userId == 0)
+                {
+                    TempData["Error"] = "Không tìm thấy phiên thanh toán VNPay.";
+                    return RedirectToAction("Login", "UserAuth");
+                }
+
+                TempData["Success"] = "Thanh toán VNPay thành công!";
+                return RedirectToAction("OrderConfirmation");
+            }
+
+            if ((userId != 0 && pendingCheckout.UserId != userId)
+                || !string.Equals(pendingCheckout.TransactionRef, paymentResult.TransactionRef, StringComparison.Ordinal)
+                || pendingCheckout.TotalPrice != paymentResult.Amount)
+            {
+                TempData["Error"] = "Thông tin thanh toán VNPay không khớp.";
+                return RedirectToAction("Checkout");
+            }
+
+            if (!pendingCheckout.IsProcessed)
+            {
+                var checkoutResult = await CreateOrdersFromPendingAsync(pendingCheckout, "VNPAY", "Paid");
+                if (!checkoutResult.Success)
+                {
+                    TempData["Error"] = checkoutResult.Message;
+                    return RedirectToAction("Checkout");
+                }
+
+                await _pendingCheckoutStore.MarkProcessedAsync(pendingCheckout.TransactionRef);
+            }
+
+            await _pendingCheckoutStore.RemoveAsync(pendingCheckout.TransactionRef);
+            TempData["Success"] = "Thanh toán VNPay thành công!";
+
+            if (userId == 0)
+            {
+                return RedirectToAction("Login", "UserAuth");
+            }
+
+            return RedirectToAction("OrderConfirmation");
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> VnPayIpn()
+        {
+            var paymentResult = _vnPayService.ProcessReturn(Request.Query);
+            if (!paymentResult.IsValidSignature)
+            {
+                return Json(new { RspCode = "97", Message = "Invalid signature" });
+            }
+
+            var pendingCheckout = await _pendingCheckoutStore.GetAsync(paymentResult.TransactionRef);
+            if (pendingCheckout == null)
+            {
+                return Json(new { RspCode = "01", Message = "Order not found" });
+            }
+
+            if (pendingCheckout.TotalPrice != paymentResult.Amount)
+            {
+                return Json(new { RspCode = "04", Message = "Invalid amount" });
+            }
+
+            if (pendingCheckout.IsProcessed)
+            {
+                return Json(new { RspCode = "02", Message = "Order already confirmed" });
+            }
+
+            if (!paymentResult.IsSuccess)
+            {
+                await _pendingCheckoutStore.RemoveAsync(pendingCheckout.TransactionRef);
+                return Json(new { RspCode = "00", Message = "Payment failed" });
+            }
+
+            var checkoutResult = await CreateOrdersFromPendingAsync(pendingCheckout, "VNPAY", "Paid");
+            if (!checkoutResult.Success)
+            {
+                return Json(new { RspCode = "99", Message = checkoutResult.Message });
+            }
+
+            await _pendingCheckoutStore.MarkProcessedAsync(pendingCheckout.TransactionRef);
+            return Json(new { RspCode = "00", Message = "Confirm Success" });
+        }
+
+        private async Task<(bool Success, string Message)> CreateOrdersFromCartAsync(
+            int userId,
+            CheckoutViewModel model,
+            List<LapTopBD.Models.CartItem> cartItems,
+            string paymentMethod)
+        {
             foreach (var item in cartItems)
             {
                 var product = await _context.Product.FindAsync(item.ProductId);
                 if (product == null)
                 {
-                    Console.WriteLine($"[DEBUG] Sản phẩm {item.ProductId} không tồn tại");
-                    return Json(new { success = false, message = $"Sản phẩm {item.Product.ProductName} không tồn tại!" });
+                    return (false, $"Sản phẩm ID {item.ProductId} không tồn tại!");
                 }
 
                 var order = new Order
@@ -317,14 +466,13 @@ namespace LapTopBD.Controllers
                     Quantity = item.Quantity,
                     OrderDate = DateTime.UtcNow,
                     OrderStatus = "Pending",
-                    PaymentMethod = model.PaymentMethod,
-                    TotalPrice = item.Product.ProductPrice * item.Quantity // Lưu TotalPrice
+                    PaymentMethod = paymentMethod,
+                    TotalPrice = product.ProductPrice * item.Quantity
                 };
 
                 _context.Order.Add(order);
             }
 
-            // Cập nhật thông tin giao hàng của user
             var user = await _context.Users.FindAsync(userId);
             if (user != null)
             {
@@ -338,13 +486,95 @@ namespace LapTopBD.Controllers
                 _context.Users.Update(user);
             }
 
-            // Xóa giỏ hàng sau khi thanh toán thành công
             _context.CartItems.RemoveRange(cartItems);
+            await _context.SaveChangesAsync();
+
+            return (true, "OK");
+        }
+
+        private async Task<(bool Success, string Message)> CreateOrdersFromPendingAsync(
+            PendingCheckoutData pendingCheckout,
+            string paymentMethod,
+            string orderStatus)
+        {
+            if (pendingCheckout.Items.Count == 0)
+            {
+                return (false, "Không có sản phẩm để tạo đơn hàng.");
+            }
+
+            foreach (var item in pendingCheckout.Items)
+            {
+                var product = await _context.Product.FindAsync(item.ProductId);
+                if (product == null)
+                {
+                    return (false, $"Sản phẩm ID {item.ProductId} không tồn tại!");
+                }
+
+                var order = new Order
+                {
+                    City = pendingCheckout.City,
+                    District = pendingCheckout.District,
+                    Ward = pendingCheckout.Ward,
+                    Address = pendingCheckout.Address,
+                    UserId = pendingCheckout.UserId,
+                    ProductId = item.ProductId,
+                    Quantity = item.Quantity,
+                    OrderDate = DateTime.UtcNow,
+                    OrderStatus = orderStatus,
+                    PaymentMethod = paymentMethod,
+                    TotalPrice = item.UnitPrice * item.Quantity
+                };
+
+                _context.Order.Add(order);
+            }
+
+            var user = await _context.Users.FindAsync(pendingCheckout.UserId);
+            if (user != null)
+            {
+                user.Name = pendingCheckout.Name;
+                user.ContactNo = pendingCheckout.ContactNo;
+                user.City = pendingCheckout.City;
+                user.District = pendingCheckout.District;
+                user.Ward = pendingCheckout.Ward;
+                user.Address = pendingCheckout.Address;
+                user.UpdationDate = DateTime.UtcNow;
+                _context.Users.Update(user);
+            }
+
+            var productIds = pendingCheckout.Items.Select(x => x.ProductId).ToList();
+            var cartItems = await _context.CartItems
+                .Where(c => c.UserId == pendingCheckout.UserId && productIds.Contains(c.ProductId))
+                .ToListAsync();
+
+            if (cartItems.Count > 0)
+            {
+                _context.CartItems.RemoveRange(cartItems);
+            }
 
             await _context.SaveChangesAsync();
-            Console.WriteLine("[DEBUG] Thanh toán thành công");
 
-            return Json(new { success = true, message = "Thanh toán thành công!", redirectUrl = Url.Action("OrderConfirmation") });
+            return (true, "OK");
+        }
+
+        private static long ConvertToVnPayAmount(decimal amount)
+        {
+            return (long)Math.Round(amount, MidpointRounding.AwayFromZero);
+        }
+
+        private static string NormalizePaymentMethod(string? paymentMethod)
+        {
+            if (string.IsNullOrWhiteSpace(paymentMethod))
+            {
+                return string.Empty;
+            }
+
+            var normalized = paymentMethod.Trim().ToUpperInvariant();
+            if (normalized == "ONLINE")
+            {
+                return "VNPAY";
+            }
+
+            return normalized is "COD" or "VNPAY" ? normalized : string.Empty;
         }
 
         // Action OrderConfirmation
