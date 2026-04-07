@@ -63,6 +63,9 @@ builder.Services.AddAntiforgery(options =>
 // Thêm chính sách ủy quyền
 builder.Services.AddAuthorization();
 builder.Services.AddScoped<IOnlineVisitorTracker, OnlineVisitorTracker>();
+builder.Services.Configure<VnPayOptions>(builder.Configuration.GetSection("VnPay"));
+builder.Services.AddScoped<IVnPayService, VnPayService>();
+builder.Services.AddScoped<IPendingCheckoutStore, PendingCheckoutStore>();
 builder.Services.AddHttpClient();
 
 var app = builder.Build();

@@ -16,6 +16,15 @@
 </div>
 
 <div class="custom-container">
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+
     <div class="row">
         <!-- Thông tin giao hàng -->
         <div class="col-lg-6">
@@ -52,7 +61,7 @@
                     <label>Phương thức thanh toán</label>
                     <select class="custom-select" name="PaymentMethod" required>
                         <option value="COD">Thanh toán khi nhận hàng </option>
-                        <option value="Online">Thanh toán trực tuyến</option>
+                        <option value="VNPAY">Thanh toán VNPay</option>
                     </select>
                 </div>
             </form>
