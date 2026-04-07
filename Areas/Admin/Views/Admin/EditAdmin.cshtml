@@ -14,7 +14,7 @@
                 <input type="hidden" asp-for="Id" />
                 <div class="form-group avatar-upload-container">
                     <label for="AvatarFile">Ảnh đại diện</label>
-                    <div class="upload-box">
+                    <div class="upload-box" id="editAdminAvatarDropZone">
                         <input type="file" class="form-control-file avatar-input" id="AvatarFile" name="AvatarFile" accept=".jpg, .jpeg, .png">
                         <span class="upload-instruction">
                             <i class="ri-image-add-fill"></i>
@@ -71,3 +71,79 @@
         </div>
     </div>
 </div>
+
+<script>
+    (function () {
+        const dropZone = document.getElementById('editAdminAvatarDropZone');
+        const input = document.getElementById('AvatarFile');
+        const preview = document.getElementById('avatarPreview');
+        const hint = dropZone ? dropZone.querySelector('.upload-instruction') : null;
+
+        if (!dropZone || !input || !preview) {
+            return;
+        }
+
+        const showPreview = (file) => {
+            if (!file || !file.type.startsWith('image/')) {
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target?.result || preview.src;
+                preview.style.display = 'block';
+                preview.classList.remove('d-none');
+                if (hint) {
+                    hint.style.display = 'none';
+                }
+            };
+
+            reader.readAsDataURL(file);
+        };
+
+        const setInputFile = (file) => {
+            try {
+                const transfer = new DataTransfer();
+                transfer.items.add(file);
+                input.files = transfer.files;
+            } catch {
+                input._droppedFile = file;
+            }
+        };
+
+        ['dragenter', 'dragover'].forEach((eventName) => {
+            dropZone.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                dropZone.classList.add('drag-over');
+            });
+        });
+
+        ['dragleave', 'dragend', 'drop'].forEach((eventName) => {
+            dropZone.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                dropZone.classList.remove('drag-over');
+            });
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            const files = Array.from(e.dataTransfer?.files || []).filter(f => f.type.startsWith('image/'));
+            if (files.length === 0) {
+                return;
+            }
+
+            setInputFile(files[0]);
+            showPreview(files[0]);
+        });
+
+        input.addEventListener('change', function () {
+            if (input.files && input.files.length > 0) {
+                input._droppedFile = null;
+                showPreview(input.files[0]);
+            } else if (input._droppedFile) {
+                showPreview(input._droppedFile);
+            }
+        });
+    })();
+</script>

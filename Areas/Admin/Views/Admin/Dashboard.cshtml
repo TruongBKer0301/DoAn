@@ -5,59 +5,522 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<div class="container mt-4">
-    <h2 class="text-center mb-4">Admin Dashboard</h2>
+<div class="analytics-page py-2">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
+        <div>
+            <h3 class="mb-1 fw-bold">Dashboard Analytics</h3>
+            <p class="text-muted mb-0">Thống kê truy cập và hoạt động theo thời gian thực</p>
+        </div>
 
-    <div class="row">
-        <!-- Card: Tổng số người dùng -->
-        <div class="col-md-4 mb-4">
-            <div class="card text-white bg-primary shadow-sm">
-                <div class="card-body text-center">
-                    <h5 class="card-title text-white">Tổng số người dùng</h5>
-                    <p class="card-text display-4">@Model.TotalUsers</p>
+        <form id="dashboardFilterForm" method="get" action="@Url.Action("Dashboard", "Admin")" class="d-flex align-items-center gap-2 flex-wrap">
+            <select id="monthSelect" name="month" class="form-select form-select-sm filter-select">
+                @for (var month = 1; month <= 12; month++)
+                {
+                    <option value="@month" selected="@(Model.SelectedMonth == month ? "selected" : null)">Tháng @month</option>
+                }
+            </select>
+            <select id="yearSelect" name="year" class="form-select form-select-sm filter-select">
+                @for (var year = DateTime.Now.Year - 2; year <= DateTime.Now.Year + 1; year++)
+                {
+                    <option value="@year" selected="@(Model.SelectedYear == year ? "selected" : null)">Năm @year</option>
+                }
+            </select>
+            <button type="submit" class="btn btn-sm btn-warning px-3 fw-semibold">Thống kê</button>
+        </form>
+    </div>
+
+    <div class="row g-3 mb-3">
+        <div class="col-xl-9">
+            <div class="box h-100">
+                <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                    <h4 id="monthlyVisitTitle" class="box-title mb-0">Thống kê truy cập tháng @Model.SelectedMonth/@Model.SelectedYear</h4>
+                    <div class="d-inline-flex align-items-center gap-2 live-badge">
+                        <span class="pulse"></span>
+                        <span id="onlineVisitorsLabel">@Model.OnlineVisitors đang online</span>
+                    </div>
+                </div>
+                <div class="chart-holder chart-holder-main">
+                    <canvas id="monthlyVisitChart"></canvas>
                 </div>
             </div>
         </div>
 
-        <!-- Card: Tổng số đơn hàng -->
-        <div class="col-md-4 mb-4">
-            <div class="card text-white bg-success shadow-sm">
-                <div class="card-body text-center">
-                    <h5 class="card-title  text-white">Tổng số đơn hàng</h5>
-                    <p class="card-text display-4">@Model.TotalOrders</p>
+        <div class="col-xl-3">
+            <div class="box h-100">
+                <h4 class="box-title mb-3">Thống kê truy cập</h4>
+                <div class="chart-holder chart-holder-donut">
+                    <canvas id="trafficDonutChart"></canvas>
+                </div>
+                <div class="legend-grid mt-2">
+                    <div><span class="dot dot-online"></span>Đang online</div>
+                    <div><span class="dot dot-month"></span>Trong tháng</div>
+                    <div><span class="dot dot-total"></span>Tổng truy cập</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-3 mb-3">
+        <div class="col-md-6 col-xl-4">
+            <div class="box h-100">
+                <h4 class="box-title mb-3">Thống kê trình duyệt</h4>
+                <div id="browserStatsList" class="simple-list">
+                    @if (Model.BrowserStats.Count == 0)
+                    {
+                        <div class="empty-state">Chưa có dữ liệu trình duyệt</div>
+                    }
+                    else
+                    {
+                        @foreach (var item in Model.BrowserStats)
+                        {
+                            <div class="simple-row">
+                                <span>@item.Name</span>
+                                <strong>@item.Value</strong>
+                            </div>
+                        }
+                    }
                 </div>
             </div>
         </div>
 
-        <!-- Card: Tổng số sản phẩm -->
-        <div class="col-md-4 mb-4">
-            <div class="card text-white bg-info shadow-sm">
-                <div class="card-body text-center">
-                    <h5 class="card-title  text-white">Tổng số sản phẩm</h5>
-                    <p class="card-text display-4">@Model.TotalProduct</p>
+        <div class="col-md-6 col-xl-4">
+            <div class="box h-100">
+                <h4 class="box-title mb-3">Thống kê thiết bị</h4>
+                @{
+                    var totalDeviceVisits = Model.DeviceStats.Sum(x => x.Value);
+                }
+                <div id="deviceStatsList" class="simple-list">
+                    @if (Model.DeviceStats.Count == 0)
+                    {
+                        <div class="empty-state">Chưa có dữ liệu thiết bị</div>
+                    }
+                    else
+                    {
+                        @foreach (var item in Model.DeviceStats)
+                        {
+                            var percent = totalDeviceVisits == 0 ? 0 : (int)Math.Round((item.Value * 100.0) / totalDeviceVisits);
+                            <div class="device-row mb-2">
+                                <div class="d-flex justify-content-between">
+                                    <span>@item.Name</span>
+                                    <strong>@percent%</strong>
+                                </div>
+                                <div class="progress device-progress mt-1">
+                                    <div class="progress-bar" role="progressbar" style="width: @percent%"></div>
+                                </div>
+                                <small class="text-muted">@item.Value lượt truy cập</small>
+                            </div>
+                        }
+                    }
                 </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4">
+            <div class="box h-100">
+                <h4 class="box-title mb-3">Thống kê IP</h4>
+                <div id="ipStatsList" class="simple-list">
+                    @if (Model.TopIps.Count == 0)
+                    {
+                        <div class="empty-state">Chưa có dữ liệu IP</div>
+                    }
+                    else
+                    {
+                        @foreach (var item in Model.TopIps)
+                        {
+                            <div class="simple-row">
+                                <span class="ip-text">@item.Name</span>
+                                <strong>@item.Value lần</strong>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-3">
+        <div class="col-sm-6 col-xl-3">
+            <div class="kpi-box kpi-blue">
+                <p class="mb-1">Tổng người dùng</p>
+                <h3 id="totalUsersKpi">@Model.TotalUsers</h3>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-3">
+            <div class="kpi-box kpi-green">
+                <p class="mb-1">Tổng đơn hàng</p>
+                <h3 id="totalOrdersKpi">@Model.TotalOrders</h3>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-3">
+            <div class="kpi-box kpi-orange">
+                <p class="mb-1">Doanh thu tuần</p>
+                <h3 id="weekRevenueKpi">@Model.WeekRevenue.ToString("N0") đ</h3>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-3">
+            <div class="kpi-box kpi-dark">
+                <p class="mb-1">Sản phẩm</p>
+                <h3 id="totalProductKpi">@Model.TotalProduct</h3>
             </div>
         </div>
     </div>
 </div>
 
 <style>
-    .card {
-        border: none;
-        border-radius: 10px;
-        transition: transform 0.3s;
+    .analytics-page {
+        animation: riseIn 0.4s ease;
     }
 
-        .card:hover {
-            transform: translateY(-5px);
+    .box {
+        background: #fff;
+        border: 1px solid #eceff3;
+        border-radius: 14px;
+        box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
+        padding: 16px;
+    }
+
+    .box-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+    }
+
+    .filter-select {
+        width: 110px;
+    }
+
+    .live-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: #fff9db;
+        color: #7c6400;
+        font-weight: 700;
+        font-size: 0.88rem;
+    }
+
+    .pulse {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: #f4b400;
+        animation: pulse 1.7s infinite;
+    }
+
+    .chart-holder {
+        position: relative;
+    }
+
+    .chart-holder-main {
+        height: 280px;
+    }
+
+    .chart-holder-donut {
+        height: 205px;
+    }
+
+    .legend-grid {
+        display: grid;
+        gap: 8px;
+        font-size: 0.9rem;
+    }
+
+    .dot {
+        width: 11px;
+        height: 11px;
+        display: inline-block;
+        border-radius: 50%;
+        margin-right: 7px;
+    }
+
+    .dot-online { background: #f4b400; }
+    .dot-month { background: #4f6ddf; }
+    .dot-total { background: #f76767; }
+
+    .simple-list {
+        max-height: 260px;
+        overflow: auto;
+        padding-right: 4px;
+    }
+
+    .simple-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px dashed #e8ebf0;
+        font-size: 0.96rem;
+    }
+
+    .simple-row:last-child {
+        border-bottom: none;
+    }
+
+    .ip-text {
+        max-width: 70%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .device-progress {
+        height: 8px;
+        border-radius: 12px;
+        background: #e9edf3;
+    }
+
+    .device-progress .progress-bar {
+        border-radius: 12px;
+        background: linear-gradient(90deg, #7aa7ff, #4f6ddf);
+    }
+
+    .empty-state {
+        color: #8492a6;
+        font-style: italic;
+    }
+
+    .kpi-box {
+        color: #fff;
+        border-radius: 12px;
+        padding: 16px;
+    }
+
+    .kpi-box h3 {
+        margin: 0;
+        font-size: 1.35rem;
+        font-weight: 700;
+    }
+
+    .kpi-blue { background: linear-gradient(120deg, #2563eb, #1d4ed8); }
+    .kpi-green { background: linear-gradient(120deg, #10b981, #059669); }
+    .kpi-orange { background: linear-gradient(120deg, #f59e0b, #ea580c); }
+    .kpi-dark { background: linear-gradient(120deg, #475569, #1f2937); }
+
+    @@keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(244, 180, 0, 0.55); }
+        70% { box-shadow: 0 0 0 10px rgba(244, 180, 0, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(244, 180, 0, 0); }
+    }
+
+    @@keyframes riseIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @@media (max-width: 992px) {
+        .chart-holder-main {
+            height: 220px;
+        }
+    }
+
+    @@media (max-width: 576px) {
+        .filter-select {
+            width: 100%;
         }
 
-    .card-title {
-        font-size: 1.25rem;
-        margin-bottom: 1rem;
-    }
-
-    .card-text {
-        font-weight: bold;
+        .chart-holder-main,
+        .chart-holder-donut {
+            height: 220px;
+        }
     }
 </style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const dashboardApiUrl = '@Url.Action("DashboardData", "Admin")';
+    const numberFormat = new Intl.NumberFormat('vi-VN');
+
+    const initialData = {
+        selectedMonth: @Model.SelectedMonth,
+        selectedYear: @Model.SelectedYear,
+        onlineVisitors: @Model.OnlineVisitors,
+        monthlyVisits: @Model.MonthlyVisits,
+        totalVisits: @Model.TotalVisits,
+        monthlyVisitLabels: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.MonthlyVisitLabels)),
+        monthlyVisitSeries: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.MonthlyVisitSeries)),
+        browserStats: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.BrowserStats)),
+        deviceStats: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.DeviceStats)),
+        topIps: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.TopIps)),
+        totalUsers: @Model.TotalUsers,
+        totalOrders: @Model.TotalOrders,
+        weekRevenue: @Model.WeekRevenue,
+        totalProduct: @Model.TotalProduct
+    };
+
+    const monthlyChart = new Chart(document.getElementById('monthlyVisitChart'), {
+        type: 'line',
+        data: {
+            labels: initialData.monthlyVisitLabels,
+            datasets: [{
+                label: 'Lượt truy cập',
+                data: initialData.monthlyVisitSeries,
+                tension: 0.35,
+                borderWidth: 3,
+                borderColor: '#ccbc54',
+                pointBackgroundColor: '#ffffff',
+                pointBorderColor: '#ccbc54',
+                pointRadius: 3,
+                fill: true,
+                backgroundColor: 'rgba(204, 188, 84, 0.12)'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: {
+                    grid: {
+                        color: 'rgba(148, 163, 184, 0.15)'
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        precision: 0
+                    },
+                    grid: {
+                        color: 'rgba(148, 163, 184, 0.2)'
+                    }
+                }
+            }
+        }
+    });
+
+    const donutChart = new Chart(document.getElementById('trafficDonutChart'), {
+        type: 'doughnut',
+        data: {
+            labels: ['Đang online', 'Trong tháng', 'Tổng truy cập'],
+            datasets: [{
+                data: [initialData.onlineVisitors, initialData.monthlyVisits, initialData.totalVisits],
+                backgroundColor: ['#f4b400', '#4f6ddf', '#f76767'],
+                hoverOffset: 8
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '66%',
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return context.label + ': ' + context.raw;
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    function renderSimpleStats(containerId, items, suffix = '') {
+        const container = document.getElementById(containerId);
+        if (!container) {
+            return;
+        }
+
+        if (!items || items.length === 0) {
+            container.innerHTML = '<div class="empty-state">Chưa có dữ liệu</div>';
+            return;
+        }
+
+        container.innerHTML = items.map(item => `
+            <div class="simple-row">
+                <span class="${containerId === 'ipStatsList' ? 'ip-text' : ''}">${item.name ?? item.Name}</span>
+                <strong>${numberFormat.format(item.value ?? item.Value)}${suffix}</strong>
+            </div>
+        `).join('');
+    }
+
+    function renderDeviceStats(items) {
+        const container = document.getElementById('deviceStatsList');
+        if (!container) {
+            return;
+        }
+
+        if (!items || items.length === 0) {
+            container.innerHTML = '<div class="empty-state">Chưa có dữ liệu thiết bị</div>';
+            return;
+        }
+
+        const total = items.reduce((acc, item) => acc + (item.value ?? item.Value), 0);
+        container.innerHTML = items.map(item => {
+            const currentValue = item.value ?? item.Value;
+            const currentName = item.name ?? item.Name;
+            const percent = total === 0 ? 0 : Math.round((currentValue * 100) / total);
+            return `
+                <div class="device-row mb-2">
+                    <div class="d-flex justify-content-between">
+                        <span>${currentName}</span>
+                        <strong>${percent}%</strong>
+                    </div>
+                    <div class="progress device-progress mt-1">
+                        <div class="progress-bar" role="progressbar" style="width: ${percent}%"></div>
+                    </div>
+                    <small class="text-muted">${numberFormat.format(currentValue)} lượt truy cập</small>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function applyDashboardData(data) {
+        document.getElementById('monthlyVisitTitle').textContent = `Thống kê truy cập tháng ${data.selectedMonth}/${data.selectedYear}`;
+        document.getElementById('onlineVisitorsLabel').textContent = `${numberFormat.format(data.onlineVisitors)} đang online`;
+        document.getElementById('totalUsersKpi').textContent = numberFormat.format(data.totalUsers);
+        document.getElementById('totalOrdersKpi').textContent = numberFormat.format(data.totalOrders);
+        document.getElementById('weekRevenueKpi').textContent = `${numberFormat.format(data.weekRevenue)} đ`;
+        document.getElementById('totalProductKpi').textContent = numberFormat.format(data.totalProduct);
+
+        monthlyChart.data.labels = data.monthlyVisitLabels;
+        monthlyChart.data.datasets[0].data = data.monthlyVisitSeries;
+        monthlyChart.update();
+
+        donutChart.data.datasets[0].data = [data.onlineVisitors, data.monthlyVisits, data.totalVisits];
+        donutChart.update();
+
+        renderSimpleStats('browserStatsList', data.browserStats);
+        renderDeviceStats(data.deviceStats);
+        renderSimpleStats('ipStatsList', data.topIps, ' lần');
+    }
+
+    async function fetchDashboardData() {
+        const month = document.getElementById('monthSelect').value;
+        const year = document.getElementById('yearSelect').value;
+        const response = await fetch(`${dashboardApiUrl}?month=${month}&year=${year}`, {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        });
+
+        if (!response.ok) {
+            return;
+        }
+
+        const data = await response.json();
+        applyDashboardData(data);
+    }
+
+    document.getElementById('dashboardFilterForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        await fetchDashboardData();
+    });
+
+    renderSimpleStats('browserStatsList', initialData.browserStats);
+    renderDeviceStats(initialData.deviceStats);
+    renderSimpleStats('ipStatsList', initialData.topIps, ' lần');
+
+    setInterval(fetchDashboardData, 60000);
+</script>

@@ -24,6 +24,24 @@ function hideMessage() {
     }, 2000);
 }
 
+function getInputPrimaryFile(inputOrSelector) {
+    const input = typeof inputOrSelector === 'string' ? $(inputOrSelector)[0] : inputOrSelector;
+    if (!input) {
+        return null;
+    }
+
+    return (input.files && input.files.length > 0)
+        ? input.files[0]
+        : (input._droppedFile || null);
+}
+
+function appendInputFileIfAny(formData, fieldName, inputOrSelector) {
+    const file = getInputPrimaryFile(inputOrSelector);
+    if (file) {
+        formData.append(fieldName, file);
+    }
+}
+
 // =========================================================================
 // SỰ KIỆN ADMIN
 // =========================================================================
@@ -91,10 +109,7 @@ $(function () {
         if (newPassword !== "") {
             formData.append("NewPassword", newPassword);
         }
-        let avatarFile = $("#AvatarFile")[0].files[0];
-        if (avatarFile) {
-            formData.append("AvatarFile", avatarFile);
-        }
+        appendInputFileIfAny(formData, "AvatarFile", "#AvatarFile");
 
         // Hiển thị thông báo đang xử lý
         $("#message").html('<div class="alert alert-info">Đang xử lý...</div>');
@@ -146,10 +161,7 @@ $(function () {
         formData.append("Password", $("#NewPassword").val());
         formData.append("Status", $("#NewStatus").val());
 
-        let avatarFile = $("#NewAvatar")[0].files[0];
-        if (avatarFile) {
-            formData.append("AvatarFile", avatarFile);
-        }
+        appendInputFileIfAny(formData, "AvatarFile", "#NewAvatar");
 
         $.ajax({
             url: "/admin/add-admin",
@@ -194,6 +206,10 @@ $(function () {
 
                     // Reset form và đóng modal
                     $("#addAdminForm")[0].reset();
+                    const newAvatarInput = $("#NewAvatar")[0];
+                    if (newAvatarInput) {
+                        newAvatarInput._droppedFile = null;
+                    }
                     $("#newAvatarPreview").attr("src", "/avatar/default-avatar.png");
                     $("#addAdminModal").modal("hide");
                 } else {
@@ -462,7 +478,7 @@ $(function () {
     $(document).on("click", "#saveBannerBtn", function () {
         const title = $("#bannerTitle").val().trim();
         const fileInput = $("#bannerImage")[0];
-        const file = fileInput.files[0];
+        const file = getInputPrimaryFile(fileInput);
         const status = $("#bannerStatus").val();
 
         // Kiểm tra dữ liệu
@@ -520,6 +536,7 @@ $(function () {
 
         const form = $('#editBannerForm')[0];
         const formData = new FormData(form);
+        appendInputFileIfAny(formData, "ImageFile", "#bannerImage");
 
         $.ajax({
             url: "/banner/edit-banner/" + $('#Id').val(),
@@ -655,16 +672,13 @@ $(function () {
         formData.append("GPU", $("#GPU").val());
         formData.append("VGA", $("#VGA").val());
         formData.append("Promotion", $("#Promotion").val());
-        formData.append("ProductAvailability", $("#ProductAvailability").val());
+        formData.append("quantity", $("#quantity").val());
         formData.append("ProductDescription", $("#editor").val());
 
         // Thêm ảnh vào formData
-        var files = $("#ProductImage1")[0].files;
-        if (files.length > 0) formData.append("ProductImages", files[0]);
-        files = $("#ProductImage2")[0].files;
-        if (files.length > 0) formData.append("ProductImages", files[0]);
-        files = $("#ProductImage3")[0].files;
-        if (files.length > 0) formData.append("ProductImages", files[0]);
+        appendInputFileIfAny(formData, "ProductImages", "#ProductImage1");
+        appendInputFileIfAny(formData, "ProductImages", "#ProductImage2");
+        appendInputFileIfAny(formData, "ProductImages", "#ProductImage3");
 
         $.ajax({
             url: "/product/add-product",
@@ -699,7 +713,7 @@ $(function () {
                         </td>
                         <td>${$("#ProductName").val()}</td>
                         <td>${$("#CategoryId option:selected").text()}</td>
-                        <td>${$("#ProductAvailability").val()}</td>
+                        <td>${$("#quantity").val()}</td>
                         <td>${parseInt($("#ProductPrice").val()).toLocaleString('vi-VN')} VNĐ</td>
                         <td>${$("#ProductPriceBeforeDiscount").val() ? parseInt($("#ProductPriceBeforeDiscount").val()).toLocaleString('vi-VN') + ' VNĐ' : 'Không có'}</td>
                         <td class="action">
@@ -759,12 +773,9 @@ $(function () {
         formData.append("BONUS", $("#BONUS").val());
 
         // Thêm ảnh vào formData
-        var files = $("#editProductImage1")[0].files;
-        if (files.length > 0) formData.append("ProductImages", files[0]);
-        files = $("#editProductImage2")[0].files;
-        if (files.length > 0) formData.append("ProductImages", files[0]);
-        files = $("#editProductImage3")[0].files;
-        if (files.length > 0) formData.append("ProductImages", files[0]);
+        appendInputFileIfAny(formData, "ProductImages", "#editProductImage1");
+        appendInputFileIfAny(formData, "ProductImages", "#editProductImage2");
+        appendInputFileIfAny(formData, "ProductImages", "#editProductImage3");
 
         $.ajax({
             url: `/product/edit-product/${productId}`,
@@ -1321,7 +1332,11 @@ $(function () {
 
 // Xem trước ảnh
 function previewImage(input) {
-    if (input.type === 'file' && input.files && input.files[0]) {
+    const previewFile = (input && input.type === 'file')
+        ? ((input.files && input.files[0]) || input._droppedFile)
+        : null;
+
+    if (previewFile) {
         const reader = new FileReader();
         reader.onload = function (e) {
             let preview = null;
@@ -1350,17 +1365,22 @@ function previewImage(input) {
                 console.error("Không tìm thấy phần tử ảnh để xem trước cho input: ", input.id);
             }
         };
-        reader.readAsDataURL(input.files[0]);
+        reader.readAsDataURL(previewFile);
     }
 }
 
 // Xem trước ảnh banner
 function previewBannerImage(input) {
-    if (input.type === 'file' && input.files && input.files[0]) {
+    const previewFile = (input && input.type === 'file')
+        ? ((input.files && input.files[0]) || input._droppedFile)
+        : null;
+
+    if (previewFile) {
         const reader = new FileReader();
         reader.onload = function (e) {
-            const preview = document.querySelector('#bannerPreview');
-            const uploadHint = input.closest('.banner-upload-area').querySelector('.banner-upload-hint');
+            const bannerArea = input.closest('.banner-upload-area');
+            const preview = bannerArea ? bannerArea.querySelector('#bannerPreview, .banner-image-preview') : null;
+            const uploadHint = bannerArea ? bannerArea.querySelector('.banner-upload-hint') : null;
             if (preview) {
                 preview.src = e.target.result;
                 preview.classList.remove('hidden');
@@ -1372,9 +1392,179 @@ function previewBannerImage(input) {
                 console.error("Không tìm thấy banner preview");
             }
         };
-        reader.readAsDataURL(input.files[0]);
+        reader.readAsDataURL(previewFile);
     }
 }
+
+function assignDroppedFiles(input, files) {
+    if (!input || !files || files.length === 0) {
+        return false;
+    }
+
+    input._droppedFile = files[0];
+
+    try {
+        const transfer = new DataTransfer();
+        transfer.items.add(files[0]);
+        input.files = transfer.files;
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+        return true;
+    } catch (err) {
+        // Fallback for environments where DataTransfer constructor is blocked.
+        console.warn('DataTransfer is not available, using fallback dropped file storage.', err);
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+        return true;
+    }
+}
+
+function getUrlFromDroppedData(dataTransfer) {
+    if (!dataTransfer) {
+        return null;
+    }
+
+    const uriList = dataTransfer.getData('text/uri-list');
+    if (uriList) {
+        const uriCandidate = uriList
+            .split('\n')
+            .map(line => line.trim())
+            .find(line => line && !line.startsWith('#'));
+
+        if (uriCandidate) {
+            return uriCandidate;
+        }
+    }
+
+    const plainText = dataTransfer.getData('text/plain');
+    if (plainText && /^https?:\/\//i.test(plainText.trim())) {
+        return plainText.trim();
+    }
+
+    const htmlText = dataTransfer.getData('text/html');
+    if (htmlText) {
+        const match = htmlText.match(/src=["'](https?:\/\/[^"']+)["']/i);
+        if (match && match[1]) {
+            return match[1];
+        }
+    }
+
+    return null;
+}
+
+async function assignImageFromUrlToInput(url, input) {
+    if (!url || !input) {
+        return false;
+    }
+
+    try {
+        const response = await fetch('/admin/fetch-image-from-url', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ url: url })
+        });
+
+        if (!response.ok) {
+            return false;
+        }
+
+        const blob = await response.blob();
+        if (!blob.type.startsWith('image/')) {
+            return false;
+        }
+
+        const fileName = (url.split('/').pop() || 'web-image.jpg').split('?')[0];
+        const file = new File([blob], fileName, { type: blob.type });
+        return assignDroppedFiles(input, [file]);
+    } catch (error) {
+        console.error('Không thể lấy ảnh từ URL kéo thả:', error);
+        return false;
+    }
+}
+
+function setupDragDropArea(dropArea, input, onDropCallback) {
+    if (!dropArea || !input) {
+        return;
+    }
+
+    const preventDefaults = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+    };
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropArea.addEventListener(eventName, (e) => {
+            preventDefaults(e);
+            dropArea.classList.add('drag-over');
+        });
+    });
+
+    ['dragleave', 'dragend', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, (e) => {
+            preventDefaults(e);
+            dropArea.classList.remove('drag-over');
+        });
+    });
+
+    const handleDrop = async (e) => {
+        preventDefaults(e);
+
+        const files = Array.from(e.dataTransfer?.files ?? []).filter(file => file.type.startsWith('image/'));
+        let processed = false;
+
+        if (files.length > 0) {
+            processed = assignDroppedFiles(input, files);
+        }
+
+        if (!processed) {
+            const droppedUrl = getUrlFromDroppedData(e.dataTransfer);
+            if (droppedUrl) {
+                processed = await assignImageFromUrlToInput(droppedUrl, input);
+            }
+        }
+
+        if (processed && typeof onDropCallback === 'function') {
+            onDropCallback(input);
+        } else if (!processed && typeof showMessage === 'function') {
+            showMessage('Không thể xử lý dữ liệu kéo thả. Hãy kéo file ảnh từ máy hoặc URL ảnh trực tiếp.', 'danger');
+        }
+    };
+
+    dropArea.addEventListener('drop', handleDrop);
+
+    input.addEventListener('drop', () => {
+        setTimeout(() => {
+            if (input.files && input.files.length > 0) {
+                input.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+        }, 0);
+    });
+
+    input.addEventListener('drop', handleDrop);
+}
+
+function isUploadDropTarget(target) {
+    if (!target || typeof target.closest !== 'function') {
+        return false;
+    }
+
+    return !!target.closest('.upload-box, .banner-upload-area');
+}
+
+// Prevent browser from opening dropped files/urls in a new tab.
+document.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    if (e.dataTransfer) {
+        e.dataTransfer.dropEffect = isUploadDropTarget(e.target) ? 'copy' : 'none';
+    }
+}, true);
+
+document.addEventListener('drop', (e) => {
+    e.preventDefault();
+    if (!isUploadDropTarget(e.target)) {
+        e.stopPropagation();
+    }
+}, true);
 
 
 // Load danh mục phụ theo danh mục chính
@@ -1405,7 +1595,13 @@ function loadSubCategories(categorySelector, subCategorySelector) {
 document.querySelectorAll('.avatar-input, .file-input').forEach(input => {
     if (input.type === 'file') {
         // Sự kiện change khi chọn file
-        input.addEventListener('change', () => previewImage(input));
+        input.addEventListener('change', () => {
+            if (input.files && input.files.length > 0) {
+                input._droppedFile = null;
+            }
+
+            previewImage(input);
+        });
 
         // Kiểm tra ảnh mặc định khi tải trang
         const uploadBox = input.closest('.upload-box');
@@ -1438,16 +1634,28 @@ document.querySelectorAll('.avatar-input, .file-input').forEach(input => {
     }
 });
 
+document.querySelectorAll('.upload-box').forEach(uploadBox => {
+    const input = uploadBox.querySelector('.avatar-input, .file-input');
+    if (!input) {
+        return;
+    }
+
+    setupDragDropArea(uploadBox, input, previewImage);
+});
+
 //Banner
-const bannerInput = document.querySelector('#bannerImage');
-if (bannerInput) {
+document.querySelectorAll('.banner-file-input').forEach(bannerInput => {
     bannerInput.addEventListener('change', function () {
+        if (bannerInput.files && bannerInput.files.length > 0) {
+            bannerInput._droppedFile = null;
+        }
+
         previewBannerImage(this);
     });
 
     const bannerArea = bannerInput.closest('.banner-upload-area');
     if (bannerArea) {
-        const preview = document.querySelector('#bannerPreview');
+        const preview = bannerArea.querySelector('#bannerPreview, .banner-image-preview');
         const uploadHint = bannerArea.querySelector('.banner-upload-hint');
         if (preview && uploadHint) {
             const isDefaultImage = preview.src.includes('default-product.png') || preview.src.includes('default-avatar.png');
@@ -1461,8 +1669,10 @@ if (bannerInput) {
                 uploadHint.style.display = 'block';
             }
         }
+
+        setupDragDropArea(bannerArea, bannerInput, previewBannerImage);
     }
-}
+});
 
 
 

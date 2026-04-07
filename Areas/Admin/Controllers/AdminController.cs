@@ -8,8 +8,10 @@ using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using LapTopBD.Models.ViewModels.Admin;
 using LapTopBD.Models.ViewModels;
+using LapTopBD.Utilities;
 
 
 namespace LapTopBD.Areas.Admin.Controllers
@@ -20,25 +22,224 @@ namespace LapTopBD.Areas.Admin.Controllers
     public class AdminController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IOnlineVisitorTracker _onlineVisitorTracker;
+        private readonly IHttpClientFactory _httpClientFactory;
 
-        public AdminController(ApplicationDbContext context)
+        public AdminController(
+            ApplicationDbContext context,
+            IOnlineVisitorTracker onlineVisitorTracker,
+            IHttpClientFactory httpClientFactory)
         {
             _context = context;
+            _onlineVisitorTracker = onlineVisitorTracker;
+            _httpClientFactory = httpClientFactory;
+        }
+
+        [HttpPost]
+        [Route("fetch-image-from-url")]
+        public async Task<IActionResult> FetchImageFromUrl([FromBody] FetchImageRequest request)
+        {
+            if (request == null || string.IsNullOrWhiteSpace(request.Url))
+            {
+                return BadRequest(new { success = false, message = "URL ảnh không hợp lệ." });
+            }
+
+            if (!Uri.TryCreate(request.Url, UriKind.Absolute, out var uri) ||
+                (uri.Scheme != Uri.UriSchemeHttp && uri.Scheme != Uri.UriSchemeHttps) ||
+                uri.IsLoopback ||
+                uri.Host.Equals("localhost", StringComparison.OrdinalIgnoreCase))
+            {
+                return BadRequest(new { success = false, message = "Chỉ chấp nhận URL ảnh HTTP/HTTPS hợp lệ." });
+            }
+
+            try
+            {
+                var client = _httpClientFactory.CreateClient();
+                client.Timeout = TimeSpan.FromSeconds(15);
+
+                using var response = await client.GetAsync(uri, HttpCompletionOption.ResponseHeadersRead);
+                if (!response.IsSuccessStatusCode)
+                {
+                    return BadRequest(new { success = false, message = "Không thể tải ảnh từ URL này." });
+                }
+
+                var contentType = response.Content.Headers.ContentType?.MediaType ?? string.Empty;
+                if (!contentType.StartsWith("image/", StringComparison.OrdinalIgnoreCase))
+                {
+                    return BadRequest(new { success = false, message = "URL không phải là ảnh hợp lệ." });
+                }
+
+                const long maxBytes = 5 * 1024 * 1024;
+                if (response.Content.Headers.ContentLength.HasValue && response.Content.Headers.ContentLength.Value > maxBytes)
+                {
+                    return BadRequest(new { success = false, message = "Ảnh vượt quá giới hạn 5MB." });
+                }
+
+                await using var inputStream = await response.Content.ReadAsStreamAsync();
+                await using var outputStream = new MemoryStream();
+
+                var buffer = new byte[81920];
+                int read;
+                long totalRead = 0;
+
+                while ((read = await inputStream.ReadAsync(buffer.AsMemory(0, buffer.Length))) > 0)
+                {
+                    totalRead += read;
+                    if (totalRead > maxBytes)
+                    {
+                        return BadRequest(new { success = false, message = "Ảnh vượt quá giới hạn 5MB." });
+                    }
+
+                    await outputStream.WriteAsync(buffer.AsMemory(0, read));
+                }
+
+                var extension = Path.GetExtension(uri.AbsolutePath);
+                if (string.IsNullOrWhiteSpace(extension) || !Regex.IsMatch(extension, "^\\.(jpg|jpeg|png|gif|webp)$", RegexOptions.IgnoreCase))
+                {
+                    extension = contentType switch
+                    {
+                        "image/png" => ".png",
+                        "image/gif" => ".gif",
+                        "image/webp" => ".webp",
+                        _ => ".jpg"
+                    };
+                }
+
+                var fileName = $"dropped-image{extension}";
+                return File(outputStream.ToArray(), contentType, fileName);
+            }
+            catch
+            {
+                return BadRequest(new { success = false, message = "Không thể xử lý ảnh từ URL." });
+            }
         }
 
         [HttpGet]
         [Route("")]
         [Route("dashboard")]
-        public async Task<IActionResult> Dashboard()
+        public async Task<IActionResult> Dashboard(int? month, int? year)
         {
+            var viewModel = await BuildDashboardViewModel(month, year);
+            return View(viewModel);
+        }
+
+        [HttpGet]
+        [Route("dashboard-data")]
+        public async Task<IActionResult> DashboardData(int? month, int? year)
+        {
+            var viewModel = await BuildDashboardViewModel(month, year);
+
+            return Json(new
+            {
+                selectedMonth = viewModel.SelectedMonth,
+                selectedYear = viewModel.SelectedYear,
+                onlineVisitors = viewModel.OnlineVisitors,
+                monthlyVisits = viewModel.MonthlyVisits,
+                totalVisits = viewModel.TotalVisits,
+                monthlyVisitLabels = viewModel.MonthlyVisitLabels,
+                monthlyVisitSeries = viewModel.MonthlyVisitSeries,
+                browserStats = viewModel.BrowserStats,
+                deviceStats = viewModel.DeviceStats,
+                topIps = viewModel.TopIps,
+                totalUsers = viewModel.TotalUsers,
+                totalOrders = viewModel.TotalOrders,
+                weekRevenue = viewModel.WeekRevenue,
+                totalProduct = viewModel.TotalProduct
+            });
+        }
+
+        private async Task<AdminDashboardViewModel> BuildDashboardViewModel(int? month, int? year)
+        {
+            var now = DateTime.Now;
+            var today = now.Date;
+            var weekStart = today.AddDays(-6);
+            var monthStart = new DateTime(today.Year, today.Month, 1);
+
+            var selectedMonth = month.GetValueOrDefault(now.Month);
+            var selectedYear = year.GetValueOrDefault(now.Year);
+
+            if (selectedMonth < 1 || selectedMonth > 12)
+            {
+                selectedMonth = now.Month;
+            }
+
+            if (selectedYear < 2020 || selectedYear > now.Year + 1)
+            {
+                selectedYear = now.Year;
+            }
+
+            var allOrders = await _context.Order
+                .AsNoTracking()
+                .ToListAsync();
+
+            var todayOrders = allOrders.Where(o => o.OrderDate.Date == today).ToList();
+            var weekOrders = allOrders.Where(o => o.OrderDate.Date >= weekStart && o.OrderDate.Date <= today).ToList();
+            var monthOrders = allOrders.Where(o => o.OrderDate.Date >= monthStart && o.OrderDate.Date <= today).ToList();
+
+            var labels = new List<string>();
+            var dailyOrderCounts = new List<int>();
+            var dailyRevenue = new List<decimal>();
+
+            for (var i = 6; i >= 0; i--)
+            {
+                var date = today.AddDays(-i);
+                var dayOrders = allOrders.Where(o => o.OrderDate.Date == date).ToList();
+
+                labels.Add(date.ToString("dd/MM"));
+                dailyOrderCounts.Add(dayOrders.Count);
+                dailyRevenue.Add(dayOrders.Sum(o => o.TotalPrice));
+            }
+
+            var monthlyVisits = await _onlineVisitorTracker.GetDailyVisitCountsAsync(selectedYear, selectedMonth);
+            var browserStats = (await _onlineVisitorTracker.GetTopBrowsersAsync(7))
+                .Select(x => new DashboardStatItem { Name = x.Key, Value = x.Value })
+                .ToList();
+            var deviceStats = (await _onlineVisitorTracker.GetDeviceBreakdownAsync())
+                .Select(x => new DashboardStatItem { Name = x.Key, Value = x.Value })
+                .ToList();
+            var ipStats = (await _onlineVisitorTracker.GetTopIpsAsync(7))
+                .Select(x => new DashboardStatItem { Name = x.Key, Value = x.Value })
+                .ToList();
+
+            var monthlyVisitLabels = Enumerable.Range(1, monthlyVisits.Count)
+                .Select(day => $"D{day}")
+                .ToList();
+
+            var monthlyVisitTotal = monthlyVisits.Sum();
+            var totalVisits = await _onlineVisitorTracker.GetTotalVisitCountAsync();
+
             var viewModel = new AdminDashboardViewModel
             {
-                TotalUsers = await _context.Users.CountAsync(), // Đếm tổng số người dùng
-                TotalOrders = await _context.Order.CountAsync(), // Đếm tổng số đơn hàng
-                TotalProduct = await _context.Product.CountAsync() // Đếm tổng số sản phẩm
+                TotalUsers = await _context.Users.CountAsync(),
+                TotalOrders = allOrders.Count,
+                TotalProduct = await _context.Product.CountAsync(),
+
+                TodayOrders = todayOrders.Count,
+                WeekOrders = weekOrders.Count,
+                MonthOrders = monthOrders.Count,
+                OnlineVisitors = await _onlineVisitorTracker.GetOnlineCountAsync(TimeSpan.FromMinutes(5)),
+
+                TodayRevenue = todayOrders.Sum(o => o.TotalPrice),
+                WeekRevenue = weekOrders.Sum(o => o.TotalPrice),
+                MonthRevenue = monthOrders.Sum(o => o.TotalPrice),
+
+                Last7DaysLabels = labels,
+                Last7DaysOrderCounts = dailyOrderCounts,
+                Last7DaysRevenue = dailyRevenue,
+
+                SelectedMonth = selectedMonth,
+                SelectedYear = selectedYear,
+                MonthlyVisitLabels = monthlyVisitLabels,
+                MonthlyVisitSeries = monthlyVisits.ToList(),
+                MonthlyVisits = monthlyVisitTotal,
+                TotalVisits = totalVisits,
+
+                BrowserStats = browserStats,
+                DeviceStats = deviceStats,
+                TopIps = ipStats
             };
 
-            return View(viewModel);
+            return viewModel;
         }
 
         // Danh sách Admins
@@ -363,6 +564,11 @@ namespace LapTopBD.Areas.Admin.Controllers
                 byte[] hashBytes = md5.ComputeHash(inputBytes);
                 return BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
             }
+        }
+
+        public class FetchImageRequest
+        {
+            public string Url { get; set; } = string.Empty;
         }
 
 
