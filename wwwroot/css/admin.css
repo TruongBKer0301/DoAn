@@ -172,6 +172,12 @@
         border-color: #333;
     }
 
+    .upload-box.drag-over {
+        border-color: #2b59f7;
+        background: #edf3ff;
+        box-shadow: 0 0 0 3px rgba(43, 89, 247, 0.16);
+    }
+
     .upload-box img {
         max-width: 100%;
         max-height: 100%;
@@ -268,6 +274,12 @@
 
     .banner-upload-area:hover {
         border-color: #333;
+    }
+
+    .banner-upload-area.drag-over {
+        border-color: #2b59f7;
+        background: #edf3ff;
+        box-shadow: 0 0 0 3px rgba(43, 89, 247, 0.16);
     }
 
 .banner-file-input {

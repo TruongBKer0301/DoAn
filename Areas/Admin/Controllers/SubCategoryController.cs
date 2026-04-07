@@ -75,8 +75,12 @@ namespace LapTopBD.Areas.Admin.Controllers
                     return Json(new { success = false, message = "Tên danh mục phụ không được để trống." });
                 }
 
+                var normalizedSubCategoryName = model.SubCategoryName.Trim();
+
                 var existingSubCategory = await _context.SubCategories
-                    .FirstOrDefaultAsync(sc => (sc.SubCategoryName ?? "").ToLower() == model.SubCategoryName.ToLower());
+                    .FirstOrDefaultAsync(sc =>
+                        sc.CategoryId == model.CategoryId
+                        && (sc.SubCategoryName ?? "").ToLower() == normalizedSubCategoryName.ToLower());
 
                 if (existingSubCategory != null)
                 {
@@ -105,7 +109,7 @@ namespace LapTopBD.Areas.Admin.Controllers
 
                 var subCategory = new SubCategory
                 {
-                    SubCategoryName = model.SubCategoryName,
+                    SubCategoryName = normalizedSubCategoryName,
                     CategoryId = model.CategoryId,
                     CreationDate = DateTime.Now
                 };
@@ -165,6 +169,8 @@ namespace LapTopBD.Areas.Admin.Controllers
                 return Json(new { success = false, message = "Tên danh mục phụ không được để trống." });
             }
 
+            var normalizedSubCategoryName = model.SubCategoryName.Trim();
+
             var subCategory = await _context.SubCategories.FindAsync(model.Id);
             if (subCategory == null)
             {
@@ -173,14 +179,17 @@ namespace LapTopBD.Areas.Admin.Controllers
 
             // Kiểm tra xem tên danh mục phụ đã tồn tại chưa
             var existingSubCategory = await _context.SubCategories
-                .FirstOrDefaultAsync(sc => (sc.SubCategoryName ?? "").ToLower() == model.SubCategoryName.ToLower() && sc.Id != model.Id);
+                .FirstOrDefaultAsync(sc =>
+                    sc.CategoryId == model.CategoryId
+                    && (sc.SubCategoryName ?? "").ToLower() == normalizedSubCategoryName.ToLower()
+                    && sc.Id != model.Id);
 
             if (existingSubCategory != null)
             {
                 return Json(new { success = false, message = "Tên danh mục phụ đã tồn tại." });
             }
 
-            subCategory.SubCategoryName = model.SubCategoryName;
+            subCategory.SubCategoryName = normalizedSubCategoryName;
             subCategory.CategoryId = model.CategoryId;
             subCategory.UpdationDate = DateTime.Now;
 

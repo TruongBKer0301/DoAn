@@ -19,6 +19,7 @@ namespace LapTopBD.Data
         public DbSet<ProductReview> ProductReviews { get; set; }
         public DbSet<Wishlist> Wishlists { get; set; }
         public DbSet<Banner> Banner { get; set; }
+        public DbSet<VisitLog> VisitLogs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -88,6 +89,12 @@ namespace LapTopBD.Data
                 .WithMany(p => p.Wishlists)
                 .HasForeignKey(w => w.ProductId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<VisitLog>()
+                .HasIndex(v => v.VisitedAtUtc);
+
+            modelBuilder.Entity<VisitLog>()
+                .HasIndex(v => v.VisitorId);
 
          
         }

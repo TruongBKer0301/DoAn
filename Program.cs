@@ -1,4 +1,5 @@
 ﻿using LapTopBD.Data;
+using LapTopBD.Utilities;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -61,8 +62,32 @@ builder.Services.AddAntiforgery(options =>
 
 // Thêm chính sách ủy quyền
 builder.Services.AddAuthorization();
+builder.Services.AddScoped<IOnlineVisitorTracker, OnlineVisitorTracker>();
+builder.Services.AddHttpClient();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.ExecuteSqlRaw(@"
+IF OBJECT_ID(N'dbo.VisitLogs', N'U') IS NULL
+BEGIN
+    CREATE TABLE [dbo].[VisitLogs] (
+        [Id] BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+        [VisitorId] NVARCHAR(64) NOT NULL,
+        [VisitedAtUtc] DATETIME2 NOT NULL,
+        [Path] NVARCHAR(200) NOT NULL,
+        [Browser] NVARCHAR(64) NOT NULL,
+        [Device] NVARCHAR(32) NOT NULL,
+        [IpAddress] NVARCHAR(64) NOT NULL,
+        [UserAgent] NVARCHAR(512) NOT NULL
+    );
+    CREATE INDEX [IX_VisitLogs_VisitedAtUtc] ON [dbo].[VisitLogs] ([VisitedAtUtc]);
+    CREATE INDEX [IX_VisitLogs_VisitorId] ON [dbo].[VisitLogs] ([VisitorId]);
+END
+");
+}
 
 // Cấu hình pipeline HTTP
 if (app.Environment.IsDevelopment())
@@ -77,6 +102,7 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseMiddleware<VisitorTrackingMiddleware>();
 
 app.UseRouting();
 app.UseAuthentication(); // Đọc cookie và điền thông tin vào HttpContext.User

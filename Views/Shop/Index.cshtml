@@ -53,7 +53,7 @@
                             <a href="@Url.Action("Index", "Shop", new { categoryId = selectedCategoryId, subCategoryId = "", search = "", sortBy = sortBy })"
                                class="list-group-item list-group-item-action @(string.IsNullOrEmpty(selectedSubCategoryId) ? "active" : "") subcategory-link"
                                data-subcategory-id="">
-                                TẤT CẢ DÒNG LAPTOP
+                                TẤT CẢ DÒNG SẢN PHẨM
                             </a>
                             @if (ViewBag.SubCategories is IEnumerable<LapTopBD.ViewModels.SubCategoryViewModel> subCategories)
                             {
