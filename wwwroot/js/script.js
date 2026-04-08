@@ -1002,7 +1002,7 @@ $(function () {
         if (!passworduser) return showMessage("Vui lòng nhập mật khẩu!", "danger");
 
         $.ajax({
-            url: "/UserAuth/Login",
+            url: "/UserAuth/Login" + (window.location.search || ""),
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify({ Email: emailuser, Password: passworduser, RememberMe: rememberMe }),

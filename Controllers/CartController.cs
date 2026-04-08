@@ -78,7 +78,7 @@ namespace LapTopBD.Controllers
                     UserId = userId,
                     ProductId = productId,
                     Quantity = quantity,
-                    AddedDate = DateTime.UtcNow
+                    AddedDate = DateTimeHelper.Now
                 };
                 _context.CartItems.Add(cartItem);
             }
@@ -302,7 +302,7 @@ namespace LapTopBD.Controllers
                 }
 
                 var totalPrice = ConvertToVnPayAmount(pendingItems.Sum(item => item.UnitPrice * item.Quantity));
-                var transactionRef = $"{userId}{DateTime.UtcNow:yyyyMMddHHmmssfff}";
+                var transactionRef = $"{userId}{DateTimeHelper.Now:yyyyMMddHHmmssfff}";
 
                 var pendingCheckout = new PendingCheckoutData
                 {
@@ -341,17 +341,28 @@ namespace LapTopBD.Controllers
         public async Task<IActionResult> VnPayReturn()
         {
             var userId = await GetUserIdAsync();
+            var successReturnUrl = Url.Action("OrderConfirmation", "Cart", new { paymentResult = "success" }) ?? "/Cart/OrderConfirmation?paymentResult=success";
 
             var paymentResult = _vnPayService.ProcessReturn(Request.Query);
             if (!paymentResult.IsValidSignature)
             {
                 TempData["Error"] = "Chữ ký VNPay không hợp lệ. Vui lòng thử lại.";
+                if (userId == 0)
+                {
+                    return RedirectToAction("Login", "UserAuth", new { returnUrl = Url.Action("Checkout", "Cart") });
+                }
+
                 return RedirectToAction("Checkout");
             }
 
             if (!paymentResult.IsSuccess)
             {
                 TempData["Error"] = "Thanh toán VNPay không thành công hoặc đã bị hủy.";
+                if (userId == 0)
+                {
+                    return RedirectToAction("Login", "UserAuth", new { returnUrl = Url.Action("Checkout", "Cart") });
+                }
+
                 return RedirectToAction("Checkout");
             }
 
@@ -361,11 +372,11 @@ namespace LapTopBD.Controllers
                 if (userId == 0)
                 {
                     TempData["Error"] = "Không tìm thấy phiên thanh toán VNPay.";
-                    return RedirectToAction("Login", "UserAuth");
+                    return RedirectToAction("Login", "UserAuth", new { returnUrl = successReturnUrl });
                 }
 
-                TempData["Success"] = "Thanh toán VNPay thành công!";
-                return RedirectToAction("OrderConfirmation");
+                TempData["Success"] = "Thanh toán VNPay thành công! Đơn hàng đã được cập nhật.";
+                return RedirectToAction("OrderConfirmation", new { paymentResult = "success" });
             }
 
             if ((userId != 0 && pendingCheckout.UserId != userId)
@@ -389,14 +400,14 @@ namespace LapTopBD.Controllers
             }
 
             await _pendingCheckoutStore.RemoveAsync(pendingCheckout.TransactionRef);
-            TempData["Success"] = "Thanh toán VNPay thành công!";
+            TempData["Success"] = "Thanh toán VNPay thành công! Đơn hàng đã được cập nhật.";
 
             if (userId == 0)
             {
-                return RedirectToAction("Login", "UserAuth");
+                return RedirectToAction("Login", "UserAuth", new { returnUrl = successReturnUrl });
             }
 
-            return RedirectToAction("OrderConfirmation");
+            return RedirectToAction("OrderConfirmation", new { paymentResult = "success" });
         }
 
         [AllowAnonymous]
@@ -464,7 +475,7 @@ namespace LapTopBD.Controllers
                     UserId = userId,
                     ProductId = item.ProductId,
                     Quantity = item.Quantity,
-                    OrderDate = DateTime.UtcNow,
+                    OrderDate = DateTimeHelper.Now,
                     OrderStatus = "Pending",
                     PaymentMethod = paymentMethod,
                     TotalPrice = product.ProductPrice * item.Quantity
@@ -482,7 +493,7 @@ namespace LapTopBD.Controllers
                 user.District = model.District;
                 user.Ward = model.Ward;
                 user.Address = model.Address;
-                user.UpdationDate = DateTime.UtcNow;
+                user.UpdationDate = DateTimeHelper.Now;
                 _context.Users.Update(user);
             }
 
@@ -519,7 +530,7 @@ namespace LapTopBD.Controllers
                     UserId = pendingCheckout.UserId,
                     ProductId = item.ProductId,
                     Quantity = item.Quantity,
-                    OrderDate = DateTime.UtcNow,
+                    OrderDate = DateTimeHelper.Now,
                     OrderStatus = orderStatus,
                     PaymentMethod = paymentMethod,
                     TotalPrice = item.UnitPrice * item.Quantity
@@ -537,7 +548,7 @@ namespace LapTopBD.Controllers
                 user.District = pendingCheckout.District;
                 user.Ward = pendingCheckout.Ward;
                 user.Address = pendingCheckout.Address;
-                user.UpdationDate = DateTime.UtcNow;
+                user.UpdationDate = DateTimeHelper.Now;
                 _context.Users.Update(user);
             }
 
@@ -580,12 +591,18 @@ namespace LapTopBD.Controllers
         // Action OrderConfirmation
         [Authorize(AuthenticationSchemes = "UserAuth")]
         [HttpGet]
-        public async Task<IActionResult> OrderConfirmation()
+        public async Task<IActionResult> OrderConfirmation(string? paymentResult = null)
         {
             var userId = await GetUserIdAsync();
             if (userId == 0)
             {
                 return RedirectToAction("Login", "UserAuth");
+            }
+
+            if (string.Equals(paymentResult, "success", StringComparison.OrdinalIgnoreCase)
+                && TempData["Success"] == null)
+            {
+                TempData["Success"] = "Thanh toán VNPay thành công! Đơn hàng đã được cập nhật.";
             }
 
             // Lấy đơn hàng mới nhất của user
