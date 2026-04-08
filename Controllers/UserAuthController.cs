@@ -4,6 +4,7 @@ using LapTopBD.Models.ViewModels.User;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using LapTopBD.Utilities;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -123,7 +124,7 @@ namespace LapTopBD.Controllers
                 Name = model.Username,
                 ContactNo = model.Phone, // Thêm số điện thoại
                 Password = GetMD5Hash(model.Password ?? string.Empty),
-                RegDate = DateTime.UtcNow,
+                RegDate = DateTimeHelper.Now,
                 // Các trường khác để mặc định hoặc null vì không bắt buộc
                 City = "N/A",
                 District = "N/A",
