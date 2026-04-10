@@ -1,0 +1,126 @@
+﻿@model List<LapTopBD.ViewModels.AdminViewModel>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Danh sách Admin";
+}
+
+<h1 class="text-center">Danh sách Admin</h1>
+<button id="addAdminBtn" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addAdminModal">Thêm Admin</button>
+
+<!-- Modal giữ nguyên -->
+<div class="modal fade" id="addAdminModal" tabindex="-1" role="dialog" aria-labelledby="addAdminModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen-sm-down" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addAdminModalLabel">Thêm Admin Mới</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addAdminForm">
+                    <div class="form-group avatar-upload-container">
+                        <label for="NewAvatar">Ảnh đại diện</label>
+                        <div class="upload-box">
+                            <input type="file" class="form-control-file avatar-input" id="NewAvatar" name="AvatarFile" accept="image/*">
+                            <span class="upload-instruction">
+                                <i class="ri-image-add-fill"></i>
+                            </span>
+                            <img id="newAvatarPreview" src="/avatar/default-avatar.png" class="img-preview d-none">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="NewUsername">Tên đăng nhập</label>
+                        <input type="text" class="form-control" id="NewUsername" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="NewFullName">Họ và Tên</label>
+                        <input type="text" class="form-control" id="NewFullName" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="NewRoles">Chức vụ</label>
+                        <input type="text" class="form-control" id="NewRoles" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="NewPassword">Mật khẩu</label>
+                        <input type="password" class="form-control" id="NewPassword" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="NewStatus">Trạng thái</label>
+                        <select class="form-control" id="NewStatus">
+                            <option value="Hoạt động">Hoạt động</option>
+                            <option value="Không hoạt động">Không hoạt động</option>
+                        </select>
+                    </div>
+                    <div class="mt-3 " id="message"></div>
+                    <button type="button" class="btn btn-primary mt-3" id="saveNewAdminBtn">Thêm Admin</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="list" cellspacing="0">
+    <thead>
+        <tr class="parent-title">
+            <th>Ảnh đại diện</th>
+            <th>Tên đăng nhập</th>
+            <th>Họ và Tên</th>
+            <th>Ngày tạo</th>
+            <th>Trạng thái</th>
+            <th>Chức vụ</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var admin in Model)
+        {
+            <tr>
+                <td class="avatar">
+                    <img src="@admin.Avatar" alt="Ảnh đại diện" />
+                </td>
+                <td>@admin.Username</td>
+                <td class="title">
+                    <span>@admin.FullName</span>
+                </td>
+                <td class="create-date">
+                    <span>@(admin.CreationDate?.ToString("dd/MM/yyyy") ?? "Không có dữ liệu")</span>
+                </td>
+                <td class="status">
+                    <span class="@admin.StatusClass">@admin.Status</span>
+                </td>
+                <td>@admin.Roles</td>
+                <td class="action">
+                    <a href="@Url.Action("Edit", "Admin", new { id = admin.Id })">
+                        <i class="ri-pencil-line"></i>
+                    </a>
+                    <a href="javascript:void(0);" class="delete-admin" data-id="@admin.Id">
+                        <i class="ri-delete-bin-6-line"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="mt-3" id="message"></div>
+
+<!-- Phân trang giữ nguyên -->
+@if (ViewBag.TotalPages > 1)
+{
+    <nav aria-label="Page navigation" class="d-flex justify-content-center mt-3">
+        <ul class="pagination">
+            <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("ListAdmins", new { page = ViewBag.CurrentPage - 1 })">«</a>
+            </li>
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("ListAdmins", new { page = i })">@i</a>
+                </li>
+            }
+            <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("ListAdmins", new { page = ViewBag.CurrentPage + 1 })">»</a>
+            </li>
+        </ul>
+    </nav>
+}
+
