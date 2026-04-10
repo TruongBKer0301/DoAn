@@ -1,0 +1,32 @@
+﻿@model IEnumerable<LapTopBD.Models.Banner>
+
+<!-- Banner Start -->
+<div class="container-fluid mb-5" id="showbanner">
+    <div class="row border-top px-xl-5">
+        <div class="col-8">
+            <div class="main-banner">
+                <div class="owl-carousel main-banner-carousel owl-loaded">
+                    <div class="owl-stage-outer">
+                        <div class="owl-stage">
+                            @foreach (var banner in Model.OrderBy(b => b.Position))
+                            {
+                                <div class="owl-item">
+                                    <img src="@banner.ImageUrl" alt="@banner.Position" />
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="banner-children">
+                <img  src="~/uploads/banners/adver_1.jpg" />
+            </div>
+            <div class="banner-children">
+                <img src="~/uploads/banners/adver_2.jpg" />
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Banner End -->

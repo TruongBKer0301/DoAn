@@ -1,0 +1,162 @@
+﻿@model IEnumerable<LapTopBD.Models.Category>
+
+<style>
+    /* RESET */
+    .menu ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* menu ngang */
+    .menu > ul {
+        display: flex;
+        gap: 30px;
+    }
+
+        /* item cha */
+        .menu > ul > li {
+            position: relative;
+        }
+
+    /* ===== QUAN TRỌNG: ẨN TOÀN BỘ MENU CON ===== */
+    .menu ul ul {
+        display: none !important;
+    }
+
+    /* ===== HOVER HIỆN MENU ===== */
+    .menu > ul > li:hover > ul {
+        display: flex !important;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 1000px;
+        background: white;
+        padding: 20px;
+        gap: 50px;
+        z-index: 9999;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    }
+
+    /* hiển thị luôn cấp 2 trong mega menu */
+    .menu > ul > li > ul > li > ul {
+        display: block !important;
+    }
+
+    /* cột */
+    .menu > ul > li > ul > li {
+        width: 200px;
+    }
+
+        /* tiêu đề */
+        .menu > ul > li > ul > li > a {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+    /* hover đẹp */
+    .menu a:hover {
+        color: #007bff;
+    }
+</style>
+
+<!-- Navbar Start -->
+<div class="container-fluid menu-parent">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="menu-container">
+                <div class="menu">
+                    <ul>
+                        <li><a class="title-menu" href="@Url.Action("Index", "Home")">Trang Chủ</a></li>
+
+                        <li>
+                            <a class="title-menu" href="@Url.Action("Index", "Shop")">Sản Phẩm</a>
+
+                            <ul>
+                                <li>
+                                    <a href="@Url.Action("Index", "Shop", new { categoryId = 1 })">Điện Thoại</a>
+                                    <ul>
+                                        @foreach (var category in Model.Where(c => c.CategoryName == "Điện thoại"))
+                                        {
+                                            foreach (var subCategory in category.SubCategories)
+                                            {
+                                                <li>
+                                                    <a href="@Url.Action("Index", "Shop", new { search = @subCategory.SubCategoryName })">@subCategory.SubCategoryName</a>
+                                                </li>
+                                            }
+                                        }
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a href="@Url.Action("Index", "Shop", new { categoryId = 2 })">LapTop</a>
+                                    <ul>
+                                        @foreach (var category in Model.Where(c => c.CategoryName == "Laptop"))
+                                        {
+                                            foreach (var subCategory in category.SubCategories)
+                                            {
+                                                <li>
+                                                    <a href="@Url.Action("Index", "Shop", new { search = @subCategory.SubCategoryName })">@subCategory.SubCategoryName</a>
+                                                </li>
+                                            }
+                                        }
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a href="@Url.Action("Index", "Shop", new { categoryId = 4 })">Tai nghe</a>
+                                    <ul>
+                                        @foreach (var category in Model.Where(c => c.CategoryName == "Tai nghe"))
+                                        {
+                                            foreach (var subCategory in category.SubCategories)
+                                            {
+                                                <li>
+                                                    <a href="@Url.Action("Index", "Shop", new { search = @subCategory.SubCategoryName })">@subCategory.SubCategoryName</a>
+                                                </li>
+                                            }
+                                        }
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a href="@Url.Action("Index", "Shop", new { categoryId = 73 })">Sạc</a>
+                                    <ul>
+                                        @foreach (var category in Model.Where(c => c.CategoryName == "Sạc"))
+                                        {
+                                            foreach (var subCategory in category.SubCategories)
+                                            {
+                                                <li>
+                                                    <a href="@Url.Action("Index", "Shop", new { search = @subCategory.SubCategoryName })">@subCategory.SubCategoryName</a>
+                                                </li>
+                                            }
+                                        }
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a href="@Url.Action("Index", "Shop", new { categoryId = 62 })">Bàn phím cơ</a>
+                                    <ul>
+                                        @foreach (var category in Model.Where(c => c.CategoryName == "Bàn phím cơ"))
+                                        {
+                                            foreach (var subCategory in category.SubCategories)
+                                            {
+                                                <li>
+                                                    <a href="@Url.Action("Index", "Shop", new { search = @subCategory.SubCategoryName })">@subCategory.SubCategoryName</a>
+                                                </li>
+                                            }
+                                        }
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li><a class="title-menu" href="#">Giới Thiệu</a></li>
+                        <li><a class="title-menu" href="#">Liên Hệ</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Navbar End -->

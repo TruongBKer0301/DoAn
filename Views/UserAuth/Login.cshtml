@@ -1,0 +1,52 @@
+﻿@model LapTopBD.Models.ViewModels.User.UserLoginViewModel
+
+@{
+    ViewBag.Title = "Đăng Nhập/ Đăng Ký";
+}
+
+<!-- Page Header Start -->
+<div class="container-fluid bg-secondary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+        <h1 class="font-weight-semi-bold text-uppercase mb-3">Trang Đăng Nhập / Đăng Ký</h1>
+        <div class="d-inline-flex">
+            <p class="m-0"><a href="@Url.Action("Index", "Home")">Trang Chủ</a></p>
+            <p class="m-0 px-2">-</p>
+            <p class="text-danger m-0">Đăng nhập / Đăng ký</p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="p-0">
+        <div class="form-modal">
+            <div class="form-toggle">
+                <button id="login-toggle" onclick="toggleLogin()">Đăng Nhập</button>
+                <button id="signup-toggle" onclick="toggleSignup()">Đăng Ký</button>
+            </div>
+
+            <div id="login-form">
+                <form id="loginForm">
+                    <input type="text" id="Email" name="Email" placeholder="Nhập email của bạn" />
+                    <input type="password" id="Password" name="Password" placeholder="Nhập mật khẩu" />                  
+                    <div id="message"></div>
+                    <button type="submit" class="btn login">Đăng nhập</button>
+                    <p><a href="javascript:void(0)">Quên mật khẩu?</a></p>
+                    <hr />
+                </form>
+            </div>
+
+            <div id="signup-form">
+                <form id="signupForm">
+                    <input type="email" id="SignupEmail" name="Email" placeholder="Nhập email của bạn" />
+                    <input type="text" id="Username" name="Username" placeholder="Nhập Họ Tên" />
+                    <input type="tel" id="Phone" name="Phone" placeholder="Nhập số điện thoại" />
+                    <input type="password" id="SignupPassword" name="Password" placeholder="Mật khẩu" />
+                    <div id="message"></div>
+                    <button type="submit" class="btn signup">Tạo tài khoản</button>
+                    <p>Nhấn <strong> tạo tài khoản</strong> có nghĩa là bạn đã đồng ý với <a href="javascript:void(0)">điều khoản và dịch vụ của chúng tôi</a>.</p>
+                    <hr />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

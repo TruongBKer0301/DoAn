@@ -1,0 +1,41 @@
+﻿@model LapTopBD.Models.ViewModels.Admin.AdminLoginViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Admin Login</title>
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+
+</head>
+<body class="d-flex align-items-center justify-content-center vh-100">
+    <div class="card p-4" style="width: 350px;">
+        <h4 class="text-center">Admin Login</h4>
+        <form asp-action="Login" asp-controller="Auth" id="adminLoginForm" method="post">
+            <div class="mb-3">
+                <label asp-for="Username" class="form-label">Tài khoản</label>
+                <input id="Username" asp-for="Username" class="form-control" required />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label">Mật khẩu</label>
+                <input id="Password" asp-for="Password" type="password" class="form-control" required />
+            </div>
+            <div id="message"></div>
+            <div class="mb-3 form-check">
+                <input asp-for="RememberMe" type="checkbox" class="form-check-input" />
+                <label id="RememberMe" asp-for="RememberMe" class="form-check-label">Ghi nhớ</label>
+            </div>
+            <button  type="submit" class="btn btn-primary w-100">Đăng nhập</button>
+
+        </form>
+    </div>
+
+    <!-- Script-->
+    <script src="~/js/jquery-3.7.1.min.js"></script>
+    <script src="~/js/script.js"></script>
+
+</body>
+</html>
