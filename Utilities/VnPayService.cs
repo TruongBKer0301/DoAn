@@ -51,6 +51,7 @@ namespace LapTopBD.Utilities
         public string CreatePaymentUrl(HttpContext httpContext, long amount, string orderInfo, string transactionRef)
         {
             var now = DateTime.UtcNow;
+            var returnUrl = ResolveReturnUrl(httpContext);
             try
             {
                 var tz = TimeZoneInfo.FindSystemTimeZoneById(_options.TimeZoneId);
@@ -73,7 +74,7 @@ namespace LapTopBD.Utilities
                 ["vnp_Locale"] = _options.Locale,
                 ["vnp_OrderInfo"] = orderInfo,
                 ["vnp_OrderType"] = "other",
-                ["vnp_ReturnUrl"] = _options.PaymentBackReturnUrl,
+                ["vnp_ReturnUrl"] = returnUrl,
                 ["vnp_TxnRef"] = transactionRef,
                 ["vnp_ExpireDate"] = now.AddMinutes(15).ToString("yyyyMMddHHmmss")
             };
@@ -91,6 +92,27 @@ namespace LapTopBD.Utilities
                 secureHash);
 
             return $"{_options.BaseUrl}?{queryString}&vnp_SecureHashType=HMACSHA512&vnp_SecureHash={secureHash}";
+        }
+
+        private string ResolveReturnUrl(HttpContext httpContext)
+        {
+            var fallback = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}/Cart/VnPayReturn";
+            if (string.IsNullOrWhiteSpace(_options.PaymentBackReturnUrl))
+            {
+                return fallback;
+            }
+
+            if (!Uri.TryCreate(_options.PaymentBackReturnUrl, UriKind.Absolute, out var configuredUri))
+            {
+                return fallback;
+            }
+
+            if (configuredUri.IsLoopback)
+            {
+                return fallback;
+            }
+
+            return _options.PaymentBackReturnUrl;
         }
 
         public VnPayReturnResult ProcessReturn(IQueryCollection query)

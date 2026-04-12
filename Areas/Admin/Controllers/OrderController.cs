@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using LapTopBD.Utilities;
 
 namespace LapTopBD.Areas.Admin.Controllers
 {
@@ -46,14 +47,11 @@ namespace LapTopBD.Areas.Admin.Controllers
         {
             try
             {
-                // Lấy thời gian hiện tại theo múi giờ UTC
-                var nowUtc = DateTime.UtcNow;
+                var nowLocal = DateTimeHelper.Now;
 
-                // Tính ngày bắt đầu (3 ngày trước, 00:00 UTC)
-                var startDate = nowUtc.Date.AddDays(-2); // Hôm nay - 2 ngày = hôm kia
+                var startDate = nowLocal.Date.AddDays(-2);
 
-                // Tính ngày kết thúc (hôm nay, 23:59:59 UTC)
-                var endDate = nowUtc.Date.AddDays(1).AddTicks(-1); // Cuối ngày hôm nay
+                var endDate = nowLocal.Date.AddDays(1).AddTicks(-1);
 
                 // Đếm số lượng đơn hàng trong 3 ngày gần nhất, không tính đơn hàng đã hủy
                 var newOrdersCount = await _context.Order

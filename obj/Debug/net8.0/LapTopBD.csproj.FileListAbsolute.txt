@@ -839,6 +839,7 @@ C:\Users\PC\source\repos\LapTopDDB - Copy\LapTopBD\obj\Debug\net8.0\staticwebass
 C:\Users\PC\source\repos\LapTopDDB - Copy\LapTopBD\obj\Debug\net8.0\LapTopBD.csproj.Up2Date
 C:\Users\PC\source\repos\LapTopDDB - Copy\LapTopBD\obj\Debug\net8.0\LapTopBD.genruntimeconfig.cache
 C:\Users\PC\source\repos\LapTopDDB - Copy\LapTopBD\obj\Debug\net8.0\ref\LapTopBD.dll
+<<<<<<< HEAD
 C:\Users\PC\source\repos\LapTopDDB\DoAn\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\PC\source\repos\LapTopDDB\DoAn\bin\Debug\net8.0\appsettings.json
 C:\Users\PC\source\repos\LapTopDDB\DoAn\bin\Debug\net8.0\LapTopBD.staticwebassets.runtime.json
@@ -1401,3 +1402,5 @@ C:\Users\PC\source\repos\DoAn\DoAn\obj\Debug\net8.0\refint\LapTopBD.dll
 C:\Users\PC\source\repos\DoAn\DoAn\obj\Debug\net8.0\LapTopBD.pdb
 C:\Users\PC\source\repos\DoAn\DoAn\obj\Debug\net8.0\LapTopBD.genruntimeconfig.cache
 C:\Users\PC\source\repos\DoAn\DoAn\obj\Debug\net8.0\ref\LapTopBD.dll
+=======
+>>>>>>> ngay7thang4
