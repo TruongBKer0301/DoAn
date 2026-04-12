@@ -126,10 +126,10 @@ namespace LapTopBD.Controllers
                 Password = GetMD5Hash(model.Password ?? string.Empty),
                 RegDate = DateTimeHelper.Now,
                 // Các trường khác để mặc định hoặc null vì không bắt buộc
-                City = "N/A",
-                District = "N/A",
-                Ward = "N/A",
-                Address = "N/A"
+                City = "",
+                District = "",
+                Ward = "",
+                Address = ""
             };
 
             _context.Users.Add(user);
