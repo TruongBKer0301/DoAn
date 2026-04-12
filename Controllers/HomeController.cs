@@ -36,6 +36,7 @@ namespace LapTopBD.Controllers
             var newProduct = await _context.Product
                 .Include(p => p.Category)
                 .Include(p => p.SubCategory)
+                .Include(p => p.ProductReviews)
                 .OrderByDescending(p => p.PostingDate)
                 .Take(7)
                 .Select(p => new ProductViewModel
@@ -50,13 +51,15 @@ namespace LapTopBD.Controllers
                     SubCategoryId = p.SubCategoryId,
                     SubCategoryName = p.SubCategory != null ? p.SubCategory.SubCategoryName : null,
                     quantity = p.quantity,
-                    Slug = p.Slug
+                    Slug = p.Slug,
+                    AverageRating = p.ProductReviews.Any() ? p.ProductReviews.Average(pr => pr.Rating) : 0
                 })
                 .ToListAsync();
 
             var hotDeals = await _context.Product
                 .Include(p => p.Category)
                 .Include(p => p.SubCategory)
+                .Include(p => p.ProductReviews)
                 .Where(p => p.ProductPriceBeforeDiscount.HasValue && p.ProductPriceBeforeDiscount > p.ProductPrice)
                 .OrderByDescending(p => p.ProductPriceBeforeDiscount.HasValue
                     ? (double)(p.ProductPriceBeforeDiscount.Value - p.ProductPrice) / (double)p.ProductPriceBeforeDiscount.Value
@@ -74,7 +77,8 @@ namespace LapTopBD.Controllers
                     SubCategoryId = p.SubCategoryId,
                     SubCategoryName = p.SubCategory != null ? p.SubCategory.SubCategoryName : null,
                     quantity = p.quantity,
-                    Slug = p.Slug
+                    Slug = p.Slug,
+                    AverageRating = p.ProductReviews.Any() ? p.ProductReviews.Average(pr => pr.Rating) : 0
                 })
                 .ToListAsync();
 

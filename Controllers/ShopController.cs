@@ -89,7 +89,8 @@ namespace LapTopBD.Controllers
                                GPU = p.GPU,
                                VGA = p.VGA,
                                Promotion = p.Promotion,
-                               Slug = p.Slug
+                               Slug = p.Slug,
+                               AverageRating = p.ProductReviews.Any() ? p.ProductReviews.Average(pr => pr.Rating) : 0
                            };
 
             // Filter theo danh mục
