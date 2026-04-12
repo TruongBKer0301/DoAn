@@ -564,10 +564,6 @@ namespace LapTopBD.Controllers
                     // Tạo order
                 var order = new Order
                 {
-                        UserId = pendingCheckout.UserId,
-                        ProductId = item.ProductId,
-                        Quantity = item.Quantity,
-                        TotalPrice = item.UnitPrice * item.Quantity,
 
                     City = pendingCheckout.City,
                     District = pendingCheckout.District,

@@ -89,12 +89,46 @@
             <div class="d-flex mb-3">
                 <p class="text-dark font-weight-medium mb-0 mr-3">Thông số kỹ thuật:</p>
                 <ul class="list-unstyled">
-                    <li><strong>Thương hiệu:</strong> @Model?.Brand</li>
-                    <li><strong>CPU:</strong> @Model?.CPU</li>
-                    <li><strong>RAM:</strong> @Model?.RAM</li>
-                    <li><strong>Bộ nhớ:</strong> @Model?.Storage</li>
-                    <li><strong>GPU:</strong> @Model?.GPU</li>
-                    <li><strong>VGA:</strong> @Model?.VGA</li>
+                    @if (!string.IsNullOrWhiteSpace(Model?.Brand))
+                    {
+                        <li><strong>Thương hiệu:</strong> @Model.Brand</li>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model?.CPU))
+                    {
+                        <li><strong>CPU:</strong> @Model.CPU</li>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model?.RAM))
+                    {
+                        <li><strong>RAM:</strong> @Model.RAM</li>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model?.Storage))
+                    {
+                        <li><strong>Bộ nhớ:</strong> @Model.Storage</li>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model?.GPU))
+                    {
+                        <li><strong>GPU:</strong> @Model.GPU</li>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model?.VGA))
+                    {
+                        <li><strong>VGA:</strong> @Model.VGA</li>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model?.PIN))
+                    {
+                        <li><strong>Thời lượng pin:</strong> @Model.PIN</li>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model?.WEIGHT))
+                    {
+                        <li><strong>Khối lượng:</strong> @Model.WEIGHT</li>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model?.SIZE))
+                    {
+                        <li><strong>Kích thước:</strong> @Model.SIZE</li>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model?.BONUS))
+                    {
+                        <li><strong>Thông tin bổ sung:</strong> @Model.BONUS</li>
+                    }
                 </ul>
             </div>
 
@@ -135,23 +169,7 @@
 
             <!-- Thông báo lỗi -->
             <div id="qty-message" style="color:red; font-size:0.85rem; margin-top:4px;"></div>
-            <div class="d-flex pt-2">
-                <p class="text-dark font-weight-medium mb-0 mr-2">Chia sẻ trên:</p>
-                <div class="d-inline-flex">
-                    <a class="text-fb px-2" href="">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a class="text-x px-2" href="">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a class="text-dark px-2" href="">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a class="text-youtube pl-2" href="">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                </div>
-            </div>
+            
         </div>
     </div>
     <div class="row px-xl-5">
