@@ -926,31 +926,31 @@ $(function () {
 
     // Xử lý khi nhấn vào "Thông tin đơn hàng"
     $(document).on("click", "#newOrdersLink", function (e) {
-            e.preventDefault();
+        e.preventDefault();
             clicked = true;
 
-            $.ajax({
-                url: "/admin/order/get-new-orders-count",
-                type: "GET",
-                dataType: "json",
-                xhrFields: {
-                    withCredentials: true // Đảm bảo gửi cookie xác thực
-                },
-                success: function (response) {
-                    console.log("Phản hồi từ server:", response);
-                    if (response.success) {
-                        $("#newOrdersCount").text(`Có ${response.count} đơn hàng mới trong 3 ngày gần nhất.`);
-                        $("#newOrdersInfo").show();
-                    } else {
-                        $("#newOrdersCount").text("Không thể lấy thông tin đơn hàng: " + response.message);
-                        $("#newOrdersInfo").show();
-                    }
-                },
-                error: function (xhr) {
-                    console.log("Lỗi AJAX:", xhr.responseText);
-                    $("#newOrdersCount").text("Lỗi khi lấy thông tin đơn hàng.");
+        $.ajax({
+            url: "/admin/order/get-new-orders-count",
+            type: "GET",
+            dataType: "json",
+            xhrFields: {
+                withCredentials: true // Đảm bảo gửi cookie xác thực
+            },
+            success: function (response) {
+                console.log("Phản hồi từ server:", response);
+                if (response.success) {
+                    $("#newOrdersCount").text(`Có ${response.count} đơn hàng mới trong 3 ngày gần nhất.`);
+                    $("#newOrdersInfo").show();
+                } else {
+                    $("#newOrdersCount").text("Không thể lấy thông tin đơn hàng: " + response.message);
                     $("#newOrdersInfo").show();
                 }
+            },
+            error: function (xhr) {
+                console.log("Lỗi AJAX:", xhr.responseText);
+                $("#newOrdersCount").text("Lỗi khi lấy thông tin đơn hàng.");
+                $("#newOrdersInfo").show();
+            }
         });
     });
 
@@ -1011,7 +1011,7 @@ $(function () {
         if (!passworduser) return showMessage("Vui lòng nhập mật khẩu!", "danger");
 
         $.ajax({
-            url: "/UserAuth/Login",
+            url: "/UserAuth/Login" + (window.location.search || ""),
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify({ Email: emailuser, Password: passworduser, RememberMe: rememberMe }),

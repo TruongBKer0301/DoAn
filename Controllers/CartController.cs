@@ -78,7 +78,7 @@ namespace LapTopBD.Controllers
                     UserId = userId,
                     ProductId = productId,
                     Quantity = quantity,
-                    AddedDate = DateTime.UtcNow
+                    AddedDate = DateTimeHelper.Now
                 };
                 _context.CartItems.Add(cartItem);
             }
@@ -320,7 +320,7 @@ namespace LapTopBD.Controllers
                 }
 
                 var totalPrice = ConvertToVnPayAmount(pendingItems.Sum(item => item.UnitPrice * item.Quantity));
-                var transactionRef = $"{userId}{DateTime.UtcNow:yyyyMMddHHmmssfff}";
+                var transactionRef = $"{userId}{DateTimeHelper.Now:yyyyMMddHHmmssfff}";
 
                 var pendingCheckout = new PendingCheckoutData
                 {
@@ -359,17 +359,28 @@ namespace LapTopBD.Controllers
         public async Task<IActionResult> VnPayReturn()
         {
             var userId = await GetUserIdAsync();
+            var successReturnUrl = Url.Action("OrderConfirmation", "Cart", new { paymentResult = "success" }) ?? "/Cart/OrderConfirmation?paymentResult=success";
 
             var paymentResult = _vnPayService.ProcessReturn(Request.Query);
             if (!paymentResult.IsValidSignature)
             {
                 TempData["Error"] = "Chữ ký VNPay không hợp lệ. Vui lòng thử lại.";
+                if (userId == 0)
+                {
+                    return RedirectToAction("Login", "UserAuth", new { returnUrl = Url.Action("Checkout", "Cart") });
+                }
+
                 return RedirectToAction("Checkout");
             }
 
             if (!paymentResult.IsSuccess)
             {
                 TempData["Error"] = "Thanh toán VNPay không thành công hoặc đã bị hủy.";
+                if (userId == 0)
+                {
+                    return RedirectToAction("Login", "UserAuth", new { returnUrl = Url.Action("Checkout", "Cart") });
+                }
+
                 return RedirectToAction("Checkout");
             }
 
@@ -379,11 +390,11 @@ namespace LapTopBD.Controllers
                 if (userId == 0)
                 {
                     TempData["Error"] = "Không tìm thấy phiên thanh toán VNPay.";
-                    return RedirectToAction("Login", "UserAuth");
+                    return RedirectToAction("Login", "UserAuth", new { returnUrl = successReturnUrl });
                 }
 
-                TempData["Success"] = "Thanh toán VNPay thành công!";
-                return RedirectToAction("OrderConfirmation");
+                TempData["Success"] = "Thanh toán VNPay thành công! Đơn hàng đã được cập nhật.";
+                return RedirectToAction("OrderConfirmation", new { paymentResult = "success" });
             }
 
             if ((userId != 0 && pendingCheckout.UserId != userId)
@@ -407,14 +418,14 @@ namespace LapTopBD.Controllers
             }
 
             await _pendingCheckoutStore.RemoveAsync(pendingCheckout.TransactionRef);
-            TempData["Success"] = "Thanh toán VNPay thành công!";
+            TempData["Success"] = "Thanh toán VNPay thành công! Đơn hàng đã được cập nhật.";
 
             if (userId == 0)
             {
-                return RedirectToAction("Login", "UserAuth");
+                return RedirectToAction("Login", "UserAuth", new { returnUrl = successReturnUrl });
             }
 
-            return RedirectToAction("OrderConfirmation");
+            return RedirectToAction("OrderConfirmation", new { paymentResult = "success" });
         }
 
         [AllowAnonymous]
@@ -468,57 +479,57 @@ namespace LapTopBD.Controllers
             using var transaction = await _context.Database.BeginTransactionAsync();
 
             try {
-                foreach (var item in cartItems)
+            foreach (var item in cartItems)
+            {
+                var product = await _context.Product.FindAsync(item.ProductId);
+                if (product == null)
                 {
-                    var product = await _context.Product.FindAsync(item.ProductId);
-                    if (product == null)
-                    {
-                        return (false, $"Sản phẩm ID {item.ProductId} không tồn tại!");
-                    }
+                    return (false, $"Sản phẩm ID {item.ProductId} không tồn tại!");
+                }
                     if (item.Quantity > product.quantity)
                     {
                         return (false, $"Sản phẩm {item.Product.ProductName} chỉ còn {product.quantity}");
                     }
 
-                    var order = new Order
-                    {
-                        City = model.City,
-                        District = model.District,
-                        Ward = model.Ward,
-                        Address = model.Address,
-                        UserId = userId,
-                        ProductId = item.ProductId,
-                        Quantity = item.Quantity,
-                        OrderDate = DateTime.UtcNow,
-                        OrderStatus = "Pending",
-                        PaymentMethod = paymentMethod,
-                        TotalPrice = product.ProductPrice * item.Quantity
-                    };
+                var order = new Order
+                {
+                    City = model.City,
+                    District = model.District,
+                    Ward = model.Ward,
+                    Address = model.Address,
+                    UserId = userId,
+                    ProductId = item.ProductId,
+                    Quantity = item.Quantity,
+                    OrderDate = DateTimeHelper.Now,
+                    OrderStatus = "Pending",
+                    PaymentMethod = paymentMethod,
+                    TotalPrice = product.ProductPrice * item.Quantity
+                };
 
-                    _context.Order.Add(order);
+                _context.Order.Add(order);
 
                     product.quantity -= item.Quantity;
-                }
+            }
 
-                var user = await _context.Users.FindAsync(userId);
-                if (user != null)
-                {
-                    user.Name = model.Name;
-                    user.ContactNo = model.ContactNo;
-                    user.City = model.City;
-                    user.District = model.District;
-                    user.Ward = model.Ward;
-                    user.Address = model.Address;
-                    user.UpdationDate = DateTime.UtcNow;
-                    _context.Users.Update(user);
-                }
+            var user = await _context.Users.FindAsync(userId);
+            if (user != null)
+            {
+                user.Name = model.Name;
+                user.ContactNo = model.ContactNo;
+                user.City = model.City;
+                user.District = model.District;
+                user.Ward = model.Ward;
+                user.Address = model.Address;
+                user.UpdationDate = DateTimeHelper.Now;
+                _context.Users.Update(user);
+            }
 
-                _context.CartItems.RemoveRange(cartItems);
-                await _context.SaveChangesAsync();
+            _context.CartItems.RemoveRange(cartItems);
+            await _context.SaveChangesAsync();
                 await transaction.CommitAsync();
 
-                return (true, "OK");
-            }
+            return (true, "OK");
+        }
             catch (Exception ex)
             {
                 await transaction.RollbackAsync();
@@ -535,18 +546,15 @@ namespace LapTopBD.Controllers
             {
                 return (false, "Không có sản phẩm để tạo đơn hàng.");
             }
-            using var transaction = await _context.Database.BeginTransactionAsync();
-            try
-            {
-                // CHECK tồn kho trước
-                foreach (var item in pendingCheckout.Items)
-                {
-                    var product = await _context.Product.FindAsync(item.ProductId);
 
-                    if (product == null)
-                    {
-                        return (false, $"Sản phẩm ID {item.ProductId} không tồn tại!");
-                    }
+            foreach (var item in pendingCheckout.Items)
+            {
+                var product = await _context.Product.FindAsync(item.ProductId);
+
+                if (product == null)
+                {
+                    return (false, $"Sản phẩm ID {item.ProductId} không tồn tại!");
+                }
 
                     if (product.quantity < item.Quantity)
                     {
@@ -554,52 +562,59 @@ namespace LapTopBD.Controllers
                     }
 
                     // Tạo order
-                    var order = new Order
-                    {
+                var order = new Order
+                {
                         UserId = pendingCheckout.UserId,
                         ProductId = item.ProductId,
                         Quantity = item.Quantity,
                         TotalPrice = item.UnitPrice * item.Quantity,
 
-                        City = pendingCheckout.City,
-                        District = pendingCheckout.District,
-                        Ward = pendingCheckout.Ward,
-                        Address = pendingCheckout.Address,
+                    City = pendingCheckout.City,
+                    District = pendingCheckout.District,
+                    Ward = pendingCheckout.Ward,
+                    Address = pendingCheckout.Address,
+                    UserId = pendingCheckout.UserId,
+                    ProductId = item.ProductId,
+                    Quantity = item.Quantity,
+                    OrderDate = DateTimeHelper.Now,
+                    OrderStatus = orderStatus,
+                    PaymentMethod = paymentMethod,
+                    TotalPrice = item.UnitPrice * item.Quantity
+                };
 
-                        OrderDate = DateTime.UtcNow,
-                        OrderStatus = "Paid", // VNPay => đã thanh toán
-                        PaymentMethod = "VNPAY"
-                    };
-
-                    _context.Order.Add(order);
+                _context.Order.Add(order);
 
                     // TRỪ KHO
                     product.quantity -= item.Quantity;
-                }
+            }
 
-                // Xóa pending (tránh xử lý lại)
-                await _pendingCheckoutStore.RemoveAsync(pendingCheckout.TransactionRef);
+            var user = await _context.Users.FindAsync(pendingCheckout.UserId);
+            if (user != null)
+            {
+                user.Name = pendingCheckout.Name;
+                user.ContactNo = pendingCheckout.ContactNo;
+                user.City = pendingCheckout.City;
+                user.District = pendingCheckout.District;
+                user.Ward = pendingCheckout.Ward;
+                user.Address = pendingCheckout.Address;
+                user.UpdationDate = DateTimeHelper.Now;
+                _context.Users.Update(user);
+            }
 
-                // (Tuỳ chọn) Xóa giỏ hàng
-                var cartItems = await _context.CartItems
-                    .Where(c => c.UserId == pendingCheckout.UserId)
-                    .ToListAsync();
+            var productIds = pendingCheckout.Items.Select(x => x.ProductId).ToList();
+            var cartItems = await _context.CartItems
+                .Where(c => c.UserId == pendingCheckout.UserId && productIds.Contains(c.ProductId))
+                .ToListAsync();
 
+            if (cartItems.Count > 0)
+            {
                 _context.CartItems.RemoveRange(cartItems);
+            }
 
                 // Lưu DB
-                await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
-                // Commit transaction
-                await transaction.CommitAsync();
-
-                return (true, "Thanh toán VNPay thành công!");
-            }
-            catch (Exception ex)
-            {
-                await transaction.RollbackAsync();
-                return (false, ex.Message);
-            }
+            return (true, "OK");
         }
 
         private static long ConvertToVnPayAmount(decimal amount)
@@ -626,12 +641,18 @@ namespace LapTopBD.Controllers
         // Action OrderConfirmation
         [Authorize(AuthenticationSchemes = "UserAuth")]
         [HttpGet]
-        public async Task<IActionResult> OrderConfirmation()
+        public async Task<IActionResult> OrderConfirmation(string? paymentResult = null)
         {
             var userId = await GetUserIdAsync();
             if (userId == 0)
             {
                 return RedirectToAction("Login", "UserAuth");
+            }
+
+            if (string.Equals(paymentResult, "success", StringComparison.OrdinalIgnoreCase)
+                && TempData["Success"] == null)
+            {
+                TempData["Success"] = "Thanh toán VNPay thành công! Đơn hàng đã được cập nhật.";
             }
 
             // Lấy đơn hàng mới nhất của user

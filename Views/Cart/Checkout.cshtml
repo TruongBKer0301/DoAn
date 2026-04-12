@@ -174,9 +174,9 @@
                     if (response.success) {
                             $('#successPopup').fadeIn();
 
-                            setTimeout(function () {
-                                window.location.href = response.redirectUrl || '/';
-                            }, 2000);
+                        setTimeout(function () {
+                            window.location.href = response.redirectUrl || '/';
+                        }, 2000);
                     } else {
                         showMessage(response.message, 'danger');
 
