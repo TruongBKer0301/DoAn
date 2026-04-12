@@ -1,6 +1,5 @@
 ﻿<Project>
   <ItemGroup>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\avatar\66eb1fd7-c52e-4f13-9002-9958d6900e68.png'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -19,8 +18,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\avatar\66eb1fd7-c52e-4f13-9002-9958d6900e68.png'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\avatar\7a9688bf-2742-437e-90ab-aba8de573ef1.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -69,13 +66,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>urxgkfttcf</Fingerprint>
       <Integrity>BrEJayP+h3HpQbAjAv65OHoX3NoSFjZSoa8CzoUcAgA=</Integrity>
-=======
-      <Fingerprint>jpi2p7ur5g</Fingerprint>
-      <Integrity>N6BGbuUwLVZx3Yd3zJ0ToKIDXiMWmZTgKbrBCw8FX30=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\cart.html'))</OriginalItemSpec>
@@ -92,13 +84,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>8tri6mpcdk</Fingerprint>
       <Integrity>tDRuW+53OoCINCb/NloRRC99E0qcnmdoIrywBK2zJnY=</Integrity>
-=======
-      <Fingerprint>q557lfgkbw</Fingerprint>
-      <Integrity>3ubXPs5aARxSbh9oE5k1+jLoLgyT+lISPfzniQ8NdWU=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\admin.css'))</OriginalItemSpec>
@@ -133,13 +120,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>388cjb2yro</Fingerprint>
       <Integrity>Xayd9gsAx1SY7/kPSHRltUn8wU+SgX8Rfz2scb7beeQ=</Integrity>
-=======
-      <Fingerprint>pgbpwawve2</Fingerprint>
-      <Integrity>SU6yCtHBh+dAwWG8RI8o3+vklmQU/MB6tU3s03uwpUA=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\app.min.css'))</OriginalItemSpec>
@@ -156,13 +138,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>9mrwy2w5jg</Fingerprint>
       <Integrity>0T1Qh2NXpb1zJJyaNV+NO/yOlaARhFVtMfiVYD7DF2g=</Integrity>
-=======
-      <Fingerprint>zi6j5hy159</Fingerprint>
-      <Integrity>Ne/FrSURrWf8dMSMS8kimXcNGddwyqjBoVJzudIBxco=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\bootstrap.min.css'))</OriginalItemSpec>
@@ -179,13 +156,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>p0zrf8x93x</Fingerprint>
       <Integrity>9zZukMUG2NmWFPipGQ6rI2ymFx/WL8TIzHKVQV64IDY=</Integrity>
-=======
-      <Fingerprint>7qednbc4xz</Fingerprint>
-      <Integrity>z87WACJ2JtJdbs/chjxW7HTRBZBlrD7es/mSfhWRd90=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\custom.min.css'))</OriginalItemSpec>
@@ -202,13 +174,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>4n5t6031g9</Fingerprint>
       <Integrity>MAgSyBaheSicSlXq/w9uOEDuRGUykSqxZ24BBXlxyQM=</Integrity>
-=======
-      <Fingerprint>4s1qctyjyh</Fingerprint>
-      <Integrity>fHRQAniHb3GHhsDuumpV3qPogLew24XCz3or0ShkkhU=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\dropzone.css'))</OriginalItemSpec>
@@ -243,13 +210,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>ug0cdb31ue</Fingerprint>
       <Integrity>Xjb8S0v+SFN28BwcWxM+aGD//H5pVvcoI3vKyaHtNks=</Integrity>
-=======
-      <Fingerprint>y8xhccnv95</Fingerprint>
-      <Integrity>ki5xIzwMniJFfYp3fYrcQUmkdxM+jbwtx9Dlje94H+o=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\fonts\lc_lightbox.svg'))</OriginalItemSpec>
@@ -338,13 +300,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>4rkxvdj0k0</Fingerprint>
       <Integrity>sBUhP9oWZeKFgk69vBExgycBIYT7GqcXqSMh0TdsQeo=</Integrity>
-=======
-      <Fingerprint>sl3zh0fcfq</Fingerprint>
-      <Integrity>AGLfLHdDZNLeidNRACWl5a5yGpzCtfIdeLF7vTAsq1Y=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\jquery-ui.min.css'))</OriginalItemSpec>
@@ -379,13 +336,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>wcx1z9yu5m</Fingerprint>
       <Integrity>IMbK3zviEURIajoqNPFIn03wRnqEoSxisy/oePTKeE8=</Integrity>
-=======
-      <Fingerprint>lg65xi6elk</Fingerprint>
-      <Integrity>Cyc44hoTCsqTQu6pQ8Jy/1C+EgTaMzqJZrGQvTkOrf4=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\loading-overlay.jquery.css'))</OriginalItemSpec>
@@ -402,13 +354,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>qk5jasshga</Fingerprint>
       <Integrity>BiNoZ3vO/ZSV6LMg4M8ixPrKnxvARmbv65zVMHzVkaQ=</Integrity>
-=======
-      <Fingerprint>a28q16vo32</Fingerprint>
-      <Integrity>UhQQ4fxEeABh4JrcmAJ1+16id/1dnlOEVCFOxDef9Lw=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\owl.carousel.min.css'))</OriginalItemSpec>
@@ -425,13 +372,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>b9sayid5wm</Fingerprint>
       <Integrity>j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg=</Integrity>
-=======
-      <Fingerprint>lugek5hnai</Fingerprint>
-      <Integrity>zeR5PHeeHbxfGkL8WV86OzdoF6UnjuCmnagaocD+cbo=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</OriginalItemSpec>
@@ -448,13 +390,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>u2cwzyorrp</Fingerprint>
       <Integrity>JhBbWpQNQBgCCjy0UYo9pOEVxPwO/vgToXBQ3RpqFGE=</Integrity>
-=======
-      <Fingerprint>20yr1g8kuv</Fingerprint>
-      <Integrity>Hro4OBWRBrKqo2Jl7ngwTsAwWjj+M0qZCAAmw4IimJ4=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\skins\dark.css'))</OriginalItemSpec>
@@ -471,13 +408,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>ozn4m3e6wd</Fingerprint>
       <Integrity>jIvcdHDlF7CFiPjtqgOR8tSLlY/TyNSphBnRRfBsRUg=</Integrity>
-=======
-      <Fingerprint>04zngm246b</Fingerprint>
-      <Integrity>gKbRWHsR/b7bz5M3zU/UiTK6wj665HYq2T1VOM3/imk=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\skins\light.css'))</OriginalItemSpec>
@@ -494,13 +426,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>9jihi0e8n6</Fingerprint>
       <Integrity>61WywMcBxPadVRBM7aya6c5UdURkleRGBJOKB81jzR8=</Integrity>
-=======
-      <Fingerprint>n667mrxcop</Fingerprint>
-      <Integrity>D02QYp6qkQswOetrr+zZ5Ua+skW3C7ILUd3zv2u9/gk=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\skins\minimal.css'))</OriginalItemSpec>
@@ -517,13 +444,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>5mwhiowmh1</Fingerprint>
       <Integrity>XfGJOOq19E9L94hf0rnqbs7Q5En4Bx7SaphX50mZA64=</Integrity>
-=======
-      <Fingerprint>enwltbe5mv</Fingerprint>
-      <Integrity>igGYuB//ActF7XCXZ41MmqP6eManDq8JiIEqeCf97lc=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\style.css'))</OriginalItemSpec>
@@ -540,13 +462,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>bswyztney6</Fingerprint>
       <Integrity>hZ7lJUt/kgXuptrFiY1CTKSt+Vdk4sAp8mRU4J49mZM=</Integrity>
-=======
-      <Fingerprint>gq7xu5uo5r</Fingerprint>
-      <Integrity>aJcooSAjj6NdnvZGvH8ke7vQyezB4NSH1xbfcNIqALo=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\styletemp.css'))</OriginalItemSpec>
@@ -563,13 +480,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>3cojkypwft</Fingerprint>
       <Integrity>DRLEWELdMqjDcLEfv9wSGLaZ4ze16rT4xPnDHhFn8jU=</Integrity>
-=======
-      <Fingerprint>wwcnm7dz7j</Fingerprint>
-      <Integrity>4HwHCbeMqivm5FFbtD34/lHkxnKfaMwHgsgC8BEnZzc=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\detail.html'))</OriginalItemSpec>
@@ -622,13 +534,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>fb35jjwv6l</Fingerprint>
       <Integrity>C3+K519cHIB9464SZ3kl8s8zAh1TPdz0p5PiU1S9UcM=</Integrity>
-=======
-      <Fingerprint>d155qmw4en</Fingerprint>
-      <Integrity>P+UC2Mj2oLuG/CWOFqpuyVpoTuUNaTvU/jBbRn/ScLs=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\fonts\boxicons.svg'))</OriginalItemSpec>
@@ -987,13 +894,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>3j8uw1zk0v</Fingerprint>
       <Integrity>r3qcM/qoyZV43gsX+RilYSKZEYZrwJleTBGWSMsT09w=</Integrity>
-=======
-      <Fingerprint>52oi3pjpfr</Fingerprint>
-      <Integrity>TaGBkWmGd9hW1EBnqDh80nnoul0M+ftL/+R9Wb2sHxM=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\fonts\la-brands-400.svg'))</OriginalItemSpec>
@@ -1082,13 +984,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>2qts8v59gx</Fingerprint>
       <Integrity>hga1g264UnSBwAL9dPb9XSsObfldS+lWCm/jA6oUtaY=</Integrity>
-=======
-      <Fingerprint>okunamvsov</Fingerprint>
-      <Integrity>iEzhnBqefBxJbPDN61vCbifE3dqU8DsjmmPtKDXzHW0=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\fonts\la-regular-400.svg'))</OriginalItemSpec>
@@ -1177,13 +1074,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>y6x36cc51s</Fingerprint>
       <Integrity>Nr+Gw9XMgw7xJNxtxzWeV+QbxlgoDqZLlS7VMlOCfoQ=</Integrity>
-=======
-      <Fingerprint>o72ffib3s7</Fingerprint>
-      <Integrity>DODMQDzNCaLVXc6fkXkfHY+EisDqxIXsm+NmwLnZZnc=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\fonts\la-solid-900.svg'))</OriginalItemSpec>
@@ -1344,13 +1236,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>zqoj3ubaap</Fingerprint>
       <Integrity>C0+c1eKL9qFwKXE/Lp/CGuAP36d0X2FVDQvawg5l3i8=</Integrity>
-=======
-      <Fingerprint>7v10ce6pz0</Fingerprint>
-      <Integrity>cy1q+qimFbYTtqzrEyXxxwXL+ge/ewwGquFykKcNxz4=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\fonts\remixicon.svg'))</OriginalItemSpec>
@@ -1421,13 +1308,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>lg9fg15579</Fingerprint>
       <Integrity>W96yBe98Vsjv1Ws3a3zyfmxNai15wYyu+k7S80rleFk=</Integrity>
-=======
-      <Fingerprint>w1hifj9h6x</Fingerprint>
-      <Integrity>LG6kJ3SmHHKpD3EfasaMC5OURGFw92YVeorgcDc1Gew=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\fonts\remixicon.symbol.svg'))</OriginalItemSpec>
@@ -1570,13 +1452,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>acfrp3tami</Fingerprint>
       <Integrity>antVxl6FdVs7G9xWWhGvacdrO7/eXpx4fOubgenJ0+I=</Integrity>
-=======
-      <Fingerprint>7734i5idlv</Fingerprint>
-      <Integrity>M8+OBvdfK2J+LP6XyNItgKVEojf18vt41n+NHQ0d4tA=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\index.html'))</OriginalItemSpec>
@@ -1593,13 +1470,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>0vbkvfs7ll</Fingerprint>
       <Integrity>DBTL3wBXMqQbnczVk3auB3DnNCunRQQdJouU8GzDIvc=</Integrity>
-=======
-      <Fingerprint>docditpsky</Fingerprint>
-      <Integrity>bffeF4AHYjZ5sfHr3sTS6QieQvNaeVmGnlyo5Nbnbvw=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\alloy_finger.min.js'))</OriginalItemSpec>
@@ -1634,13 +1506,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>e4dzfkey7z</Fingerprint>
       <Integrity>LsxIBkLhCaVqfgvhxtUHlFnecMHaTNajiNOP0MXpsGA=</Integrity>
-=======
-      <Fingerprint>661an12lwb</Fingerprint>
-      <Integrity>bp90Qe8PqgQTNnnwAZ5q+F5lRwWb94nBiiqjGhtyvAY=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\app.js'))</OriginalItemSpec>
@@ -1657,13 +1524,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>zkdd1ttrh0</Fingerprint>
       <Integrity>/bRxBrI1pOHhxb4qgx7Md/klWSjWuB2aYSUpiocTV2k=</Integrity>
-=======
-      <Fingerprint>e60iqh2efp</Fingerprint>
-      <Integrity>Zq80762K1r5RjJVftCFjqfEXii9RtrFueGSkaXOwQ0k=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\bootstrap.bundle.min.js'))</OriginalItemSpec>
@@ -1680,13 +1542,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>ffiouutctr</Fingerprint>
       <Integrity>S1nKoM0lAM5hMO5Fa5TkvQhp/tsEijl5lbZJ/n7omeU=</Integrity>
-=======
-      <Fingerprint>mn0cmcct32</Fingerprint>
-      <Integrity>ruv2mjknTNvPfNKXAfLIWm6IF1oMDA2q0Mpv6snTCcQ=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\ckeditor.js'))</OriginalItemSpec>
@@ -1739,13 +1596,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>m9qm4tazc0</Fingerprint>
       <Integrity>eqaw4I9IoPldjffqieTL/h7z0ejA9zc/fyXt+05KMl4=</Integrity>
-=======
-      <Fingerprint>o1o13a6vjx</Fingerprint>
-      <Integrity>/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\jquery-3.7.1.min.js'))</OriginalItemSpec>
@@ -1762,13 +1614,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>ja9uqevw3n</Fingerprint>
       <Integrity>i8yezj89wZBUsnaBgBOLx5F1dfs6k5j36Vg42eTI9xg=</Integrity>
-=======
-      <Fingerprint>o2wvfqc1uw</Fingerprint>
-      <Integrity>IMtsEWIS+FhbAaNg92UknYKK+uzz7+nulsP6xLuU6gQ=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\jquery-ui.min.js'))</OriginalItemSpec>
@@ -1785,13 +1632,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>xa6aoxuwoy</Fingerprint>
       <Integrity>aVo59vzge6gBxA1S/0jZWm/Go8fH93Ge+Vwpf/YGbVg=</Integrity>
-=======
-      <Fingerprint>jbwz2ltfp3</Fingerprint>
-      <Integrity>oSuUdZXvIZuGVIaWyy9orAvfTdL9K8gEbPpBAsxYlUw=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\layout.js'))</OriginalItemSpec>
@@ -1808,13 +1650,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>m25bdlcflb</Fingerprint>
       <Integrity>bg+wKrAlVW8I475xZBiUSV5ZUUd3jqwb4cIBTk4v1ko=</Integrity>
-=======
-      <Fingerprint>kdg6yqxr22</Fingerprint>
-      <Integrity>mI2j6pH2ZU6wHcE5K0xsYDOYcn1aB+HK1N3cHAS6IAs=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\lc_lightbox.lite.min.js'))</OriginalItemSpec>
@@ -1831,13 +1668,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>7o7w9a9thb</Fingerprint>
       <Integrity>18/5DA0V5N5bHw8W7v9b3SXplfcp8g7UNiB0TjHMu38=</Integrity>
-=======
-      <Fingerprint>131nni8ruy</Fingerprint>
-      <Integrity>w1vTYhqKctHNtJ0H+AjO2H5xkN4Qj+4yFB+uh1B7qoQ=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\loading-overlay.jquery.js'))</OriginalItemSpec>
@@ -1872,13 +1704,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>v1scq0wgo3</Fingerprint>
       <Integrity>/YxCyiMwiMzm8qfD5oRCDSKfWS0f+Wz36CJPTRW2mmM=</Integrity>
-=======
-      <Fingerprint>5pkzqk6u0x</Fingerprint>
-      <Integrity>iV1yaDpGD15nJzNali1fhniLCWCg87jHB1XpmL2xwQM=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\main.js'))</OriginalItemSpec>
@@ -1895,13 +1722,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>qhliun387q</Fingerprint>
       <Integrity>TgeBvdLLtdsE2jteBZ7so04yX6u4k77nRXtbq/W3wCk=</Integrity>
-=======
-      <Fingerprint>3ajr5l1ur1</Fingerprint>
-      <Integrity>pTxD+DSzIwmwhOqTFN+DB+nHjO4iAsbgfyFq5K5bcE0=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\owl.carousel.min.js'))</OriginalItemSpec>
@@ -1918,13 +1740,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>k8qco6n87b</Fingerprint>
       <Integrity>LJAgBzZWqimTEwCyuvzWbl8YawdTDq8dy8/iW68w3wE=</Integrity>
-=======
-      <Fingerprint>cxvy30zrcv</Fingerprint>
-      <Integrity>IKmdYbEab2wU5JY/FCITSFxiu07TsATM4grPkqRbY+A=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\particles.js'))</OriginalItemSpec>
@@ -1941,13 +1758,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>adhbdzrf7q</Fingerprint>
       <Integrity>rjX1Kx4BznQMgXXu4pRC+qw3cKzjhCEp+Kj3Ukjc+ko=</Integrity>
-=======
-      <Fingerprint>08emo3hmcr</Fingerprint>
-      <Integrity>gHp3W4xPtab6mmY7PUnj06waaj67oTEfUfPbjowY3XQ=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\particles.app.js'))</OriginalItemSpec>
@@ -1964,13 +1776,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>8r3jfieu2i</Fingerprint>
       <Integrity>PA+6CjWaA4zXnryYenVWXjcRbFwIuDpGb/Ywi8KSW9U=</Integrity>
-=======
-      <Fingerprint>ienjsu1ylf</Fingerprint>
-      <Integrity>OmGfb8itm0g39aJm3LmBJYQJhoc0MrgkL0+brGZmUcE=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\remix-icons-listing.js'))</OriginalItemSpec>
@@ -1987,13 +1794,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
-      <Fingerprint>7xdcvqz1cn</Fingerprint>
-      <Integrity>e2jtq6uuLQNN8593Gf94VcKvlXxDJtJ/o0aF1XC7NYE=</Integrity>
-=======
-      <Fingerprint>i1z7nvkodj</Fingerprint>
-      <Integrity>JkCJCWtm57VtiRtLwWN09cmH4+PEb3La+goS7Wfhtm0=</Integrity>
->>>>>>> ngay7thang4
+      <Fingerprint>b1nc4gt363</Fingerprint>
+      <Integrity>Yay01VuJ+M2TGTmog21ZD3BgpEhbArt4J4caqWWNlBg=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\script.js'))</OriginalItemSpec>
@@ -2010,13 +1812,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>341ztiijdl</Fingerprint>
       <Integrity>Y5VuzTKT+LE2Ug8var5DmhuLLQpSQD8hgXswC+t9jNQ=</Integrity>
-=======
-      <Fingerprint>xarvfh8kvr</Fingerprint>
-      <Integrity>B5GDFrzfiun8I79ctSh7nEW9jHqJlYikAPu0gvbcGdc=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\simplebar.min.js'))</OriginalItemSpec>
@@ -2069,13 +1866,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>zub09dkrxp</Fingerprint>
       <Integrity>CzmECrtXV8BSk/+8SG+Rw7Fr+3hCt2bS2bEkS4YD3PQ=</Integrity>
-=======
-      <Fingerprint>s35ty4nyc5</Fingerprint>
-      <Integrity>GKEF18s44B5e0MolXAkpkqLiEbOVlKf6VyYr/G/E6pw=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\dist\css\bootstrap.css'))</OriginalItemSpec>
@@ -2092,13 +1884,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>t1cqhe9u97</Fingerprint>
       <Integrity>f4c8YV1qrr6RSiVYWMQT7R5W2OkT+iXmE5H69/uRvGQ=</Integrity>
-=======
-      <Fingerprint>bqjiyaj88i</Fingerprint>
-      <Integrity>Yy5/hBqRmmU2MJ1TKwP2aXoTO6+OjzrLmJIsC2Wy4H8=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\dist\css\bootstrap-grid.css'))</OriginalItemSpec>
@@ -2133,13 +1920,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>sejl45xvog</Fingerprint>
       <Integrity>hN2ttMG/K3wQlFrN3SbQ1YF4tIJHCE4oYP+QibT3vOY=</Integrity>
-=======
-      <Fingerprint>erw9l3u2r3</Fingerprint>
-      <Integrity>5nDHMGiyfZHl3UXePuhLDQR9ncPfBR1HJeZLXyJNV24=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\dist\css\bootstrap-grid.min.css'))</OriginalItemSpec>
@@ -2174,13 +1956,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>xvp3kq03qx</Fingerprint>
       <Integrity>M15fHTKfMK6cTars5c28PNhN6hD0qeUb3HPzOdoPwCc=</Integrity>
-=======
-      <Fingerprint>d7shbmvgxk</Fingerprint>
-      <Integrity>CZxoF8zjaLlyVkcvVCDlc8CeQR1w1RMrvgYx30cs8kM=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\dist\css\bootstrap-grid.rtl.css'))</OriginalItemSpec>
@@ -2215,13 +1992,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>22vffe00uq</Fingerprint>
       <Integrity>+rGG3u63SMkHL80Ga42LAawPUj7i8vaR2Kuenqlta2E=</Integrity>
-=======
-      <Fingerprint>k8d9w2qqmf</Fingerprint>
-      <Integrity>vMxTcvkC4Ly7LiAT3G8yEy9EpTr7Fge4SczWp07/p3k=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css'))</OriginalItemSpec>
@@ -2256,13 +2028,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>qesaa3a1fm</Fingerprint>
       <Integrity>rjusxCRzKjztCcfgOVduAc3e3Z7KvimJGokJSeADNmE=</Integrity>
-=======
-      <Fingerprint>ub07r2b239</Fingerprint>
-      <Integrity>lo9YI82OF03vojdu+XOR3+DRrLIpMhpzZNmHbM5CDMA=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\dist\css\bootstrap-reboot.css'))</OriginalItemSpec>
@@ -2297,13 +2064,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>tmc1g35s3z</Fingerprint>
       <Integrity>y72bT5TKmFmfvw3bNEzPRNZa/8595xtseZIcBUV0PdM=</Integrity>
-=======
-      <Fingerprint>b7pk76d08c</Fingerprint>
-      <Integrity>l8vt5oozv958eMd9TFsPAWgl9JJK9YKfbVSs8mchQ84=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\dist\css\bootstrap-reboot.min.css'))</OriginalItemSpec>
@@ -2338,13 +2100,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>rxsg74s51o</Fingerprint>
       <Integrity>gRKIHVkBgnCPUs/hmZsXynZ9ZJpvsE77idtljDkrWGI=</Integrity>
-=======
-      <Fingerprint>rzd6atqjts</Fingerprint>
-      <Integrity>V8psnHoJS/MPlCXWwc/J3tGtp9c3gGFRmqsIQgpn+Gg=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css'))</OriginalItemSpec>
@@ -2379,13 +2136,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>q9ht133ko3</Fingerprint>
       <Integrity>UkajePbMzGj8y73Imkd3dWWnLJr0v2CrBCLMrVMleP8=</Integrity>
-=======
-      <Fingerprint>dxx9fxp4il</Fingerprint>
-      <Integrity>/8jh8hcEMFKyS6goWqnNu7t3EzZPCGdQZgO6sCkI8tI=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css'))</OriginalItemSpec>
@@ -2420,13 +2172,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>gye83jo8yx</Fingerprint>
       <Integrity>uIzOR4gILoNjCGNryIsWnkEGO3BSwRa/MLjr73tDodE=</Integrity>
-=======
-      <Fingerprint>khv3u5hwcm</Fingerprint>
-      <Integrity>2BubgNUPlQSF/0wLFcRXQ/Yjzk9vsUbDAeK2QM+h+yo=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\dist\css\bootstrap-utilities.css'))</OriginalItemSpec>
@@ -2461,13 +2208,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>wl58j5mj3v</Fingerprint>
       <Integrity>ZBXbYF8OZrF1GDOLMLvW/zRPtx1RfeMDYj5D2Wb/9jo=</Integrity>
-=======
-      <Fingerprint>lcd1t2u6c8</Fingerprint>
-      <Integrity>KyE9xbKO9CuYx0HXpIKgsWIvXkAfITtiQ172j26wmRs=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\dist\css\bootstrap-utilities.min.css'))</OriginalItemSpec>
@@ -2502,13 +2244,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>d4r6k3f320</Fingerprint>
       <Integrity>MwFckg8YbY2WrveNQnXkfULkprYhFOq+t1BH92A7GsI=</Integrity>
-=======
-      <Fingerprint>tdbxkamptv</Fingerprint>
-      <Integrity>H6wkBbSwjua2veJoThJo4uy161jp+DOiZTloUlcZ6qQ=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css'))</OriginalItemSpec>
@@ -2543,13 +2280,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>keugtjm085</Fingerprint>
       <Integrity>7MYEMUFgHEc1CjrfAK/TlV30POxgoxXk2b+vAs/143U=</Integrity>
-=======
-      <Fingerprint>06098lyss8</Fingerprint>
-      <Integrity>GAUum6FjwQ8HrXGaoFRnHTqQQLpljXGavT7mBX8E9qU=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css'))</OriginalItemSpec>
@@ -2602,13 +2334,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>43atpzeawx</Fingerprint>
       <Integrity>sKIQRfQriISuQ9l/44b1zHfQniGXJhGonVtB2LlSuIs=</Integrity>
-=======
-      <Fingerprint>46ein0sx1k</Fingerprint>
-      <Integrity>PI8n5gCcz9cQqQXm3PEtDuPG8qx9oFsFctPg0S5zb8g=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\dist\css\bootstrap.min.css'))</OriginalItemSpec>
@@ -2643,13 +2370,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>ynyaa8k90p</Fingerprint>
       <Integrity>/rceNUMI0RlFJugRzjua815bgXwawEJBGBPh4Vx3r38=</Integrity>
-=======
-      <Fingerprint>37tfw0ft22</Fingerprint>
-      <Integrity>j5E4XIj1p1kNnDi0x1teX9RXoh1/FNlPvCML9YmRh2Q=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\dist\css\bootstrap.rtl.css'))</OriginalItemSpec>
@@ -2684,13 +2406,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>c63t5i9ira</Fingerprint>
       <Integrity>rI1w2GDxZPCr77bpZIGQ8mUvMVtEr+gBtahl5RIPJpA=</Integrity>
-=======
-      <Fingerprint>pk9g2wxc8p</Fingerprint>
-      <Integrity>h5lE7Nm8SkeIpBHHYxN99spP3VuGFKl5NZgsocil7zk=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\dist\css\bootstrap.rtl.min.css'))</OriginalItemSpec>
@@ -2725,13 +2442,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>u9q1upor1n</Fingerprint>
       <Integrity>vqK8KwEVuWidx0Ddm5m5LyBriPDPl9TcjrKZQhkFSVA=</Integrity>
-=======
-      <Fingerprint>notf2xhcfb</Fingerprint>
-      <Integrity>+UW802wgVfnjaSbdwyHLlU7AVplb0WToOlvN1CnzIac=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\dist\js\bootstrap.js'))</OriginalItemSpec>
@@ -2748,13 +2460,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>4094rpi4f9</Fingerprint>
       <Integrity>bNojyBU9M3Cv/K4YqdKkq4xeaAkchkkS7HXP7554z9Y=</Integrity>
-=======
-      <Fingerprint>6cfz1n2cew</Fingerprint>
-      <Integrity>mkoRoV24jV+rCPWcHDR5awPx8VuzzJKN0ibhxZ9/WaM=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\dist\js\bootstrap.bundle.js'))</OriginalItemSpec>
@@ -2789,13 +2496,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>hd3gran6i8</Fingerprint>
       <Integrity>6zfk2L8R3wCgRbZzpkEi7UYC2bc6fYGIgFfNeqyOWnQ=</Integrity>
-=======
-      <Fingerprint>493y06b0oq</Fingerprint>
-      <Integrity>CDOy6cOibCWEdsRiZuaHf8dSGGJRYuBGC+mjoJimHGw=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\dist\js\bootstrap.bundle.min.js'))</OriginalItemSpec>
@@ -2830,13 +2532,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>ltid2c489k</Fingerprint>
       <Integrity>idJzCWndWIhl4ZZvXbuLRTe5wquRfykXbEiDpO7ZsFk=</Integrity>
-=======
-      <Fingerprint>vr1egmr9el</Fingerprint>
-      <Integrity>exiXZNJDwucXfuje3CbXPbuS6+Ery3z9sP+pgmvh8nA=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\dist\js\bootstrap.esm.js'))</OriginalItemSpec>
@@ -2871,13 +2568,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>8vyfqsqgz1</Fingerprint>
       <Integrity>REjSeieVKd00nAKwd6dv7MMhuVKvKctPmLI4iDRs/cc=</Integrity>
-=======
-      <Fingerprint>jj8uyg4cgr</Fingerprint>
-      <Integrity>QZdFT1ZNdly4rmgUBtXmXFS9BU1FTa+sPe6h794sFRQ=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\dist\js\bootstrap.esm.min.js'))</OriginalItemSpec>
@@ -2930,13 +2622,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>4d85u1mtcx</Fingerprint>
       <Integrity>aCTIqw9op0XQGYnNe1649V7fnihACD48OP3M8BP2xVM=</Integrity>
-=======
-      <Fingerprint>63fj8s7r0e</Fingerprint>
-      <Integrity>3gQJhtmj7YnV1fmtbVcnAV6eI4ws0Tr48bVZCThtCGQ=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\dist\js\bootstrap.min.js'))</OriginalItemSpec>
@@ -2971,13 +2658,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>81b7ukuj9c</Fingerprint>
       <Integrity>ZH6pA6BSx6fuHZvdaKph1DwUJ+VSYilIiEQu8ilnvqk=</Integrity>
-=======
-      <Fingerprint>z6qzljqjd0</Fingerprint>
-      <Integrity>WzAxfJw1u28FEBxQHehmzGhSq5tlXc9ZQXM/ZkTD69A=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\LICENSE'))</OriginalItemSpec>
@@ -2994,13 +2676,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>03hjc8e09r</Fingerprint>
       <Integrity>xJbBMLGhYbXlPrrrddrSVmduyF6KEtbxEsYxw7hYZV4=</Integrity>
-=======
-      <Fingerprint>47otxtyo56</Fingerprint>
-      <Integrity>wJQaJ0XynBE2fq6CexXXhxKu7fstVmQc7V2MHNTo+WQ=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.js'))</OriginalItemSpec>
@@ -3017,13 +2694,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>48y08845bh</Fingerprint>
       <Integrity>RFWFWIIPsjB4DucR4jqwxTWw13ZmtI+s6tVR2LJmZXk=</Integrity>
-=======
-      <Fingerprint>4v8eqarkd7</Fingerprint>
-      <Integrity>YJa7W8EiQdQpkk93iGEjjnLSUWRpRJbSfzfURh1kxz4=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.min.js'))</OriginalItemSpec>
@@ -3040,13 +2712,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>356vix0kms</Fingerprint>
       <Integrity>16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s=</Integrity>
-=======
-      <Fingerprint>l3n5xuwxn8</Fingerprint>
-      <Integrity>z8IfXovWVa6ZfuyRYTi3B7HSkLgycsAqlcn4IbjIcxA=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\jquery-validation-unobtrusive\LICENSE.txt'))</OriginalItemSpec>
@@ -3063,13 +2730,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>83jwlth58m</Fingerprint>
       <Integrity>XL6yOf4sfG2g15W8aB744T4ClbiDG4IMGl2mi0tbzu0=</Integrity>
-=======
-      <Fingerprint>ilo7uva0vt</Fingerprint>
-      <Integrity>RtK5/xaX3H1GQNw5gX7lTEGtDXcqlD8j/rgs0bEPA6c=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\jquery-validation\dist\additional-methods.js'))</OriginalItemSpec>
@@ -3086,13 +2748,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>mrlpezrjn3</Fingerprint>
       <Integrity>jhvKRxZo6eW/PyCe+4rjBLzqesJlE8rnyQGEjk8l2k8=</Integrity>
-=======
-      <Fingerprint>qlccset4i1</Fingerprint>
-      <Integrity>MtEA819Zls6dtLt5S5BpEMOhifPyz7gfzfgtNtY75lE=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\jquery-validation\dist\additional-methods.min.js'))</OriginalItemSpec>
@@ -3109,13 +2766,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>worgj0nhwm</Fingerprint>
       <Integrity>0GxoUp3otVLneA5AAK6d6uUs64GFYYMOJ8VrHPs4xKA=</Integrity>
-=======
-      <Fingerprint>lzl9nlhx6b</Fingerprint>
-      <Integrity>kRL82372ur5YrVTjFWp9muao9yeU8AoLiJxSb5ekmHg=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\jquery-validation\dist\jquery.validate.js'))</OriginalItemSpec>
@@ -3132,13 +2784,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>gk0pw8i4co</Fingerprint>
       <Integrity>4NCwFlQ/wYiXS/TiueaKHFZND6AibX0E5NEBx9i3ar0=</Integrity>
-=======
-      <Fingerprint>ag7o75518u</Fingerprint>
-      <Integrity>umbTaFxP31Fv6O1itpLS/3+v5fOAWDLOUzlmvOGaKV4=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\jquery-validation\dist\jquery.validate.min.js'))</OriginalItemSpec>
@@ -3155,13 +2802,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>x0q3zqp4vz</Fingerprint>
       <Integrity>geHEkw/WGPdaHQMRq5HuNY9snliNzU/y2OW8ycnhGXw=</Integrity>
-=======
-      <Fingerprint>xzw0cte36n</Fingerprint>
-      <Integrity>85iHjKszi4aWOL2sGurna/OsEbK4nabgtovBpkVzNEA=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\jquery-validation\LICENSE.md'))</OriginalItemSpec>
@@ -3178,13 +2820,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>d6nrnj6jjx</Fingerprint>
       <Integrity>6440qEDaqjKqrIVfk4x21neDBVsbef6XUR5dUCKBv/E=</Integrity>
-=======
-      <Fingerprint>0i3buxo5is</Fingerprint>
-      <Integrity>eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\jquery\dist\jquery.js'))</OriginalItemSpec>
@@ -3201,13 +2838,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>m9qm4tazc0</Fingerprint>
       <Integrity>eqaw4I9IoPldjffqieTL/h7z0ejA9zc/fyXt+05KMl4=</Integrity>
-=======
-      <Fingerprint>o1o13a6vjx</Fingerprint>
-      <Integrity>/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\jquery\dist\jquery.min.js'))</OriginalItemSpec>
@@ -3242,13 +2874,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>jjsuc0puko</Fingerprint>
       <Integrity>AXgugf7kYNDl5ASR/8ZY13Id5HcDtTTmscOm4zwYn4E=</Integrity>
-=======
-      <Fingerprint>2z0ns9nrw6</Fingerprint>
-      <Integrity>UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\jquery\dist\jquery.slim.js'))</OriginalItemSpec>
@@ -3265,13 +2892,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>9vr69e8ynj</Fingerprint>
       <Integrity>a4xPRM7I0Iu95emrjGFRPWtNfn31f7PRjqVT5MIQMuc=</Integrity>
-=======
-      <Fingerprint>muycvpuwrr</Fingerprint>
-      <Integrity>kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\jquery\dist\jquery.slim.min.js'))</OriginalItemSpec>
@@ -3306,13 +2928,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>mlv21k5csn</Fingerprint>
       <Integrity>hjIBkvmgxQXbNXK3B9YQ3t06RwLuQSQzC/dpvuB/lMk=</Integrity>
-=======
-      <Fingerprint>jfsiqqwiad</Fingerprint>
-      <Integrity>kR0ThRjy07+hq4p08nfdkjN+pI94Gj2rK5lyE0buITU=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\jquery\LICENSE.txt'))</OriginalItemSpec>
@@ -3329,13 +2946,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-<<<<<<< HEAD
       <Fingerprint>oje638bvst</Fingerprint>
       <Integrity>3P2plm4XI2P0iD4nSanNAqtRsh3b9Oa1jNc0ONdUzSY=</Integrity>
-=======
-      <Fingerprint>nibwxq9trr</Fingerprint>
-      <Integrity>scSaM3+kB5GCV2s40FJIWH+wITEwRYQ3wuw09Ab8Zuk=</Integrity>
->>>>>>> ngay7thang4
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\shop.html'))</OriginalItemSpec>
@@ -3358,7 +2970,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\banner\3c6e3a79-1c11-4e5f-af2a-1df5b0b80b99_snapedit_1742834828592.jpeg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\banner\4faac7b9-e210-4d66-b65f-89a54e81b6fd_609fa7b53c435fb27393587d_dd5787fa0c9306323b7176ce91a4d31ff6041c4a2.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -3395,8 +3006,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\banner\b804befe-5744-430b-8564-07bfd0ef2e6b_macbookairm1giảmngay1triệuchohs-svgv3.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\banner\be40ea2c-f4a3-408b-bc9b-31c18099cda5_snapedit_1742834806685.jpeg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -3505,7 +3114,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\01de8839-4db9-4c39-9626-b0a5a21d47d5_samsung-galaxy-a54-5g-tim-thumb-1-600x600.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\0313a054-329d-499c-b157-e55c782dd87e_tau-sac-o-to-ugreen-ed018-50875-2-usb-a-24w_2_.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -3560,8 +3168,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\042f4524-4d2c-477f-955d-cd7bef219c4c_tai-nghe-rog-cetra-ii-core_17_.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\0445b73b-d8d0-44f3-a93a-651dea37b0b7_dell_3515_2.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -3580,7 +3186,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\0445b73b-d8d0-44f3-a93a-651dea37b0b7_dell_3515_2.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\055d33b7-9657-43f9-8872-e2a78ca4c96f_samsung-galaxy-buds-2-pro-ksp-1_1.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -3617,8 +3222,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\055e9cdf-fb89-4985-b207-071e7162e69d_tai-nghe-khong-day-asus-tuf-gaming-h3_1_.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\06713720-ad20-49ba-b330-9bca2dbe707c_hp-elitebook-x360-1.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -3637,7 +3240,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\06713720-ad20-49ba-b330-9bca2dbe707c_hp-elitebook-x360-1.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\0763f650-7439-4dae-b518-7d3e305cc398_16-nen-3292.png'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -3656,8 +3258,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\0763f650-7439-4dae-b518-7d3e305cc398_16-nen-3292.png'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\099d5a1a-42a3-40cd-96bf-eada71268df3_hp-15s-fq2559tu_1.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -3712,7 +3312,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\0bbbea28-6204-4fd8-af48-56d832d44ecf_lenovo_y7000_2.png'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\0c763a97-41a5-40a9-8670-f8354e7cc289_p76_buds_8_pro_ksp_4.5_standard.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -3731,8 +3330,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\0c763a97-41a5-40a9-8670-f8354e7cc289_p76_buds_8_pro_ksp_4.5_standard.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\0c8acf31-d1ae-4bc1-bc69-d1ac1e3d768b_hp-15s-fq2559tu_3.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -3751,7 +3348,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\0c8acf31-d1ae-4bc1-bc69-d1ac1e3d768b_hp-15s-fq2559tu_3.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\0ea2449c-acf6-4975-9052-af1a228dc296_ban-phim-co-aula-s2022-blue-switch-3.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -3788,8 +3384,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\11e042e7-8821-4a13-bc09-2d157b63095b_xiaomi-15-ultra-white-thumbnew-600x600.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\121d260f-9d09-4d88-95f1-851a10f82c44_lenovo-yoga-7-2.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -3808,7 +3402,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\121d260f-9d09-4d88-95f1-851a10f82c44_lenovo-yoga-7-2.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\12fd6597-f84e-4df3-a1d5-494bb53f9383_7_17.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -3827,8 +3420,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\12fd6597-f84e-4df3-a1d5-494bb53f9383_7_17.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\13405f0b-0690-424e-b9b5-23b9f0700733_hp-omen-16-xf0071-1.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -3883,7 +3474,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\18db5a78-2321-4d75-993e-b5a6a1814f78_thinkpad-e14-3.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\1af51e5f-a2e9-43bc-b973-b13ef2b4f78d_tai-nghe-bluetooth-xiaomi-redmi-buds-8-pro_13_.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -3902,8 +3492,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\1af51e5f-a2e9-43bc-b973-b13ef2b4f78d_tai-nghe-bluetooth-xiaomi-redmi-buds-8-pro_13_.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\1aff2f1c-86dd-4b22-8bd4-de4a98eaf1cb_rog_flow_z13_1.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -3958,7 +3546,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\1db04d41-eea9-4eec-a28a-f2a7d67a3889_thinkpad-e14-2.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\1db7be90-0550-4eff-900e-97d4fb6460a3_ban-phim-co-rapoo-v700diy-75-xanh-la-den_1.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -3995,8 +3582,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\1f1409fd-0ee9-4fa3-a9b8-aac666896086_tai-nghe-co-day-havit-fuxi-h5d_4_.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\213743c7-5fd0-44e5-94dc-d43f4ee5786b_hp-15s-fq2559tu_1.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4015,7 +3600,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\213743c7-5fd0-44e5-94dc-d43f4ee5786b_hp-15s-fq2559tu_1.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\2181fe17-f937-4df5-a76f-37fc71465c8a_cu-sac-anker-nano-b2679-1c-100w-kem-cap-type-c_8_.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4070,8 +3654,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\247466a1-14b9-4f0f-bc3d-6a2cd95a87d0_tai-nghe-chup-tai-havit-h2043u.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\2515af33-9f19-4ba4-905e-ff2afa8a74cd_645552630_1248513117418992_2793655263226700122_n.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4090,7 +3672,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\2515af33-9f19-4ba4-905e-ff2afa8a74cd_645552630_1248513117418992_2793655263226700122_n.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\2601cb06-dd3f-47f3-856d-cc01cc984e45_iphone-17-pro-max-5.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4109,8 +3690,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\2601cb06-dd3f-47f3-856d-cc01cc984e45_iphone-17-pro-max-5.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\26afdfc6-d9d6-4e48-a299-54d94c4681d7_hp-elitebook-x360-3.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4129,7 +3708,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\26afdfc6-d9d6-4e48-a299-54d94c4681d7_hp-elitebook-x360-3.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\27cea943-6c4e-439f-acc7-616474bab233_tai-nghe-khong-day-asus-tuf-gaming-h3.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4148,8 +3726,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\27cea943-6c4e-439f-acc7-616474bab233_tai-nghe-khong-day-asus-tuf-gaming-h3.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\28579d9d-5c85-41bd-85c0-179372a7c609_hp-15s-fq2559tu_2.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4168,7 +3744,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\28579d9d-5c85-41bd-85c0-179372a7c609_hp-15s-fq2559tu_2.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\29ecb574-a28c-4f0c-a1b1-f757c81e46de_cu-sac-anker-nano-b2679-1c-100w-kem-cap-type-c_2_.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4187,8 +3762,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\29ecb574-a28c-4f0c-a1b1-f757c81e46de_cu-sac-anker-nano-b2679-1c-100w-kem-cap-type-c_2_.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\2a2cd518-77a4-4228-a708-f099b5b2f792_thinkpad-e14-1.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4207,7 +3780,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\2a2cd518-77a4-4228-a708-f099b5b2f792_thinkpad-e14-1.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\2c728997-599f-437d-9ec6-7df22f6fe90c_Samsung-Galaxy-S25-Ultra-Titan-Grey.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4262,8 +3834,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\317974e3-3a62-481d-9b37-c74757b75c5e_ban-phim-gaming-msi-forge-gk100-rgb-led-den-5.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\3245cc41-b946-447e-8e02-33941dd3e943_dell_5625_2.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4282,7 +3852,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\3245cc41-b946-447e-8e02-33941dd3e943_dell_5625_2.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\34d8a06b-c658-487f-82dc-9aec72623eac_ban-phim-co-co-day-aula-win68he-max-xam-trang-8.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4301,8 +3870,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\34d8a06b-c658-487f-82dc-9aec72623eac_ban-phim-co-co-day-aula-win68he-max-xam-trang-8.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\36d9179e-5b44-411e-9492-f267b97e6887_mb_m4_2.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4321,7 +3888,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\36d9179e-5b44-411e-9492-f267b97e6887_mb_m4_2.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\36f8ce1a-54e0-41cf-ab9e-77b565a55e1e_frame_3_23__2.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4358,8 +3924,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\375677b7-1cf2-4245-be1f-f81806ee7b1c_16-nen-3292.png'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\384b157a-986e-4b64-94bf-c06f5325f92a_hp-elitebook-x360-2.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4414,7 +3978,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\3b4020c7-e085-43aa-9ae3-0e4e2233fee6_mb_m4_3.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\3b70bc27-aabc-49ef-af67-ea727bc9e67a_4_43.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4487,8 +4050,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\3f1f9eae-5fd7-4053-88b8-c3b71cb133c9_2024_4_24_638495700434861779_xiaomi-14-ultra-den-3.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\4160bbac-8966-43d2-8596-87bac6f20ca6_dell_3515_3.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4507,7 +4068,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\4160bbac-8966-43d2-8596-87bac6f20ca6_dell_3515_3.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\41c40303-11e2-49d6-a8d5-a6ef1220a9e1_ban-phim-co-rapoo-v700diy-75-xanh-la-den-2.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4526,8 +4086,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\41c40303-11e2-49d6-a8d5-a6ef1220a9e1_ban-phim-co-rapoo-v700diy-75-xanh-la-den-2.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\42d2ca06-444a-4f31-9716-534c8520c5e1_lenovo-legion-5-15irx9_2.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4546,7 +4104,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\42d2ca06-444a-4f31-9716-534c8520c5e1_lenovo-legion-5-15irx9_2.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\43cb8254-044f-4f4a-bdb1-16718d64b952_samsung-galaxy-s25-ultra-blue-thumbai-600x600.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4583,8 +4140,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\44ce69f8-6d04-4430-8296-a888128d59ae_ban-phim-co-rapoo-v510-led-rainbow-den-2.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\46092ad3-2de5-4a9d-a2f4-6e05daad31b6_dell_5430_3.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4639,7 +4194,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\480c6ebe-1929-4cb4-910d-ffa9ed65c442_hp-15s-fq2559tu_1.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\490782af-b99a-410d-8fe0-f2163ba14773_tau-sac-o-to-ugreen-ed018-50875-2-usb-a-24w_1__2.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4658,8 +4212,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\490782af-b99a-410d-8fe0-f2163ba14773_tau-sac-o-to-ugreen-ed018-50875-2-usb-a-24w_1__2.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\4a8e60c5-8489-4a75-a63a-c8dda49577e6_rogzephyrus_g16_2.png'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4696,7 +4248,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\4ac3a82f-f2d0-49f4-91f4-2d8865253796_asus_g16_3.png'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\4b016a7c-bb8a-4196-aa65-2c0cef06c1ea_samsung-galaxy-buds-2-pro-thumb.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4769,8 +4320,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\4e35292e-db17-4329-b0e7-2f88936f5345_cu-sac-nhanh-baseus-palm-1c1a-20w-us-kem-cap_6_.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\4e520b06-f813-4cb7-90e9-11d8a095fd97_macpro_m2_3.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4789,7 +4338,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\4e520b06-f813-4cb7-90e9-11d8a095fd97_macpro_m2_3.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\5193f9e4-1c8d-4e51-b2e6-0425141062ed_dien-thoai-xiaomi-15-ultra_14_.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4826,8 +4374,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\52e8c205-c5cf-486f-983a-715b555a6a04_vn-11134258-81ztc-mmpn5o534ft15b.png'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\547739ff-52b5-4cbe-ac01-2b87d6f9a1e0_hp-15s-fq2559tu_1.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4864,7 +4410,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\557f7d1a-1ade-49b4-9f52-bd3c323dbd22_mb_m4_1.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\58709269-3fb4-4dc2-ab47-78193bb1edfa_tai-nghe-gaming-havit-h2040d.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4919,8 +4464,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\61622d7e-3818-471c-9aa5-b48b3848834d_group_193_3_.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\65353545-dbc2-4166-92b4-f2e9009065d1_hp-pavilion-15-eg3093tu_3.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4957,7 +4500,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\6583bd3a-8f26-457c-8df6-73bc738c5271_mac_pro_m2_1.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\67b6d591-442f-45ca-be53-864173e1308d_pkit.367-3.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4976,8 +4518,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\67b6d591-442f-45ca-be53-864173e1308d_pkit.367-3.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\6a463c1c-1788-4ca8-ab8d-b1ddb0e294ff_hp-15s-fq2559tu_3.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4996,7 +4536,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\6a463c1c-1788-4ca8-ab8d-b1ddb0e294ff_hp-15s-fq2559tu_3.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\6adea89c-746f-40f5-b9ef-27e6ea936e7a_cu-sac-trusmi-ch11-1a-1c-pd-20w-kem-cap-type-c-to-lightning-60w_2_.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -5015,8 +4554,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\6adea89c-746f-40f5-b9ef-27e6ea936e7a_cu-sac-trusmi-ch11-1a-1c-pd-20w-kem-cap-type-c-to-lightning-60w_2_.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\6b240ae9-bea7-4234-97ef-de7f9deeed94_hp-envy-x360-1.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -5089,7 +4626,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\6fa80a46-abb9-43cb-81bd-6c66cb5e26de_624577934_122291464778225587_1187208001619482972_n.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\770b06f1-6657-460c-bd77-f46731398faf_tai-nghe-gaming-havit-h2040d_7_.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -5126,8 +4662,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\78e9a3c5-846a-4d38-beac-bbf77af7dd16_iphone-16-1.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\794ef9b2-36a1-4182-b67a-9674469485a4_lenovo-legion-5-15irx9_3.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -5164,7 +4698,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\7999c9ec-9803-4128-97db-45fb297021dd_hp-pavilion-15-eg3093tu_2.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\7bcee833-847f-47c8-b4ff-89b3fd55dc97_cu-sac-nhanh-baseus-palm-1c1a-20w-us-kem-cap_7_.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -5255,8 +4788,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\8058cea9-80ca-4f75-ae12-f8b050ebf0b9_50d34bf3-6074-4738-80dc-00d05032fe2d-jpeg.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\812e8acb-2f4c-4cbc-881b-c8928c1efe2a_hp-15s-fq2559tu_3.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -5275,7 +4806,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\812e8acb-2f4c-4cbc-881b-c8928c1efe2a_hp-15s-fq2559tu_3.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\8280c322-f834-4f05-ba32-0c95597ec888_cu-sac-trusmi-ch11-1a-1c-pd-20w-kem-cap-type-c-to-lightning-60w_6_.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -5348,8 +4878,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\8889ef25-94c0-4046-80dd-0432882b0319_ban-phim-gaming-msi-forge-gk100-rgb-led-den.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\8f70fb27-cf53-440d-89e5-2d7967a9c55d_rog_flow_z13_3.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -5368,7 +4896,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\8f70fb27-cf53-440d-89e5-2d7967a9c55d_rog_flow_z13_3.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\8fb06655-8e2d-4f98-acbf-dac4fc5354c2_frame_3_25__2.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -5423,8 +4950,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\90348482-b4d5-47da-9e65-cb9b46713ae0_tai-nghe-co-day-havit-fuxi-h5d_2_.png'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\906c85c8-2082-4fe5-8352-8beb062b5c6d_dell_5430_1.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -5443,7 +4968,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\906c85c8-2082-4fe5-8352-8beb062b5c6d_dell_5430_1.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\9082b934-6f45-44cf-8ccd-88f7e7e12af1_baseus-super-si-25w-1-cong-kem-cap-type-c-to-type-c-1m-7.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -5462,8 +4986,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\9082b934-6f45-44cf-8ccd-88f7e7e12af1_baseus-super-si-25w-1-cong-kem-cap-type-c-to-type-c-1m-7.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\90a3f298-f8b0-4f77-a239-ccbcd889cff6_dell_5430_2.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -5482,7 +5004,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\90a3f298-f8b0-4f77-a239-ccbcd889cff6_dell_5430_2.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\9394e3fa-e210-41e2-8329-234e64b37099_ban-phim-gaming-msi-forge-gk100-rgb-led-den-2.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -5519,8 +5040,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\93ceb31e-53ee-42d5-bc14-6d6bac6906be_thong-so-iphone-17-pro-max.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\9525a464-0307-402b-a0a2-301467ecbf8c_rogzephyrus_g16_3.png'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -5539,7 +5058,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\9525a464-0307-402b-a0a2-301467ecbf8c_rogzephyrus_g16_3.png'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\9581f1d0-a920-41e0-97f7-f06b0c64b99b_5_1__1.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -5558,8 +5076,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\9581f1d0-a920-41e0-97f7-f06b0c64b99b_5_1__1.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\97b463ad-bbe9-41ea-9496-c43af4b43563_dell_5625_3.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -5578,7 +5094,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\97b463ad-bbe9-41ea-9496-c43af4b43563_dell_5625_3.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\993d9e37-e695-44d9-862a-b09df257f5d5_tai-nghe-co-day-havit-fuxi-h5d.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -5669,8 +5184,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\9c41ae0e-54a8-4205-805d-a5a6b01a2b37_frame_392.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\a2aadc18-512b-427b-8106-45261264d318_lenovo-legion-5-15irx9_1.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -5689,7 +5202,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\a2aadc18-512b-427b-8106-45261264d318_lenovo-legion-5-15irx9_1.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\a443370b-1e7f-4c29-a21c-d96261edc57b_pin_iphone_17_pro_c0ad874f14.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -5744,8 +5256,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\a6df8aa9-0098-4a6e-931d-b9acc836c481_dung-luong-pin-iphone-17-pro-max-2.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\aa010640-d091-4541-88c3-b9555390542d_644789898_1505019520990853_4809499643401294434_n.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -5764,7 +5274,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\aa010640-d091-4541-88c3-b9555390542d_644789898_1505019520990853_4809499643401294434_n.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\ab309db3-758d-47d9-9106-520fa8cf1a89_vn-11134207-81ztc-mlei2ri16ku9cc.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -5837,8 +5346,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\aebb5e5b-d20e-4655-a1b7-b4cc28e14183_dien-thoai-xiaomi-15-ultra.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\afc8bdb6-450f-4522-82c0-a0be01b3ac3f_asus_g16_1.png'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -5875,7 +5382,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\b09109f3-ca78-4d73-a45b-386cc1a41a5f_hp-15s-fq2559tu_2.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\b185d476-7722-4dff-b07c-801da0a73605_02_5_.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -5912,8 +5418,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\b229e6cd-7f21-4bfd-ae50-19133bf24a1c_tai-nghe-gaming-havit-h2040d_3_.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\b29e2549-27c2-4396-9d2b-d29bd194836f_dell_16plus_1.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -5968,7 +5472,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\b42cf296-0b85-4c43-a527-653434a910c0_tải xuống (5).jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\b4929d23-24b0-48de-b3a2-7a1bcf76ece8_ban-phim-gaming-asus-tuf-k1-3.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -5987,8 +5490,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\b4929d23-24b0-48de-b3a2-7a1bcf76ece8_ban-phim-gaming-asus-tuf-k1-3.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\b5bbe7a8-00b5-45a7-b824-b8b1abcd3314_hp-omen-16-xf0071-3.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -6025,7 +5526,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\b64cb16d-7e6b-4475-9723-eac386cf77bc_2023_3_29_638156772400703328_A54 (1).webp'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\b69c6b3f-42dd-426d-abaa-7b2add2ea965_dung-luong-pin-iphone-17-pro-max-2.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -6062,8 +5562,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\b75a9a50-3665-4088-a92c-bf89b5f02a95_tau-sac-o-to-ugreen-ed018-50875-2-usb-a-24w_3_.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\ba78a47c-a971-4bcc-ad8a-132b0cc24726_hp-omen-16-xf0071-2.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -6100,7 +5598,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\bcd4620b-6815-4333-a3bd-87e28d24d8f7_macpro_m2_2.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\bec1aba8-0014-40e7-b59a-b7350a4a8d36_iphone-17-pro-max-512gb-4.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -6173,8 +5670,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\c5e5c9b2-6e68-4220-b2a7-9f9c2105b891_baseus-super-si-25w-1-cong-kem-cap-type-c-to-type-c-1m-8.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\c977bbf5-dee3-47c3-b979-46de237dd37c_asus_g16_1.png'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -6193,7 +5688,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\c977bbf5-dee3-47c3-b979-46de237dd37c_asus_g16_1.png'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\ca36d818-15e3-4f28-894d-ed9e309c8ff8_iphone-16-1.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -6320,8 +5814,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\d2cf9dd9-2464-4f4a-8c17-f0e46066c5d5_vn-11134207-81ztc-mlei2ri2fj0i4e@resize_w450_nl.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\d3a84b12-4347-48e3-aad9-1ea2fa0be16a_lenovo-yoga-7-1.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -6340,7 +5832,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\d3a84b12-4347-48e3-aad9-1ea2fa0be16a_lenovo-yoga-7-1.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\d4538db3-1246-4c2c-a4cf-ccf0e0b3f4ef_ban-phim-co-co-day-aula-win68he-max-xam-trang-1.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -6377,8 +5868,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\d6cfc514-6c3e-461b-9200-1a58bd814867_ban-phim-co-rapoo-v700diy-75-xanh-la-den-7.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\d71e8fc8-75f1-43d4-bdcd-5b1d29c15e12_lenovo-yoga-7-3.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -6433,7 +5922,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\d7c9d30a-5053-44bc-bdd4-b80187c91d2c_dell_3515_1.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\d8b10071-d969-4eea-ad0c-d600adab29bf_cu-sac-nhanh-baseus-palm-kem-cap-1c-20w-1m_6_.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -6488,8 +5976,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\df2d0656-d836-40d0-b6ca-70edd3efb4b9_h88838da46f3f4014a63aa536d51116f.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\e2485e7d-6d7b-468c-a133-790ff4b700f8_hp-15s-fq2559tu_3.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -6508,7 +5994,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\e2485e7d-6d7b-468c-a133-790ff4b700f8_hp-15s-fq2559tu_3.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\e3820c22-9908-4c95-8139-8b1c4da1560f_cu-sac-trusmi-ch11-1a-1c-pd-20w-kem-cap-type-c-to-lightning-60w_9_.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -6527,8 +6012,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\e3820c22-9908-4c95-8139-8b1c4da1560f_cu-sac-trusmi-ch11-1a-1c-pd-20w-kem-cap-type-c-to-lightning-60w_9_.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\e3c2ad93-345d-43fc-9c5c-063d83b2ab6e_asus_g16_3.png'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -6601,7 +6084,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\e8fc8a85-3cb1-47c8-a10e-8fe037ed3a1f_asus_g16_2.png'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\e91a6a55-5430-45ef-8541-6b47b1672e86_iphone_16_1_04ab3981a5.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -6620,8 +6102,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\e91a6a55-5430-45ef-8541-6b47b1672e86_iphone_16_1_04ab3981a5.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\ed41edec-aafb-4540-920f-8fa6eef193fa_hp-envy-x360-2.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -6640,7 +6120,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\ed41edec-aafb-4540-920f-8fa6eef193fa_hp-envy-x360-2.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\ef26d883-c92d-4a37-9ac2-bff223ce0f6f_2024_1_17_638410793333120339_samsung-galaxy-s24-ultra-vang-1.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -6659,8 +6138,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\ef26d883-c92d-4a37-9ac2-bff223ce0f6f_2024_1_17_638410793333120339_samsung-galaxy-s24-ultra-vang-1.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\ef582560-1761-4183-9d37-a5b705f1ed8b_hp-15s-fq2559tu_2.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -6679,7 +6156,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\ef582560-1761-4183-9d37-a5b705f1ed8b_hp-15s-fq2559tu_2.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\f452a6b0-0580-4a3d-b027-6268f8fd54f1_pin_iphone_17_pro_c0ad874f14.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -6734,8 +6210,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\f5eee4e7-9cc7-408d-adac-4768a95c556e_cu-sac-nhanh-baseus-palm-kem-cap-1c-20w-1m_5_.webp'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\f85d7319-2ea0-4d3d-8d1b-5b6eda88d282_mac_pro_m2_3.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -6772,7 +6246,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\f8608ed4-63dc-4215-9168-ce02aead7a35_mac_pro_m2_2.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-<<<<<<< HEAD
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\f88b0f58-3873-4c2c-aee3-5e7038bb06d4_cu-sac-anker-nano-b2679-1c-100w-kem-cap-type-c_6_.png'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -6791,7 +6264,5 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\f88b0f58-3873-4c2c-aee3-5e7038bb06d4_cu-sac-anker-nano-b2679-1c-100w-kem-cap-type-c_6_.png'))</OriginalItemSpec>
     </StaticWebAsset>
-=======
->>>>>>> ngay7thang4
   </ItemGroup>
 </Project>
