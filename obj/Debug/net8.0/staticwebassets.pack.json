@@ -1,1303 +1,1395 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\LapTopBD.bundle.scp.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\LapTopBD.bundle.scp.css",
       "PackagePath": "staticwebassets\\LapTopBD.evwzrwujdv.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\avatar\\66eb1fd7-c52e-4f13-9002-9958d6900e68.png",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\avatar\\66eb1fd7-c52e-4f13-9002-9958d6900e68.png",
       "PackagePath": "staticwebassets\\avatar\\66eb1fd7-c52e-4f13-9002-9958d6900e68.png"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\avatar\\7a9688bf-2742-437e-90ab-aba8de573ef1.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\avatar\\7a9688bf-2742-437e-90ab-aba8de573ef1.jpg",
       "PackagePath": "staticwebassets\\avatar\\7a9688bf-2742-437e-90ab-aba8de573ef1.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\avatar\\d7f5d48f-7a38-4295-96c4-05c05748dc98.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\avatar\\d7f5d48f-7a38-4295-96c4-05c05748dc98.jpg",
       "PackagePath": "staticwebassets\\avatar\\d7f5d48f-7a38-4295-96c4-05c05748dc98.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\cart.html",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\cart.html",
       "PackagePath": "staticwebassets\\cart.html"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\css\\admin.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\css\\admin.css",
       "PackagePath": "staticwebassets\\css\\admin.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\css\\aos.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\css\\aos.css",
       "PackagePath": "staticwebassets\\css\\aos.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\css\\app.min.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\css\\app.min.css",
       "PackagePath": "staticwebassets\\css\\app.min.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\css\\bootstrap.min.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\css\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\css\\bootstrap.min.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\css\\custom.min.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\css\\custom.min.css",
       "PackagePath": "staticwebassets\\css\\custom.min.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\css\\dropzone.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\css\\dropzone.css",
       "PackagePath": "staticwebassets\\css\\dropzone.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\css\\fonts\\lc_lightbox.eot",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\css\\fonts\\lc_lightbox.eot",
       "PackagePath": "staticwebassets\\css\\fonts\\lc_lightbox.eot"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\css\\fonts\\lc_lightbox.svg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\css\\fonts\\lc_lightbox.svg",
       "PackagePath": "staticwebassets\\css\\fonts\\lc_lightbox.svg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\css\\fonts\\lc_lightbox.ttf",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\css\\fonts\\lc_lightbox.ttf",
       "PackagePath": "staticwebassets\\css\\fonts\\lc_lightbox.ttf"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\css\\fonts\\lc_lightbox.woff",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\css\\fonts\\lc_lightbox.woff",
       "PackagePath": "staticwebassets\\css\\fonts\\lc_lightbox.woff"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\css\\glightbox.min.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\css\\glightbox.min.css",
       "PackagePath": "staticwebassets\\css\\glightbox.min.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\css\\icons.min.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\css\\icons.min.css",
       "PackagePath": "staticwebassets\\css\\icons.min.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\css\\jquery-ui.min.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\css\\jquery-ui.min.css",
       "PackagePath": "staticwebassets\\css\\jquery-ui.min.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\css\\lc_lightbox.min.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\css\\lc_lightbox.min.css",
       "PackagePath": "staticwebassets\\css\\lc_lightbox.min.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\css\\loading-overlay.jquery.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\css\\loading-overlay.jquery.css",
       "PackagePath": "staticwebassets\\css\\loading-overlay.jquery.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\css\\owl.carousel.min.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\css\\owl.carousel.min.css",
       "PackagePath": "staticwebassets\\css\\owl.carousel.min.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\css\\site.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\css\\skins\\dark.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\css\\skins\\dark.css",
       "PackagePath": "staticwebassets\\css\\skins\\dark.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\css\\skins\\light.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\css\\skins\\light.css",
       "PackagePath": "staticwebassets\\css\\skins\\light.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\css\\skins\\minimal.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\css\\skins\\minimal.css",
       "PackagePath": "staticwebassets\\css\\skins\\minimal.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\css\\style.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\css\\style.css",
       "PackagePath": "staticwebassets\\css\\style.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\css\\styletemp.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\css\\styletemp.css",
       "PackagePath": "staticwebassets\\css\\styletemp.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\detail.html",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\detail.html",
       "PackagePath": "staticwebassets\\detail.html"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\favicon.ico",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\boxicons.eot",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\boxicons.eot",
       "PackagePath": "staticwebassets\\fonts\\boxicons.eot"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\boxicons.svg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\boxicons.svg",
       "PackagePath": "staticwebassets\\fonts\\boxicons.svg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\boxicons.ttf",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\boxicons.ttf",
       "PackagePath": "staticwebassets\\fonts\\boxicons.ttf"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\boxicons.woff",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\boxicons.woff",
       "PackagePath": "staticwebassets\\fonts\\boxicons.woff"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\boxicons.woff2",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\boxicons.woff2",
       "PackagePath": "staticwebassets\\fonts\\boxicons.woff2"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\hkgrotesk-bold.ttf",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\hkgrotesk-bold.ttf",
       "PackagePath": "staticwebassets\\fonts\\hkgrotesk-bold.ttf"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\hkgrotesk-bold.woff",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\hkgrotesk-bold.woff",
       "PackagePath": "staticwebassets\\fonts\\hkgrotesk-bold.woff"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\hkgrotesk-bold.woff2",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\hkgrotesk-bold.woff2",
       "PackagePath": "staticwebassets\\fonts\\hkgrotesk-bold.woff2"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\hkgrotesk-light.eot",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\hkgrotesk-light.eot",
       "PackagePath": "staticwebassets\\fonts\\hkgrotesk-light.eot"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\hkgrotesk-light.woff",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\hkgrotesk-light.woff",
       "PackagePath": "staticwebassets\\fonts\\hkgrotesk-light.woff"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\hkgrotesk-light.woff2",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\hkgrotesk-light.woff2",
       "PackagePath": "staticwebassets\\fonts\\hkgrotesk-light.woff2"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\hkgrotesk-medium.eot",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\hkgrotesk-medium.eot",
       "PackagePath": "staticwebassets\\fonts\\hkgrotesk-medium.eot"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\hkgrotesk-medium.woff",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\hkgrotesk-medium.woff",
       "PackagePath": "staticwebassets\\fonts\\hkgrotesk-medium.woff"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\hkgrotesk-medium.woff2",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\hkgrotesk-medium.woff2",
       "PackagePath": "staticwebassets\\fonts\\hkgrotesk-medium.woff2"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\hkgrotesk-regular.eot",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\hkgrotesk-regular.eot",
       "PackagePath": "staticwebassets\\fonts\\hkgrotesk-regular.eot"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\hkgrotesk-regular.woff",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\hkgrotesk-regular.woff",
       "PackagePath": "staticwebassets\\fonts\\hkgrotesk-regular.woff"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\hkgrotesk-regular.woff2",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\hkgrotesk-regular.woff2",
       "PackagePath": "staticwebassets\\fonts\\hkgrotesk-regular.woff2"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\hkgrotesk-semibold.eot",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\hkgrotesk-semibold.eot",
       "PackagePath": "staticwebassets\\fonts\\hkgrotesk-semibold.eot"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\hkgrotesk-semibold.woff",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\hkgrotesk-semibold.woff",
       "PackagePath": "staticwebassets\\fonts\\hkgrotesk-semibold.woff"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\hkgrotesk-semibold.woff2",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\hkgrotesk-semibold.woff2",
       "PackagePath": "staticwebassets\\fonts\\hkgrotesk-semibold.woff2"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\la-brands-400.eot",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\la-brands-400.eot",
       "PackagePath": "staticwebassets\\fonts\\la-brands-400.eot"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\la-brands-400.svg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\la-brands-400.svg",
       "PackagePath": "staticwebassets\\fonts\\la-brands-400.svg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\la-brands-400.ttf",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\la-brands-400.ttf",
       "PackagePath": "staticwebassets\\fonts\\la-brands-400.ttf"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\la-brands-400.woff",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\la-brands-400.woff",
       "PackagePath": "staticwebassets\\fonts\\la-brands-400.woff"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\la-brands-400.woff2",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\la-brands-400.woff2",
       "PackagePath": "staticwebassets\\fonts\\la-brands-400.woff2"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\la-regular-400.eot",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\la-regular-400.eot",
       "PackagePath": "staticwebassets\\fonts\\la-regular-400.eot"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\la-regular-400.svg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\la-regular-400.svg",
       "PackagePath": "staticwebassets\\fonts\\la-regular-400.svg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\la-regular-400.ttf",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\la-regular-400.ttf",
       "PackagePath": "staticwebassets\\fonts\\la-regular-400.ttf"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\la-regular-400.woff",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\la-regular-400.woff",
       "PackagePath": "staticwebassets\\fonts\\la-regular-400.woff"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\la-regular-400.woff2",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\la-regular-400.woff2",
       "PackagePath": "staticwebassets\\fonts\\la-regular-400.woff2"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\la-solid-900.eot",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\la-solid-900.eot",
       "PackagePath": "staticwebassets\\fonts\\la-solid-900.eot"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\la-solid-900.svg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\la-solid-900.svg",
       "PackagePath": "staticwebassets\\fonts\\la-solid-900.svg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\la-solid-900.ttf",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\la-solid-900.ttf",
       "PackagePath": "staticwebassets\\fonts\\la-solid-900.ttf"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\la-solid-900.woff",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\la-solid-900.woff",
       "PackagePath": "staticwebassets\\fonts\\la-solid-900.woff"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\la-solid-900.woff2",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\la-solid-900.woff2",
       "PackagePath": "staticwebassets\\fonts\\la-solid-900.woff2"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\materialdesignicons-webfont.eot",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\materialdesignicons-webfont.eot",
       "PackagePath": "staticwebassets\\fonts\\materialdesignicons-webfont.eot"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\materialdesignicons-webfont.ttf",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\materialdesignicons-webfont.ttf",
       "PackagePath": "staticwebassets\\fonts\\materialdesignicons-webfont.ttf"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\materialdesignicons-webfont.woff",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\materialdesignicons-webfont.woff",
       "PackagePath": "staticwebassets\\fonts\\materialdesignicons-webfont.woff"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\materialdesignicons-webfont.woff2",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\materialdesignicons-webfont.woff2",
       "PackagePath": "staticwebassets\\fonts\\materialdesignicons-webfont.woff2"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\remixicon.eot",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\remixicon.eot",
       "PackagePath": "staticwebassets\\fonts\\remixicon.eot"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\remixicon.svg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\remixicon.svg",
       "PackagePath": "staticwebassets\\fonts\\remixicon.svg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\remixicon.symbol.svg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\remixicon.symbol.svg",
       "PackagePath": "staticwebassets\\fonts\\remixicon.symbol.svg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\remixicon.ttf",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\remixicon.ttf",
       "PackagePath": "staticwebassets\\fonts\\remixicon.ttf"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\remixicon.woff",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\remixicon.woff",
       "PackagePath": "staticwebassets\\fonts\\remixicon.woff"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\remixicon.woff2",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\remixicon.woff2",
       "PackagePath": "staticwebassets\\fonts\\remixicon.woff2"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\summernote.eot",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\summernote.eot",
       "PackagePath": "staticwebassets\\fonts\\summernote.eot"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\summernote.ttf",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\summernote.ttf",
       "PackagePath": "staticwebassets\\fonts\\summernote.ttf"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\fonts\\summernote.woff",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\fonts\\summernote.woff",
       "PackagePath": "staticwebassets\\fonts\\summernote.woff"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\images\\laptop.png",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\images\\laptop.png",
       "PackagePath": "staticwebassets\\images\\laptop.png"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\images\\logo-dark.png",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\images\\logo-dark.png",
       "PackagePath": "staticwebassets\\images\\logo-dark.png"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\images\\logo-light.png",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\images\\logo-light.png",
       "PackagePath": "staticwebassets\\images\\logo-light.png"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\images\\logo-sm.png",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\images\\logo-sm.png",
       "PackagePath": "staticwebassets\\images\\logo-sm.png"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\index.html",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\index.html",
       "PackagePath": "staticwebassets\\index.html"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\js\\alloy_finger.min.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\js\\alloy_finger.min.js",
       "PackagePath": "staticwebassets\\js\\alloy_finger.min.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\js\\aos.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\js\\aos.js",
       "PackagePath": "staticwebassets\\js\\aos.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\js\\app.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\js\\app.js",
       "PackagePath": "staticwebassets\\js\\app.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\js\\bootstrap.bundle.min.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\js\\bootstrap.bundle.min.js",
       "PackagePath": "staticwebassets\\js\\bootstrap.bundle.min.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\js\\ckeditor.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\js\\ckeditor.js",
       "PackagePath": "staticwebassets\\js\\ckeditor.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\js\\dropzone-min.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\js\\dropzone-min.js",
       "PackagePath": "staticwebassets\\js\\dropzone-min.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\js\\glightbox.min.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\js\\glightbox.min.js",
       "PackagePath": "staticwebassets\\js\\glightbox.min.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\js\\jquery-3.7.1.min.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\js\\jquery-3.7.1.min.js",
       "PackagePath": "staticwebassets\\js\\jquery-3.7.1.min.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\js\\jquery-ui.min.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\js\\jquery-ui.min.js",
       "PackagePath": "staticwebassets\\js\\jquery-ui.min.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\js\\layout.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\js\\layout.js",
       "PackagePath": "staticwebassets\\js\\layout.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\js\\lc_lightbox.lite.min.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\js\\lc_lightbox.lite.min.js",
       "PackagePath": "staticwebassets\\js\\lc_lightbox.lite.min.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\js\\loading-overlay.jquery.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\js\\loading-overlay.jquery.js",
       "PackagePath": "staticwebassets\\js\\loading-overlay.jquery.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\js\\lord-icon-2.1.0.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\js\\lord-icon-2.1.0.js",
       "PackagePath": "staticwebassets\\js\\lord-icon-2.1.0.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\js\\main.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\js\\main.js",
       "PackagePath": "staticwebassets\\js\\main.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\js\\owl.carousel.min.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\js\\owl.carousel.min.js",
       "PackagePath": "staticwebassets\\js\\owl.carousel.min.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\js\\particles.app.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\js\\particles.app.js",
       "PackagePath": "staticwebassets\\js\\particles.app.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\js\\particles.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\js\\particles.js",
       "PackagePath": "staticwebassets\\js\\particles.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\js\\remix-icons-listing.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\js\\remix-icons-listing.js",
       "PackagePath": "staticwebassets\\js\\remix-icons-listing.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\js\\script.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\js\\script.js",
       "PackagePath": "staticwebassets\\js\\script.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\js\\simplebar.min.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\js\\simplebar.min.js",
       "PackagePath": "staticwebassets\\js\\simplebar.min.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\js\\waves.min.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\js\\waves.min.js",
       "PackagePath": "staticwebassets\\js\\waves.min.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\LICENSE",
       "PackagePath": "staticwebassets\\lib\\bootstrap"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.min.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.min.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\jquery\\LICENSE.txt",
       "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\jquery\\dist\\jquery.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\jquery\\dist\\jquery.slim.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\jquery\\dist\\jquery.slim.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.slim.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.js",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.slim.min.js"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.map",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.slim.min.map"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\shop.html",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\shop.html",
       "PackagePath": "staticwebassets\\shop.html"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\banner\\3c6e3a79-1c11-4e5f-af2a-1df5b0b80b99_snapedit_1742834828592.jpeg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\banner\\3c6e3a79-1c11-4e5f-af2a-1df5b0b80b99_snapedit_1742834828592.jpeg",
       "PackagePath": "staticwebassets\\uploads\\banner\\3c6e3a79-1c11-4e5f-af2a-1df5b0b80b99_snapedit_1742834828592.jpeg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\banner\\be40ea2c-f4a3-408b-bc9b-31c18099cda5_snapedit_1742834806685.jpeg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\banner\\4faac7b9-e210-4d66-b65f-89a54e81b6fd_609fa7b53c435fb27393587d_dd5787fa0c9306323b7176ce91a4d31ff6041c4a2.jpg",
+      "PackagePath": "staticwebassets\\uploads\\banner\\4faac7b9-e210-4d66-b65f-89a54e81b6fd_609fa7b53c435fb27393587d_dd5787fa0c9306323b7176ce91a4d31ff6041c4a2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\banner\\b804befe-5744-430b-8564-07bfd0ef2e6b_macbookairm1giảmngay1triệuchohs-svgv3.jpg",
+      "PackagePath": "staticwebassets\\uploads\\banner\\b804befe-5744-430b-8564-07bfd0ef2e6b_macbookairm1giảmngay1triệuchohs-svgv3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\banner\\be40ea2c-f4a3-408b-bc9b-31c18099cda5_snapedit_1742834806685.jpeg",
       "PackagePath": "staticwebassets\\uploads\\banner\\be40ea2c-f4a3-408b-bc9b-31c18099cda5_snapedit_1742834806685.jpeg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\banner\\f3803f78-d965-4210-8cce-2367d76f126c_snapedit_1742834773018.jpeg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\banner\\f3803f78-d965-4210-8cce-2367d76f126c_snapedit_1742834773018.jpeg",
       "PackagePath": "staticwebassets\\uploads\\banner\\f3803f78-d965-4210-8cce-2367d76f126c_snapedit_1742834773018.jpeg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\banners\\adver_1.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\banners\\adver_1.jpg",
       "PackagePath": "staticwebassets\\uploads\\banners\\adver_1.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\banners\\adver_2.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\banners\\adver_2.jpg",
       "PackagePath": "staticwebassets\\uploads\\banners\\adver_2.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\01a2be73-0d86-4ed6-b0f6-0a1780e833eb_lenovo_y7000_1.png",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\01a2be73-0d86-4ed6-b0f6-0a1780e833eb_lenovo_y7000_1.png",
       "PackagePath": "staticwebassets\\uploads\\productimages\\01a2be73-0d86-4ed6-b0f6-0a1780e833eb_lenovo_y7000_1.png"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\01de8839-4db9-4c39-9626-b0a5a21d47d5_samsung-galaxy-a54-5g-tim-thumb-1-600x600.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\01de8839-4db9-4c39-9626-b0a5a21d47d5_samsung-galaxy-a54-5g-tim-thumb-1-600x600.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\01de8839-4db9-4c39-9626-b0a5a21d47d5_samsung-galaxy-a54-5g-tim-thumb-1-600x600.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\0313a054-329d-499c-b157-e55c782dd87e_tau-sac-o-to-ugreen-ed018-50875-2-usb-a-24w_2_.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\0313a054-329d-499c-b157-e55c782dd87e_tau-sac-o-to-ugreen-ed018-50875-2-usb-a-24w_2_.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\0313a054-329d-499c-b157-e55c782dd87e_tau-sac-o-to-ugreen-ed018-50875-2-usb-a-24w_2_.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\03ff0212-aa97-4c2f-9b55-1ab5876dbc27_1_444.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\03ff0212-aa97-4c2f-9b55-1ab5876dbc27_1_444.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\03ff0212-aa97-4c2f-9b55-1ab5876dbc27_1_444.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\042f4524-4d2c-477f-955d-cd7bef219c4c_tai-nghe-rog-cetra-ii-core_17_.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\042f4524-4d2c-477f-955d-cd7bef219c4c_tai-nghe-rog-cetra-ii-core_17_.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\042f4524-4d2c-477f-955d-cd7bef219c4c_tai-nghe-rog-cetra-ii-core_17_.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\0445b73b-d8d0-44f3-a93a-651dea37b0b7_dell_3515_2.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\0445b73b-d8d0-44f3-a93a-651dea37b0b7_dell_3515_2.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\0445b73b-d8d0-44f3-a93a-651dea37b0b7_dell_3515_2.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\055d33b7-9657-43f9-8872-e2a78ca4c96f_samsung-galaxy-buds-2-pro-ksp-1_1.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\055d33b7-9657-43f9-8872-e2a78ca4c96f_samsung-galaxy-buds-2-pro-ksp-1_1.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\055d33b7-9657-43f9-8872-e2a78ca4c96f_samsung-galaxy-buds-2-pro-ksp-1_1.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\055e9cdf-fb89-4985-b207-071e7162e69d_tai-nghe-khong-day-asus-tuf-gaming-h3_1_.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\055e9cdf-fb89-4985-b207-071e7162e69d_tai-nghe-khong-day-asus-tuf-gaming-h3_1_.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\055e9cdf-fb89-4985-b207-071e7162e69d_tai-nghe-khong-day-asus-tuf-gaming-h3_1_.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\06713720-ad20-49ba-b330-9bca2dbe707c_hp-elitebook-x360-1.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\06713720-ad20-49ba-b330-9bca2dbe707c_hp-elitebook-x360-1.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\06713720-ad20-49ba-b330-9bca2dbe707c_hp-elitebook-x360-1.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\0763f650-7439-4dae-b518-7d3e305cc398_16-nen-3292.png",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\0763f650-7439-4dae-b518-7d3e305cc398_16-nen-3292.png",
       "PackagePath": "staticwebassets\\uploads\\productimages\\0763f650-7439-4dae-b518-7d3e305cc398_16-nen-3292.png"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\099d5a1a-42a3-40cd-96bf-eada71268df3_hp-15s-fq2559tu_1.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\099d5a1a-42a3-40cd-96bf-eada71268df3_hp-15s-fq2559tu_1.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\099d5a1a-42a3-40cd-96bf-eada71268df3_hp-15s-fq2559tu_1.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\09d12833-8883-465d-8fb6-f518705cf86a_rog_flow_z13_2.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\09d12833-8883-465d-8fb6-f518705cf86a_rog_flow_z13_2.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\09d12833-8883-465d-8fb6-f518705cf86a_rog_flow_z13_2.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\0bbbea28-6204-4fd8-af48-56d832d44ecf_lenovo_y7000_2.png",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\0bbbea28-6204-4fd8-af48-56d832d44ecf_lenovo_y7000_2.png",
       "PackagePath": "staticwebassets\\uploads\\productimages\\0bbbea28-6204-4fd8-af48-56d832d44ecf_lenovo_y7000_2.png"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\0c763a97-41a5-40a9-8670-f8354e7cc289_p76_buds_8_pro_ksp_4.5_standard.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\0c763a97-41a5-40a9-8670-f8354e7cc289_p76_buds_8_pro_ksp_4.5_standard.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\0c763a97-41a5-40a9-8670-f8354e7cc289_p76_buds_8_pro_ksp_4.5_standard.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\0c8acf31-d1ae-4bc1-bc69-d1ac1e3d768b_hp-15s-fq2559tu_3.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\0c8acf31-d1ae-4bc1-bc69-d1ac1e3d768b_hp-15s-fq2559tu_3.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\0c8acf31-d1ae-4bc1-bc69-d1ac1e3d768b_hp-15s-fq2559tu_3.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\0ea2449c-acf6-4975-9052-af1a228dc296_ban-phim-co-aula-s2022-blue-switch-3.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\0ea2449c-acf6-4975-9052-af1a228dc296_ban-phim-co-aula-s2022-blue-switch-3.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\0ea2449c-acf6-4975-9052-af1a228dc296_ban-phim-co-aula-s2022-blue-switch-3.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\121d260f-9d09-4d88-95f1-851a10f82c44_lenovo-yoga-7-2.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\11e042e7-8821-4a13-bc09-2d157b63095b_xiaomi-15-ultra-white-thumbnew-600x600.jpg",
+      "PackagePath": "staticwebassets\\uploads\\productimages\\11e042e7-8821-4a13-bc09-2d157b63095b_xiaomi-15-ultra-white-thumbnew-600x600.jpg"
+    },
+    {
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\121d260f-9d09-4d88-95f1-851a10f82c44_lenovo-yoga-7-2.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\121d260f-9d09-4d88-95f1-851a10f82c44_lenovo-yoga-7-2.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\12fd6597-f84e-4df3-a1d5-494bb53f9383_7_17.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\12fd6597-f84e-4df3-a1d5-494bb53f9383_7_17.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\12fd6597-f84e-4df3-a1d5-494bb53f9383_7_17.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\13405f0b-0690-424e-b9b5-23b9f0700733_hp-omen-16-xf0071-1.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\13405f0b-0690-424e-b9b5-23b9f0700733_hp-omen-16-xf0071-1.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\13405f0b-0690-424e-b9b5-23b9f0700733_hp-omen-16-xf0071-1.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\17e592ad-19b9-46a7-983d-ecc88e26717c_lenovo_y7000_3.png",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\17e592ad-19b9-46a7-983d-ecc88e26717c_lenovo_y7000_3.png",
       "PackagePath": "staticwebassets\\uploads\\productimages\\17e592ad-19b9-46a7-983d-ecc88e26717c_lenovo_y7000_3.png"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\18db5a78-2321-4d75-993e-b5a6a1814f78_thinkpad-e14-3.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\18db5a78-2321-4d75-993e-b5a6a1814f78_thinkpad-e14-3.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\18db5a78-2321-4d75-993e-b5a6a1814f78_thinkpad-e14-3.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\1af51e5f-a2e9-43bc-b973-b13ef2b4f78d_tai-nghe-bluetooth-xiaomi-redmi-buds-8-pro_13_.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\1af51e5f-a2e9-43bc-b973-b13ef2b4f78d_tai-nghe-bluetooth-xiaomi-redmi-buds-8-pro_13_.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\1af51e5f-a2e9-43bc-b973-b13ef2b4f78d_tai-nghe-bluetooth-xiaomi-redmi-buds-8-pro_13_.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\1aff2f1c-86dd-4b22-8bd4-de4a98eaf1cb_rog_flow_z13_1.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\1aff2f1c-86dd-4b22-8bd4-de4a98eaf1cb_rog_flow_z13_1.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\1aff2f1c-86dd-4b22-8bd4-de4a98eaf1cb_rog_flow_z13_1.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\1bbb3b3e-4537-4028-bbe2-592a1520ba7b_dell_16plus_3.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\1bbb3b3e-4537-4028-bbe2-592a1520ba7b_dell_16plus_3.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\1bbb3b3e-4537-4028-bbe2-592a1520ba7b_dell_16plus_3.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\1db04d41-eea9-4eec-a28a-f2a7d67a3889_thinkpad-e14-2.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\1db04d41-eea9-4eec-a28a-f2a7d67a3889_thinkpad-e14-2.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\1db04d41-eea9-4eec-a28a-f2a7d67a3889_thinkpad-e14-2.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\1db7be90-0550-4eff-900e-97d4fb6460a3_ban-phim-co-rapoo-v700diy-75-xanh-la-den_1.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\1db7be90-0550-4eff-900e-97d4fb6460a3_ban-phim-co-rapoo-v700diy-75-xanh-la-den_1.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\1db7be90-0550-4eff-900e-97d4fb6460a3_ban-phim-co-rapoo-v700diy-75-xanh-la-den_1.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\1f1409fd-0ee9-4fa3-a9b8-aac666896086_tai-nghe-co-day-havit-fuxi-h5d_4_.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\1f1409fd-0ee9-4fa3-a9b8-aac666896086_tai-nghe-co-day-havit-fuxi-h5d_4_.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\1f1409fd-0ee9-4fa3-a9b8-aac666896086_tai-nghe-co-day-havit-fuxi-h5d_4_.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\213743c7-5fd0-44e5-94dc-d43f4ee5786b_hp-15s-fq2559tu_1.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\213743c7-5fd0-44e5-94dc-d43f4ee5786b_hp-15s-fq2559tu_1.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\213743c7-5fd0-44e5-94dc-d43f4ee5786b_hp-15s-fq2559tu_1.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\2181fe17-f937-4df5-a76f-37fc71465c8a_cu-sac-anker-nano-b2679-1c-100w-kem-cap-type-c_8_.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\2181fe17-f937-4df5-a76f-37fc71465c8a_cu-sac-anker-nano-b2679-1c-100w-kem-cap-type-c_8_.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\2181fe17-f937-4df5-a76f-37fc71465c8a_cu-sac-anker-nano-b2679-1c-100w-kem-cap-type-c_8_.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\21cd05df-46ff-4038-85df-b83258a5d7f9_tai-nghe-khong-day-asus-tuf-gaming-h3-6.png",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\21cd05df-46ff-4038-85df-b83258a5d7f9_tai-nghe-khong-day-asus-tuf-gaming-h3-6.png",
       "PackagePath": "staticwebassets\\uploads\\productimages\\21cd05df-46ff-4038-85df-b83258a5d7f9_tai-nghe-khong-day-asus-tuf-gaming-h3-6.png"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\247466a1-14b9-4f0f-bc3d-6a2cd95a87d0_tai-nghe-chup-tai-havit-h2043u.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\247466a1-14b9-4f0f-bc3d-6a2cd95a87d0_tai-nghe-chup-tai-havit-h2043u.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\247466a1-14b9-4f0f-bc3d-6a2cd95a87d0_tai-nghe-chup-tai-havit-h2043u.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\2515af33-9f19-4ba4-905e-ff2afa8a74cd_645552630_1248513117418992_2793655263226700122_n.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\2515af33-9f19-4ba4-905e-ff2afa8a74cd_645552630_1248513117418992_2793655263226700122_n.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\2515af33-9f19-4ba4-905e-ff2afa8a74cd_645552630_1248513117418992_2793655263226700122_n.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\26afdfc6-d9d6-4e48-a299-54d94c4681d7_hp-elitebook-x360-3.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\2601cb06-dd3f-47f3-856d-cc01cc984e45_iphone-17-pro-max-5.webp",
+      "PackagePath": "staticwebassets\\uploads\\productimages\\2601cb06-dd3f-47f3-856d-cc01cc984e45_iphone-17-pro-max-5.webp"
+    },
+    {
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\26afdfc6-d9d6-4e48-a299-54d94c4681d7_hp-elitebook-x360-3.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\26afdfc6-d9d6-4e48-a299-54d94c4681d7_hp-elitebook-x360-3.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\27cea943-6c4e-439f-acc7-616474bab233_tai-nghe-khong-day-asus-tuf-gaming-h3.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\27cea943-6c4e-439f-acc7-616474bab233_tai-nghe-khong-day-asus-tuf-gaming-h3.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\27cea943-6c4e-439f-acc7-616474bab233_tai-nghe-khong-day-asus-tuf-gaming-h3.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\28579d9d-5c85-41bd-85c0-179372a7c609_hp-15s-fq2559tu_2.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\28579d9d-5c85-41bd-85c0-179372a7c609_hp-15s-fq2559tu_2.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\28579d9d-5c85-41bd-85c0-179372a7c609_hp-15s-fq2559tu_2.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\29ecb574-a28c-4f0c-a1b1-f757c81e46de_cu-sac-anker-nano-b2679-1c-100w-kem-cap-type-c_2_.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\29ecb574-a28c-4f0c-a1b1-f757c81e46de_cu-sac-anker-nano-b2679-1c-100w-kem-cap-type-c_2_.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\29ecb574-a28c-4f0c-a1b1-f757c81e46de_cu-sac-anker-nano-b2679-1c-100w-kem-cap-type-c_2_.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\2a2cd518-77a4-4228-a708-f099b5b2f792_thinkpad-e14-1.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\2a2cd518-77a4-4228-a708-f099b5b2f792_thinkpad-e14-1.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\2a2cd518-77a4-4228-a708-f099b5b2f792_thinkpad-e14-1.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\2e35b339-3ec7-4ac7-bd9a-bc31f12ab27a_pkit.367.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\2c728997-599f-437d-9ec6-7df22f6fe90c_Samsung-Galaxy-S25-Ultra-Titan-Grey.webp",
+      "PackagePath": "staticwebassets\\uploads\\productimages\\2c728997-599f-437d-9ec6-7df22f6fe90c_Samsung-Galaxy-S25-Ultra-Titan-Grey.webp"
+    },
+    {
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\2e35b339-3ec7-4ac7-bd9a-bc31f12ab27a_pkit.367.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\2e35b339-3ec7-4ac7-bd9a-bc31f12ab27a_pkit.367.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\317974e3-3a62-481d-9b37-c74757b75c5e_ban-phim-gaming-msi-forge-gk100-rgb-led-den-5.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\317974e3-3a62-481d-9b37-c74757b75c5e_ban-phim-gaming-msi-forge-gk100-rgb-led-den-5.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\317974e3-3a62-481d-9b37-c74757b75c5e_ban-phim-gaming-msi-forge-gk100-rgb-led-den-5.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\3245cc41-b946-447e-8e02-33941dd3e943_dell_5625_2.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\3245cc41-b946-447e-8e02-33941dd3e943_dell_5625_2.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\3245cc41-b946-447e-8e02-33941dd3e943_dell_5625_2.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\34d8a06b-c658-487f-82dc-9aec72623eac_ban-phim-co-co-day-aula-win68he-max-xam-trang-8.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\34d8a06b-c658-487f-82dc-9aec72623eac_ban-phim-co-co-day-aula-win68he-max-xam-trang-8.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\34d8a06b-c658-487f-82dc-9aec72623eac_ban-phim-co-co-day-aula-win68he-max-xam-trang-8.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\36d9179e-5b44-411e-9492-f267b97e6887_mb_m4_2.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\36d9179e-5b44-411e-9492-f267b97e6887_mb_m4_2.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\36d9179e-5b44-411e-9492-f267b97e6887_mb_m4_2.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\36f8ce1a-54e0-41cf-ab9e-77b565a55e1e_frame_3_23__2.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\36f8ce1a-54e0-41cf-ab9e-77b565a55e1e_frame_3_23__2.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\36f8ce1a-54e0-41cf-ab9e-77b565a55e1e_frame_3_23__2.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\384b157a-986e-4b64-94bf-c06f5325f92a_hp-elitebook-x360-2.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\375677b7-1cf2-4245-be1f-f81806ee7b1c_16-nen-3292.png",
+      "PackagePath": "staticwebassets\\uploads\\productimages\\375677b7-1cf2-4245-be1f-f81806ee7b1c_16-nen-3292.png"
+    },
+    {
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\384b157a-986e-4b64-94bf-c06f5325f92a_hp-elitebook-x360-2.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\384b157a-986e-4b64-94bf-c06f5325f92a_hp-elitebook-x360-2.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\3b0dd604-58d5-4f06-835a-03800e70d429_rogzephyrus_g16_1.png",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\3b0dd604-58d5-4f06-835a-03800e70d429_rogzephyrus_g16_1.png",
       "PackagePath": "staticwebassets\\uploads\\productimages\\3b0dd604-58d5-4f06-835a-03800e70d429_rogzephyrus_g16_1.png"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\3b4020c7-e085-43aa-9ae3-0e4e2233fee6_mb_m4_3.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\3b4020c7-e085-43aa-9ae3-0e4e2233fee6_mb_m4_3.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\3b4020c7-e085-43aa-9ae3-0e4e2233fee6_mb_m4_3.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\3b70bc27-aabc-49ef-af67-ea727bc9e67a_4_43.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\3b70bc27-aabc-49ef-af67-ea727bc9e67a_4_43.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\3b70bc27-aabc-49ef-af67-ea727bc9e67a_4_43.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\3de698c1-5ea5-473b-b31c-d9f0f0a634f3_iphone_16_1_04ab3981a5.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\3d4a4866-8d56-479b-9e13-b6fd9d4a9411_galaxy-s25-ultra-note-638748064717735718.jpg",
+      "PackagePath": "staticwebassets\\uploads\\productimages\\3d4a4866-8d56-479b-9e13-b6fd9d4a9411_galaxy-s25-ultra-note-638748064717735718.jpg"
+    },
+    {
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\3de698c1-5ea5-473b-b31c-d9f0f0a634f3_iphone_16_1_04ab3981a5.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\3de698c1-5ea5-473b-b31c-d9f0f0a634f3_iphone_16_1_04ab3981a5.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\4160bbac-8966-43d2-8596-87bac6f20ca6_dell_3515_3.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\3f1f9eae-5fd7-4053-88b8-c3b71cb133c9_2024_4_24_638495700434861779_xiaomi-14-ultra-den-3.webp",
+      "PackagePath": "staticwebassets\\uploads\\productimages\\3f1f9eae-5fd7-4053-88b8-c3b71cb133c9_2024_4_24_638495700434861779_xiaomi-14-ultra-den-3.webp"
+    },
+    {
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\4160bbac-8966-43d2-8596-87bac6f20ca6_dell_3515_3.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\4160bbac-8966-43d2-8596-87bac6f20ca6_dell_3515_3.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\41c40303-11e2-49d6-a8d5-a6ef1220a9e1_ban-phim-co-rapoo-v700diy-75-xanh-la-den-2.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\41c40303-11e2-49d6-a8d5-a6ef1220a9e1_ban-phim-co-rapoo-v700diy-75-xanh-la-den-2.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\41c40303-11e2-49d6-a8d5-a6ef1220a9e1_ban-phim-co-rapoo-v700diy-75-xanh-la-den-2.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\42d2ca06-444a-4f31-9716-534c8520c5e1_lenovo-legion-5-15irx9_2.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\42d2ca06-444a-4f31-9716-534c8520c5e1_lenovo-legion-5-15irx9_2.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\42d2ca06-444a-4f31-9716-534c8520c5e1_lenovo-legion-5-15irx9_2.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\44ce69f8-6d04-4430-8296-a888128d59ae_ban-phim-co-rapoo-v510-led-rainbow-den-2.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\43cb8254-044f-4f4a-bdb1-16718d64b952_samsung-galaxy-s25-ultra-blue-thumbai-600x600.jpg",
+      "PackagePath": "staticwebassets\\uploads\\productimages\\43cb8254-044f-4f4a-bdb1-16718d64b952_samsung-galaxy-s25-ultra-blue-thumbai-600x600.jpg"
+    },
+    {
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\44ce69f8-6d04-4430-8296-a888128d59ae_ban-phim-co-rapoo-v510-led-rainbow-den-2.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\44ce69f8-6d04-4430-8296-a888128d59ae_ban-phim-co-rapoo-v510-led-rainbow-den-2.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\46092ad3-2de5-4a9d-a2f4-6e05daad31b6_dell_5430_3.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\46092ad3-2de5-4a9d-a2f4-6e05daad31b6_dell_5430_3.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\46092ad3-2de5-4a9d-a2f4-6e05daad31b6_dell_5430_3.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\47e8124b-e6ed-49af-954e-3ee9f393e9a2_macpro_m2_1.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\47e8124b-e6ed-49af-954e-3ee9f393e9a2_macpro_m2_1.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\47e8124b-e6ed-49af-954e-3ee9f393e9a2_macpro_m2_1.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\480c6ebe-1929-4cb4-910d-ffa9ed65c442_hp-15s-fq2559tu_1.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\480c6ebe-1929-4cb4-910d-ffa9ed65c442_hp-15s-fq2559tu_1.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\480c6ebe-1929-4cb4-910d-ffa9ed65c442_hp-15s-fq2559tu_1.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\490782af-b99a-410d-8fe0-f2163ba14773_tau-sac-o-to-ugreen-ed018-50875-2-usb-a-24w_1__2.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\490782af-b99a-410d-8fe0-f2163ba14773_tau-sac-o-to-ugreen-ed018-50875-2-usb-a-24w_1__2.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\490782af-b99a-410d-8fe0-f2163ba14773_tau-sac-o-to-ugreen-ed018-50875-2-usb-a-24w_1__2.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\4a8e60c5-8489-4a75-a63a-c8dda49577e6_rogzephyrus_g16_2.png",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\4a8e60c5-8489-4a75-a63a-c8dda49577e6_rogzephyrus_g16_2.png",
       "PackagePath": "staticwebassets\\uploads\\productimages\\4a8e60c5-8489-4a75-a63a-c8dda49577e6_rogzephyrus_g16_2.png"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\4ac3a82f-f2d0-49f4-91f4-2d8865253796_asus_g16_3.png",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\4ac3a82f-f2d0-49f4-91f4-2d8865253796_asus_g16_3.png",
       "PackagePath": "staticwebassets\\uploads\\productimages\\4ac3a82f-f2d0-49f4-91f4-2d8865253796_asus_g16_3.png"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\4b016a7c-bb8a-4196-aa65-2c0cef06c1ea_samsung-galaxy-buds-2-pro-thumb.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\4b016a7c-bb8a-4196-aa65-2c0cef06c1ea_samsung-galaxy-buds-2-pro-thumb.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\4b016a7c-bb8a-4196-aa65-2c0cef06c1ea_samsung-galaxy-buds-2-pro-thumb.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\4b544cae-e43d-4f49-9f83-bfc1cb52b96e_ban-phim-gaming-asus-tuf-k1.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\4b544cae-e43d-4f49-9f83-bfc1cb52b96e_ban-phim-gaming-asus-tuf-k1.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\4b544cae-e43d-4f49-9f83-bfc1cb52b96e_ban-phim-gaming-asus-tuf-k1.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\4b6876d1-dbb9-46c4-8032-23e4a5915cb2_tai-nghe-co-day-havit-h2002d_1_.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\4b6876d1-dbb9-46c4-8032-23e4a5915cb2_tai-nghe-co-day-havit-h2002d_1_.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\4b6876d1-dbb9-46c4-8032-23e4a5915cb2_tai-nghe-co-day-havit-h2002d_1_.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\4e35292e-db17-4329-b0e7-2f88936f5345_cu-sac-nhanh-baseus-palm-1c1a-20w-us-kem-cap_6_.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\4e35292e-db17-4329-b0e7-2f88936f5345_cu-sac-nhanh-baseus-palm-1c1a-20w-us-kem-cap_6_.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\4e35292e-db17-4329-b0e7-2f88936f5345_cu-sac-nhanh-baseus-palm-1c1a-20w-us-kem-cap_6_.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\4e520b06-f813-4cb7-90e9-11d8a095fd97_macpro_m2_3.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\4e520b06-f813-4cb7-90e9-11d8a095fd97_macpro_m2_3.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\4e520b06-f813-4cb7-90e9-11d8a095fd97_macpro_m2_3.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\52e8c205-c5cf-486f-983a-715b555a6a04_vn-11134258-81ztc-mmpn5o534ft15b.png",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\5193f9e4-1c8d-4e51-b2e6-0425141062ed_dien-thoai-xiaomi-15-ultra_14_.webp",
+      "PackagePath": "staticwebassets\\uploads\\productimages\\5193f9e4-1c8d-4e51-b2e6-0425141062ed_dien-thoai-xiaomi-15-ultra_14_.webp"
+    },
+    {
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\52e8c205-c5cf-486f-983a-715b555a6a04_vn-11134258-81ztc-mmpn5o534ft15b.png",
       "PackagePath": "staticwebassets\\uploads\\productimages\\52e8c205-c5cf-486f-983a-715b555a6a04_vn-11134258-81ztc-mmpn5o534ft15b.png"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\547739ff-52b5-4cbe-ac01-2b87d6f9a1e0_hp-15s-fq2559tu_1.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\547739ff-52b5-4cbe-ac01-2b87d6f9a1e0_hp-15s-fq2559tu_1.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\547739ff-52b5-4cbe-ac01-2b87d6f9a1e0_hp-15s-fq2559tu_1.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\557f7d1a-1ade-49b4-9f52-bd3c323dbd22_mb_m4_1.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\557f7d1a-1ade-49b4-9f52-bd3c323dbd22_mb_m4_1.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\557f7d1a-1ade-49b4-9f52-bd3c323dbd22_mb_m4_1.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\58709269-3fb4-4dc2-ab47-78193bb1edfa_tai-nghe-gaming-havit-h2040d.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\58709269-3fb4-4dc2-ab47-78193bb1edfa_tai-nghe-gaming-havit-h2040d.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\58709269-3fb4-4dc2-ab47-78193bb1edfa_tai-nghe-gaming-havit-h2040d.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\5bc01a3d-8d99-4f07-8ab3-35bd6328473a_cu-sac-nhanh-baseus-palm-kem-cap-1c-20w-1m_2_.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\5bc01a3d-8d99-4f07-8ab3-35bd6328473a_cu-sac-nhanh-baseus-palm-kem-cap-1c-20w-1m_2_.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\5bc01a3d-8d99-4f07-8ab3-35bd6328473a_cu-sac-nhanh-baseus-palm-kem-cap-1c-20w-1m_2_.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\61622d7e-3818-471c-9aa5-b48b3848834d_group_193_3_.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\61622d7e-3818-471c-9aa5-b48b3848834d_group_193_3_.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\61622d7e-3818-471c-9aa5-b48b3848834d_group_193_3_.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\65353545-dbc2-4166-92b4-f2e9009065d1_hp-pavilion-15-eg3093tu_3.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\65353545-dbc2-4166-92b4-f2e9009065d1_hp-pavilion-15-eg3093tu_3.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\65353545-dbc2-4166-92b4-f2e9009065d1_hp-pavilion-15-eg3093tu_3.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\6583bd3a-8f26-457c-8df6-73bc738c5271_mac_pro_m2_1.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\6583bd3a-8f26-457c-8df6-73bc738c5271_mac_pro_m2_1.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\6583bd3a-8f26-457c-8df6-73bc738c5271_mac_pro_m2_1.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\67b6d591-442f-45ca-be53-864173e1308d_pkit.367-3.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\67b6d591-442f-45ca-be53-864173e1308d_pkit.367-3.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\67b6d591-442f-45ca-be53-864173e1308d_pkit.367-3.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\6a463c1c-1788-4ca8-ab8d-b1ddb0e294ff_hp-15s-fq2559tu_3.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\6a463c1c-1788-4ca8-ab8d-b1ddb0e294ff_hp-15s-fq2559tu_3.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\6a463c1c-1788-4ca8-ab8d-b1ddb0e294ff_hp-15s-fq2559tu_3.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\6adea89c-746f-40f5-b9ef-27e6ea936e7a_cu-sac-trusmi-ch11-1a-1c-pd-20w-kem-cap-type-c-to-lightning-60w_2_.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\6adea89c-746f-40f5-b9ef-27e6ea936e7a_cu-sac-trusmi-ch11-1a-1c-pd-20w-kem-cap-type-c-to-lightning-60w_2_.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\6adea89c-746f-40f5-b9ef-27e6ea936e7a_cu-sac-trusmi-ch11-1a-1c-pd-20w-kem-cap-type-c-to-lightning-60w_2_.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\6b240ae9-bea7-4234-97ef-de7f9deeed94_hp-envy-x360-1.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\6b240ae9-bea7-4234-97ef-de7f9deeed94_hp-envy-x360-1.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\6b240ae9-bea7-4234-97ef-de7f9deeed94_hp-envy-x360-1.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\6bfe9a16-7771-40cf-bed0-2f42fb91b011_hp-15s-fq2559tu_2.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\6bfe9a16-7771-40cf-bed0-2f42fb91b011_hp-15s-fq2559tu_2.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\6bfe9a16-7771-40cf-bed0-2f42fb91b011_hp-15s-fq2559tu_2.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\6c59cb0c-8df3-463a-b45b-907e6c92ab8f_hp-pavilion-15-eg3093tu_1.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\6c59cb0c-8df3-463a-b45b-907e6c92ab8f_hp-pavilion-15-eg3093tu_1.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\6c59cb0c-8df3-463a-b45b-907e6c92ab8f_hp-pavilion-15-eg3093tu_1.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\6fa80a46-abb9-43cb-81bd-6c66cb5e26de_624577934_122291464778225587_1187208001619482972_n.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\6fa80a46-abb9-43cb-81bd-6c66cb5e26de_624577934_122291464778225587_1187208001619482972_n.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\6fa80a46-abb9-43cb-81bd-6c66cb5e26de_624577934_122291464778225587_1187208001619482972_n.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\770b06f1-6657-460c-bd77-f46731398faf_tai-nghe-gaming-havit-h2040d_7_.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\770b06f1-6657-460c-bd77-f46731398faf_tai-nghe-gaming-havit-h2040d_7_.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\770b06f1-6657-460c-bd77-f46731398faf_tai-nghe-gaming-havit-h2040d_7_.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\78e9a3c5-846a-4d38-beac-bbf77af7dd16_iphone-16-1.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\78e9a3c5-846a-4d38-beac-bbf77af7dd16_iphone-16-1.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\78e9a3c5-846a-4d38-beac-bbf77af7dd16_iphone-16-1.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\794ef9b2-36a1-4182-b67a-9674469485a4_lenovo-legion-5-15irx9_3.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\794ef9b2-36a1-4182-b67a-9674469485a4_lenovo-legion-5-15irx9_3.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\794ef9b2-36a1-4182-b67a-9674469485a4_lenovo-legion-5-15irx9_3.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\7999c9ec-9803-4128-97db-45fb297021dd_hp-pavilion-15-eg3093tu_2.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\7999c9ec-9803-4128-97db-45fb297021dd_hp-pavilion-15-eg3093tu_2.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\7999c9ec-9803-4128-97db-45fb297021dd_hp-pavilion-15-eg3093tu_2.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\7bcee833-847f-47c8-b4ff-89b3fd55dc97_cu-sac-nhanh-baseus-palm-1c1a-20w-us-kem-cap_7_.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\7bcee833-847f-47c8-b4ff-89b3fd55dc97_cu-sac-nhanh-baseus-palm-1c1a-20w-us-kem-cap_7_.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\7bcee833-847f-47c8-b4ff-89b3fd55dc97_cu-sac-nhanh-baseus-palm-1c1a-20w-us-kem-cap_7_.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\7c45658b-1c50-4d94-a1c8-5df0aaa80bdb_baseus-super-si-25w-1-cong-kem-cap-type-c-to-type-c-1m-2.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\7c45658b-1c50-4d94-a1c8-5df0aaa80bdb_baseus-super-si-25w-1-cong-kem-cap-type-c-to-type-c-1m-2.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\7c45658b-1c50-4d94-a1c8-5df0aaa80bdb_baseus-super-si-25w-1-cong-kem-cap-type-c-to-type-c-1m-2.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\7ed8a8c6-b095-4640-996b-800cf8fe90c4_ban-phim-co-rapoo-v510-led-rainbow-den-3.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\7ed8a8c6-b095-4640-996b-800cf8fe90c4_ban-phim-co-rapoo-v510-led-rainbow-den-3.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\7ed8a8c6-b095-4640-996b-800cf8fe90c4_ban-phim-co-rapoo-v510-led-rainbow-den-3.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\7fb01e9a-032d-41e1-b1c2-aa3470311b41_tai-nghe-co-day-havit-h2002d_4_.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\7fb01e9a-032d-41e1-b1c2-aa3470311b41_tai-nghe-co-day-havit-h2002d_4_.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\7fb01e9a-032d-41e1-b1c2-aa3470311b41_tai-nghe-co-day-havit-h2002d_4_.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\812e8acb-2f4c-4cbc-881b-c8928c1efe2a_hp-15s-fq2559tu_3.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\8058cea9-80ca-4f75-ae12-f8b050ebf0b9_50d34bf3-6074-4738-80dc-00d05032fe2d-jpeg.webp",
+      "PackagePath": "staticwebassets\\uploads\\productimages\\8058cea9-80ca-4f75-ae12-f8b050ebf0b9_50d34bf3-6074-4738-80dc-00d05032fe2d-jpeg.webp"
+    },
+    {
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\812e8acb-2f4c-4cbc-881b-c8928c1efe2a_hp-15s-fq2559tu_3.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\812e8acb-2f4c-4cbc-881b-c8928c1efe2a_hp-15s-fq2559tu_3.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\8280c322-f834-4f05-ba32-0c95597ec888_cu-sac-trusmi-ch11-1a-1c-pd-20w-kem-cap-type-c-to-lightning-60w_6_.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\8280c322-f834-4f05-ba32-0c95597ec888_cu-sac-trusmi-ch11-1a-1c-pd-20w-kem-cap-type-c-to-lightning-60w_6_.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\8280c322-f834-4f05-ba32-0c95597ec888_cu-sac-trusmi-ch11-1a-1c-pd-20w-kem-cap-type-c-to-lightning-60w_6_.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\84bf2331-e662-406c-b25e-b16a840594b5_ban-phim-co-rapoo-v510-led-rainbow-den.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\84bf2331-e662-406c-b25e-b16a840594b5_ban-phim-co-rapoo-v510-led-rainbow-den.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\84bf2331-e662-406c-b25e-b16a840594b5_ban-phim-co-rapoo-v510-led-rainbow-den.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\8889ef25-94c0-4046-80dd-0432882b0319_ban-phim-gaming-msi-forge-gk100-rgb-led-den.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\8748f63f-d642-450e-916f-8d6f402ff943_samsung-galaxy-s24-ultra-5g-600x600.jpg",
+      "PackagePath": "staticwebassets\\uploads\\productimages\\8748f63f-d642-450e-916f-8d6f402ff943_samsung-galaxy-s24-ultra-5g-600x600.jpg"
+    },
+    {
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\8889ef25-94c0-4046-80dd-0432882b0319_ban-phim-gaming-msi-forge-gk100-rgb-led-den.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\8889ef25-94c0-4046-80dd-0432882b0319_ban-phim-gaming-msi-forge-gk100-rgb-led-den.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\8f70fb27-cf53-440d-89e5-2d7967a9c55d_rog_flow_z13_3.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\8f70fb27-cf53-440d-89e5-2d7967a9c55d_rog_flow_z13_3.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\8f70fb27-cf53-440d-89e5-2d7967a9c55d_rog_flow_z13_3.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\8fb06655-8e2d-4f98-acbf-dac4fc5354c2_frame_3_25__2.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\8fb06655-8e2d-4f98-acbf-dac4fc5354c2_frame_3_25__2.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\8fb06655-8e2d-4f98-acbf-dac4fc5354c2_frame_3_25__2.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\902afe0b-a440-423c-b2ee-449bb66f90a7_cu-sac-nhanh-baseus-palm-1c1a-20w-us-kem-cap_5_.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\902afe0b-a440-423c-b2ee-449bb66f90a7_cu-sac-nhanh-baseus-palm-1c1a-20w-us-kem-cap_5_.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\902afe0b-a440-423c-b2ee-449bb66f90a7_cu-sac-nhanh-baseus-palm-1c1a-20w-us-kem-cap_5_.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\90348482-b4d5-47da-9e65-cb9b46713ae0_tai-nghe-co-day-havit-fuxi-h5d_2_.png",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\90348482-b4d5-47da-9e65-cb9b46713ae0_tai-nghe-co-day-havit-fuxi-h5d_2_.png",
       "PackagePath": "staticwebassets\\uploads\\productimages\\90348482-b4d5-47da-9e65-cb9b46713ae0_tai-nghe-co-day-havit-fuxi-h5d_2_.png"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\906c85c8-2082-4fe5-8352-8beb062b5c6d_dell_5430_1.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\906c85c8-2082-4fe5-8352-8beb062b5c6d_dell_5430_1.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\906c85c8-2082-4fe5-8352-8beb062b5c6d_dell_5430_1.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\9082b934-6f45-44cf-8ccd-88f7e7e12af1_baseus-super-si-25w-1-cong-kem-cap-type-c-to-type-c-1m-7.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\9082b934-6f45-44cf-8ccd-88f7e7e12af1_baseus-super-si-25w-1-cong-kem-cap-type-c-to-type-c-1m-7.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\9082b934-6f45-44cf-8ccd-88f7e7e12af1_baseus-super-si-25w-1-cong-kem-cap-type-c-to-type-c-1m-7.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\90a3f298-f8b0-4f77-a239-ccbcd889cff6_dell_5430_2.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\90a3f298-f8b0-4f77-a239-ccbcd889cff6_dell_5430_2.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\90a3f298-f8b0-4f77-a239-ccbcd889cff6_dell_5430_2.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\9394e3fa-e210-41e2-8329-234e64b37099_ban-phim-gaming-msi-forge-gk100-rgb-led-den-2.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\9394e3fa-e210-41e2-8329-234e64b37099_ban-phim-gaming-msi-forge-gk100-rgb-led-den-2.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\9394e3fa-e210-41e2-8329-234e64b37099_ban-phim-gaming-msi-forge-gk100-rgb-led-den-2.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\9525a464-0307-402b-a0a2-301467ecbf8c_rogzephyrus_g16_3.png",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\93ceb31e-53ee-42d5-bc14-6d6bac6906be_thong-so-iphone-17-pro-max.jpg",
+      "PackagePath": "staticwebassets\\uploads\\productimages\\93ceb31e-53ee-42d5-bc14-6d6bac6906be_thong-so-iphone-17-pro-max.jpg"
+    },
+    {
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\9525a464-0307-402b-a0a2-301467ecbf8c_rogzephyrus_g16_3.png",
       "PackagePath": "staticwebassets\\uploads\\productimages\\9525a464-0307-402b-a0a2-301467ecbf8c_rogzephyrus_g16_3.png"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\9581f1d0-a920-41e0-97f7-f06b0c64b99b_5_1__1.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\9581f1d0-a920-41e0-97f7-f06b0c64b99b_5_1__1.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\9581f1d0-a920-41e0-97f7-f06b0c64b99b_5_1__1.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\97b463ad-bbe9-41ea-9496-c43af4b43563_dell_5625_3.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\97b463ad-bbe9-41ea-9496-c43af4b43563_dell_5625_3.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\97b463ad-bbe9-41ea-9496-c43af4b43563_dell_5625_3.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\993d9e37-e695-44d9-862a-b09df257f5d5_tai-nghe-co-day-havit-fuxi-h5d.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\993d9e37-e695-44d9-862a-b09df257f5d5_tai-nghe-co-day-havit-fuxi-h5d.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\993d9e37-e695-44d9-862a-b09df257f5d5_tai-nghe-co-day-havit-fuxi-h5d.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\99ec501b-782c-4677-86d4-844dd83ff468_01_3_.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\99ec501b-782c-4677-86d4-844dd83ff468_01_3_.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\99ec501b-782c-4677-86d4-844dd83ff468_01_3_.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\9ac90483-5ca4-4211-8486-550ec6d665a7_tai-nghe-co-day-havit-h2002d.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\9ac90483-5ca4-4211-8486-550ec6d665a7_tai-nghe-co-day-havit-h2002d.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\9ac90483-5ca4-4211-8486-550ec6d665a7_tai-nghe-co-day-havit-h2002d.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\9b4cba3c-9eb6-4694-a17c-b22142e882cd_ban-phim-gaming-rbg-havit-kb866l-4.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\9b4cba3c-9eb6-4694-a17c-b22142e882cd_ban-phim-gaming-rbg-havit-kb866l-4.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\9b4cba3c-9eb6-4694-a17c-b22142e882cd_ban-phim-gaming-rbg-havit-kb866l-4.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\9c41ae0e-54a8-4205-805d-a5a6b01a2b37_frame_392.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\9c41ae0e-54a8-4205-805d-a5a6b01a2b37_frame_392.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\9c41ae0e-54a8-4205-805d-a5a6b01a2b37_frame_392.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\a2aadc18-512b-427b-8106-45261264d318_lenovo-legion-5-15irx9_1.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\a2aadc18-512b-427b-8106-45261264d318_lenovo-legion-5-15irx9_1.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\a2aadc18-512b-427b-8106-45261264d318_lenovo-legion-5-15irx9_1.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\a443370b-1e7f-4c29-a21c-d96261edc57b_pin_iphone_17_pro_c0ad874f14.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\a443370b-1e7f-4c29-a21c-d96261edc57b_pin_iphone_17_pro_c0ad874f14.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\a443370b-1e7f-4c29-a21c-d96261edc57b_pin_iphone_17_pro_c0ad874f14.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\a6df8aa9-0098-4a6e-931d-b9acc836c481_dung-luong-pin-iphone-17-pro-max-2.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\a69c101f-9e31-4289-81ab-89295c4a72ae_xiaomi-14-ultra-8gb-256gb_1__3.webp",
+      "PackagePath": "staticwebassets\\uploads\\productimages\\a69c101f-9e31-4289-81ab-89295c4a72ae_xiaomi-14-ultra-8gb-256gb_1__3.webp"
+    },
+    {
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\a6df8aa9-0098-4a6e-931d-b9acc836c481_dung-luong-pin-iphone-17-pro-max-2.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\a6df8aa9-0098-4a6e-931d-b9acc836c481_dung-luong-pin-iphone-17-pro-max-2.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\aa010640-d091-4541-88c3-b9555390542d_644789898_1505019520990853_4809499643401294434_n.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\aa010640-d091-4541-88c3-b9555390542d_644789898_1505019520990853_4809499643401294434_n.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\aa010640-d091-4541-88c3-b9555390542d_644789898_1505019520990853_4809499643401294434_n.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\ab309db3-758d-47d9-9106-520fa8cf1a89_vn-11134207-81ztc-mlei2ri16ku9cc.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\ab309db3-758d-47d9-9106-520fa8cf1a89_vn-11134207-81ztc-mlei2ri16ku9cc.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\ab309db3-758d-47d9-9106-520fa8cf1a89_vn-11134207-81ztc-mlei2ri16ku9cc.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\abfd7221-cab6-4892-9d95-e4ab9b91a9d3_ban-phim-co-co-day-aula-win68he-max-xam-trang-2.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\abfd7221-cab6-4892-9d95-e4ab9b91a9d3_ban-phim-co-co-day-aula-win68he-max-xam-trang-2.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\abfd7221-cab6-4892-9d95-e4ab9b91a9d3_ban-phim-co-co-day-aula-win68he-max-xam-trang-2.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\ac400c80-f2f9-43c9-808c-c1d86e1f200b_frame_379_-_2025-08-06t094841.386.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\ac400c80-f2f9-43c9-808c-c1d86e1f200b_frame_379_-_2025-08-06t094841.386.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\ac400c80-f2f9-43c9-808c-c1d86e1f200b_frame_379_-_2025-08-06t094841.386.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\afc8bdb6-450f-4522-82c0-a0be01b3ac3f_asus_g16_1.png",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\aebb5e5b-d20e-4655-a1b7-b4cc28e14183_dien-thoai-xiaomi-15-ultra.webp",
+      "PackagePath": "staticwebassets\\uploads\\productimages\\aebb5e5b-d20e-4655-a1b7-b4cc28e14183_dien-thoai-xiaomi-15-ultra.webp"
+    },
+    {
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\afc8bdb6-450f-4522-82c0-a0be01b3ac3f_asus_g16_1.png",
       "PackagePath": "staticwebassets\\uploads\\productimages\\afc8bdb6-450f-4522-82c0-a0be01b3ac3f_asus_g16_1.png"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\b09109f3-ca78-4d73-a45b-386cc1a41a5f_hp-15s-fq2559tu_2.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\b09109f3-ca78-4d73-a45b-386cc1a41a5f_hp-15s-fq2559tu_2.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\b09109f3-ca78-4d73-a45b-386cc1a41a5f_hp-15s-fq2559tu_2.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\b185d476-7722-4dff-b07c-801da0a73605_02_5_.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\b185d476-7722-4dff-b07c-801da0a73605_02_5_.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\b185d476-7722-4dff-b07c-801da0a73605_02_5_.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\b229e6cd-7f21-4bfd-ae50-19133bf24a1c_tai-nghe-gaming-havit-h2040d_3_.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\b229e6cd-7f21-4bfd-ae50-19133bf24a1c_tai-nghe-gaming-havit-h2040d_3_.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\b229e6cd-7f21-4bfd-ae50-19133bf24a1c_tai-nghe-gaming-havit-h2040d_3_.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\b29e2549-27c2-4396-9d2b-d29bd194836f_dell_16plus_1.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\b29e2549-27c2-4396-9d2b-d29bd194836f_dell_16plus_1.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\b29e2549-27c2-4396-9d2b-d29bd194836f_dell_16plus_1.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\b34b525d-c93f-4d3d-9a83-bdc987927593_dell_5625_1.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\b34b525d-c93f-4d3d-9a83-bdc987927593_dell_5625_1.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\b34b525d-c93f-4d3d-9a83-bdc987927593_dell_5625_1.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\b42cf296-0b85-4c43-a527-653434a910c0_tải xuống (5).jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\b42cf296-0b85-4c43-a527-653434a910c0_tải xuống (5).jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\b42cf296-0b85-4c43-a527-653434a910c0_tải xuống (5).jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\b4929d23-24b0-48de-b3a2-7a1bcf76ece8_ban-phim-gaming-asus-tuf-k1-3.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\b4929d23-24b0-48de-b3a2-7a1bcf76ece8_ban-phim-gaming-asus-tuf-k1-3.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\b4929d23-24b0-48de-b3a2-7a1bcf76ece8_ban-phim-gaming-asus-tuf-k1-3.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\b5bbe7a8-00b5-45a7-b824-b8b1abcd3314_hp-omen-16-xf0071-3.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\b5bbe7a8-00b5-45a7-b824-b8b1abcd3314_hp-omen-16-xf0071-3.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\b5bbe7a8-00b5-45a7-b824-b8b1abcd3314_hp-omen-16-xf0071-3.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\b64cb16d-7e6b-4475-9723-eac386cf77bc_2023_3_29_638156772400703328_A54 (1).webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\b64cb16d-7e6b-4475-9723-eac386cf77bc_2023_3_29_638156772400703328_A54 (1).webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\b64cb16d-7e6b-4475-9723-eac386cf77bc_2023_3_29_638156772400703328_A54 (1).webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\b75a9a50-3665-4088-a92c-bf89b5f02a95_tau-sac-o-to-ugreen-ed018-50875-2-usb-a-24w_3_.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\b69c6b3f-42dd-426d-abaa-7b2add2ea965_dung-luong-pin-iphone-17-pro-max-2.jpg",
+      "PackagePath": "staticwebassets\\uploads\\productimages\\b69c6b3f-42dd-426d-abaa-7b2add2ea965_dung-luong-pin-iphone-17-pro-max-2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\b75a9a50-3665-4088-a92c-bf89b5f02a95_tau-sac-o-to-ugreen-ed018-50875-2-usb-a-24w_3_.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\b75a9a50-3665-4088-a92c-bf89b5f02a95_tau-sac-o-to-ugreen-ed018-50875-2-usb-a-24w_3_.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\ba78a47c-a971-4bcc-ad8a-132b0cc24726_hp-omen-16-xf0071-2.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\ba78a47c-a971-4bcc-ad8a-132b0cc24726_hp-omen-16-xf0071-2.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\ba78a47c-a971-4bcc-ad8a-132b0cc24726_hp-omen-16-xf0071-2.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\bcd4620b-6815-4333-a3bd-87e28d24d8f7_macpro_m2_2.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\bcd4620b-6815-4333-a3bd-87e28d24d8f7_macpro_m2_2.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\bcd4620b-6815-4333-a3bd-87e28d24d8f7_macpro_m2_2.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\bec1aba8-0014-40e7-b59a-b7350a4a8d36_iphone-17-pro-max-512gb-4.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\bec1aba8-0014-40e7-b59a-b7350a4a8d36_iphone-17-pro-max-512gb-4.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\bec1aba8-0014-40e7-b59a-b7350a4a8d36_iphone-17-pro-max-512gb-4.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\c1492423-9670-4b51-9eed-12d37c39d4e1_frame_3_18__1.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\c1492423-9670-4b51-9eed-12d37c39d4e1_frame_3_18__1.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\c1492423-9670-4b51-9eed-12d37c39d4e1_frame_3_18__1.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\c5e5c9b2-6e68-4220-b2a7-9f9c2105b891_baseus-super-si-25w-1-cong-kem-cap-type-c-to-type-c-1m-8.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\c42b3d7c-c385-4ad6-912e-2681d7791edf_maxresdefault (1).jpg",
+      "PackagePath": "staticwebassets\\uploads\\productimages\\c42b3d7c-c385-4ad6-912e-2681d7791edf_maxresdefault (1).jpg"
+    },
+    {
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\c5e5c9b2-6e68-4220-b2a7-9f9c2105b891_baseus-super-si-25w-1-cong-kem-cap-type-c-to-type-c-1m-8.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\c5e5c9b2-6e68-4220-b2a7-9f9c2105b891_baseus-super-si-25w-1-cong-kem-cap-type-c-to-type-c-1m-8.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\c977bbf5-dee3-47c3-b979-46de237dd37c_asus_g16_1.png",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\c977bbf5-dee3-47c3-b979-46de237dd37c_asus_g16_1.png",
       "PackagePath": "staticwebassets\\uploads\\productimages\\c977bbf5-dee3-47c3-b979-46de237dd37c_asus_g16_1.png"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\caf766f4-3145-4e28-bc1f-4d55d315afd0_ban-phim-co-aula-s2022-blue-switch-5_1.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\ca36d818-15e3-4f28-894d-ed9e309c8ff8_iphone-16-1.webp",
+      "PackagePath": "staticwebassets\\uploads\\productimages\\ca36d818-15e3-4f28-894d-ed9e309c8ff8_iphone-16-1.webp"
+    },
+    {
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\ca55f599-4bf5-40de-8ae4-a3313c954bbb_2024_4_25_638496651458317388_Xiaomi 14 Ultra-3.webp",
+      "PackagePath": "staticwebassets\\uploads\\productimages\\ca55f599-4bf5-40de-8ae4-a3313c954bbb_2024_4_25_638496651458317388_Xiaomi 14 Ultra-3.webp"
+    },
+    {
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\caf766f4-3145-4e28-bc1f-4d55d315afd0_ban-phim-co-aula-s2022-blue-switch-5_1.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\caf766f4-3145-4e28-bc1f-4d55d315afd0_ban-phim-co-aula-s2022-blue-switch-5_1.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\d0390db4-bba6-4cf6-afb8-c4a99b0d31fd_ban-phim-gaming-asus-tuf-k1-2.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\cb25a0a2-1510-4b4c-ada7-4f2b74cab64d_iphone-17-pro-max-512gb-4.webp",
+      "PackagePath": "staticwebassets\\uploads\\productimages\\cb25a0a2-1510-4b4c-ada7-4f2b74cab64d_iphone-17-pro-max-512gb-4.webp"
+    },
+    {
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\d0390db4-bba6-4cf6-afb8-c4a99b0d31fd_ban-phim-gaming-asus-tuf-k1-2.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\d0390db4-bba6-4cf6-afb8-c4a99b0d31fd_ban-phim-gaming-asus-tuf-k1-2.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\d225ac30-f938-4815-8fba-15ef3fa50b2b_frame_379_1_7.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\d225ac30-f938-4815-8fba-15ef3fa50b2b_frame_379_1_7.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\d225ac30-f938-4815-8fba-15ef3fa50b2b_frame_379_1_7.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\d2cf9dd9-2464-4f4a-8c17-f0e46066c5d5_vn-11134207-81ztc-mlei2ri2fj0i4e@resize_w450_nl.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\d2cf9dd9-2464-4f4a-8c17-f0e46066c5d5_vn-11134207-81ztc-mlei2ri2fj0i4e@resize_w450_nl.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\d2cf9dd9-2464-4f4a-8c17-f0e46066c5d5_vn-11134207-81ztc-mlei2ri2fj0i4e@resize_w450_nl.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\d3a84b12-4347-48e3-aad9-1ea2fa0be16a_lenovo-yoga-7-1.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\d3a84b12-4347-48e3-aad9-1ea2fa0be16a_lenovo-yoga-7-1.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\d3a84b12-4347-48e3-aad9-1ea2fa0be16a_lenovo-yoga-7-1.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\d4538db3-1246-4c2c-a4cf-ccf0e0b3f4ef_ban-phim-co-co-day-aula-win68he-max-xam-trang-1.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\d4538db3-1246-4c2c-a4cf-ccf0e0b3f4ef_ban-phim-co-co-day-aula-win68he-max-xam-trang-1.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\d4538db3-1246-4c2c-a4cf-ccf0e0b3f4ef_ban-phim-co-co-day-aula-win68he-max-xam-trang-1.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\d6cfc514-6c3e-461b-9200-1a58bd814867_ban-phim-co-rapoo-v700diy-75-xanh-la-den-7.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\d6cfc514-6c3e-461b-9200-1a58bd814867_ban-phim-co-rapoo-v700diy-75-xanh-la-den-7.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\d6cfc514-6c3e-461b-9200-1a58bd814867_ban-phim-co-rapoo-v700diy-75-xanh-la-den-7.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\d71e8fc8-75f1-43d4-bdcd-5b1d29c15e12_lenovo-yoga-7-3.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\d71e8fc8-75f1-43d4-bdcd-5b1d29c15e12_lenovo-yoga-7-3.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\d71e8fc8-75f1-43d4-bdcd-5b1d29c15e12_lenovo-yoga-7-3.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\d78ce84c-b04b-4807-b699-ec4733154d0e_dell_16plus_2.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\d78ce84c-b04b-4807-b699-ec4733154d0e_dell_16plus_2.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\d78ce84c-b04b-4807-b699-ec4733154d0e_dell_16plus_2.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\d7c9d30a-5053-44bc-bdd4-b80187c91d2c_dell_3515_1.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\d7c9d30a-5053-44bc-bdd4-b80187c91d2c_dell_3515_1.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\d7c9d30a-5053-44bc-bdd4-b80187c91d2c_dell_3515_1.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\d8b10071-d969-4eea-ad0c-d600adab29bf_cu-sac-nhanh-baseus-palm-kem-cap-1c-20w-1m_6_.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\d8b10071-d969-4eea-ad0c-d600adab29bf_cu-sac-nhanh-baseus-palm-kem-cap-1c-20w-1m_6_.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\d8b10071-d969-4eea-ad0c-d600adab29bf_cu-sac-nhanh-baseus-palm-kem-cap-1c-20w-1m_6_.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\ddaf39f8-f9f2-4923-844e-a0b478a12b06_ban-phim-co-aula-s2022-blue-switch-6_1.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\ddaf39f8-f9f2-4923-844e-a0b478a12b06_ban-phim-co-aula-s2022-blue-switch-6_1.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\ddaf39f8-f9f2-4923-844e-a0b478a12b06_ban-phim-co-aula-s2022-blue-switch-6_1.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\df2d0656-d836-40d0-b6ca-70edd3efb4b9_h88838da46f3f4014a63aa536d51116f.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\df2d0656-d836-40d0-b6ca-70edd3efb4b9_h88838da46f3f4014a63aa536d51116f.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\df2d0656-d836-40d0-b6ca-70edd3efb4b9_h88838da46f3f4014a63aa536d51116f.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\e2485e7d-6d7b-468c-a133-790ff4b700f8_hp-15s-fq2559tu_3.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\e2485e7d-6d7b-468c-a133-790ff4b700f8_hp-15s-fq2559tu_3.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\e2485e7d-6d7b-468c-a133-790ff4b700f8_hp-15s-fq2559tu_3.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\e3820c22-9908-4c95-8139-8b1c4da1560f_cu-sac-trusmi-ch11-1a-1c-pd-20w-kem-cap-type-c-to-lightning-60w_9_.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\e3820c22-9908-4c95-8139-8b1c4da1560f_cu-sac-trusmi-ch11-1a-1c-pd-20w-kem-cap-type-c-to-lightning-60w_9_.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\e3820c22-9908-4c95-8139-8b1c4da1560f_cu-sac-trusmi-ch11-1a-1c-pd-20w-kem-cap-type-c-to-lightning-60w_9_.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\e3c2ad93-345d-43fc-9c5c-063d83b2ab6e_asus_g16_3.png",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\e3c2ad93-345d-43fc-9c5c-063d83b2ab6e_asus_g16_3.png",
       "PackagePath": "staticwebassets\\uploads\\productimages\\e3c2ad93-345d-43fc-9c5c-063d83b2ab6e_asus_g16_3.png"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\e5693fdc-dd94-466c-96b7-c05a9928075f_hp-envy-x360-3.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\e5693fdc-dd94-466c-96b7-c05a9928075f_hp-envy-x360-3.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\e5693fdc-dd94-466c-96b7-c05a9928075f_hp-envy-x360-3.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\e7e768df-73ba-4827-8fa3-a51f60a82618_mac_pro_m2_1.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\e7e768df-73ba-4827-8fa3-a51f60a82618_mac_pro_m2_1.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\e7e768df-73ba-4827-8fa3-a51f60a82618_mac_pro_m2_1.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\e8fc8a85-3cb1-47c8-a10e-8fe037ed3a1f_asus_g16_2.png",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\e8fc8a85-3cb1-47c8-a10e-8fe037ed3a1f_asus_g16_2.png",
       "PackagePath": "staticwebassets\\uploads\\productimages\\e8fc8a85-3cb1-47c8-a10e-8fe037ed3a1f_asus_g16_2.png"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\ed41edec-aafb-4540-920f-8fa6eef193fa_hp-envy-x360-2.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\e91a6a55-5430-45ef-8541-6b47b1672e86_iphone_16_1_04ab3981a5.jpg",
+      "PackagePath": "staticwebassets\\uploads\\productimages\\e91a6a55-5430-45ef-8541-6b47b1672e86_iphone_16_1_04ab3981a5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\ed41edec-aafb-4540-920f-8fa6eef193fa_hp-envy-x360-2.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\ed41edec-aafb-4540-920f-8fa6eef193fa_hp-envy-x360-2.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\ef582560-1761-4183-9d37-a5b705f1ed8b_hp-15s-fq2559tu_2.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\ef26d883-c92d-4a37-9ac2-bff223ce0f6f_2024_1_17_638410793333120339_samsung-galaxy-s24-ultra-vang-1.webp",
+      "PackagePath": "staticwebassets\\uploads\\productimages\\ef26d883-c92d-4a37-9ac2-bff223ce0f6f_2024_1_17_638410793333120339_samsung-galaxy-s24-ultra-vang-1.webp"
+    },
+    {
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\ef582560-1761-4183-9d37-a5b705f1ed8b_hp-15s-fq2559tu_2.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\ef582560-1761-4183-9d37-a5b705f1ed8b_hp-15s-fq2559tu_2.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\f463087c-8b4b-42c9-8eb6-6c130bfe77b5_tai-nghe-rog-cetra-ii-core_24_.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\f452a6b0-0580-4a3d-b027-6268f8fd54f1_pin_iphone_17_pro_c0ad874f14.webp",
+      "PackagePath": "staticwebassets\\uploads\\productimages\\f452a6b0-0580-4a3d-b027-6268f8fd54f1_pin_iphone_17_pro_c0ad874f14.webp"
+    },
+    {
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\f463087c-8b4b-42c9-8eb6-6c130bfe77b5_tai-nghe-rog-cetra-ii-core_24_.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\f463087c-8b4b-42c9-8eb6-6c130bfe77b5_tai-nghe-rog-cetra-ii-core_24_.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\f5eee4e7-9cc7-408d-adac-4768a95c556e_cu-sac-nhanh-baseus-palm-kem-cap-1c-20w-1m_5_.webp",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\f5eee4e7-9cc7-408d-adac-4768a95c556e_cu-sac-nhanh-baseus-palm-kem-cap-1c-20w-1m_5_.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\f5eee4e7-9cc7-408d-adac-4768a95c556e_cu-sac-nhanh-baseus-palm-kem-cap-1c-20w-1m_5_.webp"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\f85d7319-2ea0-4d3d-8d1b-5b6eda88d282_mac_pro_m2_3.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\f85d7319-2ea0-4d3d-8d1b-5b6eda88d282_mac_pro_m2_3.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\f85d7319-2ea0-4d3d-8d1b-5b6eda88d282_mac_pro_m2_3.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\f8608ed4-63dc-4215-9168-ce02aead7a35_mac_pro_m2_2.jpg",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\f8608ed4-63dc-4215-9168-ce02aead7a35_mac_pro_m2_2.jpg",
       "PackagePath": "staticwebassets\\uploads\\productimages\\f8608ed4-63dc-4215-9168-ce02aead7a35_mac_pro_m2_2.jpg"
     },
     {
-      "Id": "C:\\Users\\PC\\source\\repos\\LapTopDDB\\DoAn\\wwwroot\\uploads\\productimages\\f88b0f58-3873-4c2c-aee3-5e7038bb06d4_cu-sac-anker-nano-b2679-1c-100w-kem-cap-type-c_6_.png",
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\f88b0f58-3873-4c2c-aee3-5e7038bb06d4_cu-sac-anker-nano-b2679-1c-100w-kem-cap-type-c_6_.png",
       "PackagePath": "staticwebassets\\uploads\\productimages\\f88b0f58-3873-4c2c-aee3-5e7038bb06d4_cu-sac-anker-nano-b2679-1c-100w-kem-cap-type-c_6_.png"
     },
     {

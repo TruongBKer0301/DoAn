@@ -81,7 +81,7 @@ namespace LapTopBD.Areas.Admin.Controllers
                 }
 
                 // Kiểm tra trạng thái hợp lệ
-                var validStatuses = new[] { "Pending", "Shipped", "Delivered", "Cancelled" };
+                var validStatuses = new[] { "Pending", "Shipping", "Delivered", "Cancelled", "Paid" };
                 if (!validStatuses.Contains(status))
                 {
                     return Json(new { success = false, message = "Trạng thái không hợp lệ!" });
