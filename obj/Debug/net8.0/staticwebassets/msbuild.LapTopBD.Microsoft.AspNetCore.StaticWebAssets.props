@@ -120,8 +120,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>fon3sf26xh</Fingerprint>
-      <Integrity>n3J4HtMKa/gtHH9iJgCESeiOWFDXTlQ0pFr9lZkFr7E=</Integrity>
+      <Fingerprint>388cjb2yro</Fingerprint>
+      <Integrity>Xayd9gsAx1SY7/kPSHRltUn8wU+SgX8Rfz2scb7beeQ=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\app.min.css'))</OriginalItemSpec>
@@ -1794,8 +1794,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>h59dncsqe9</Fingerprint>
-      <Integrity>aylvz5JGm6TbIut5O2MFrPJ2l6NTP7fFrIchC6/2nD8=</Integrity>
+      <Fingerprint>7xdcvqz1cn</Fingerprint>
+      <Integrity>e2jtq6uuLQNN8593Gf94VcKvlXxDJtJ/o0aF1XC7NYE=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\script.js'))</OriginalItemSpec>
@@ -2970,6 +2970,42 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\banner\3c6e3a79-1c11-4e5f-af2a-1df5b0b80b99_snapedit_1742834828592.jpeg'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\banner\4faac7b9-e210-4d66-b65f-89a54e81b6fd_609fa7b53c435fb27393587d_dd5787fa0c9306323b7176ce91a4d31ff6041c4a2.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>LapTopBD</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/LapTopBD</BasePath>
+      <RelativePath>uploads/banner/4faac7b9-e210-4d66-b65f-89a54e81b6fd_609fa7b53c435fb27393587d_dd5787fa0c9306323b7176ce91a4d31ff6041c4a2.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>u0etmzvgrr</Fingerprint>
+      <Integrity>wuFEVWJcYJ3JB1K+CE7XjP1223C39vpA678ViAEMLw4=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\banner\4faac7b9-e210-4d66-b65f-89a54e81b6fd_609fa7b53c435fb27393587d_dd5787fa0c9306323b7176ce91a4d31ff6041c4a2.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\banner\b804befe-5744-430b-8564-07bfd0ef2e6b_macbookairm1giảmngay1triệuchohs-svgv3.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>LapTopBD</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/LapTopBD</BasePath>
+      <RelativePath>uploads/banner/b804befe-5744-430b-8564-07bfd0ef2e6b_macbookairm1giảmngay1triệuchohs-svgv3.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>xgzna46nt0</Fingerprint>
+      <Integrity>UQ2LVgXsk9goVCeS5G4vKPkbv/+mxG4ago3g1uM7Z1w=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\banner\b804befe-5744-430b-8564-07bfd0ef2e6b_macbookairm1giảmngay1triệuchohs-svgv3.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\banner\be40ea2c-f4a3-408b-bc9b-31c18099cda5_snapedit_1742834806685.jpeg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -3330,6 +3366,24 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\0ea2449c-acf6-4975-9052-af1a228dc296_ban-phim-co-aula-s2022-blue-switch-3.webp'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\11e042e7-8821-4a13-bc09-2d157b63095b_xiaomi-15-ultra-white-thumbnew-600x600.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>LapTopBD</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/LapTopBD</BasePath>
+      <RelativePath>uploads/productimages/11e042e7-8821-4a13-bc09-2d157b63095b_xiaomi-15-ultra-white-thumbnew-600x600.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>yjvov8y70l</Fingerprint>
+      <Integrity>vjSpfzz/XCMRj1gli/O7ArCiGyg2UlQP/K8+uZKzxRQ=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\11e042e7-8821-4a13-bc09-2d157b63095b_xiaomi-15-ultra-white-thumbnew-600x600.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\121d260f-9d09-4d88-95f1-851a10f82c44_lenovo-yoga-7-2.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -3618,6 +3672,24 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\2515af33-9f19-4ba4-905e-ff2afa8a74cd_645552630_1248513117418992_2793655263226700122_n.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\2601cb06-dd3f-47f3-856d-cc01cc984e45_iphone-17-pro-max-5.webp'))">
+      <SourceType>Package</SourceType>
+      <SourceId>LapTopBD</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/LapTopBD</BasePath>
+      <RelativePath>uploads/productimages/2601cb06-dd3f-47f3-856d-cc01cc984e45_iphone-17-pro-max-5.webp</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>t7m663sblf</Fingerprint>
+      <Integrity>BxjeRzKVIrWt7kGYvTLv+Y7Ccez2Ao919OJxHz6Jhqw=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\2601cb06-dd3f-47f3-856d-cc01cc984e45_iphone-17-pro-max-5.webp'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\26afdfc6-d9d6-4e48-a299-54d94c4681d7_hp-elitebook-x360-3.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -3707,6 +3779,24 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\2a2cd518-77a4-4228-a708-f099b5b2f792_thinkpad-e14-1.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\2c728997-599f-437d-9ec6-7df22f6fe90c_Samsung-Galaxy-S25-Ultra-Titan-Grey.webp'))">
+      <SourceType>Package</SourceType>
+      <SourceId>LapTopBD</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/LapTopBD</BasePath>
+      <RelativePath>uploads/productimages/2c728997-599f-437d-9ec6-7df22f6fe90c_Samsung-Galaxy-S25-Ultra-Titan-Grey.webp</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>5zr3vil4dl</Fingerprint>
+      <Integrity>YQdTvqha4P1ImXOjcuN5TiTqOFn6b2b2I7xo9U21elE=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\2c728997-599f-437d-9ec6-7df22f6fe90c_Samsung-Galaxy-S25-Ultra-Titan-Grey.webp'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\2e35b339-3ec7-4ac7-bd9a-bc31f12ab27a_pkit.367.webp'))">
       <SourceType>Package</SourceType>
@@ -3816,6 +3906,24 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\36f8ce1a-54e0-41cf-ab9e-77b565a55e1e_frame_3_23__2.webp'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\375677b7-1cf2-4245-be1f-f81806ee7b1c_16-nen-3292.png'))">
+      <SourceType>Package</SourceType>
+      <SourceId>LapTopBD</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/LapTopBD</BasePath>
+      <RelativePath>uploads/productimages/375677b7-1cf2-4245-be1f-f81806ee7b1c_16-nen-3292.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>p675fsw25h</Fingerprint>
+      <Integrity>oZKVa5yAwPlL9aiNDjHAyUeOcT90EsWTFGv9zxVBxj0=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\375677b7-1cf2-4245-be1f-f81806ee7b1c_16-nen-3292.png'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\384b157a-986e-4b64-94bf-c06f5325f92a_hp-elitebook-x360-2.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -3888,6 +3996,24 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\3b70bc27-aabc-49ef-af67-ea727bc9e67a_4_43.webp'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\3d4a4866-8d56-479b-9e13-b6fd9d4a9411_galaxy-s25-ultra-note-638748064717735718.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>LapTopBD</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/LapTopBD</BasePath>
+      <RelativePath>uploads/productimages/3d4a4866-8d56-479b-9e13-b6fd9d4a9411_galaxy-s25-ultra-note-638748064717735718.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>bek2151dke</Fingerprint>
+      <Integrity>w/g0jdg6MV1C6vwOVvXQOihrhmBJ3Gumd3u3jekHuAM=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\3d4a4866-8d56-479b-9e13-b6fd9d4a9411_galaxy-s25-ultra-note-638748064717735718.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\3de698c1-5ea5-473b-b31c-d9f0f0a634f3_iphone_16_1_04ab3981a5.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -3905,6 +4031,24 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\3de698c1-5ea5-473b-b31c-d9f0f0a634f3_iphone_16_1_04ab3981a5.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\3f1f9eae-5fd7-4053-88b8-c3b71cb133c9_2024_4_24_638495700434861779_xiaomi-14-ultra-den-3.webp'))">
+      <SourceType>Package</SourceType>
+      <SourceId>LapTopBD</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/LapTopBD</BasePath>
+      <RelativePath>uploads/productimages/3f1f9eae-5fd7-4053-88b8-c3b71cb133c9_2024_4_24_638495700434861779_xiaomi-14-ultra-den-3.webp</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>pc2ct3sz1l</Fingerprint>
+      <Integrity>6T/98K9Ng1Ui1+5u8dmvVaKL1DTinqNIYsefwVJ31bI=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\3f1f9eae-5fd7-4053-88b8-c3b71cb133c9_2024_4_24_638495700434861779_xiaomi-14-ultra-den-3.webp'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\4160bbac-8966-43d2-8596-87bac6f20ca6_dell_3515_3.jpg'))">
       <SourceType>Package</SourceType>
@@ -3959,6 +4103,24 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\42d2ca06-444a-4f31-9716-534c8520c5e1_lenovo-legion-5-15irx9_2.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\43cb8254-044f-4f4a-bdb1-16718d64b952_samsung-galaxy-s25-ultra-blue-thumbai-600x600.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>LapTopBD</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/LapTopBD</BasePath>
+      <RelativePath>uploads/productimages/43cb8254-044f-4f4a-bdb1-16718d64b952_samsung-galaxy-s25-ultra-blue-thumbai-600x600.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>zqcnx1qv9e</Fingerprint>
+      <Integrity>S2XrMBnhqd0HV/ErrEg5X873pOS9os3m1N3/g0zxd6w=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\43cb8254-044f-4f4a-bdb1-16718d64b952_samsung-galaxy-s25-ultra-blue-thumbai-600x600.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\44ce69f8-6d04-4430-8296-a888128d59ae_ban-phim-co-rapoo-v510-led-rainbow-den-2.webp'))">
       <SourceType>Package</SourceType>
@@ -4175,6 +4337,24 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\4e520b06-f813-4cb7-90e9-11d8a095fd97_macpro_m2_3.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\5193f9e4-1c8d-4e51-b2e6-0425141062ed_dien-thoai-xiaomi-15-ultra_14_.webp'))">
+      <SourceType>Package</SourceType>
+      <SourceId>LapTopBD</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/LapTopBD</BasePath>
+      <RelativePath>uploads/productimages/5193f9e4-1c8d-4e51-b2e6-0425141062ed_dien-thoai-xiaomi-15-ultra_14_.webp</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>zvjlqkg6nk</Fingerprint>
+      <Integrity>7wHMgs4DeypTntZ53ng5aRHp4+CXbtehKYCeDmfg6HE=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\5193f9e4-1c8d-4e51-b2e6-0425141062ed_dien-thoai-xiaomi-15-ultra_14_.webp'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\52e8c205-c5cf-486f-983a-715b555a6a04_vn-11134258-81ztc-mmpn5o534ft15b.png'))">
       <SourceType>Package</SourceType>
@@ -4590,6 +4770,24 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\7fb01e9a-032d-41e1-b1c2-aa3470311b41_tai-nghe-co-day-havit-h2002d_4_.webp'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\8058cea9-80ca-4f75-ae12-f8b050ebf0b9_50d34bf3-6074-4738-80dc-00d05032fe2d-jpeg.webp'))">
+      <SourceType>Package</SourceType>
+      <SourceId>LapTopBD</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/LapTopBD</BasePath>
+      <RelativePath>uploads/productimages/8058cea9-80ca-4f75-ae12-f8b050ebf0b9_50d34bf3-6074-4738-80dc-00d05032fe2d-jpeg.webp</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>mb5dgmki8q</Fingerprint>
+      <Integrity>MkRL1vm+LUAhSXSAdUOHAuiQWMwcmTPDUHfdiryRpoY=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\8058cea9-80ca-4f75-ae12-f8b050ebf0b9_50d34bf3-6074-4738-80dc-00d05032fe2d-jpeg.webp'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\812e8acb-2f4c-4cbc-881b-c8928c1efe2a_hp-15s-fq2559tu_3.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -4643,6 +4841,24 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\84bf2331-e662-406c-b25e-b16a840594b5_ban-phim-co-rapoo-v510-led-rainbow-den.webp'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\8748f63f-d642-450e-916f-8d6f402ff943_samsung-galaxy-s24-ultra-5g-600x600.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>LapTopBD</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/LapTopBD</BasePath>
+      <RelativePath>uploads/productimages/8748f63f-d642-450e-916f-8d6f402ff943_samsung-galaxy-s24-ultra-5g-600x600.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>198f3dm3o1</Fingerprint>
+      <Integrity>hS4kPg0/UPZRIhhsrb/YDwsJEJbuJPW5kRMqr4oIEHE=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\8748f63f-d642-450e-916f-8d6f402ff943_samsung-galaxy-s24-ultra-5g-600x600.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\8889ef25-94c0-4046-80dd-0432882b0319_ban-phim-gaming-msi-forge-gk100-rgb-led-den.webp'))">
       <SourceType>Package</SourceType>
@@ -4805,6 +5021,24 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\9394e3fa-e210-41e2-8329-234e64b37099_ban-phim-gaming-msi-forge-gk100-rgb-led-den-2.webp'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\93ceb31e-53ee-42d5-bc14-6d6bac6906be_thong-so-iphone-17-pro-max.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>LapTopBD</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/LapTopBD</BasePath>
+      <RelativePath>uploads/productimages/93ceb31e-53ee-42d5-bc14-6d6bac6906be_thong-so-iphone-17-pro-max.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>e79x0etj5d</Fingerprint>
+      <Integrity>2jS5dkP/paoa59ejOdIm+idrbKN7KQpqqBdA2fJtz1M=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\93ceb31e-53ee-42d5-bc14-6d6bac6906be_thong-so-iphone-17-pro-max.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\9525a464-0307-402b-a0a2-301467ecbf8c_rogzephyrus_g16_3.png'))">
       <SourceType>Package</SourceType>
@@ -4986,6 +5220,24 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\a443370b-1e7f-4c29-a21c-d96261edc57b_pin_iphone_17_pro_c0ad874f14.webp'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\a69c101f-9e31-4289-81ab-89295c4a72ae_xiaomi-14-ultra-8gb-256gb_1__3.webp'))">
+      <SourceType>Package</SourceType>
+      <SourceId>LapTopBD</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/LapTopBD</BasePath>
+      <RelativePath>uploads/productimages/a69c101f-9e31-4289-81ab-89295c4a72ae_xiaomi-14-ultra-8gb-256gb_1__3.webp</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>1tk7wu68y1</Fingerprint>
+      <Integrity>6+K0QGFYL2KZvZa+D6Ui6Pp6PzrBAStvzFGJ+5OQqIc=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\a69c101f-9e31-4289-81ab-89295c4a72ae_xiaomi-14-ultra-8gb-256gb_1__3.webp'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\a6df8aa9-0098-4a6e-931d-b9acc836c481_dung-luong-pin-iphone-17-pro-max-2.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -5075,6 +5327,24 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\ac400c80-f2f9-43c9-808c-c1d86e1f200b_frame_379_-_2025-08-06t094841.386.webp'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\aebb5e5b-d20e-4655-a1b7-b4cc28e14183_dien-thoai-xiaomi-15-ultra.webp'))">
+      <SourceType>Package</SourceType>
+      <SourceId>LapTopBD</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/LapTopBD</BasePath>
+      <RelativePath>uploads/productimages/aebb5e5b-d20e-4655-a1b7-b4cc28e14183_dien-thoai-xiaomi-15-ultra.webp</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>65ec07iz47</Fingerprint>
+      <Integrity>ZtE6oYTvIznozSWHM5aH/PuTzwI9RvbGkLeCvOBQNJE=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\aebb5e5b-d20e-4655-a1b7-b4cc28e14183_dien-thoai-xiaomi-15-ultra.webp'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\afc8bdb6-450f-4522-82c0-a0be01b3ac3f_asus_g16_1.png'))">
       <SourceType>Package</SourceType>
@@ -5256,6 +5526,24 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\b64cb16d-7e6b-4475-9723-eac386cf77bc_2023_3_29_638156772400703328_A54 (1).webp'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\b69c6b3f-42dd-426d-abaa-7b2add2ea965_dung-luong-pin-iphone-17-pro-max-2.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>LapTopBD</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/LapTopBD</BasePath>
+      <RelativePath>uploads/productimages/b69c6b3f-42dd-426d-abaa-7b2add2ea965_dung-luong-pin-iphone-17-pro-max-2.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>zcw2u2qgi4</Fingerprint>
+      <Integrity>U9aV7t2TRWBmlNrS1EdaZ6gewDlYBo4XcQFBmLBcH2M=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\b69c6b3f-42dd-426d-abaa-7b2add2ea965_dung-luong-pin-iphone-17-pro-max-2.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\b75a9a50-3665-4088-a92c-bf89b5f02a95_tau-sac-o-to-ugreen-ed018-50875-2-usb-a-24w_3_.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -5346,6 +5634,24 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\c1492423-9670-4b51-9eed-12d37c39d4e1_frame_3_18__1.webp'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\c42b3d7c-c385-4ad6-912e-2681d7791edf_maxresdefault (1).jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>LapTopBD</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/LapTopBD</BasePath>
+      <RelativePath>uploads/productimages/c42b3d7c-c385-4ad6-912e-2681d7791edf_maxresdefault (1).jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>efhoppfuyu</Fingerprint>
+      <Integrity>xmQsCuhF9Ein4vfKEFMYk2RfqQmX2+mJtCHNGOopFaE=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\c42b3d7c-c385-4ad6-912e-2681d7791edf_maxresdefault (1).jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\c5e5c9b2-6e68-4220-b2a7-9f9c2105b891_baseus-super-si-25w-1-cong-kem-cap-type-c-to-type-c-1m-8.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -5382,6 +5688,42 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\c977bbf5-dee3-47c3-b979-46de237dd37c_asus_g16_1.png'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\ca36d818-15e3-4f28-894d-ed9e309c8ff8_iphone-16-1.webp'))">
+      <SourceType>Package</SourceType>
+      <SourceId>LapTopBD</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/LapTopBD</BasePath>
+      <RelativePath>uploads/productimages/ca36d818-15e3-4f28-894d-ed9e309c8ff8_iphone-16-1.webp</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>dawcvfx4rf</Fingerprint>
+      <Integrity>dVnUqNnZAu8zZ81ZA2VpcCcDdb/vH+fbpyXYdjlnkZQ=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\ca36d818-15e3-4f28-894d-ed9e309c8ff8_iphone-16-1.webp'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\ca55f599-4bf5-40de-8ae4-a3313c954bbb_2024_4_25_638496651458317388_Xiaomi 14 Ultra-3.webp'))">
+      <SourceType>Package</SourceType>
+      <SourceId>LapTopBD</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/LapTopBD</BasePath>
+      <RelativePath>uploads/productimages/ca55f599-4bf5-40de-8ae4-a3313c954bbb_2024_4_25_638496651458317388_Xiaomi 14 Ultra-3.webp</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>v3o1oxrjfx</Fingerprint>
+      <Integrity>S9wPPvWr/EcDz34wgsqtPIME82qj7eINWtJy5BW6i+8=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\ca55f599-4bf5-40de-8ae4-a3313c954bbb_2024_4_25_638496651458317388_Xiaomi 14 Ultra-3.webp'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\caf766f4-3145-4e28-bc1f-4d55d315afd0_ban-phim-co-aula-s2022-blue-switch-5_1.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -5399,6 +5741,24 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\caf766f4-3145-4e28-bc1f-4d55d315afd0_ban-phim-co-aula-s2022-blue-switch-5_1.webp'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\cb25a0a2-1510-4b4c-ada7-4f2b74cab64d_iphone-17-pro-max-512gb-4.webp'))">
+      <SourceType>Package</SourceType>
+      <SourceId>LapTopBD</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/LapTopBD</BasePath>
+      <RelativePath>uploads/productimages/cb25a0a2-1510-4b4c-ada7-4f2b74cab64d_iphone-17-pro-max-512gb-4.webp</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>5vvvy81obj</Fingerprint>
+      <Integrity>EUVPDvgKbvhTyoTt8/rUwuPxmUvWGpL4eqTzNILE4CY=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\cb25a0a2-1510-4b4c-ada7-4f2b74cab64d_iphone-17-pro-max-512gb-4.webp'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\d0390db4-bba6-4cf6-afb8-c4a99b0d31fd_ban-phim-gaming-asus-tuf-k1-2.webp'))">
       <SourceType>Package</SourceType>
@@ -5724,6 +6084,24 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\e8fc8a85-3cb1-47c8-a10e-8fe037ed3a1f_asus_g16_2.png'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\e91a6a55-5430-45ef-8541-6b47b1672e86_iphone_16_1_04ab3981a5.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>LapTopBD</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/LapTopBD</BasePath>
+      <RelativePath>uploads/productimages/e91a6a55-5430-45ef-8541-6b47b1672e86_iphone_16_1_04ab3981a5.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>s64jrz70fq</Fingerprint>
+      <Integrity>9HI2ZISxfpAF2jNmCLiItbhETswAo/os6NwOb+MdAyY=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\e91a6a55-5430-45ef-8541-6b47b1672e86_iphone_16_1_04ab3981a5.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\ed41edec-aafb-4540-920f-8fa6eef193fa_hp-envy-x360-2.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -5742,6 +6120,24 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\ed41edec-aafb-4540-920f-8fa6eef193fa_hp-envy-x360-2.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\ef26d883-c92d-4a37-9ac2-bff223ce0f6f_2024_1_17_638410793333120339_samsung-galaxy-s24-ultra-vang-1.webp'))">
+      <SourceType>Package</SourceType>
+      <SourceId>LapTopBD</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/LapTopBD</BasePath>
+      <RelativePath>uploads/productimages/ef26d883-c92d-4a37-9ac2-bff223ce0f6f_2024_1_17_638410793333120339_samsung-galaxy-s24-ultra-vang-1.webp</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>meogn03y5g</Fingerprint>
+      <Integrity>jgbwk2D8GPdW5SDtsiJSjPNMKI86kdLhbqD4m6twqLU=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\ef26d883-c92d-4a37-9ac2-bff223ce0f6f_2024_1_17_638410793333120339_samsung-galaxy-s24-ultra-vang-1.webp'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\ef582560-1761-4183-9d37-a5b705f1ed8b_hp-15s-fq2559tu_2.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -5759,6 +6155,24 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\ef582560-1761-4183-9d37-a5b705f1ed8b_hp-15s-fq2559tu_2.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\f452a6b0-0580-4a3d-b027-6268f8fd54f1_pin_iphone_17_pro_c0ad874f14.webp'))">
+      <SourceType>Package</SourceType>
+      <SourceId>LapTopBD</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/LapTopBD</BasePath>
+      <RelativePath>uploads/productimages/f452a6b0-0580-4a3d-b027-6268f8fd54f1_pin_iphone_17_pro_c0ad874f14.webp</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>t39385f0fy</Fingerprint>
+      <Integrity>J4NSBd2SQbHb61aTPwvbhzPQUydSv2zpePrrxmVFOA8=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\f452a6b0-0580-4a3d-b027-6268f8fd54f1_pin_iphone_17_pro_c0ad874f14.webp'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\f463087c-8b4b-42c9-8eb6-6c130bfe77b5_tai-nghe-rog-cetra-ii-core_24_.webp'))">
       <SourceType>Package</SourceType>

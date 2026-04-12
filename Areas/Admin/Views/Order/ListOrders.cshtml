@@ -36,7 +36,8 @@
                         <td>
                             <span class="badge 
                                 @(order.OrderStatus == "Pending" ? "bg-warning" : 
-                                  order.OrderStatus == "Shipped" ? "bg-info" : 
+                                  order.OrderStatus == "Paid" ? "bg-info" :
+                                  order.OrderStatus == "Shipping" ? "bg-info" : 
                                   order.OrderStatus == "Delivered" ? "bg-success" : 
                                   "bg-danger")">
                                 @order.OrderStatus
@@ -46,7 +47,8 @@
                         <td>
                             <select class="form-control update-status" data-order-id="@order.Id" data-current-status="@order.OrderStatus">
                                 <option value="Pending">Pending</option>
-                                <option value="Shipped">Shipped</option>
+                                <option value="Paid">Paid</option>
+                                <option value="Shipping">Shipping</option>
                                 <option value="Delivered">Delivered</option>
                                 <option value="Cancelled">Cancelled</option>
                             </select>

@@ -972,9 +972,11 @@ $(function () {
                     badge.removeClass("bg-warning bg-info bg-success bg-danger");
                     if (newStatus === "Pending") {
                         badge.addClass("bg-warning");
-                    } else if (newStatus === "Shipped") {
+                    } else if (newStatus === "Paid") {
                         badge.addClass("bg-info");
-                    } else if (newStatus === "Delivered") {
+                    } else if (newStatus === "Shipping") {
+                        badge.addClass("bg-info");
+                    }else if (newStatus === "Delivered") {
                         badge.addClass("bg-success");
                     } else if (newStatus === "Cancelled") {
                         badge.addClass("bg-danger");

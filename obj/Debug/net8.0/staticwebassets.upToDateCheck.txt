@@ -162,6 +162,8 @@ wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.min.j
 wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
 wwwroot\shop.html
 wwwroot\uploads\banner\3c6e3a79-1c11-4e5f-af2a-1df5b0b80b99_snapedit_1742834828592.jpeg
+wwwroot\uploads\banner\4faac7b9-e210-4d66-b65f-89a54e81b6fd_609fa7b53c435fb27393587d_dd5787fa0c9306323b7176ce91a4d31ff6041c4a2.jpg
+wwwroot\uploads\banner\b804befe-5744-430b-8564-07bfd0ef2e6b_macbookairm1giảmngay1triệuchohs-svgv3.jpg
 wwwroot\uploads\banner\be40ea2c-f4a3-408b-bc9b-31c18099cda5_snapedit_1742834806685.jpeg
 wwwroot\uploads\banner\f3803f78-d965-4210-8cce-2367d76f126c_snapedit_1742834773018.jpeg
 wwwroot\uploads\banners\adver_1.jpg
@@ -182,6 +184,7 @@ wwwroot\uploads\productimages\0bbbea28-6204-4fd8-af48-56d832d44ecf_lenovo_y7000_
 wwwroot\uploads\productimages\0c763a97-41a5-40a9-8670-f8354e7cc289_p76_buds_8_pro_ksp_4.5_standard.webp
 wwwroot\uploads\productimages\0c8acf31-d1ae-4bc1-bc69-d1ac1e3d768b_hp-15s-fq2559tu_3.jpg
 wwwroot\uploads\productimages\0ea2449c-acf6-4975-9052-af1a228dc296_ban-phim-co-aula-s2022-blue-switch-3.webp
+wwwroot\uploads\productimages\11e042e7-8821-4a13-bc09-2d157b63095b_xiaomi-15-ultra-white-thumbnew-600x600.jpg
 wwwroot\uploads\productimages\121d260f-9d09-4d88-95f1-851a10f82c44_lenovo-yoga-7-2.jpg
 wwwroot\uploads\productimages\12fd6597-f84e-4df3-a1d5-494bb53f9383_7_17.webp
 wwwroot\uploads\productimages\13405f0b-0690-424e-b9b5-23b9f0700733_hp-omen-16-xf0071-1.jpg
@@ -198,25 +201,31 @@ wwwroot\uploads\productimages\2181fe17-f937-4df5-a76f-37fc71465c8a_cu-sac-anker-
 wwwroot\uploads\productimages\21cd05df-46ff-4038-85df-b83258a5d7f9_tai-nghe-khong-day-asus-tuf-gaming-h3-6.png
 wwwroot\uploads\productimages\247466a1-14b9-4f0f-bc3d-6a2cd95a87d0_tai-nghe-chup-tai-havit-h2043u.webp
 wwwroot\uploads\productimages\2515af33-9f19-4ba4-905e-ff2afa8a74cd_645552630_1248513117418992_2793655263226700122_n.jpg
+wwwroot\uploads\productimages\2601cb06-dd3f-47f3-856d-cc01cc984e45_iphone-17-pro-max-5.webp
 wwwroot\uploads\productimages\26afdfc6-d9d6-4e48-a299-54d94c4681d7_hp-elitebook-x360-3.jpg
 wwwroot\uploads\productimages\27cea943-6c4e-439f-acc7-616474bab233_tai-nghe-khong-day-asus-tuf-gaming-h3.webp
 wwwroot\uploads\productimages\28579d9d-5c85-41bd-85c0-179372a7c609_hp-15s-fq2559tu_2.jpg
 wwwroot\uploads\productimages\29ecb574-a28c-4f0c-a1b1-f757c81e46de_cu-sac-anker-nano-b2679-1c-100w-kem-cap-type-c_2_.webp
 wwwroot\uploads\productimages\2a2cd518-77a4-4228-a708-f099b5b2f792_thinkpad-e14-1.jpg
+wwwroot\uploads\productimages\2c728997-599f-437d-9ec6-7df22f6fe90c_Samsung-Galaxy-S25-Ultra-Titan-Grey.webp
 wwwroot\uploads\productimages\2e35b339-3ec7-4ac7-bd9a-bc31f12ab27a_pkit.367.webp
 wwwroot\uploads\productimages\317974e3-3a62-481d-9b37-c74757b75c5e_ban-phim-gaming-msi-forge-gk100-rgb-led-den-5.webp
 wwwroot\uploads\productimages\3245cc41-b946-447e-8e02-33941dd3e943_dell_5625_2.jpg
 wwwroot\uploads\productimages\34d8a06b-c658-487f-82dc-9aec72623eac_ban-phim-co-co-day-aula-win68he-max-xam-trang-8.webp
 wwwroot\uploads\productimages\36d9179e-5b44-411e-9492-f267b97e6887_mb_m4_2.jpg
 wwwroot\uploads\productimages\36f8ce1a-54e0-41cf-ab9e-77b565a55e1e_frame_3_23__2.webp
+wwwroot\uploads\productimages\375677b7-1cf2-4245-be1f-f81806ee7b1c_16-nen-3292.png
 wwwroot\uploads\productimages\384b157a-986e-4b64-94bf-c06f5325f92a_hp-elitebook-x360-2.jpg
 wwwroot\uploads\productimages\3b0dd604-58d5-4f06-835a-03800e70d429_rogzephyrus_g16_1.png
 wwwroot\uploads\productimages\3b4020c7-e085-43aa-9ae3-0e4e2233fee6_mb_m4_3.jpg
 wwwroot\uploads\productimages\3b70bc27-aabc-49ef-af67-ea727bc9e67a_4_43.webp
+wwwroot\uploads\productimages\3d4a4866-8d56-479b-9e13-b6fd9d4a9411_galaxy-s25-ultra-note-638748064717735718.jpg
 wwwroot\uploads\productimages\3de698c1-5ea5-473b-b31c-d9f0f0a634f3_iphone_16_1_04ab3981a5.jpg
+wwwroot\uploads\productimages\3f1f9eae-5fd7-4053-88b8-c3b71cb133c9_2024_4_24_638495700434861779_xiaomi-14-ultra-den-3.webp
 wwwroot\uploads\productimages\4160bbac-8966-43d2-8596-87bac6f20ca6_dell_3515_3.jpg
 wwwroot\uploads\productimages\41c40303-11e2-49d6-a8d5-a6ef1220a9e1_ban-phim-co-rapoo-v700diy-75-xanh-la-den-2.webp
 wwwroot\uploads\productimages\42d2ca06-444a-4f31-9716-534c8520c5e1_lenovo-legion-5-15irx9_2.jpg
+wwwroot\uploads\productimages\43cb8254-044f-4f4a-bdb1-16718d64b952_samsung-galaxy-s25-ultra-blue-thumbai-600x600.jpg
 wwwroot\uploads\productimages\44ce69f8-6d04-4430-8296-a888128d59ae_ban-phim-co-rapoo-v510-led-rainbow-den-2.webp
 wwwroot\uploads\productimages\46092ad3-2de5-4a9d-a2f4-6e05daad31b6_dell_5430_3.jpg
 wwwroot\uploads\productimages\47e8124b-e6ed-49af-954e-3ee9f393e9a2_macpro_m2_1.jpg
@@ -229,6 +238,7 @@ wwwroot\uploads\productimages\4b544cae-e43d-4f49-9f83-bfc1cb52b96e_ban-phim-gami
 wwwroot\uploads\productimages\4b6876d1-dbb9-46c4-8032-23e4a5915cb2_tai-nghe-co-day-havit-h2002d_1_.webp
 wwwroot\uploads\productimages\4e35292e-db17-4329-b0e7-2f88936f5345_cu-sac-nhanh-baseus-palm-1c1a-20w-us-kem-cap_6_.webp
 wwwroot\uploads\productimages\4e520b06-f813-4cb7-90e9-11d8a095fd97_macpro_m2_3.jpg
+wwwroot\uploads\productimages\5193f9e4-1c8d-4e51-b2e6-0425141062ed_dien-thoai-xiaomi-15-ultra_14_.webp
 wwwroot\uploads\productimages\52e8c205-c5cf-486f-983a-715b555a6a04_vn-11134258-81ztc-mmpn5o534ft15b.png
 wwwroot\uploads\productimages\547739ff-52b5-4cbe-ac01-2b87d6f9a1e0_hp-15s-fq2559tu_1.jpg
 wwwroot\uploads\productimages\557f7d1a-1ade-49b4-9f52-bd3c323dbd22_mb_m4_1.jpg
@@ -252,9 +262,11 @@ wwwroot\uploads\productimages\7bcee833-847f-47c8-b4ff-89b3fd55dc97_cu-sac-nhanh-
 wwwroot\uploads\productimages\7c45658b-1c50-4d94-a1c8-5df0aaa80bdb_baseus-super-si-25w-1-cong-kem-cap-type-c-to-type-c-1m-2.webp
 wwwroot\uploads\productimages\7ed8a8c6-b095-4640-996b-800cf8fe90c4_ban-phim-co-rapoo-v510-led-rainbow-den-3.webp
 wwwroot\uploads\productimages\7fb01e9a-032d-41e1-b1c2-aa3470311b41_tai-nghe-co-day-havit-h2002d_4_.webp
+wwwroot\uploads\productimages\8058cea9-80ca-4f75-ae12-f8b050ebf0b9_50d34bf3-6074-4738-80dc-00d05032fe2d-jpeg.webp
 wwwroot\uploads\productimages\812e8acb-2f4c-4cbc-881b-c8928c1efe2a_hp-15s-fq2559tu_3.jpg
 wwwroot\uploads\productimages\8280c322-f834-4f05-ba32-0c95597ec888_cu-sac-trusmi-ch11-1a-1c-pd-20w-kem-cap-type-c-to-lightning-60w_6_.webp
 wwwroot\uploads\productimages\84bf2331-e662-406c-b25e-b16a840594b5_ban-phim-co-rapoo-v510-led-rainbow-den.webp
+wwwroot\uploads\productimages\8748f63f-d642-450e-916f-8d6f402ff943_samsung-galaxy-s24-ultra-5g-600x600.jpg
 wwwroot\uploads\productimages\8889ef25-94c0-4046-80dd-0432882b0319_ban-phim-gaming-msi-forge-gk100-rgb-led-den.webp
 wwwroot\uploads\productimages\8f70fb27-cf53-440d-89e5-2d7967a9c55d_rog_flow_z13_3.jpg
 wwwroot\uploads\productimages\8fb06655-8e2d-4f98-acbf-dac4fc5354c2_frame_3_25__2.webp
@@ -264,6 +276,7 @@ wwwroot\uploads\productimages\906c85c8-2082-4fe5-8352-8beb062b5c6d_dell_5430_1.j
 wwwroot\uploads\productimages\9082b934-6f45-44cf-8ccd-88f7e7e12af1_baseus-super-si-25w-1-cong-kem-cap-type-c-to-type-c-1m-7.webp
 wwwroot\uploads\productimages\90a3f298-f8b0-4f77-a239-ccbcd889cff6_dell_5430_2.jpg
 wwwroot\uploads\productimages\9394e3fa-e210-41e2-8329-234e64b37099_ban-phim-gaming-msi-forge-gk100-rgb-led-den-2.webp
+wwwroot\uploads\productimages\93ceb31e-53ee-42d5-bc14-6d6bac6906be_thong-so-iphone-17-pro-max.jpg
 wwwroot\uploads\productimages\9525a464-0307-402b-a0a2-301467ecbf8c_rogzephyrus_g16_3.png
 wwwroot\uploads\productimages\9581f1d0-a920-41e0-97f7-f06b0c64b99b_5_1__1.webp
 wwwroot\uploads\productimages\97b463ad-bbe9-41ea-9496-c43af4b43563_dell_5625_3.jpg
@@ -274,11 +287,13 @@ wwwroot\uploads\productimages\9b4cba3c-9eb6-4694-a17c-b22142e882cd_ban-phim-gami
 wwwroot\uploads\productimages\9c41ae0e-54a8-4205-805d-a5a6b01a2b37_frame_392.webp
 wwwroot\uploads\productimages\a2aadc18-512b-427b-8106-45261264d318_lenovo-legion-5-15irx9_1.jpg
 wwwroot\uploads\productimages\a443370b-1e7f-4c29-a21c-d96261edc57b_pin_iphone_17_pro_c0ad874f14.webp
+wwwroot\uploads\productimages\a69c101f-9e31-4289-81ab-89295c4a72ae_xiaomi-14-ultra-8gb-256gb_1__3.webp
 wwwroot\uploads\productimages\a6df8aa9-0098-4a6e-931d-b9acc836c481_dung-luong-pin-iphone-17-pro-max-2.jpg
 wwwroot\uploads\productimages\aa010640-d091-4541-88c3-b9555390542d_644789898_1505019520990853_4809499643401294434_n.jpg
 wwwroot\uploads\productimages\ab309db3-758d-47d9-9106-520fa8cf1a89_vn-11134207-81ztc-mlei2ri16ku9cc.webp
 wwwroot\uploads\productimages\abfd7221-cab6-4892-9d95-e4ab9b91a9d3_ban-phim-co-co-day-aula-win68he-max-xam-trang-2.webp
 wwwroot\uploads\productimages\ac400c80-f2f9-43c9-808c-c1d86e1f200b_frame_379_-_2025-08-06t094841.386.webp
+wwwroot\uploads\productimages\aebb5e5b-d20e-4655-a1b7-b4cc28e14183_dien-thoai-xiaomi-15-ultra.webp
 wwwroot\uploads\productimages\afc8bdb6-450f-4522-82c0-a0be01b3ac3f_asus_g16_1.png
 wwwroot\uploads\productimages\b09109f3-ca78-4d73-a45b-386cc1a41a5f_hp-15s-fq2559tu_2.jpg
 wwwroot\uploads\productimages\b185d476-7722-4dff-b07c-801da0a73605_02_5_.webp
@@ -289,14 +304,19 @@ wwwroot\uploads\productimages\b42cf296-0b85-4c43-a527-653434a910c0_tải xuống
 wwwroot\uploads\productimages\b4929d23-24b0-48de-b3a2-7a1bcf76ece8_ban-phim-gaming-asus-tuf-k1-3.webp
 wwwroot\uploads\productimages\b5bbe7a8-00b5-45a7-b824-b8b1abcd3314_hp-omen-16-xf0071-3.jpg
 wwwroot\uploads\productimages\b64cb16d-7e6b-4475-9723-eac386cf77bc_2023_3_29_638156772400703328_A54 (1).webp
+wwwroot\uploads\productimages\b69c6b3f-42dd-426d-abaa-7b2add2ea965_dung-luong-pin-iphone-17-pro-max-2.jpg
 wwwroot\uploads\productimages\b75a9a50-3665-4088-a92c-bf89b5f02a95_tau-sac-o-to-ugreen-ed018-50875-2-usb-a-24w_3_.webp
 wwwroot\uploads\productimages\ba78a47c-a971-4bcc-ad8a-132b0cc24726_hp-omen-16-xf0071-2.jpg
 wwwroot\uploads\productimages\bcd4620b-6815-4333-a3bd-87e28d24d8f7_macpro_m2_2.jpg
 wwwroot\uploads\productimages\bec1aba8-0014-40e7-b59a-b7350a4a8d36_iphone-17-pro-max-512gb-4.webp
 wwwroot\uploads\productimages\c1492423-9670-4b51-9eed-12d37c39d4e1_frame_3_18__1.webp
+wwwroot\uploads\productimages\c42b3d7c-c385-4ad6-912e-2681d7791edf_maxresdefault (1).jpg
 wwwroot\uploads\productimages\c5e5c9b2-6e68-4220-b2a7-9f9c2105b891_baseus-super-si-25w-1-cong-kem-cap-type-c-to-type-c-1m-8.webp
 wwwroot\uploads\productimages\c977bbf5-dee3-47c3-b979-46de237dd37c_asus_g16_1.png
+wwwroot\uploads\productimages\ca36d818-15e3-4f28-894d-ed9e309c8ff8_iphone-16-1.webp
+wwwroot\uploads\productimages\ca55f599-4bf5-40de-8ae4-a3313c954bbb_2024_4_25_638496651458317388_Xiaomi 14 Ultra-3.webp
 wwwroot\uploads\productimages\caf766f4-3145-4e28-bc1f-4d55d315afd0_ban-phim-co-aula-s2022-blue-switch-5_1.webp
+wwwroot\uploads\productimages\cb25a0a2-1510-4b4c-ada7-4f2b74cab64d_iphone-17-pro-max-512gb-4.webp
 wwwroot\uploads\productimages\d0390db4-bba6-4cf6-afb8-c4a99b0d31fd_ban-phim-gaming-asus-tuf-k1-2.webp
 wwwroot\uploads\productimages\d225ac30-f938-4815-8fba-15ef3fa50b2b_frame_379_1_7.webp
 wwwroot\uploads\productimages\d2cf9dd9-2464-4f4a-8c17-f0e46066c5d5_vn-11134207-81ztc-mlei2ri2fj0i4e@resize_w450_nl.webp
@@ -315,8 +335,11 @@ wwwroot\uploads\productimages\e3c2ad93-345d-43fc-9c5c-063d83b2ab6e_asus_g16_3.pn
 wwwroot\uploads\productimages\e5693fdc-dd94-466c-96b7-c05a9928075f_hp-envy-x360-3.jpg
 wwwroot\uploads\productimages\e7e768df-73ba-4827-8fa3-a51f60a82618_mac_pro_m2_1.jpg
 wwwroot\uploads\productimages\e8fc8a85-3cb1-47c8-a10e-8fe037ed3a1f_asus_g16_2.png
+wwwroot\uploads\productimages\e91a6a55-5430-45ef-8541-6b47b1672e86_iphone_16_1_04ab3981a5.jpg
 wwwroot\uploads\productimages\ed41edec-aafb-4540-920f-8fa6eef193fa_hp-envy-x360-2.jpg
+wwwroot\uploads\productimages\ef26d883-c92d-4a37-9ac2-bff223ce0f6f_2024_1_17_638410793333120339_samsung-galaxy-s24-ultra-vang-1.webp
 wwwroot\uploads\productimages\ef582560-1761-4183-9d37-a5b705f1ed8b_hp-15s-fq2559tu_2.jpg
+wwwroot\uploads\productimages\f452a6b0-0580-4a3d-b027-6268f8fd54f1_pin_iphone_17_pro_c0ad874f14.webp
 wwwroot\uploads\productimages\f463087c-8b4b-42c9-8eb6-6c130bfe77b5_tai-nghe-rog-cetra-ii-core_24_.webp
 wwwroot\uploads\productimages\f5eee4e7-9cc7-408d-adac-4768a95c556e_cu-sac-nhanh-baseus-palm-kem-cap-1c-20w-1m_5_.webp
 wwwroot\uploads\productimages\f85d7319-2ea0-4d3d-8d1b-5b6eda88d282_mac_pro_m2_3.jpg

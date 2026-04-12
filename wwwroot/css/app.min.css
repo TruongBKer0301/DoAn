@@ -4975,6 +4975,10 @@ b, strong {
     border-right-color: #299cdb
 }
 
+.badge-label.bg-info2:before {
+    border-right-color: #f7b84b
+}
+
 .badge-label.bg-warning:before {
     border-right-color: #f7b84b
 }
