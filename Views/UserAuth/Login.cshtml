@@ -30,7 +30,14 @@
                     <input type="password" id="Password" name="Password" placeholder="Nhập mật khẩu" />                  
                     <div id="message"></div>
                     <button type="submit" class="btn login">Đăng nhập</button>
+                    
                     <p><a href="javascript:void(0)">Quên mật khẩu?</a></p>
+
+                    <div class="extra-actions">
+                        <a asp-area="Admin" asp-controller="Auth" asp-action="Login" class="admin-login-link">
+                            Đăng nhập quản trị
+                        </a>
+                    </div>
                     <hr />
                 </form>
             </div>
@@ -50,3 +57,29 @@
         </div>
     </div>
 </div>
+
+<style>
+    .admin-login-link {
+        display: flex;
+        justify-content: center;
+        align-items: center; /* căn giữa dọc */
+        gap: 8px;
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #4a6cf7;
+        border: 2px solid #4a6cf7;
+        border-radius: 30px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        line-height: 1; /* fix lệch */
+    }
+
+
+        .admin-login-link:hover {
+            background-color: #4a6cf7;
+            color: #fff;
+        }
+
+</style>
