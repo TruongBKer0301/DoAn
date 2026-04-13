@@ -28,7 +28,7 @@
                 <form id="loginForm">
                     <input type="text" id="Email" name="Email" placeholder="Nhập email của bạn" />
                     <input type="password" id="Password" name="Password" placeholder="Nhập mật khẩu" />                  
-                    <div id="message"></div>
+                    <div id="login-message"></div>
                     <button type="submit" class="btn login">Đăng nhập</button>
                     
                     <p><a href="javascript:void(0)">Quên mật khẩu?</a></p>
@@ -42,13 +42,13 @@
                 </form>
             </div>
 
-            <div id="signup-form">
-                <form id="signupForm">
+            <div id="signup-form" >
+                <form id="signupForm" novalidate>
                     <input type="email" id="SignupEmail" name="Email" placeholder="Nhập email của bạn" />
                     <input type="text" id="Username" name="Username" placeholder="Nhập Họ Tên" />
                     <input type="tel" id="Phone" name="Phone" placeholder="Nhập số điện thoại" />
                     <input type="password" id="SignupPassword" name="Password" placeholder="Mật khẩu" />
-                    <div id="message"></div>
+                    <div id="signup-message"></div>
                     <button type="submit" class="btn signup">Tạo tài khoản</button>
                     <p>Nhấn <strong> tạo tài khoản</strong> có nghĩa là bạn đã đồng ý với <a href="javascript:void(0)">điều khoản và dịch vụ của chúng tôi</a>.</p>
                     <hr />

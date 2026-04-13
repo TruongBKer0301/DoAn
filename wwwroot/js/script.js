@@ -1,26 +1,24 @@
 ﻿
 //Hiển thị thông báo
-function showMessage(message, type) {
-    let messageDiv = $("#message");
+function showMessage(message, type, target) {
 
-    // Tạo HTML cho alert
+    // Nếu không truyền target → mặc định dùng #message (code cũ)
+    if (!target) {
+        target = "#message";
+    }
+
+    let messageDiv = $(target);
+
     let alertHtml = `
-        <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+        <div class="alert alert-${type}">
             ${message}
         </div>
     `;
 
-    // Hiển thị thông báo
     messageDiv.html(alertHtml).fadeIn();
 
-    // Gọi hàm ẩn sau 2 giây
-    hideMessage();
-}
-
-// Hàm ẩn thông báo sau 2 giây
-function hideMessage() {
     setTimeout(function () {
-        $("#message").fadeOut();
+        messageDiv.fadeOut();
     }, 2000);
 }
 
@@ -1007,8 +1005,8 @@ $(function () {
         const passworduser = $("#Password").val()?.trim() || "";
         const rememberMe = $("#RememberMe")?.is(":checked") || false; // Thêm RememberMe nếu có
 
-        if (!emailuser) return showMessage("Vui lòng nhập email!", "danger");
-        if (!passworduser) return showMessage("Vui lòng nhập mật khẩu!", "danger");
+        if (!emailuser) return showMessage("Vui lòng nhập email!", "danger", '#login-message');
+        if (!passworduser) return showMessage("Vui lòng nhập mật khẩu!", "danger", '#login-message');
 
         $.ajax({
             url: "/UserAuth/Login" + (window.location.search || ""),
@@ -1018,17 +1016,17 @@ $(function () {
             success: function (response) {
                 console.log("Response:", response);
                 if (response.success) {
-                    showMessage(response.message, "success");
+                    showMessage(response.message, "success", '#login-message');
                     setTimeout(function () {
                         window.location.href = response.redirectUrl || "/";
                     }, 2000);
                 } else {
-                    showMessage(response.message, "danger");
+                    showMessage(response.message, "danger", '#login-message');
                 }
             },
             error: function (xhr) {
                 console.error("AJAX Error:", xhr.responseText);
-                showMessage("Đã xảy ra lỗi! Vui lòng thử lại.", "danger");
+                showMessage("Đã xảy ra lỗi! Vui lòng thử lại.", "danger", '#login-message');
             }
         });
     });
@@ -1041,10 +1039,10 @@ $(function () {
         const username = $('#Username').val()?.trim() || '';
         const phone = $('#Phone').val()?.trim() || '';
         const password = $('#SignupPassword').val()?.trim() || '';
-        if (!email) return showMessage('Vui lòng nhập email!', 'danger');
-        if (!username) return showMessage('Vui lòng nhập họ tên!', 'danger');
-        if (!phone) return showMessage('Vui lòng nhập số điện thoại!', 'danger');
-        if (!password) return showMessage('Vui lòng nhập mật khẩu!', 'danger');
+        if (!email) return showMessage('Vui lòng nhập email!', 'danger', '#signup-message');
+        if (!username) return showMessage('Vui lòng nhập họ tên!', 'danger', '#signup-message');
+        if (!phone) return showMessage('Vui lòng nhập số điện thoại!', 'danger', '#signup-message');
+        if (!password) return showMessage('Vui lòng nhập mật khẩu!', 'danger', '#signup-message');
 
         $.ajax({
             url: '/UserAuth/Register',
@@ -1058,17 +1056,17 @@ $(function () {
             }),
             success: function (response) {
                 if (response.success) {
-                    showMessage(response.message, 'success');
+                    showMessage(response.message, 'success', '#signup-message');
                     setTimeout(function () {
                         window.location.href = response.redirectUrl || '/';
                     }, 2000);
                 } else {
-                    showMessage(response.message, 'danger');
+                    showMessage(response.message, 'danger', '#signup-message');
                 }
             },
             error: function (xhr) {
                 console.error('AJAX Error:', xhr.responseText);
-                showMessage('Đã xảy ra lỗi! Vui lòng thử lại.', 'danger');
+                showMessage('Đã xảy ra lỗi! Vui lòng thử lại.', 'danger', '#signup-message');
             }
         });
     });
