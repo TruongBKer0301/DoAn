@@ -171,25 +171,34 @@
                 data: JSON.stringify(data),
                 success: function (response) {
                     console.log("Phản hồi từ server:", response);
-                    if (response.success) {
-                            $('#successPopup').fadeIn();
+                        if (response.success) {
 
-                        setTimeout(function () {
-                            window.location.href = response.redirectUrl || '/';
-                        }, 2000);
-                    } else {
-                        showMessage(response.message, 'danger');
+                            // Nếu là COD thì hiện popup
+                            if (data.PaymentMethod === "COD") {
+                                $('#successPopup').fadeIn();
 
-                            //Xóa lỗi cũ
-                            $('.text-danger.product-error').text('');
-
-                            // Hiển thị lỗi từng sản phẩm
-                            if (response.errors) {
-                                response.errors.forEach(err => {
-                                    $(`#error-${err.productId}`).text(err.message);
-                                });
+                                setTimeout(function () {
+                                    window.location.href = response.redirectUrl || '/';
+                                }, 2000);
                             }
-                    }
+                            // Nếu là VNPay thì redirect luôn
+                            else if (data.PaymentMethod === "VNPAY") {
+                                window.location.href = response.redirectUrl || '/';
+                            }
+                        }
+                        else {
+                            showMessage(response.message, 'danger');
+
+                                //Xóa lỗi cũ
+                                $('.text-danger.product-error').text('');
+
+                                // Hiển thị lỗi từng sản phẩm
+                                if (response.errors) {
+                                    response.errors.forEach(err => {
+                                        $(`#error-${err.productId}`).text(err.message);
+                                    });
+                                }
+                        }
                 },
                 error: function (xhr) {
                     console.error('AJAX Error:', xhr.responseText);
