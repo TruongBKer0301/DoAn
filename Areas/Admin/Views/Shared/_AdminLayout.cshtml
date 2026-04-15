@@ -165,27 +165,31 @@
                             </a>
                         </li>
 
-
+                        @if (User.IsInRole("Admin"))
+                        {
                         <li class="menu-title"><span>AUTHENCATION</span></li>
 
-                        <!-- Account -->
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="#group2" data-bs-toggle="collapse">
-                                <i class="ri-account-circle-line"></i>
-                                <span>Tài khoản</span>
-                            </a>
-                            <div class="collapse menu-dropdown" id="group2">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("ListAdmins", "Admin")" class="nav-link">Tài khoản Admin</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("ListUsers", "Admin")" class="nav-link">Tài khoản User</a>
-                                    </li>
-                                    
-                                </ul>
-                            </div>
-                        </li>
+
+
+                        
+                            <!-- Account -->
+                            <li class="nav-item">
+                                <a class="nav-link menu-link" href="#group2" data-bs-toggle="collapse">
+                                    <i class="ri-account-circle-line"></i>
+                                    <span>Tài khoản</span>
+                                </a>
+                                <div class="collapse menu-dropdown" id="group2">
+                                    <ul class="nav nav-sm flex-column">
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("ListAdmins", "Admin")" class="nav-link">Tài khoản Admin</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("ListUsers", "Admin")" class="nav-link">Tài khoản User</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        }
 
                         <li class="menu-title"><span>PAGES</span></li>
 

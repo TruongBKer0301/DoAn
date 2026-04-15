@@ -1,3 +1,4 @@
+wwwroot\avatar\24bd59e4-27ee-419c-8ca5-cea7fa9e54ef.jpg
 wwwroot\avatar\66eb1fd7-c52e-4f13-9002-9958d6900e68.png
 wwwroot\avatar\7a9688bf-2742-437e-90ab-aba8de573ef1.jpg
 wwwroot\avatar\d7f5d48f-7a38-4295-96c4-05c05748dc98.jpg
