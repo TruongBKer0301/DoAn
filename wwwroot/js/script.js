@@ -74,6 +74,7 @@ $(function () {
             success: function (response) {
                 console.log("Phản hồi từ server:", response);
                 if (response.success) {
+                    
                     showMessage(response.message, "success");
                     setTimeout(function () {
                         window.location.href = "/Admin/Dashboard";
