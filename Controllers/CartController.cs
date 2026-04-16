@@ -691,9 +691,12 @@ namespace LapTopBD.Controllers
                 return Json(new { success = false, message = "Đơn hàng không thể hủy vì không ở trạng thái Pending!" });
             }
 
+            var product = await _context.Product.FindAsync(order.ProductId);
+            product.quantity += order.Quantity;
             // Cập nhật trạng thái đơn hàng thành "Cancelled"
             order.OrderStatus = "Cancelled";
             _context.Order.Update(order);
+            _context.Product.Update(product);
 
             try
             {
