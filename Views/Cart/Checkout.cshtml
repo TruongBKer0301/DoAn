@@ -46,19 +46,19 @@
         <div class="alert alert-success">@TempData["Success"]</div>
     }
 
-    <div class="row">
+    <div class="row checkout-row">
         <!-- Thông tin giao hàng -->
         <div class="col-lg-6">
             <h3 class="mb-4">Thông tin giao hàng</h3>
             <form id="checkoutForm">
                 <div class="custom-form-group">
                     <label>Họ tên</label>
-                    <input type="text" class="custom-input" name="Name" value="@Model.Name" required />
+                    <input type="text" class="custom-input" name="Name" value="@Model.Name" required maxlength="100" autocomplete="name" />
                     <small class="custom-text-muted">Kiểm tra và chỉnh sửa nếu cần.</small>
                 </div>
                 <div class="custom-form-group">
                     <label>Số điện thoại</label>
-                    <input type="text" class="custom-input" name="ContactNo" value="@Model.ContactNo" required />
+                    <input type="text" class="custom-input" name="ContactNo" value="@Model.ContactNo" required maxlength="20" autocomplete="tel" />
                     <small class="custom-text-muted">Kiểm tra và chỉnh sửa nếu cần.</small>
                 </div>
                 <div class="custom-form-group">
@@ -81,6 +81,7 @@
                 <div class="custom-form-group">
                     <label>Phương thức thanh toán</label>
                     <select class="custom-select" name="PaymentMethod" required>
+                        <option value="">-- Chọn phương thức thanh toán --</option>
                         <option value="COD">Thanh toán khi nhận hàng </option>
                         <option value="VNPAY">Thanh toán VNPay</option>
                     </select>
@@ -130,16 +131,37 @@
     </div>
 </div>
 
+<style>
+    .checkout-row {
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    @@media (max-width: 991.98px) {
+        .checkout-row {
+            width: 100%;
+        }
+    }
+</style>
+
 @section Scripts {
     <script>
         function submitCheckout() {
             var formData = $('#checkoutForm').serializeArray();
             var data = {};
             formData.forEach(item => {
-                data[item.name] = item.value;
+                data[item.name] = (item.value || '').trim();
             });
 
             // Kiểm tra các trường bắt buộc trước khi gửi
+            if (!data.Name || data.Name.trim() === '') {
+                showMessage('Vui lòng nhập họ tên!', 'danger');
+                return;
+            }
+            if (!data.ContactNo || data.ContactNo.trim() === '') {
+                showMessage('Vui lòng nhập số điện thoại!', 'danger');
+                return;
+            }
             if (!data.City || data.City.trim() === '') {
                 showMessage('Vui lòng nhập Tỉnh!', 'danger');
                 return;

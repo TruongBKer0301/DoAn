@@ -1,25 +1,43 @@
 ﻿
 //Hiển thị thông báo
 function showMessage(message, type, target) {
-
-    // Nếu không truyền target → mặc định dùng #message (code cũ)
+    // Nếu không truyền target -> mặc định dùng #message (code cũ)
     if (!target) {
         target = "#message";
     }
 
     let messageDiv = $(target);
 
-    let alertHtml = `
-        <div class="alert alert-${type}">
+    // Nếu target không tồn tại trên trang thì dùng popup góc phải
+    if (!messageDiv.length) {
+        if (!$('#global-alert-container').length) {
+            $('body').append('<div id="global-alert-container" style="position:fixed;top:20px;right:20px;z-index:2000;max-width:420px;width:calc(100% - 40px);"></div>');
+        }
+        target = '#global-alert-container';
+        messageDiv = $(target);
+    }
+
+    const alertItem = $(`
+        <div class="alert alert-${type} alert-dismissible fade show mb-2" role="alert" style="box-shadow:0 10px 28px rgba(0,0,0,.18);">
             ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-    `;
+    `);
 
-    messageDiv.html(alertHtml).fadeIn();
+    if (target === '#global-alert-container') {
+        messageDiv.prepend(alertItem).fadeIn();
+        setTimeout(function () {
+            alertItem.fadeOut(250, function () {
+                $(this).remove();
+            });
+        }, 2600);
+        return;
+    }
 
+    messageDiv.html(alertItem).fadeIn();
     setTimeout(function () {
         messageDiv.fadeOut();
-    }, 2000);
+    }, 2600);
 }
 
 function getInputPrimaryFile(inputOrSelector) {
@@ -998,6 +1016,186 @@ $(function () {
 // SỰ KIỆN USER
 // =========================================================================
 $(function () {
+    let verifyCooldownTimer = null;
+    let forgotCooldownTimer = null;
+    const commonEmailTypos = {
+        'gmal.com': 'gmail.com',
+        'gmial.com': 'gmail.com',
+        'gmail.con': 'gmail.com',
+        'gmail.co': 'gmail.com',
+        'hotmail.co': 'hotmail.com',
+        'hotnail.com': 'hotmail.com',
+        'yaho.com': 'yahoo.com',
+        'yahooo.com': 'yahoo.com',
+        'outlok.com': 'outlook.com',
+        'outllok.com': 'outlook.com'
+    };
+
+    function validateEmailWithSuggestion(email) {
+        const value = (email || '').trim().toLowerCase();
+        const simpleRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!value || !simpleRegex.test(value)) {
+            return { valid: false, message: 'Email không hợp lệ.' };
+        }
+
+        const parts = value.split('@');
+        if (parts.length !== 2) {
+            return { valid: false, message: 'Email không hợp lệ.' };
+        }
+
+        const local = parts[0];
+        const domain = parts[1];
+        if (commonEmailTypos[domain]) {
+            return {
+                valid: false,
+                message: `Bạn có nhập sai email không? Gợi ý: ${local}@${commonEmailTypos[domain]}`
+            };
+        }
+
+        return { valid: true, message: '' };
+    }
+
+    function isStrongPassword(password) {
+        const value = password || '';
+        return value.length >= 8 && /[A-Z]/.test(value) && /[a-z]/.test(value) && /\d/.test(value);
+    }
+
+    function updateResetPasswordChecklist(password) {
+        const value = password || '';
+        const checks = [
+            { selector: '#rule-length', valid: value.length >= 8 },
+            { selector: '#rule-upper', valid: /[A-Z]/.test(value) },
+            { selector: '#rule-lower', valid: /[a-z]/.test(value) },
+            { selector: '#rule-digit', valid: /\d/.test(value) }
+        ];
+
+        checks.forEach(function (check) {
+            const $item = $(check.selector);
+            if ($item.length === 0) {
+                return;
+            }
+
+            $item.toggleClass('valid', check.valid);
+            $item.toggleClass('invalid', !check.valid);
+        });
+    }
+
+    function updateSignupPasswordChecklist(password) {
+        const value = password || '';
+        const checks = [
+            { selector: '#signup-rule-length', valid: value.length >= 8 },
+            { selector: '#signup-rule-upper', valid: /[A-Z]/.test(value) },
+            { selector: '#signup-rule-lower', valid: /[a-z]/.test(value) },
+            { selector: '#signup-rule-digit', valid: /\d/.test(value) }
+        ];
+
+        checks.forEach(function (check) {
+            const $item = $(check.selector);
+            if ($item.length === 0) {
+                return;
+            }
+
+            $item.toggleClass('valid', check.valid);
+            $item.toggleClass('invalid', !check.valid);
+        });
+    }
+
+    function setOtpHint(selector, message) {
+        const $hint = $(selector);
+        if ($hint.length > 0) {
+            $hint.text(message || '');
+        }
+    }
+
+    function startOtpCooldown($button, seconds, idleText, timerRefName, hintSelector, doneHintText) {
+        if (!seconds || seconds <= 0) {
+            return;
+        }
+
+        const hasButton = !!($button && $button.length > 0);
+
+        if (timerRefName === 'verify' && verifyCooldownTimer) {
+            clearInterval(verifyCooldownTimer);
+            verifyCooldownTimer = null;
+        }
+
+        if (timerRefName === 'forgot' && forgotCooldownTimer) {
+            clearInterval(forgotCooldownTimer);
+            forgotCooldownTimer = null;
+        }
+
+        let remaining = seconds;
+        if (hasButton) {
+            $button.prop('disabled', true).text(`Gửi lại sau ${remaining}s`);
+        }
+        if (hintSelector) {
+            setOtpHint(hintSelector, `Bạn có thể yêu cầu gửi lại OTP sau ${remaining}s.`);
+        }
+
+        const timer = setInterval(function () {
+            remaining -= 1;
+            if (remaining <= 0) {
+                clearInterval(timer);
+                if (hasButton) {
+                    $button.prop('disabled', false).text(idleText);
+                }
+                if (hintSelector) {
+                    setOtpHint(hintSelector, doneHintText || 'Bạn có thể yêu cầu gửi lại OTP ngay bây giờ.');
+                }
+                if (timerRefName === 'verify') {
+                    verifyCooldownTimer = null;
+                } else if (timerRefName === 'forgot') {
+                    forgotCooldownTimer = null;
+                }
+                return;
+            }
+
+            if (hasButton) {
+                $button.text(`Gửi lại sau ${remaining}s`);
+            }
+            if (hintSelector) {
+                setOtpHint(hintSelector, `Bạn có thể yêu cầu gửi lại OTP sau ${remaining}s.`);
+            }
+        }, 1000);
+
+        if (timerRefName === 'verify') {
+            verifyCooldownTimer = timer;
+        } else if (timerRefName === 'forgot') {
+            forgotCooldownTimer = timer;
+        }
+    }
+
+    function openVerifyEmailForm(email) {
+        $("#VerifyEmail").val(email || "");
+        $("#VerifyOtp").val("");
+        setOtpHint('#verify-otp-hint', 'OTP có hiệu lực trong 1 phút.');
+        $("#login-form, #signup-form, #forgot-password-form").hide();
+        $("#verify-email-form").show();
+    }
+
+    function openForgotPasswordForm() {
+        setOtpHint('#forgot-otp-hint', 'OTP sẽ được gửi trực tiếp về email đang nhập ở form đăng nhập.');
+        setOtpHint('#reset-otp-hint', 'OTP đặt lại mật khẩu có hiệu lực trong 1 phút.');
+        const loginEmail = $('#Email').val()?.trim() || '';
+        $('#ResetEmail').val(loginEmail);
+        $("#login-form, #signup-form, #verify-email-form").hide();
+        $("#forgot-password-form").show();
+        $("#resetPasswordForm").hide();
+        $("#reset-password-step").hide();
+        $("#forgotPasswordRequestForm").show();
+    }
+
+    function resolveForgotEmail() {
+        const hiddenEmail = $('#ResetEmail').val()?.trim() || '';
+        const loginEmail = $('#Email').val()?.trim() || '';
+        const email = hiddenEmail || loginEmail;
+        if (email) {
+            $('#ResetEmail').val(email);
+        }
+        return email;
+    }
+
     // Đăng nhập User
     $(document).on("submit", "#loginForm", function (e) {
         e.preventDefault();
@@ -1006,6 +1204,8 @@ $(function () {
         const rememberMe = $("#RememberMe")?.is(":checked") || false; // Thêm RememberMe nếu có
 
         if (!emailuser) return showMessage("Vui lòng nhập email!", "danger", '#login-message');
+        const loginEmailCheck = validateEmailWithSuggestion(emailuser);
+        if (!loginEmailCheck.valid) return showMessage(loginEmailCheck.message, "danger", '#login-message');
         if (!passworduser) return showMessage("Vui lòng nhập mật khẩu!", "danger", '#login-message');
 
         $.ajax({
@@ -1020,6 +1220,9 @@ $(function () {
                     setTimeout(function () {
                         window.location.href = response.redirectUrl || "/";
                     }, 2000);
+                } else if (response.requiresVerification && response.email) {
+                    showMessage(response.message, "warning", '#login-message');
+                    openVerifyEmailForm(response.email);
                 } else {
                     showMessage(response.message, "danger", '#login-message');
                 }
@@ -1039,10 +1242,16 @@ $(function () {
         const username = $('#Username').val()?.trim() || '';
         const phone = $('#Phone').val()?.trim() || '';
         const password = $('#SignupPassword').val()?.trim() || '';
+        const confirmPassword = $('#SignupConfirmPassword').val()?.trim() || '';
         if (!email) return showMessage('Vui lòng nhập email!', 'danger', '#signup-message');
+        const signupEmailCheck = validateEmailWithSuggestion(email);
+        if (!signupEmailCheck.valid) return showMessage(signupEmailCheck.message, 'danger', '#signup-message');
         if (!username) return showMessage('Vui lòng nhập họ tên!', 'danger', '#signup-message');
         if (!phone) return showMessage('Vui lòng nhập số điện thoại!', 'danger', '#signup-message');
         if (!password) return showMessage('Vui lòng nhập mật khẩu!', 'danger', '#signup-message');
+        if (!isStrongPassword(password)) return showMessage('Mật khẩu phải có ít nhất 8 ký tự, gồm chữ hoa, chữ thường và số.', 'danger', '#signup-message');
+        if (!confirmPassword) return showMessage('Vui lòng nhập xác nhận mật khẩu!', 'danger', '#signup-message');
+        if (password !== confirmPassword) return showMessage('Mật khẩu xác nhận không khớp!', 'danger', '#signup-message');
 
         $.ajax({
             url: '/UserAuth/Register',
@@ -1052,14 +1261,23 @@ $(function () {
                 Email: email,
                 Username: username,
                 Phone: phone,
-                Password: password
+                Password: password,
+                Password2: confirmPassword
             }),
             success: function (response) {
                 if (response.success) {
                     showMessage(response.message, 'success', '#signup-message');
-                    setTimeout(function () {
-                        window.location.href = response.redirectUrl || '/';
-                    }, 2000);
+                    if (response.requiresVerification && response.email) {
+                        openVerifyEmailForm(response.email);
+                        startOtpCooldown(
+                            $('#resend-verify-otp-btn'),
+                            response.cooldownSeconds || 60,
+                            'Gửi lại OTP',
+                            'verify',
+                            '#verify-otp-hint',
+                            'OTP có hiệu lực trong 1 phút. Bạn có thể bấm gửi lại nếu chưa nhận được email.'
+                        );
+                    }
                 } else {
                     showMessage(response.message, 'danger', '#signup-message');
                 }
@@ -1069,6 +1287,297 @@ $(function () {
                 showMessage('Đã xảy ra lỗi! Vui lòng thử lại.', 'danger', '#signup-message');
             }
         });
+    });
+
+    $(document).on('click', '.toggle-password-btn', function () {
+        const selector = $(this).data('target');
+        const $target = $(selector);
+        if ($target.length === 0) {
+            return;
+        }
+
+        const isPassword = $target.attr('type') === 'password';
+        const $icon = $(this).find('i');
+        $target.attr('type', isPassword ? 'text' : 'password');
+        $(this).toggleClass('active', isPassword);
+        $(this).attr('title', isPassword ? 'Ẩn mật khẩu' : 'Hiện mật khẩu');
+        $(this).attr('aria-label', isPassword ? 'Ẩn mật khẩu' : 'Hiện mật khẩu');
+
+        if ($icon.length > 0) {
+            if (isPassword) {
+                $icon.removeClass('ri-eye-line').addClass('ri-eye-off-line');
+            } else {
+                $icon.removeClass('ri-eye-off-line').addClass('ri-eye-line');
+            }
+        }
+    });
+
+    $(document).on('submit', '#verifyEmailForm', function (e) {
+        e.preventDefault();
+
+        const email = $('#VerifyEmail').val()?.trim() || '';
+        const otp = $('#VerifyOtp').val()?.trim() || '';
+
+        if (!email) return showMessage('Thiếu email xác thực.', 'danger', '#verify-message');
+        if (!otp || otp.length !== 6) return showMessage('Vui lòng nhập OTP 6 số.', 'danger', '#verify-message');
+
+        $.ajax({
+            url: '/UserAuth/VerifyEmailOtp',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ Email: email, Otp: otp }),
+            success: function (response) {
+                if (response.success) {
+                    showMessage(response.message, 'success', '#verify-message');
+                    setTimeout(function () {
+                        window.location.href = response.redirectUrl || '/';
+                    }, 1500);
+                } else {
+                    showMessage(response.message, 'danger', '#verify-message');
+                }
+            },
+            error: function () {
+                showMessage('Đã xảy ra lỗi! Vui lòng thử lại.', 'danger', '#verify-message');
+            }
+        });
+    });
+
+    $(document).on('click', '#resend-verify-otp-btn', function () {
+        const email = $('#VerifyEmail').val()?.trim() || '';
+        if (!email) return showMessage('Thiếu email để gửi OTP.', 'danger', '#verify-message');
+
+        $.ajax({
+            url: '/UserAuth/ResendVerificationOtp',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ Email: email }),
+            success: function (response) {
+                showMessage(response.message, response.success ? 'success' : 'danger', '#verify-message');
+                if (response.cooldownSeconds) {
+                    startOtpCooldown(
+                        $('#resend-verify-otp-btn'),
+                        response.cooldownSeconds,
+                        'Gửi lại OTP',
+                        'verify',
+                        '#verify-otp-hint',
+                        'OTP có hiệu lực trong 1 phút. Bạn có thể bấm gửi lại nếu chưa nhận được email.'
+                    );
+                }
+            },
+            error: function () {
+                showMessage('Không thể gửi lại OTP.', 'danger', '#verify-message');
+            }
+        });
+    });
+
+    function sendForgotPasswordOtp() {
+        const email = resolveForgotEmail();
+        if (!email) {
+            showMessage('Vui lòng nhập email ở form đăng nhập trước.', 'danger', '#forgot-message');
+            return;
+        }
+
+        const forgotEmailCheck = validateEmailWithSuggestion(email);
+        if (!forgotEmailCheck.valid) {
+            showMessage(forgotEmailCheck.message, 'danger', '#forgot-message');
+            return;
+        }
+
+        showMessage('Đang gửi OTP về email của bạn...', 'info', '#forgot-message');
+
+        $.ajax({
+            url: '/UserAuth/ForgotPasswordRequest',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ Email: email }),
+            success: function (response) {
+                let forgotMessage = response.message || '';
+                if (response.success && response.otpPreview) {
+                    forgotMessage += ` OTP test (dev): ${response.otpPreview}`;
+                }
+                showMessage(forgotMessage, response.success ? 'success' : 'danger', '#forgot-message');
+                if (response.cooldownSeconds) {
+                    startOtpCooldown(
+                        $('#resend-forgot-otp-btn'),
+                        response.cooldownSeconds,
+                        'Gửi lại OTP',
+                        'forgot',
+                        '#forgot-otp-hint',
+                        'OTP có hiệu lực trong 1 phút. Nếu chưa nhận được email, bạn có thể bấm "Gửi lại OTP".'
+                    );
+                }
+                if (response.success) {
+                    $('#ResetEmail').val(email);
+                    $('#ResetOtp').val('');
+                    $('#resetPasswordForm').hide();
+                    $('#reset-password-step').hide();
+                    $('#ResetOtp').trigger('focus');
+                }
+            },
+            error: function () {
+                showMessage('Không thể gửi OTP đặt lại mật khẩu.', 'danger', '#forgot-message');
+            }
+        });
+    }
+
+    $(document).on('click', '#forgot-password-link', function () {
+        openForgotPasswordForm();
+        sendForgotPasswordOtp();
+    });
+
+    $(document).on('click', '#resend-forgot-otp-btn', function () {
+        sendForgotPasswordOtp();
+    });
+
+    $(document).on('keydown', '#ResetOtp', function (e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            $('#verify-reset-otp-btn').trigger('click');
+        }
+    });
+
+    $(document).on('click', '#verify-reset-otp-btn', function () {
+        const $verifyButton = $('#verify-reset-otp-btn');
+        const email = resolveForgotEmail();
+        const otp = $('#ResetOtp').val()?.trim() || '';
+
+        if (!email) return showMessage('Thiếu email đặt lại mật khẩu.', 'danger', '#forgot-message');
+        if (!otp || otp.length !== 6) return showMessage('Vui lòng nhập OTP 6 số.', 'danger', '#forgot-message');
+
+        $verifyButton.prop('disabled', true).text('Đang xác nhận...');
+
+        $.ajax({
+            url: '/UserAuth/VerifyForgotPasswordOtp',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ Email: email, Otp: otp }),
+            success: function (response) {
+                if (response.success) {
+                    showMessage(response.message, 'success', '#forgot-message');
+                    const redirectUrl = response.redirectUrl || `/UserAuth/ResetPassword?email=${encodeURIComponent(email)}&otp=${encodeURIComponent(otp)}`;
+                    setTimeout(function () {
+                        window.location.href = redirectUrl;
+                    }, 120);
+                } else {
+                    showMessage(response.message, 'danger', '#forgot-message');
+                }
+            },
+            error: function () {
+                showMessage('Không thể xác nhận OTP.', 'danger', '#forgot-message');
+            },
+            complete: function () {
+                $verifyButton.prop('disabled', false).text('Xác nhận OTP');
+            }
+        });
+    });
+
+    $(document).on('submit', '#resetPasswordPageForm', function (e) {
+        e.preventDefault();
+
+        const email = $('#ResetPageEmail').val()?.trim() || '';
+        const otp = $('#ResetPageOtp').val()?.trim() || '';
+        const newPassword = $('#ResetPageNewPassword').val()?.trim() || '';
+        const confirmPassword = $('#ResetPageConfirmPassword').val()?.trim() || '';
+
+        if (!email) return showMessage('Thiếu email đặt lại mật khẩu.', 'danger', '#reset-page-message');
+        const resetPageEmailCheck = validateEmailWithSuggestion(email);
+        if (!resetPageEmailCheck.valid) return showMessage(resetPageEmailCheck.message, 'danger', '#reset-page-message');
+        if (!otp || otp.length !== 6) return showMessage('OTP không hợp lệ.', 'danger', '#reset-page-message');
+        if (!isStrongPassword(newPassword)) return showMessage('Mật khẩu mới phải có ít nhất 8 ký tự, gồm chữ hoa, chữ thường và số.', 'danger', '#reset-page-message');
+        if (newPassword !== confirmPassword) return showMessage('Mật khẩu xác nhận không khớp.', 'danger', '#reset-page-message');
+
+        $.ajax({
+            url: '/UserAuth/ResetPasswordWithOtp',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                Email: email,
+                Otp: otp,
+                NewPassword: newPassword,
+                ConfirmPassword: confirmPassword
+            }),
+            success: function (response) {
+                if (response.success) {
+                    showMessage(response.message, 'success', '#reset-page-message');
+                    setTimeout(function () {
+                        window.location.href = '/UserAuth/Login';
+                    }, 1200);
+                } else {
+                    showMessage(response.message, 'danger', '#reset-page-message');
+                }
+            },
+            error: function () {
+                showMessage('Không thể đặt lại mật khẩu.', 'danger', '#reset-page-message');
+            }
+        });
+    });
+
+    $(document).on('input', '#ResetPageNewPassword', function () {
+        updateResetPasswordChecklist($(this).val());
+    });
+
+    $(document).on('input', '#SignupPassword', function () {
+        updateSignupPasswordChecklist($(this).val());
+    });
+
+    if ($('#ResetPageNewPassword').length > 0) {
+        updateResetPasswordChecklist($('#ResetPageNewPassword').val());
+    }
+
+    if ($('#SignupPassword').length > 0) {
+        updateSignupPasswordChecklist($('#SignupPassword').val());
+    }
+
+    $(document).on('submit', '#resetPasswordForm', function (e) {
+        e.preventDefault();
+
+        const email = resolveForgotEmail();
+        const otp = $('#ResetOtp').val()?.trim() || '';
+        const newPassword = $('#ResetNewPassword').val()?.trim() || '';
+        const confirmPassword = $('#ResetConfirmPassword').val()?.trim() || '';
+
+        if ($('#reset-password-step').is(':hidden')) {
+            return showMessage('Vui lòng xác nhận OTP trước khi đổi mật khẩu.', 'danger', '#reset-message');
+        }
+
+        if (!email) return showMessage('Thiếu email đặt lại mật khẩu.', 'danger', '#reset-message');
+        const resetEmailCheck = validateEmailWithSuggestion(email);
+        if (!resetEmailCheck.valid) return showMessage(resetEmailCheck.message, 'danger', '#reset-message');
+        if (!otp || otp.length !== 6) return showMessage('Vui lòng nhập OTP 6 số.', 'danger', '#reset-message');
+        if (!isStrongPassword(newPassword)) return showMessage('Mật khẩu mới phải có ít nhất 8 ký tự, gồm chữ hoa, chữ thường và số.', 'danger', '#reset-message');
+        if (newPassword !== confirmPassword) return showMessage('Mật khẩu xác nhận không khớp.', 'danger', '#reset-message');
+
+        $.ajax({
+            url: '/UserAuth/ResetPasswordWithOtp',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                Email: email,
+                Otp: otp,
+                NewPassword: newPassword,
+                ConfirmPassword: confirmPassword
+            }),
+            success: function (response) {
+                if (response.success) {
+                    showMessage(response.message, 'success', '#reset-message');
+                    setTimeout(function () {
+                        toggleLogin();
+                        $('#forgot-password-form').hide();
+                        $('#login-form').show();
+                    }, 1200);
+                } else {
+                    showMessage(response.message, 'danger', '#reset-message');
+                }
+            },
+            error: function () {
+                showMessage('Không thể đặt lại mật khẩu.', 'danger', '#reset-message');
+            }
+        });
+    });
+
+    $(document).on('click', '#back-to-login-from-verify, #back-to-login-from-forgot', function () {
+        $('#verify-email-form, #forgot-password-form').hide();
+        toggleLogin();
     });
 
     //Đánh giá sản phẩm
@@ -1224,11 +1733,36 @@ $(function () {
                     updateCartCount();
                   
                 } else {
-                    alert(response.message);
+                    showMessage(response.message, 'danger');
                 }
             },
             error: function () {
-                alert('Đã xảy ra lỗi khi thêm vào giỏ hàng!');
+                showMessage('Đã xảy ra lỗi khi thêm vào giỏ hàng!', 'danger');
+            }
+        });
+    });
+
+    // Mua ngay: thêm sản phẩm vào giỏ rồi chuyển thẳng đến checkout
+    $(document).on('click', '.btn-buy-now', function (e) {
+        e.preventDefault();
+
+        var productId = $(this).data('product-id');
+        var quantity = parseInt($('#quantity').val()) || 1;
+
+        $.ajax({
+            url: '/Cart/AddToCart',
+            type: 'POST',
+            data: { productId: productId, quantity: quantity },
+            xhrFields: { withCredentials: true },
+            success: function (response) {
+                if (response.success) {
+                    window.location.href = '/Cart/Checkout';
+                } else {
+                    showMessage(response.message, 'danger');
+                }
+            },
+            error: function () {
+                showMessage('Đã xảy ra lỗi khi xử lý mua ngay!', 'danger');
             }
         });
     });
@@ -1867,12 +2401,38 @@ $(function () {
 });
 
 //Toggle của login and / register user
+function clearSignupForm() {
+    const fieldIds = ['SignupEmail', 'Username', 'Phone', 'SignupPassword', 'SignupConfirmPassword'];
+    fieldIds.forEach(function (id) {
+        const el = document.getElementById(id);
+        if (el) {
+            el.value = '';
+        }
+    });
+
+    const signupMessage = document.getElementById('signup-message');
+    if (signupMessage) {
+        signupMessage.innerHTML = '';
+    }
+
+    if (typeof updateSignupPasswordChecklist === 'function') {
+        updateSignupPasswordChecklist('');
+    }
+}
+
 function toggleSignup() {
     document.getElementById("login-toggle").style.backgroundColor = "#fff";
     document.getElementById("login-toggle").style.color = "#222";
     document.getElementById("signup-toggle").style.backgroundColor = "#3a79ff";
     document.getElementById("signup-toggle").style.color = "#fff";
     document.getElementById("login-form").style.display = "none";
+    if (document.getElementById("verify-email-form")) {
+        document.getElementById("verify-email-form").style.display = "none";
+    }
+    if (document.getElementById("forgot-password-form")) {
+        document.getElementById("forgot-password-form").style.display = "none";
+    }
+    clearSignupForm();
     document.getElementById("signup-form").style.display = "block";
 }
 function toggleLogin() {
@@ -1881,8 +2441,26 @@ function toggleLogin() {
     document.getElementById("signup-toggle").style.backgroundColor = "#fff";
     document.getElementById("signup-toggle").style.color = "#222";
     document.getElementById("signup-form").style.display = "none";
+    if (document.getElementById("verify-email-form")) {
+        document.getElementById("verify-email-form").style.display = "none";
+    }
+    if (document.getElementById("forgot-password-form")) {
+        document.getElementById("forgot-password-form").style.display = "none";
+    }
     document.getElementById("login-form").style.display = "block";
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    if (typeof clearSignupForm === 'function') {
+        clearSignupForm();
+    }
+});
+
+window.addEventListener('pageshow', function () {
+    if (typeof clearSignupForm === 'function') {
+        clearSignupForm();
+    }
+});
 
 // Hàm hiển thị/ẩn danh mục con
 function showSubCategories(categoryId) {
