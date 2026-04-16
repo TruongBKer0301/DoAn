@@ -1416,7 +1416,7 @@ $(function () {
             success: function (response) {
                 if (response.success) {
                     // Hiệu ứng biến mất mượt mà
-                    productItem.fadeOut(400, function () {
+                    productItem.fadeOut(200, function () {
                         $(this).remove();
 
                         // Nếu xóa xong mà không còn sp nào thì hiện thông báo trống
