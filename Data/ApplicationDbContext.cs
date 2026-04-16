@@ -20,6 +20,7 @@ namespace LapTopBD.Data
         public DbSet<Wishlist> Wishlist { get; set; }
         public DbSet<Banner> Banner { get; set; }
         public DbSet<VisitLog> VisitLogs { get; set; }
+        public DbSet<ContactRequest> ContactRequests { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -96,6 +97,9 @@ namespace LapTopBD.Data
 
             modelBuilder.Entity<VisitLog>()
                 .HasIndex(v => v.VisitorId);
+
+            modelBuilder.Entity<ContactRequest>()
+                .ToTable("ContactRequests");
 
          
         }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<dynamic>
+﻿@model IEnumerable<LapTopBD.Models.ViewModels.Admin.OrderViewModel>
 
 @{
     ViewData["Title"] = "Danh sách đơn hàng";
@@ -10,56 +10,51 @@
 
     @if (Model.Any())
     {
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Tên khách hàng</th>
-                    <th>Sản phẩm</th>
-                    <th>Số lượng</th>
-                    <th>Ngày đặt hàng</th>
-                    <th>Trạng thái</th>
-                    <th>Tổng giá</th>
-                    <th>Thao tác</th>
-                    <th>Địa chỉ</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var order in Model)
-                {
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped align-middle order-table">
+                <thead>
                     <tr>
-                        <td>@order.Id</td>
-                        <td>@order.UserName</td>
-                        <td>@order.ProductName</td>
-                        <td>@order.Quantity</td>
-                        <td>@order.OrderDate.ToString("dd/MM/yyyy HH:mm")</td>
-                        <td>
-                            <span class="badge 
-                                @(order.OrderStatus == "Pending" ? "bg-warning" : 
-                                  order.OrderStatus == "Paid" ? "bg-info" :
-                                  order.OrderStatus == "Shipping" ? "bg-info" : 
-                                  order.OrderStatus == "Delivered" ? "bg-success" : 
-                                  "bg-danger")">
-                                @order.OrderStatus
-                            </span>
-                        </td>
-                        <td>@order.TotalPrice.ToString("N0") VNĐ</td>
-                        <td>
-                            <select class="form-control update-status" data-order-id="@order.Id" data-current-status="@order.OrderStatus">
-                                <option value="Pending">Pending</option>
-                                <option value="Paid">Paid</option>
-                                <option value="Shipping">Shipping</option>
-                                <option value="Delivered">Delivered</option>
-                                <option value="Cancelled">Cancelled</option>
-                            </select>
-                        </td>
-                    <td class="address"></td>
-
-
+                        <th class="col-id">ID</th>
+                        <th class="col-customer">Tên khách hàng</th>
+                        <th class="col-product">Sản phẩm</th>
+                        <th class="col-qty">Số lượng</th>
+                        <th class="col-date">Ngày đặt hàng</th>
+                        <th class="col-status">Trạng thái</th>
+                        <th class="col-total">Tổng giá</th>
+                        <th class="col-actions">Thao tác</th>
+                        <th class="col-address">Địa chỉ</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var order in Model)
+                    {
+                        <tr>
+                            <td class="col-id text-center">@order.Id</td>
+                            <td class="col-customer">@order.UserName</td>
+                            <td class="col-product">@order.ProductName</td>
+                            <td class="col-qty text-center">@order.Quantity</td>
+                            <td class="col-date text-nowrap">@order.OrderDate.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td class="col-status text-center">
+                                <span class="badge @(order.OrderStatus == "Pending" ? "bg-warning text-dark" : order.OrderStatus == "Paid" ? "bg-info" : order.OrderStatus == "Shipping" ? "bg-info" : order.OrderStatus == "Delivered" ? "bg-success" : "bg-danger")">
+                                    @order.OrderStatus
+                                </span>
+                            </td>
+                            <td class="col-total text-nowrap">@order.TotalPrice.ToString("N0") VNĐ</td>
+                            <td class="col-actions">
+                                <select class="form-control form-control-sm update-status" data-order-id="@order.Id" data-current-status="@order.OrderStatus">
+                                    <option value="Pending" selected="@(order.OrderStatus == "Pending" ? "selected" : null)">Pending</option>
+                                    <option value="Paid" selected="@(order.OrderStatus == "Paid" ? "selected" : null)">Paid</option>
+                                    <option value="Shipping" selected="@(order.OrderStatus == "Shipping" ? "selected" : null)">Shipping</option>
+                                    <option value="Delivered" selected="@(order.OrderStatus == "Delivered" ? "selected" : null)">Delivered</option>
+                                    <option value="Cancelled" selected="@(order.OrderStatus == "Cancelled" ? "selected" : null)">Cancelled</option>
+                                </select>
+                            </td>
+                            <td class="col-address">@order.FullAddress</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     }
     else
     {
@@ -68,3 +63,46 @@
 
     <div id="message" class="mt-3"></div>
 </div>
+
+<style>
+    .order-table .col-id {
+        width: 70px;
+    }
+
+    .order-table .col-customer {
+        min-width: 180px;
+    }
+
+    .order-table .col-product {
+        min-width: 220px;
+        max-width: 320px;
+        word-break: break-word;
+    }
+
+    .order-table .col-qty {
+        width: 100px;
+    }
+
+    .order-table .col-date {
+        width: 165px;
+    }
+
+    .order-table .col-status {
+        width: 120px;
+    }
+
+    .order-table .col-total {
+        width: 150px;
+    }
+
+    .order-table .col-actions {
+        min-width: 150px;
+    }
+
+    .order-table .col-address {
+        min-width: 260px;
+        max-width: 380px;
+        white-space: normal;
+        word-break: break-word;
+    }
+</style>

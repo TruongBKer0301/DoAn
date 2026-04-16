@@ -89,6 +89,36 @@ namespace LapTopBD.Controllers
             return View();
         }
 
+        [HttpGet]
+        [Route("/lien-he")]
+        public IActionResult Contact()
+        {
+            ViewBag.ShowBanner = false;
+            return View(new ContactRequest());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("/lien-he")]
+        public async Task<IActionResult> Contact(ContactRequest model)
+        {
+            ViewBag.ShowBanner = false;
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            model.CreatedAt = DateTime.Now;
+            model.IsRead = false;
+            model.ReadAt = null;
+            _context.ContactRequests.Add(model);
+            await _context.SaveChangesAsync();
+
+            TempData["ContactSuccess"] = "Gửi liên hệ thành công. Chúng tôi sẽ phản hồi sớm nhất có thể.";
+            return RedirectToAction(nameof(Contact));
+        }
+
         [Route("Detail/{slug}")]
         public async Task<IActionResult> Detail(string slug, int page = 1)
         {

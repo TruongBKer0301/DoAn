@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LapTopBD.Utilities;
+using LapTopBD.Models.ViewModels.Admin;
 
 namespace LapTopBD.Areas.Admin.Controllers
 {
@@ -33,9 +34,27 @@ namespace LapTopBD.Areas.Admin.Controllers
                     o.Quantity,
                     o.OrderDate,
                     o.OrderStatus,
-                    o.TotalPrice
+                    o.TotalPrice,
+                    o.City,
+                    o.District,
+                    o.Ward,
+                    o.Address
                 })
                 .OrderByDescending(o => o.OrderDate)
+                .Select(o => new OrderViewModel
+                {
+                    Id = o.Id,
+                    UserName = o.UserName,
+                    ProductName = o.ProductName,
+                    Quantity = o.Quantity,
+                    OrderDate = o.OrderDate,
+                    OrderStatus = o.OrderStatus,
+                    TotalPrice = o.TotalPrice,
+                    City = o.City,
+                    District = o.District,
+                    Ward = o.Ward,
+                    Address = o.Address
+                })
                 .ToListAsync();
 
             return View(orders);

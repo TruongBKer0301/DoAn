@@ -236,6 +236,21 @@
                             </a>
 
                         </li>
+
+                        <!-- Contact -->
+                        <li class="nav-item">
+                            <a class="nav-link menu-link" href="@Url.Action("ListContacts", "Contact", new { area = "Admin" })">
+                                <i class="ri-customer-service-2-line"></i>
+                                <span data-key="t-forms">Liên hệ</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link menu-link" href="@Url.Action("Edit", "Policy", new { area = "Admin" })">
+                                <i class="ri-article-line"></i>
+                                <span data-key="t-forms">Chính sách</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <!-- Sidebar -->
@@ -313,6 +328,8 @@
     <script src="~/js/lc_lightbox.lite.min.js"></script>
     <script src="~/js/alloy_finger.min.js"></script>
     <script src="~/js/script.js"></script>
+
+    @RenderSection("Scripts", required: false)
 
 
 

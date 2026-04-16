@@ -26,12 +26,17 @@
 
             <div id="login-form">
                 <form id="loginForm">
-                    <input type="text" id="Email" name="Email" placeholder="Nhập email của bạn" />
-                    <input type="password" id="Password" name="Password" placeholder="Nhập mật khẩu" />                  
+                    <input type="email" id="Email" name="Email" class="form-control mb-3" placeholder="Email đăng nhập" />
+                    <div class="password-field mb-3">
+                        <input type="password" id="Password" name="Password" class="form-control" placeholder="Nhập mật khẩu" />
+                        <button type="button" class="btn toggle-password-btn" data-target="#Password" aria-label="Hiện mật khẩu" title="Hiện mật khẩu">
+                            <i class="ri-eye-line"></i>
+                        </button>
+                    </div>
                     <div id="login-message"></div>
                     <button type="submit" class="btn login">Đăng nhập</button>
                     
-                    <p><a href="javascript:void(0)">Quên mật khẩu?</a></p>
+                    <p><a href="javascript:void(0)" id="forgot-password-link">Quên mật khẩu?</a></p>
 
                     <div class="extra-actions">
                         <a asp-area="Admin" asp-controller="Auth" asp-action="Login" class="admin-login-link">
@@ -43,15 +48,79 @@
             </div>
 
             <div id="signup-form" >
-                <form id="signupForm" novalidate>
-                    <input type="email" id="SignupEmail" name="Email" placeholder="Nhập email của bạn" />
-                    <input type="text" id="Username" name="Username" placeholder="Nhập Họ Tên" />
-                    <input type="tel" id="Phone" name="Phone" placeholder="Nhập số điện thoại" />
-                    <input type="password" id="SignupPassword" name="Password" placeholder="Mật khẩu" />
+                <form id="signupForm" novalidate autocomplete="off">
+                    <input type="email" id="SignupEmail" name="Email" class="form-control mb-3" placeholder="Nhập email của bạn" autocomplete="off" />
+                    <input type="text" id="Username" name="Username" class="form-control mb-3" placeholder="Nhập Họ Tên" autocomplete="off" />
+                    <input type="tel" id="Phone" name="Phone" class="form-control mb-3" placeholder="Nhập số điện thoại" autocomplete="off" />
+                    <div class="password-field mb-3">
+                        <input type="password" id="SignupPassword" name="Password" class="form-control" placeholder="Mật khẩu" autocomplete="new-password" />
+                        <button type="button" class="btn toggle-password-btn" data-target="#SignupPassword" aria-label="Hiện mật khẩu" title="Hiện mật khẩu">
+                            <i class="ri-eye-line"></i>
+                        </button>
+                    </div>
+                    <div class="password-rule-hint">Mật khẩu cần ít nhất 8 ký tự, gồm chữ hoa, chữ thường và số.</div>
+                    <ul id="signup-password-checklist" class="password-checklist">
+                        <li id="signup-rule-length" class="invalid">Ít nhất 8 ký tự</li>
+                        <li id="signup-rule-upper" class="invalid">Có ít nhất 1 chữ in hoa</li>
+                        <li id="signup-rule-lower" class="invalid">Có ít nhất 1 chữ in thường</li>
+                        <li id="signup-rule-digit" class="invalid">Có ít nhất 1 chữ số</li>
+                    </ul>
+                    <div class="password-field mb-3">
+                        <input type="password" id="SignupConfirmPassword" name="Password2" class="form-control" placeholder="Xác nhận mật khẩu" autocomplete="new-password" />
+                        <button type="button" class="btn toggle-password-btn" data-target="#SignupConfirmPassword" aria-label="Hiện mật khẩu" title="Hiện mật khẩu">
+                            <i class="ri-eye-line"></i>
+                        </button>
+                    </div>
                     <div id="signup-message"></div>
                     <button type="submit" class="btn signup">Tạo tài khoản</button>
-                    <p>Nhấn <strong> tạo tài khoản</strong> có nghĩa là bạn đã đồng ý với <a href="javascript:void(0)">điều khoản và dịch vụ của chúng tôi</a>.</p>
+                    <p>Nhấn <span class="signup-emphasis">tạo tài khoản</span> có nghĩa là bạn đã đồng ý với <a href="javascript:void(0)">điều khoản và dịch vụ của chúng tôi</a>.</p>
                     <hr />
+                </form>
+            </div>
+
+            <div id="verify-email-form" style="display:none;">
+                <form id="verifyEmailForm" novalidate>
+                    <h5 class="mb-3 text-center">Xác thực email đăng ký</h5>
+                    <input type="email" id="VerifyEmail" name="Email" class="form-control mb-3" placeholder="Email" readonly />
+                    <input type="text" id="VerifyOtp" name="Otp" class="form-control mb-3" placeholder="Nhập OTP 6 số" maxlength="6" />
+                    <div id="verify-otp-hint" class="otp-hint">OTP có hiệu lực trong 1 phút.</div>
+                    <div id="verify-message"></div>
+                    <button type="submit" class="btn signup">Xác nhận OTP</button>
+                    <button type="button" class="btn login mt-2" id="resend-verify-otp-btn">Gửi lại OTP</button>
+                    <p class="mt-2"><a href="javascript:void(0)" id="back-to-login-from-verify">Quay lại đăng nhập</a></p>
+                </form>
+            </div>
+
+            <div id="forgot-password-form" style="display:none;">
+                <form id="forgotPasswordRequestForm" novalidate>
+                    <h5 class="mb-3 text-center">Quên mật khẩu</h5>
+                    <div id="forgot-otp-hint" class="otp-hint">OTP sẽ được gửi trực tiếp về email đang nhập ở form đăng nhập.</div>
+                    <input type="text" id="ResetOtp" name="Otp" class="form-control mb-3" placeholder="Nhập OTP" maxlength="6" />
+                    <button type="button" class="btn login mb-2" id="resend-forgot-otp-btn">Gửi lại OTP</button>
+                    <button type="button" class="btn login mb-3" id="verify-reset-otp-btn">Xác nhận OTP</button>
+                    <div id="forgot-message"></div>
+                    <p class="mt-2"><a href="javascript:void(0)" id="back-to-login-from-forgot">Quay lại đăng nhập</a></p>
+                </form>
+
+                <form id="resetPasswordForm" novalidate style="display:none; margin-top:12px;">
+                    <div id="reset-otp-hint" class="otp-hint">OTP đặt lại mật khẩu có hiệu lực trong 1 phút.</div>
+                    <input type="hidden" id="ResetEmail" name="Email" />
+                    <div id="reset-password-step" style="display:none;">
+                        <div class="password-field mb-3">
+                            <input type="password" id="ResetNewPassword" name="NewPassword" class="form-control" placeholder="Mật khẩu mới" />
+                            <button type="button" class="btn toggle-password-btn" data-target="#ResetNewPassword" aria-label="Hiện mật khẩu" title="Hiện mật khẩu">
+                                <i class="ri-eye-line"></i>
+                            </button>
+                        </div>
+                        <div class="password-field mb-3">
+                            <input type="password" id="ResetConfirmPassword" name="ConfirmPassword" class="form-control" placeholder="Xác nhận mật khẩu mới" />
+                            <button type="button" class="btn toggle-password-btn" data-target="#ResetConfirmPassword" aria-label="Hiện mật khẩu" title="Hiện mật khẩu">
+                                <i class="ri-eye-line"></i>
+                            </button>
+                        </div>
+                        <button type="submit" class="btn signup">Đặt lại mật khẩu</button>
+                    </div>
+                    <div id="reset-message"></div>
                 </form>
             </div>
         </div>
@@ -81,5 +150,84 @@
             background-color: #4a6cf7;
             color: #fff;
         }
+
+    #verify-email-form .btn,
+    #forgot-password-form .btn {
+        width: 100%;
+    }
+
+    .otp-hint {
+        font-size: 13px;
+        color: #5f6b7a;
+        margin: -4px 0 10px;
+    }
+
+    .password-field {
+        position: relative;
+    }
+
+    .password-field .form-control {
+        padding-right: 46px;
+    }
+
+    .toggle-password-btn {
+        position: absolute !important;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        border: none !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        min-width: auto !important;
+        width: auto !important;
+        height: auto !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: #5f6b7a;
+        font-size: 18px;
+        line-height: 1;
+        z-index: 5;
+    }
+
+    .toggle-password-btn.active {
+        color: #3a79ff;
+    }
+
+    .password-rule-hint {
+        font-size: 13px;
+        color: #5f6b7a;
+        margin: -4px 0 12px;
+    }
+
+    .password-checklist {
+        margin: -6px 0 14px;
+        padding-left: 18px;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .password-checklist li {
+        color: #8a94a6;
+    }
+
+    .password-checklist li.valid {
+        color: #239b56;
+        font-weight: 600;
+    }
+
+    .password-checklist li.invalid {
+        color: #8a94a6;
+    }
+
+    .signup-emphasis {
+        font-family: inherit;
+        font-weight: 700;
+        letter-spacing: 0;
+        color: #4a6cf7;
+    }
 
 </style>

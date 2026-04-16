@@ -161,9 +161,14 @@
                 }
                 else
                 {
-                    <button class="btn btn-primary" id="add-to-cart-btn" data-product-id="@Model?.Id">
-                        <i class="fa fa-shopping-cart mr-1"></i> Thêm vào giỏ hàng
-                    </button>
+                    <div class="detail-action-row">
+                        <button class="btn btn-primary" id="add-to-cart-btn" data-product-id="@Model?.Id">
+                            <i class="fa fa-shopping-cart mr-1"></i> Thêm vào giỏ hàng
+                        </button>
+                        <button class="btn btn-warning btn-buy-now" data-product-id="@Model?.Id">
+                            <i class="fas fa-bolt mr-1"></i> Mua ngay
+                        </button>
+                    </div>
                 }
                 <button class="btn btn-outline-primary btn-add-to-fav ml-3"
                         id="add-to-fav-btn"
@@ -326,9 +331,14 @@
                                             <div class="original-price">@product.ProductPrice.ToString("N0") VND</div>
                                         }
                                     </div>
-                                    <button class="btn-add-to-cart " id="add-to-cart-btn" data-product-id="@product?.Id">
-                                        <i class="fas fa-shopping-cart"></i> Thêm vào giỏ hàng
-                                    </button>
+                                    <div class="product-action-row">
+                                        <button class="btn-add-to-cart" id="add-to-cart-btn" data-product-id="@product?.Id">
+                                            <i class="fas fa-shopping-cart"></i> Thêm vào giỏ hàng
+                                        </button>
+                                        <button class="btn-buy-now" data-product-id="@product?.Id">
+                                            <i class="fas fa-bolt"></i> Mua ngay
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

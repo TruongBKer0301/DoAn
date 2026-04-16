@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "rkLh47i5DmPYwCzmQ1fYk9YI8eoV5FNG54X010DNjg0=",
+  "Hash": "7Miww08vDS4WOrfSC3VGVwpiPdQbinhDPwNTxxsjXDc=",
   "Source": "LapTopBD",
   "BasePath": "_content/LapTopBD",
   "Mode": "Default",
@@ -598,8 +598,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "ki467so2c5",
-      "Integrity": "pEx4//uGI0ysFN2E1oL5v1UagqkO0xKwTmVLSbhJMmY=",
+      "Fingerprint": "8xwby37dn9",
+      "Integrity": "bHnNTb2EE7d+f8sUS2Fjf2tvMcQozG0XDv0DKfm6Ufk=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\style.css"
@@ -2173,8 +2173,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "fjqggr3px4",
-      "Integrity": "pUl4Aitak+vFNSUmWk0GkTnhK4xWe4E5wBmNmU9qN+A=",
+      "Fingerprint": "xcaydq4nhh",
+      "Integrity": "8T1TB7gCFVFtdTkB43cimQn0sjRONzl6jALU8XAU0Jk=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\script.js"
@@ -7391,7 +7391,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 15 Apr 2026 02:38:17 GMT"
+          "Value": "Thu, 16 Apr 2026 21:27:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -7436,7 +7436,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 15 Apr 2026 02:38:17 GMT"
+          "Value": "Thu, 16 Apr 2026 21:27:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9419,6 +9419,51 @@
       ]
     },
     {
+      "Route": "css/style.8xwby37dn9.css",
+      "AssetFile": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\css\\style.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "23326"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"bHnNTb2EE7d+f8sUS2Fjf2tvMcQozG0XDv0DKfm6Ufk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 16 Apr 2026 21:31:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "8xwby37dn9"
+        },
+        {
+          "Name": "label",
+          "Value": "css/style.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-bHnNTb2EE7d+f8sUS2Fjf2tvMcQozG0XDv0DKfm6Ufk="
+        }
+      ]
+    },
+    {
       "Route": "css/style.css",
       "AssetFile": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\css\\style.css",
       "Selectors": [],
@@ -9429,7 +9474,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "22336"
+          "Value": "23326"
         },
         {
           "Name": "Content-Type",
@@ -9437,11 +9482,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"pEx4//uGI0ysFN2E1oL5v1UagqkO0xKwTmVLSbhJMmY=\""
+          "Value": "\"bHnNTb2EE7d+f8sUS2Fjf2tvMcQozG0XDv0DKfm6Ufk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 16 Apr 2026 17:05:34 GMT"
+          "Value": "Thu, 16 Apr 2026 21:31:23 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9451,52 +9496,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-pEx4//uGI0ysFN2E1oL5v1UagqkO0xKwTmVLSbhJMmY="
-        }
-      ]
-    },
-    {
-      "Route": "css/style.ki467so2c5.css",
-      "AssetFile": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\css\\style.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "22336"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"pEx4//uGI0ysFN2E1oL5v1UagqkO0xKwTmVLSbhJMmY=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 16 Apr 2026 17:05:34 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "ki467so2c5"
-        },
-        {
-          "Name": "label",
-          "Value": "css/style.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-pEx4//uGI0ysFN2E1oL5v1UagqkO0xKwTmVLSbhJMmY="
+          "Value": "sha256-bHnNTb2EE7d+f8sUS2Fjf2tvMcQozG0XDv0DKfm6Ufk="
         }
       ]
     },
@@ -15569,51 +15569,6 @@
       ]
     },
     {
-      "Route": "js/script.fjqggr3px4.js",
-      "AssetFile": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\js\\script.js",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "81029"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"pUl4Aitak+vFNSUmWk0GkTnhK4xWe4E5wBmNmU9qN+A=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 16 Apr 2026 17:51:31 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "fjqggr3px4"
-        },
-        {
-          "Name": "label",
-          "Value": "js/script.js"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-pUl4Aitak+vFNSUmWk0GkTnhK4xWe4E5wBmNmU9qN+A="
-        }
-      ]
-    },
-    {
       "Route": "js/script.js",
       "AssetFile": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\js\\script.js",
       "Selectors": [],
@@ -15624,7 +15579,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "81029"
+          "Value": "105417"
         },
         {
           "Name": "Content-Type",
@@ -15632,11 +15587,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"pUl4Aitak+vFNSUmWk0GkTnhK4xWe4E5wBmNmU9qN+A=\""
+          "Value": "\"8T1TB7gCFVFtdTkB43cimQn0sjRONzl6jALU8XAU0Jk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 16 Apr 2026 17:51:31 GMT"
+          "Value": "Thu, 16 Apr 2026 21:31:23 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -15646,7 +15601,52 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-pUl4Aitak+vFNSUmWk0GkTnhK4xWe4E5wBmNmU9qN+A="
+          "Value": "sha256-8T1TB7gCFVFtdTkB43cimQn0sjRONzl6jALU8XAU0Jk="
+        }
+      ]
+    },
+    {
+      "Route": "js/script.xcaydq4nhh.js",
+      "AssetFile": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\js\\script.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "105417"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"8T1TB7gCFVFtdTkB43cimQn0sjRONzl6jALU8XAU0Jk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 16 Apr 2026 21:31:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "xcaydq4nhh"
+        },
+        {
+          "Name": "label",
+          "Value": "js/script.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-8T1TB7gCFVFtdTkB43cimQn0sjRONzl6jALU8XAU0Jk="
         }
       ]
     },
@@ -15837,7 +15837,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 12 Apr 2026 13:03:44 GMT"
+          "Value": "Thu, 16 Apr 2026 21:46:49 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -15874,7 +15874,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 12 Apr 2026 13:03:44 GMT"
+          "Value": "Thu, 16 Apr 2026 21:46:49 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -15919,7 +15919,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 12 Apr 2026 13:03:44 GMT"
+          "Value": "Thu, 16 Apr 2026 21:46:49 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -15964,7 +15964,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 12 Apr 2026 13:03:44 GMT"
+          "Value": "Thu, 16 Apr 2026 21:46:49 GMT"
         },
         {
           "Name": "Cache-Control",

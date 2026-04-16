@@ -1,0 +1,54 @@
+@model LapTopBD.Models.ViewModels.Admin.PolicyEditorViewModel
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Quan ly chinh sach";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Quan ly noi dung chinh sach</h2>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+
+    <form asp-action="Edit" asp-controller="Policy" asp-area="Admin" method="post">
+        @Html.AntiForgeryToken()
+
+        <div class="card mb-4">
+            <div class="card-header fw-bold">Chinh sach bao hanh</div>
+            <div class="card-body">
+                <textarea id="warrantyEditor" asp-for="WarrantyHtml" class="form-control" rows="16"></textarea>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header fw-bold">Chinh sach giao hang</div>
+            <div class="card-body">
+                <textarea id="shippingEditor" asp-for="ShippingHtml" class="form-control" rows="16"></textarea>
+            </div>
+        </div>
+
+        <div class="text-end">
+            <button type="submit" class="btn btn-primary">Luu noi dung</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        (function () {
+            if (typeof CKEDITOR === 'undefined') {
+                return;
+            }
+
+            if (!CKEDITOR.instances.warrantyEditor) {
+                CKEDITOR.replace('warrantyEditor');
+            }
+
+            if (!CKEDITOR.instances.shippingEditor) {
+                CKEDITOR.replace('shippingEditor');
+            }
+        })();
+    </script>
+}
