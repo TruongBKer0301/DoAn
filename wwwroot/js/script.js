@@ -1234,6 +1234,62 @@ $(function () {
         });
     });
 
+    //Thêm vào giỏ hàng
+    $(document).on('click', '#add-to-fav-btn', function (e) {
+        e.preventDefault();
+        console.log("Superman");
+        var productId = $(this).data('product-id');
+        var favIcon = $('.icon-fav'); // Icon giỏ hàng
+        var addTofavBtn = $(this); // Nút "Thêm vào giỏ hàng"
+
+        // Lấy ảnh sản phẩm gần nút "Thêm vào giỏ hàng" nhất
+        var productImg = addTofavBtn.closest('.product-item').find('img').first();
+        if (productImg.length) {
+            var flyingImg = productImg.clone().css({
+                position: 'absolute',
+                width: productImg.width(),
+                height: productImg.height(),
+                zIndex: 1000,
+                top: productImg.offset().top,
+                left: productImg.offset().left,
+                opacity: 1
+            }).appendTo('body');
+
+            flyingImg.animate({
+                top: favIcon.offset().top + 10,
+                left: favIcon.offset().left + 10,
+                width: 50,
+                height: 50,
+                opacity: 0
+            }, 800, 'easeInOutQuad', function () {
+                $(this).remove();
+
+                // Hiệu ứng rung icon giỏ hàng
+                favIcon.addClass('shake');
+                setTimeout(() => favIcon.removeClass('shake'), 500);
+            });
+        }
+
+        // Gửi yêu cầu AJAX thêm sản phẩm vào giỏ hàng
+        $.ajax({
+            url: '/Fav/AddToFav',
+            type: 'POST',
+            data: { productId: productId },
+            xhrFields: { withCredentials: true },
+            success: function (response) {
+                if (response.success) {
+                    updateFavCount();
+
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function () {
+                alert('Đã xảy ra lỗi khi thêm vào ưa thích!');
+            }
+        });
+    });
+
     //Hủy đơn hàng
     $(document).on('click', '.btn-cancel', function () {
         var orderId = $(this).data('id');
@@ -1301,12 +1357,29 @@ $(function () {
             }
         });
     }
+    function updateFavCount() {
+        $.ajax({
+            url: '/Fav/GetFavCount',
+            type: 'GET',
+            success: function (response) {
+                if (response.success) {
+                    $('.fav-count').text(response.wishlistcount).addClass('bounce');
+                    setTimeout(() => $('.fav-count').removeClass('bounce'), 500);
+                }
+            },
+            error: function () {
+                console.error('Không thể cập nhật số lượng giỏ hàng');
+            }
+        });
+    }
 
     // Gọi updateCartCount() ngay khi trang load
     updateCartCount();
 
     // Gọi updateOrderCount() ngay khi trang load
     updateOrderCount();
+
+    updateFavCount();
 
     // Xóa giỏ hàng
     $(document).on('click', '.btn-remove', function () {
@@ -1318,6 +1391,48 @@ $(function () {
             success: function (response) {
                 if (response.success) {
                     location.reload();
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function () {
+                alert('Đã xảy ra lỗi khi xóa sản phẩm!');
+            }
+        });
+    });
+
+    // Xóa ưa thích
+    $(document).on('click', '.remove-fav-btn', function () {
+        console.log("Batman is cleaning the streets...");
+
+        var btn = $(this);
+        var productid = btn.data('id');
+        var productItem = btn.closest('.col-lg-3');
+
+        $.ajax({
+            url: '/Fav/RemoveFromFav',
+            type: 'POST',
+            data: { productid: productid },
+            success: function (response) {
+                if (response.success) {
+                    // Hiệu ứng biến mất mượt mà
+                    productItem.fadeOut(400, function () {
+                        $(this).remove();
+
+                        // Nếu xóa xong mà không còn sp nào thì hiện thông báo trống
+                        if ($('#productContainer').children().length === 0) {
+                            $('#productContainer').html('<div class="col-12 text-center"><h3>Danh sách yêu thích trống!</h3></div>');
+                        }
+                    });
+
+                    // Cập nhật lại số lượng trên icon trái tim ở Header
+                    // Bạn có thể dùng hàm updateFavCount() cũ hoặc lấy từ response nếu có
+                    if (response.wishlistCount !== undefined) {
+                        $('.fav-count').text(response.wishlistCount);
+                    } else {
+                        updateFavCount();
+                    }
+
                 } else {
                     alert(response.message);
                 }

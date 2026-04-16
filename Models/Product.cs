@@ -66,7 +66,7 @@ namespace LapTopBD.Models
         public string? Promotion { get; set; }
         public string? Slug { get; set; }
 
-        public virtual ICollection<Wishlist> Wishlists { get; set; } = new List<Wishlist>();
+        public virtual ICollection<Wishlist> Wishlist { get; set; } = new List<Wishlist>();
         public virtual ICollection<ProductReview> ProductReviews { get; set; } = new List<ProductReview>();
         public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
         public virtual ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
