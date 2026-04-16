@@ -42,7 +42,7 @@ namespace LapTopBD.Models
 
         // Quan hệ với đơn hàng & danh sách yêu thích
         public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
-        public virtual ICollection<Wishlist> Wishlists { get; set; } = new List<Wishlist>();
+        public virtual ICollection<Wishlist> Wishlist { get; set; } = new List<Wishlist>();
         public virtual ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
 
     }

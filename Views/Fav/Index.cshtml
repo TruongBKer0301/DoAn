@@ -1,20 +1,16 @@
 ﻿@model List<LapTopBD.ViewModels.ProductViewModel>
 @{
     ViewData["Title"] = "Sản phẩm";
-    string? selectedCategoryId = ViewBag.SelectedCategoryId?.ToString();
-    string? selectedSubCategoryId = ViewBag.SelectedSubCategoryId?.ToString();
-    string searchTerm = ViewBag.SearchTerm as string ?? "";
-    string sortBy = ViewBag.SortBy as string ?? "";
 }
 
 <!-- Page Header Start -->
 <div class="container-fluid bg-secondary mb-5">
     <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
-        <h1 class="font-weight-semi-bold text-uppercase mb-3">Sản phẩm</h1>
+        <h1 class="font-weight-semi-bold text-uppercase mb-3">Sản phẩm ưa thích</h1>
         <div class="d-inline-flex">
             <p class="m-0"><a href="@Url.Action("Index", "Home")">Trang chủ</a></p>
             <p class="m-0 px-2">-</p>
-            <p class="text-danger m-0">Shop</p>
+            <p class="text-danger m-0">Ưa Thích</p>
         </div>
     </div>
 </div>
@@ -22,86 +18,9 @@
 <!-- Shop Start -->
 <div class="container-fluid pt-5">
     <div class="row px-xl-5">
-        <!-- Shop Sidebar Start -->
-        <div class="col-lg-3 col-md-12">
-            <div class="border-bottom mb-4 pb-4">
-                <h5 class="font-weight-semi-bold mb-4">Lọc Theo loại sản phẩm</h5>
-                <div class="list-group">
-                    <a href="@Url.Action("Index", "Shop", new { categoryId = "", subCategoryId = selectedSubCategoryId, search = "", sortBy = sortBy })"
-                       class="list-group-item list-group-item-action @(string.IsNullOrEmpty(selectedCategoryId) ? "active" : "") category-link"
-                       data-category-id="">
-                        TẤT CẢ CÁC LOẠI SẢN PHẨM
-                    </a>
-                    @if (ViewBag.Categories is IEnumerable<LapTopBD.ViewModels.CategoryViewModel> categories)
-                    {
-                        foreach (var category in categories)
-                        {
-                            <a href="@Url.Action("Index", "Shop", new { categoryId = category.Id, subCategoryId = selectedSubCategoryId, search = "", sortBy = sortBy })"
-                               class="list-group-item list-group-item-action @(selectedCategoryId == category.Id.ToString() ? "active" : "") category-link"
-                               data-category-id="@category.Id">
-                                @category.CategoryName
-                            </a>
-                        }
-                    }
-                </div>
-
-                @if (!string.IsNullOrEmpty(selectedCategoryId))
-                {
-                    <div class="mb-5" id="subCategorySection">
-                        <h5 class="font-weight-semi-bold mb-4">Lọc Theo Loại</h5>
-                        <div class="list-group">
-                            <a href="@Url.Action("Index", "Shop", new { categoryId = selectedCategoryId, subCategoryId = "", search = "", sortBy = sortBy })"
-                               class="list-group-item list-group-item-action @(string.IsNullOrEmpty(selectedSubCategoryId) ? "active" : "") subcategory-link"
-                               data-subcategory-id="">
-                                TẤT CẢ DÒNG SẢN PHẨM
-                            </a>
-                            @if (ViewBag.SubCategories is IEnumerable<LapTopBD.ViewModels.SubCategoryViewModel> subCategories)
-                            {
-                                foreach (var subCategory in subCategories)
-                                {
-                                    <a href="@Url.Action("Index", "Shop", new { categoryId = selectedCategoryId, subCategoryId = subCategory.Id, search = "", sortBy = sortBy })"
-                                       class="list-group-item list-group-item-action @(selectedSubCategoryId == subCategory.Id.ToString() ? "active" : "") subcategory-link"
-                                       data-subcategory-id="@subCategory.Id">
-                                        @subCategory.SubCategoryName
-                                    </a>
-                                }
-                            }
-                        </div>
-                    </div>
-                }
-            </div>
-        </div>
-        <!-- Shop Sidebar End -->
         <!-- Shop Product Start -->
-        <div class="col-lg-9 col-md-12">
+        <div class="col-lg-12 col-md-12">
             <div class="row pb-3">
-                <div class="col-12 pb-1">
-                    <div class="d-flex align-items-center justify-content-between mb-4">
-                        <form id="searchForm" method="get" action="@Url.Action("Index", "Shop")">
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="searchInput" name="search" placeholder="Search by name" value="@searchTerm">
-                                <input type="hidden" name="categoryId" value="@selectedCategoryId" />
-                                <input type="hidden" name="subCategoryId" value="@selectedSubCategoryId" />
-                                <input type="hidden" name="sortBy" value="@sortBy" />
-                                <div class="input-group-append">
-                                    <button type="submit" class="input-group-text bg-transparent text-primary">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                        <div class="dropdown ml-4">
-                            <button class="btn border dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Sắp theo
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
-                                <a class="dropdown-item sort-link" href="@Url.Action("Index", "Shop", new { categoryId = selectedCategoryId, subCategoryId = selectedSubCategoryId, search = searchTerm, sortBy = "latest" })">Lọc</a>
-                                <a class="dropdown-item sort-link" href="@Url.Action("Index", "Shop", new { categoryId = selectedCategoryId, subCategoryId = selectedSubCategoryId, search = searchTerm, sortBy = "price-asc" })">Giá: Từ thấp đến cao</a>
-                                <a class="dropdown-item sort-link" href="@Url.Action("Index", "Shop", new { categoryId = selectedCategoryId, subCategoryId = selectedSubCategoryId, search = searchTerm, sortBy = "price-desc" })">Price: Từ cao đến thấp</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-12">
                     <div class="row" id="productContainer">
                         @if (Model?.Any() == true)
@@ -110,16 +29,18 @@
                             {
                                 var hasDiscount = product.ProductPriceBeforeDiscount.HasValue && product.ProductPriceBeforeDiscount > product.ProductPrice;
                                 var discountPercentage = hasDiscount ? (product.ProductPriceBeforeDiscount!.Value - product.ProductPrice) / product.ProductPriceBeforeDiscount!.Value * 100 : 0;
-                                <div class="col-lg-4 col-md-6 col-sm-12 pb-5">
+                                <div class="col-lg-3 col-md-6 col-sm-12 pb-5">
                                     <div class="item" data-aos="fade-up" data-aos-duration="2500">
                                         <div class="card shadow h-100">
                                             <div class="ratio ratio-1x1">
                                                 <a href="@Url.Action("Detail", "Home", new { slug = product.Slug })">
                                                     <img class="w-100 h-100 object-fit-cover" src="@product.ProductImage1" alt="@(product.ProductName ?? "Product")" />
                                                 </a>
-                                                <button class="btn-add-to-fav" id="add-to-fav-btn" data-product-id="@product.Id" title="Thêm vào yêu thích">
-                                                    <i class="ri-heart-line"></i>
+
+                                                <button class="remove-fav-btn btn-remove-to-fav" data-id="@product.Id" title="Xóa khỏi yêu thích">
+                                                    <i class="ri-heart-fill"></i>
                                                 </button>
+
                                                 @if (product.quantity < 1)
                                                 {
                                                     <span class="discount-tag out-of-stock">Hết hàng</span>
@@ -206,7 +127,7 @@
     }
 
     /* Style cho nút yêu thích */
-    .btn-add-to-fav {
+    .btn-remove-to-fav {
         position: absolute;
         top: 10px;
         right: 10px;
@@ -225,13 +146,13 @@
         cursor: pointer;
     }
 
-        .btn-add-to-fav:hover {
+        .btn-remove-to-fav:hover {
             background: #ff4757;
             color: white;
             transform: scale(1.1);
         }
 
-        .btn-add-to-fav i {
+        .btn-remove-to-fav i {
             font-size: 1.2rem;
         }
 </style>
