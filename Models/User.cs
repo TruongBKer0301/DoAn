@@ -21,6 +21,18 @@ namespace LapTopBD.Models
         [Required, StringLength(255)]
         public string? Password { get; set; }
 
+        public bool IsEmailVerified { get; set; }
+
+        [StringLength(10)]
+        public string? EmailVerificationOtp { get; set; }
+
+        public DateTime? EmailVerificationOtpExpiry { get; set; }
+
+        [StringLength(10)]
+        public string? PasswordResetOtp { get; set; }
+
+        public DateTime? PasswordResetOtpExpiry { get; set; }
+
         public DateTime RegDate { get; set; } = DateTime.Now;
 
         public DateTime? UpdationDate { get; set; }

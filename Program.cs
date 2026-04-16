@@ -52,7 +52,14 @@ builder.Services.AddAuthentication()
     });
 
 // Thêm dịch vụ MVC
-builder.Services.AddControllersWithViews();
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+}
+else
+{
+    builder.Services.AddControllersWithViews();
+}
 
 // Thêm antiforgery
 builder.Services.AddAntiforgery(options =>
@@ -64,8 +71,11 @@ builder.Services.AddAntiforgery(options =>
 builder.Services.AddAuthorization();
 builder.Services.AddScoped<IOnlineVisitorTracker, OnlineVisitorTracker>();
 builder.Services.Configure<VnPayOptions>(builder.Configuration.GetSection("VnPay"));
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+builder.Services.AddScoped<IEmailSender, SmtpEmailSender>();
 builder.Services.AddScoped<IVnPayService, VnPayService>();
 builder.Services.AddScoped<IPendingCheckoutStore, PendingCheckoutStore>();
+builder.Services.AddSingleton<IPolicyContentStore, JsonPolicyContentStore>();
 builder.Services.AddHttpClient();
 
 var app = builder.Build();
@@ -88,6 +98,68 @@ BEGIN
     );
     CREATE INDEX [IX_VisitLogs_VisitedAtUtc] ON [dbo].[VisitLogs] ([VisitedAtUtc]);
     CREATE INDEX [IX_VisitLogs_VisitorId] ON [dbo].[VisitLogs] ([VisitorId]);
+END
+");
+
+    db.Database.ExecuteSqlRaw(@"
+IF OBJECT_ID(N'dbo.ContactRequests', N'U') IS NULL
+BEGIN
+    CREATE TABLE [dbo].[ContactRequests] (
+        [Id] INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+        [FullName] NVARCHAR(100) NOT NULL,
+        [Email] NVARCHAR(150) NOT NULL,
+        [PhoneNumber] NVARCHAR(20) NOT NULL,
+        [Message] NVARCHAR(2000) NOT NULL,
+        [IsRead] BIT NOT NULL CONSTRAINT [DF_ContactRequests_IsRead] DEFAULT(0),
+        [ReadAt] DATETIME2 NULL,
+        [CreatedAt] DATETIME2 NOT NULL
+    );
+END
+
+IF COL_LENGTH('dbo.ContactRequests', 'IsRead') IS NULL
+BEGIN
+    ALTER TABLE [dbo].[ContactRequests]
+    ADD [IsRead] BIT NOT NULL CONSTRAINT [DF_ContactRequests_IsRead] DEFAULT(0);
+END
+
+IF COL_LENGTH('dbo.ContactRequests', 'ReadAt') IS NULL
+BEGIN
+    ALTER TABLE [dbo].[ContactRequests]
+    ADD [ReadAt] DATETIME2 NULL;
+END
+");
+
+    db.Database.ExecuteSqlRaw(@"
+IF COL_LENGTH('dbo.Users', 'IsEmailVerified') IS NULL
+BEGIN
+    ALTER TABLE [dbo].[Users]
+    ADD [IsEmailVerified] BIT NOT NULL CONSTRAINT [DF_Users_IsEmailVerified] DEFAULT(0);
+
+    EXEC('UPDATE [dbo].[Users] SET [IsEmailVerified] = 1');
+END
+
+IF COL_LENGTH('dbo.Users', 'EmailVerificationOtp') IS NULL
+BEGIN
+    ALTER TABLE [dbo].[Users]
+    ADD [EmailVerificationOtp] NVARCHAR(10) NULL;
+END
+
+IF COL_LENGTH('dbo.Users', 'EmailVerificationOtpExpiry') IS NULL
+BEGIN
+    ALTER TABLE [dbo].[Users]
+    ADD [EmailVerificationOtpExpiry] DATETIME2 NULL;
+END
+
+IF COL_LENGTH('dbo.Users', 'PasswordResetOtp') IS NULL
+BEGIN
+    ALTER TABLE [dbo].[Users]
+    ADD [PasswordResetOtp] NVARCHAR(10) NULL;
+END
+
+IF COL_LENGTH('dbo.Users', 'PasswordResetOtpExpiry') IS NULL
+BEGIN
+    ALTER TABLE [dbo].[Users]
+    ADD [PasswordResetOtpExpiry] DATETIME2 NULL;
 END
 ");
 }
@@ -113,6 +185,8 @@ app.UseAuthorization();
 app.UseSession();
 
 // Định tuyến
+app.MapControllers();
+
 app.MapControllerRoute(
     name: "areas",
     pattern: "{area:exists}/{controller=Admin}/{action=Dashboard}/{id?}");

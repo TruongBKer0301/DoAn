@@ -1,0 +1,143 @@
+@model IEnumerable<LapTopBD.Models.ContactRequest>
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Quản lý liên hệ";
+}
+
+<div class="container-fluid py-3">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="mb-0">Quản lý liên hệ</h2>
+        <span class="badge bg-primary">@Model.Count() liên hệ</span>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped align-middle contact-table">
+            <thead>
+                <tr>
+                    <th class="col-id">ID</th>
+                    <th class="col-name">Họ và tên</th>
+                    <th class="col-email">Email</th>
+                    <th class="col-phone">Số điện thoại</th>
+                    <th class="col-message">Nội dung</th>
+                    <th class="col-status">Trạng thái</th>
+                    <th class="col-created">Ngày gửi</th>
+                    <th class="col-actions">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var contact in Model)
+                {
+                    <tr class="@(contact.IsRead ? string.Empty : "table-warning")">
+                        <td class="col-id text-center">@contact.Id</td>
+                        <td class="col-name">@contact.FullName</td>
+                        <td class="col-email">@contact.Email</td>
+                        <td class="col-phone text-nowrap">@contact.PhoneNumber</td>
+                        <td class="col-message">@contact.Message</td>
+                        <td class="col-status text-center">
+                            @if (contact.IsRead)
+                            {
+                                <span class="badge bg-success">Đã xử lý</span>
+                                if (contact.ReadAt.HasValue)
+                                {
+                                    <div class="small text-muted mt-1">@contact.ReadAt.Value.ToString("dd/MM HH:mm")</div>
+                                }
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning text-dark">Mới</span>
+                            }
+                        </td>
+                        <td class="col-created text-nowrap">@contact.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td class="col-actions">
+                            <div class="d-flex gap-2 flex-wrap">
+                                @if (!contact.IsRead)
+                                {
+                                    <button type="button" class="btn btn-sm btn-success mark-read-btn" data-id="@contact.Id">Đánh dấu đã xử lý</button>
+                                }
+                                <button type="button" class="btn btn-sm btn-danger delete-contact-btn" data-id="@contact.Id">Xóa</button>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div id="message" class="mt-3"></div>
+</div>
+
+<style>
+    .contact-table .col-id {
+        width: 70px;
+    }
+
+    .contact-table .col-name {
+        min-width: 160px;
+    }
+
+    .contact-table .col-email {
+        min-width: 230px;
+        word-break: break-word;
+    }
+
+    .contact-table .col-phone {
+        min-width: 130px;
+    }
+
+    .contact-table .col-message {
+        min-width: 320px;
+        max-width: 420px;
+        white-space: pre-wrap;
+    }
+
+    .contact-table .col-status {
+        width: 130px;
+    }
+
+    .contact-table .col-created {
+        width: 160px;
+    }
+
+    .contact-table .col-actions {
+        min-width: 180px;
+    }
+</style>
+
+@section Scripts {
+    <script>
+        $(document).on("click", ".mark-read-btn", function () {
+            var id = $(this).data("id");
+            $.post("@Url.Action("MarkRead", "Contact", new { area = "Admin" })", { id: id })
+                .done(function (response) {
+                    if (response.success) {
+                        location.reload();
+                    } else {
+                        $("#message").html('<div class="alert alert-danger">' + response.message + '</div>');
+                    }
+                })
+                .fail(function () {
+                    $("#message").html('<div class="alert alert-danger">Không thể cập nhật trạng thái liên hệ.</div>');
+                });
+        });
+
+        $(document).on("click", ".delete-contact-btn", function () {
+            if (!confirm("Bạn có chắc muốn xóa liên hệ này không?")) {
+                return;
+            }
+
+            var id = $(this).data("id");
+            $.post("@Url.Action("DeleteContact", "Contact", new { area = "Admin" })", { id: id })
+                .done(function (response) {
+                    if (response.success) {
+                        location.reload();
+                    } else {
+                        $("#message").html('<div class="alert alert-danger">' + response.message + '</div>');
+                    }
+                })
+                .fail(function () {
+                    $("#message").html('<div class="alert alert-danger">Không thể xóa liên hệ.</div>');
+                });
+        });
+    </script>
+}

@@ -1,0 +1,43 @@
+@model LapTopBD.Models.ViewModels.Users.PolicyPageViewModel
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+
+<div class="container-fluid bg-secondary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 260px">
+        <h1 class="font-weight-semi-bold text-uppercase mb-3">@Model.PageTitle</h1>
+        <div class="d-inline-flex">
+            <p class="m-0"><a href="@Url.Action("Index", "Home")">Trang chu</a></p>
+            <p class="m-0 px-2">-</p>
+            <p class="text-danger m-0">@Model.PageTitle</p>
+        </div>
+    </div>
+</div>
+
+<div class="container py-4 policy-page-content">
+    @Html.Raw(Model.HtmlContent)
+</div>
+
+<style>
+    .policy-page-content {
+        max-width: 980px;
+        line-height: 1.75;
+        font-size: 15px;
+    }
+
+    .policy-page-content h2,
+    .policy-page-content h3 {
+        margin-top: 1.25rem;
+        margin-bottom: 0.75rem;
+        font-weight: 700;
+    }
+
+    .policy-page-content ul,
+    .policy-page-content ol {
+        padding-left: 1.2rem;
+    }
+
+    .policy-page-content p {
+        margin-bottom: 0.75rem;
+    }
+</style>

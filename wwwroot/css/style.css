@@ -207,7 +207,56 @@
         font-size: 1rem;
     }
 
-    .btn-add-to-cart :hover {
+.product-action-row {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+}
+
+.product-action-row .btn-add-to-cart,
+.product-action-row .btn-buy-now {
+    flex: 1;
+}
+
+.btn-buy-now {
+    background: linear-gradient(135deg, #ff8f1f, #ff5a1f);
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+    box-shadow: 0 6px 14px rgba(255, 111, 0, 0.28);
+}
+
+.btn-buy-now:hover {
+    filter: brightness(1.04);
+    transform: translateY(-1px);
+    box-shadow: 0 9px 18px rgba(255, 111, 0, 0.35);
+}
+
+.btn-buy-now:active {
+    transform: translateY(0);
+}
+
+.detail-action-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.detail-action-row .btn {
+    flex: 1;
+    min-width: 170px;
+}
+
+    .btn-add-to-cart:hover {
         background: #ff2222;
     }
 
