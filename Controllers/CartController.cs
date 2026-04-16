@@ -251,6 +251,11 @@ namespace LapTopBD.Controllers
         [HttpPost]
         public async Task<IActionResult> Checkout([FromBody] CheckoutViewModel model)
         {
+            if (model == null)
+            {
+                return Json(new { success = false, message = "Dữ liệu thanh toán không hợp lệ!" });
+            }
+
             var userId = await GetUserIdAsync();
 
             if (userId == 0)
@@ -271,11 +276,19 @@ namespace LapTopBD.Controllers
                 return Json(new { success = false, message = "Giỏ hàng của bạn đang trống!" });
             }
 
-            if (string.IsNullOrWhiteSpace(model.City) || string.IsNullOrWhiteSpace(model.District) ||
+            model.Name = model.Name?.Trim();
+            model.ContactNo = model.ContactNo?.Trim();
+            model.City = model.City?.Trim();
+            model.District = model.District?.Trim();
+            model.Ward = model.Ward?.Trim();
+            model.Address = model.Address?.Trim();
+
+            if (string.IsNullOrWhiteSpace(model.Name) || string.IsNullOrWhiteSpace(model.ContactNo) ||
+                string.IsNullOrWhiteSpace(model.City) || string.IsNullOrWhiteSpace(model.District) ||
                 string.IsNullOrWhiteSpace(model.Ward) || string.IsNullOrWhiteSpace(model.Address))
             {
                 Console.WriteLine("[DEBUG] Thiếu thông tin giao hàng");
-                return Json(new { success = false, message = "Vui lòng nhập đầy đủ thông tin địa chỉ giao hàng!" });
+                return Json(new { success = false, message = "Vui lòng nhập đầy đủ thông tin giao hàng!" });
             }
             var errors = cartItems
                 .Where(i => i.Product != null && i.Quantity > i.Product.quantity)

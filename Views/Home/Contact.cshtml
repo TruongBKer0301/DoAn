@@ -1,0 +1,72 @@
+@model LapTopBD.Models.ContactRequest
+
+@{
+    ViewData["Title"] = "Liên hệ";
+}
+
+<div class="container-fluid pt-4">
+    <div class="row px-xl-5">
+        <div class="col-12 mb-4">
+            <h2 class="font-weight-semi-bold mb-2">Liên hệ với chúng tôi</h2>
+            <p class="text-muted mb-0">Nếu bạn cần tư vấn sản phẩm, bảo hành hoặc hỗ trợ đơn hàng, đội ngũ LAPTOP | BD luôn sẵn sàng hỗ trợ.</p>
+        </div>
+    </div>
+
+    <div class="row px-xl-5 pb-5">
+        <div class="col-lg-7 mb-4">
+            <div class="bg-light p-4 rounded h-100">
+                <h5 class="font-weight-bold mb-3">Gửi yêu cầu hỗ trợ</h5>
+                @if (TempData["ContactSuccess"] != null)
+                {
+                    <div class="alert alert-success" role="alert">
+                        @TempData["ContactSuccess"]
+                    </div>
+                }
+
+                <form asp-action="Contact" asp-controller="Home" method="post" novalidate>
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
+                    <div class="form-row">
+                        <div class="col-md-6 form-group">
+                            <label asp-for="FullName">Họ và tên</label>
+                            <input asp-for="FullName" type="text" class="form-control" placeholder="Nhập họ và tên" />
+                            <span asp-validation-for="FullName" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label asp-for="Email">Email</label>
+                            <input asp-for="Email" type="email" class="form-control" placeholder="Nhập email" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PhoneNumber">Số điện thoại</label>
+                        <input asp-for="PhoneNumber" type="text" class="form-control" placeholder="Nhập số điện thoại" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Message">Nội dung</label>
+                        <textarea asp-for="Message" rows="5" class="form-control" placeholder="Mô tả yêu cầu của bạn"></textarea>
+                        <span asp-validation-for="Message" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary px-4">Gửi liên hệ</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-lg-5 mb-4">
+            <div class="bg-light p-4 rounded h-100">
+                <h5 class="font-weight-bold mb-3">Thông tin cửa hàng</h5>
+                <p class="mb-3"><i class="fa fa-map-marker-alt text-primary mr-2"></i>TRƯỜNG ĐẠI HỌC BÁCH KHOA, ĐHQG-HCM</p>
+                <p class="mb-3"><i class="fa fa-phone-alt text-primary mr-2"></i>+84 123 456 789</p>
+                <p class="mb-4"><i class="fa fa-envelope text-primary mr-2"></i>admin@gmail.com</p>
+                <h6 class="font-weight-bold">Giờ làm việc</h6>
+                <p class="mb-1">Thứ 2 - Thứ 7: 08:00 - 21:00</p>
+                <p class="mb-0">Chủ nhật: 09:00 - 18:00</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

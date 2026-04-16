@@ -142,25 +142,25 @@
         <div class="col-sm-6 col-xl-3">
             <div class="kpi-box kpi-blue">
                 <p class="mb-1">Tổng người dùng</p>
-                <h3 id="totalUsersKpi">@Model.TotalUsers</h3>
+                <h3 id="totalUsersKpi" class="kpi-number-red">@Model.TotalUsers</h3>
             </div>
         </div>
         <div class="col-sm-6 col-xl-3">
             <div class="kpi-box kpi-green">
                 <p class="mb-1">Tổng đơn hàng</p>
-                <h3 id="totalOrdersKpi">@Model.TotalOrders</h3>
+                <h3 id="totalOrdersKpi" class="kpi-number-red">@Model.TotalOrders</h3>
             </div>
         </div>
         <div class="col-sm-6 col-xl-3">
             <div class="kpi-box kpi-orange">
                 <p class="mb-1">Doanh thu tuần</p>
-                <h3 id="weekRevenueKpi">@Model.WeekRevenue.ToString("N0") đ</h3>
+                <h3 id="weekRevenueKpi" class="kpi-number-red">@Model.WeekRevenue.ToString("N0") đ</h3>
             </div>
         </div>
         <div class="col-sm-6 col-xl-3">
             <div class="kpi-box kpi-dark">
                 <p class="mb-1">Sản phẩm</p>
-                <h3 id="totalProductKpi">@Model.TotalProduct</h3>
+                <h3 id="totalProductKpi" class="kpi-number-red">@Model.TotalProduct</h3>
             </div>
         </div>
     </div>
@@ -290,6 +290,10 @@
         margin: 0;
         font-size: 1.35rem;
         font-weight: 700;
+    }
+
+    .kpi-number-red {
+        color: #dc2626;
     }
 
     .kpi-blue { background: linear-gradient(120deg, #2563eb, #1d4ed8); }
