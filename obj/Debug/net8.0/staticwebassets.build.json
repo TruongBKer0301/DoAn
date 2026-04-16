@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "RO5XOv0p/a3KxIoOajDSvb5JPBdaPqIGTbIA9FmkDXQ=",
+  "Hash": "rkLh47i5DmPYwCzmQ1fYk9YI8eoV5FNG54X010DNjg0=",
   "Source": "LapTopBD",
   "BasePath": "_content/LapTopBD",
   "Mode": "Default",
@@ -2173,8 +2173,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "pbk4e2wb6j",
-      "Integrity": "G+o/eC8FEGjyIimvKibIzViaq7MC1W5GMTFMPfJT+44=",
+      "Fingerprint": "fjqggr3px4",
+      "Integrity": "pUl4Aitak+vFNSUmWk0GkTnhK4xWe4E5wBmNmU9qN+A=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\script.js"
@@ -15569,6 +15569,51 @@
       ]
     },
     {
+      "Route": "js/script.fjqggr3px4.js",
+      "AssetFile": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\js\\script.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "81029"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"pUl4Aitak+vFNSUmWk0GkTnhK4xWe4E5wBmNmU9qN+A=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 16 Apr 2026 17:51:31 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "fjqggr3px4"
+        },
+        {
+          "Name": "label",
+          "Value": "js/script.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-pUl4Aitak+vFNSUmWk0GkTnhK4xWe4E5wBmNmU9qN+A="
+        }
+      ]
+    },
+    {
       "Route": "js/script.js",
       "AssetFile": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\js\\script.js",
       "Selectors": [],
@@ -15579,7 +15624,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "79962"
+          "Value": "81029"
         },
         {
           "Name": "Content-Type",
@@ -15587,11 +15632,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"G+o/eC8FEGjyIimvKibIzViaq7MC1W5GMTFMPfJT+44=\""
+          "Value": "\"pUl4Aitak+vFNSUmWk0GkTnhK4xWe4E5wBmNmU9qN+A=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 16 Apr 2026 17:35:36 GMT"
+          "Value": "Thu, 16 Apr 2026 17:51:31 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -15601,52 +15646,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-G+o/eC8FEGjyIimvKibIzViaq7MC1W5GMTFMPfJT+44="
-        }
-      ]
-    },
-    {
-      "Route": "js/script.pbk4e2wb6j.js",
-      "AssetFile": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\js\\script.js",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "79962"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"G+o/eC8FEGjyIimvKibIzViaq7MC1W5GMTFMPfJT+44=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 16 Apr 2026 17:35:36 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "pbk4e2wb6j"
-        },
-        {
-          "Name": "label",
-          "Value": "js/script.js"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-G+o/eC8FEGjyIimvKibIzViaq7MC1W5GMTFMPfJT+44="
+          "Value": "sha256-pUl4Aitak+vFNSUmWk0GkTnhK4xWe4E5wBmNmU9qN+A="
         }
       ]
     },
