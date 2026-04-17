@@ -10,6 +10,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Net.Mail;
 
+
 namespace LapTopBD.Controllers
 {
     public class UserAuthController : Controller
@@ -84,8 +85,8 @@ namespace LapTopBD.Controllers
                 return Json(new { success = false, message = "Tài khoản không tồn tại." });
             }
 
-            if (user.Password != GetMD5Hash(model.Password ?? string.Empty))
-            {
+            if (!PasswordHelper.VerifyPassword(model.Password ?? string.Empty, user.Password))
+                {
                 return Json(new { success = false, message = "Mật khẩu không đúng." });
             }
 
@@ -161,7 +162,7 @@ namespace LapTopBD.Controllers
                 Email = email,
                 Name = username,
                 ContactNo = phone,
-                Password = GetMD5Hash(password),
+                Password = PasswordHelper.HashPassword(password),
                 RegDate = DateTimeHelper.Now,
                 IsEmailVerified = false,
                 EmailVerificationOtp = otp,
@@ -460,7 +461,7 @@ namespace LapTopBD.Controllers
                 return Json(new { success = false, message = "Mã OTP không đúng hoặc đã hết hạn." });
             }
 
-            user.Password = GetMD5Hash(model.NewPassword ?? string.Empty);
+            user.Password = PasswordHelper.HashPassword(model.NewPassword ?? string.Empty);
             user.PasswordResetOtp = null;
             user.PasswordResetOtpExpiry = null;
             user.UpdationDate = DateTimeHelper.Now;
@@ -521,20 +522,20 @@ namespace LapTopBD.Controllers
             return View();
         }
 
-        private static string GetMD5Hash(string input)
-        {
-            if (string.IsNullOrEmpty(input))
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
+        //private static string GetMD5Hash(string input)
+        //{
+        //    if (string.IsNullOrEmpty(input))
+        //    {
+        //        throw new ArgumentNullException(nameof(input));
+        //    }
 
-            using (var md5 = MD5.Create())
-            {
-                byte[] inputBytes = Encoding.UTF8.GetBytes(input);
-                byte[] hashBytes = md5.ComputeHash(inputBytes);
-                return BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
-            }
-        }
+        //    using (var md5 = MD5.Create())
+        //    {
+        //        byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+        //        byte[] hashBytes = md5.ComputeHash(inputBytes);
+        //        return BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
+        //    }
+        //}
 
         private async Task SignInUserAsync(User user, bool rememberMe)
         {

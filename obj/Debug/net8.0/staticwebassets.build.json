@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "7Miww08vDS4WOrfSC3VGVwpiPdQbinhDPwNTxxsjXDc=",
+  "Hash": "+hOCt/hxpkf/VMiFoOIDd7o04NgCAsj5IE0oHu4Xtf8=",
   "Source": "LapTopBD",
   "BasePath": "_content/LapTopBD",
   "Mode": "Default",
@@ -141,6 +141,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\avatar\\d7f5d48f-7a38-4295-96c4-05c05748dc98.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\avatar\\de6438c4-e12e-4e89-9636-17ee20a39c58.jpg",
+      "SourceId": "LapTopBD",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\",
+      "BasePath": "_content/LapTopBD",
+      "RelativePath": "avatar/de6438c4-e12e-4e89-9636-17ee20a39c58#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "zuc5y8va8y",
+      "Integrity": "W8IR2MREaXJaYffFWagPY4EQlWBpo0aOhHH2tEX/DUw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\avatar\\de6438c4-e12e-4e89-9636-17ee20a39c58.jpg"
     },
     {
       "Identity": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\cart.html",
@@ -7693,6 +7714,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-fY8lZtwvdkeVeVW8uXJEUaNVEaj/hgK1ge6mBhBPzsg="
+        }
+      ]
+    },
+    {
+      "Route": "avatar/de6438c4-e12e-4e89-9636-17ee20a39c58.jpg",
+      "AssetFile": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\avatar\\de6438c4-e12e-4e89-9636-17ee20a39c58.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "68054"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"W8IR2MREaXJaYffFWagPY4EQlWBpo0aOhHH2tEX/DUw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 16 Apr 2026 23:57:56 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-W8IR2MREaXJaYffFWagPY4EQlWBpo0aOhHH2tEX/DUw="
+        }
+      ]
+    },
+    {
+      "Route": "avatar/de6438c4-e12e-4e89-9636-17ee20a39c58.zuc5y8va8y.jpg",
+      "AssetFile": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\avatar\\de6438c4-e12e-4e89-9636-17ee20a39c58.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "68054"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"W8IR2MREaXJaYffFWagPY4EQlWBpo0aOhHH2tEX/DUw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 16 Apr 2026 23:57:56 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "zuc5y8va8y"
+        },
+        {
+          "Name": "label",
+          "Value": "avatar/de6438c4-e12e-4e89-9636-17ee20a39c58.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-W8IR2MREaXJaYffFWagPY4EQlWBpo0aOhHH2tEX/DUw="
         }
       ]
     },
@@ -15591,7 +15694,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 16 Apr 2026 21:31:23 GMT"
+          "Value": "Fri, 17 Apr 2026 00:05:12 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -15628,7 +15731,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 16 Apr 2026 21:31:23 GMT"
+          "Value": "Fri, 17 Apr 2026 00:05:12 GMT"
         },
         {
           "Name": "Cache-Control",
