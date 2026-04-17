@@ -321,17 +321,17 @@ namespace LapTopBD.Areas.Admin.Controllers
             // Kiểm tra nếu có đổi mật khẩu
             if (!string.IsNullOrEmpty(model.OldPassword) && !string.IsNullOrEmpty(model.NewPassword))
             {
-                string oldPasswordHash = GetMD5Hash(model.OldPassword);
+                string oldPasswordHash = PasswordHelper.HashPassword(model.OldPassword);
 
                 // Kiểm tra mật khẩu cũ mà không hash
-                if (admin.Password != GetMD5Hash(model.OldPassword))
+                if (!PasswordHelper.VerifyPassword(model.OldPassword, admin.Password))
                 {
                     return Json(new { success = false, message = "Mật khẩu cũ không chính xác!" });
                 }
 
 
                 // Chỉ hash mật khẩu mới
-                admin.Password = GetMD5Hash(model.NewPassword);
+                admin.Password = PasswordHelper.HashPassword(model.NewPassword);
             }
 
             // Xử lý ảnh đại diện nếu có upload ảnh mới
@@ -458,7 +458,7 @@ namespace LapTopBD.Areas.Admin.Controllers
                     Username = model.Username,
                     FullName = model.FullName ?? "Chưa cập nhật",
                     Roles = model.Roles ?? "User",
-                    Password = GetMD5Hash(model.Password),
+                    Password = PasswordHelper.HashPassword(model.Password),
                     Status = model.Status ?? "Hoạt động",
                     CreationDate = DateTime.Now,
                     Avatar = avatarPath
@@ -556,15 +556,15 @@ namespace LapTopBD.Areas.Admin.Controllers
         }
 
         // Hàm Hash mật khẩu MD5
-        private static string GetMD5Hash(string input)
-        {
-            using (var md5 = MD5.Create())
-            {
-                byte[] inputBytes = Encoding.UTF8.GetBytes(input);
-                byte[] hashBytes = md5.ComputeHash(inputBytes);
-                return BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
-            }
-        }
+        //private static string GetMD5Hash(string input)
+        //{
+        //    using (var md5 = MD5.Create())
+        //    {
+        //        byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+        //        byte[] hashBytes = md5.ComputeHash(inputBytes);
+        //        return BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
+        //    }
+        //}
 
         public class FetchImageRequest
         {

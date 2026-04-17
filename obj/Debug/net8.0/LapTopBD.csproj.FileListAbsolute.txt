@@ -1142,3 +1142,4 @@ C:\Users\PC\source\repos\DoAn\DoAn\bin\Debug\net8.0\refs\WindowsBase.dll
 C:\Users\PC\source\repos\DoAn\DoAn\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
 C:\Users\PC\source\repos\DoAn\DoAn\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.dll
 C:\Users\PC\source\repos\DoAn\DoAn\obj\Debug\net8.0\LapTopBD.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\PC\source\repos\DoAn\DoAn\bin\Debug\net8.0\BCrypt.Net-Next.dll

@@ -1,5 +1,6 @@
 ﻿using LapTopBD.Data;
 using LapTopBD.Models.ViewModels.Admin;
+using LapTopBD.Utilities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -38,7 +39,7 @@ namespace LapTopBD.Areas.Admin.Controllers
                 .Where(a => a.Username == model.Username)
                 .FirstOrDefaultAsync();
 
-            if (admin == null || admin.Password != GetMD5Hash((model.Password ?? "")))
+            if (admin == null || !PasswordHelper.VerifyPassword( model.Password ?? "", admin.Password))
             {
                 return Json(new { success = false, message = "Sai tài khoản hoặc mật khẩu." });
             }
