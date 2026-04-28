@@ -21,6 +21,7 @@ namespace LapTopBD.Data
         public DbSet<Banner> Banner { get; set; }
         public DbSet<VisitLog> VisitLogs { get; set; }
         public DbSet<ContactRequest> ContactRequests { get; set; }
+        public DbSet<BlogPost> BlogPosts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -99,6 +100,16 @@ namespace LapTopBD.Data
 
             modelBuilder.Entity<ContactRequest>()
                 .ToTable("ContactRequests");
+
+            modelBuilder.Entity<BlogPost>()
+                .HasOne(b => b.Admin)
+                .WithMany()
+                .HasForeignKey(b => b.AdminId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<BlogPost>()
+                .HasIndex(b => b.Slug)
+                .IsUnique();
 
          
         }

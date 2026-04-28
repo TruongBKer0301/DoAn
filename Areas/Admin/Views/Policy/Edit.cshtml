@@ -1,11 +1,11 @@
 @model LapTopBD.Models.ViewModels.Admin.PolicyEditorViewModel
 @{
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
-    ViewData["Title"] = "Quan ly chinh sach";
+    ViewData["Title"] = "Quản lý chính sách";
 }
 
 <div class="container mt-4">
-    <h2 class="text-center mb-4">Quan ly noi dung chinh sach</h2>
+    <h2 class="text-center mb-4">Quản lý nội dung chính sách</h2>
 
     @if (TempData["Success"] != null)
     {
@@ -16,39 +16,61 @@
         @Html.AntiForgeryToken()
 
         <div class="card mb-4">
-            <div class="card-header fw-bold">Chinh sach bao hanh</div>
+            <div class="card-header fw-bold">Chính sách bảo hành</div>
             <div class="card-body">
                 <textarea id="warrantyEditor" asp-for="WarrantyHtml" class="form-control" rows="16"></textarea>
             </div>
         </div>
 
         <div class="card mb-4">
-            <div class="card-header fw-bold">Chinh sach giao hang</div>
+            <div class="card-header fw-bold">Chính sách giao hàng</div>
             <div class="card-body">
                 <textarea id="shippingEditor" asp-for="ShippingHtml" class="form-control" rows="16"></textarea>
             </div>
         </div>
 
         <div class="text-end">
-            <button type="submit" class="btn btn-primary">Luu noi dung</button>
+            <button type="submit" class="btn btn-primary">Lưu nội dung</button>
         </div>
     </form>
 </div>
 
 @section Scripts {
+    <script src="https://cdn.ckeditor.com/ckeditor5/48.0.0/classic/ckeditor.js"></script>
     <script>
-        (function () {
-            if (typeof CKEDITOR === 'undefined') {
-                return;
-            }
+        let warrantyEditorInstance;
+        let shippingEditorInstance;
 
-            if (!CKEDITOR.instances.warrantyEditor) {
-                CKEDITOR.replace('warrantyEditor');
-            }
+        document.addEventListener("DOMContentLoaded", function () {
+            ClassicEditor
+                .create(document.querySelector('#warrantyEditor'))
+                .then(editor => {
+                    warrantyEditorInstance = editor;
+                    editor.ui.view.editable.element.style.minHeight = '360px';
+                })
+                .catch(error => {
+                    console.error(error);
+                });
 
-            if (!CKEDITOR.instances.shippingEditor) {
-                CKEDITOR.replace('shippingEditor');
-            }
-        })();
+            ClassicEditor
+                .create(document.querySelector('#shippingEditor'))
+                .then(editor => {
+                    shippingEditorInstance = editor;
+                    editor.ui.view.editable.element.style.minHeight = '360px';
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+
+            document.querySelector('form').addEventListener('submit', function () {
+                if (warrantyEditorInstance) {
+                    document.querySelector('#warrantyEditor').value = warrantyEditorInstance.getData();
+                }
+
+                if (shippingEditorInstance) {
+                    document.querySelector('#shippingEditor').value = shippingEditorInstance.getData();
+                }
+            });
+        });
     </script>
 }

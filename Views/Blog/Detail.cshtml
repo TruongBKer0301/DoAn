@@ -1,0 +1,174 @@
+@model LapTopBD.Models.BlogPost
+@using System.Text.RegularExpressions
+@{
+    ViewData["Title"] = Model.Title;
+    var related = ViewBag.RelatedPosts as IEnumerable<LapTopBD.Models.BlogPost> ?? Enumerable.Empty<LapTopBD.Models.BlogPost>();
+
+    string Excerpt(string? html, int length = 140)
+    {
+        var text = Regex.Replace(html ?? string.Empty, "<.*?>", string.Empty).Trim();
+        if (text.Length <= length)
+        {
+            return text;
+        }
+
+        return text.Substring(0, length).TrimEnd() + "...";
+    }
+}
+
+<style>
+    .blog-detail-shell {
+        background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+    }
+
+    .blog-detail-hero {
+        border-radius: 28px;
+        overflow: hidden;
+        background: #0f172a;
+        color: #fff;
+        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
+    }
+
+    .blog-detail-hero img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .blog-detail-content {
+        background: #fff;
+        border-radius: 24px;
+        padding: 36px;
+        box-shadow: 0 16px 42px rgba(15, 23, 42, 0.08);
+        border: 1px solid rgba(148, 163, 184, 0.16);
+    }
+
+    .blog-detail-content h1 {
+        letter-spacing: -0.04em;
+        line-height: 1.08;
+    }
+
+    .blog-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.12);
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 12px;
+    }
+
+    .blog-content {
+        color: #1e293b;
+        line-height: 1.95;
+        font-size: 1.06rem;
+    }
+
+    .blog-content img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 18px;
+    }
+
+    .blog-content h2,
+    .blog-content h3,
+    .blog-content h4 {
+        margin-top: 1.5rem;
+        margin-bottom: .75rem;
+        font-weight: 800;
+        color: #0f172a;
+    }
+
+    .blog-sidebar-card {
+        border-radius: 22px;
+        overflow: hidden;
+        background: #fff;
+        box-shadow: 0 16px 42px rgba(15, 23, 42, 0.08);
+        border: 1px solid rgba(148, 163, 184, 0.16);
+    }
+
+    .blog-related-item + .blog-related-item {
+        border-top: 1px solid rgba(148, 163, 184, 0.18);
+    }
+
+    .blog-related-item a {
+        color: #0f172a;
+        text-decoration: none;
+    }
+
+    .blog-related-item a:hover {
+        color: #c2410c;
+    }
+</style>
+
+<div class="blog-detail-shell py-5">
+    <div class="container">
+        <div class="mb-4">
+            <a href="@Url.Action("Index", "Blog")" class="text-dark text-decoration-none">
+                <i class="fa fa-arrow-left mr-2"></i>Quay lại Blog
+            </a>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <div class="blog-detail-hero mb-4">
+                    <div class="row no-gutters">
+                        <div class="col-md-5">
+                            <img src="@(string.IsNullOrWhiteSpace(Model.CoverImageUrl) ? "/images/laptop.png" : Model.CoverImageUrl)" alt="@Model.Title" />
+                        </div>
+                        <div class="col-md-7 p-4 p-lg-5 d-flex flex-column justify-content-center">
+                            <span class="blog-kicker mb-3">Blog / Bài viết</span>
+                            <h1 class="mb-3">@Model.Title</h1>
+                            <p class="mb-4" style="color: rgba(255,255,255,.82);">@(Model.Summary ?? Excerpt(Model.ContentHtml, 180))</p>
+                            <div class="d-flex flex-wrap gap-3 text-white-50">
+                                <span><i class="fa fa-user mr-2"></i>@(Model.Admin?.FullName ?? "Admin")</span>
+                                <span><i class="fa fa-calendar mr-2"></i>@(Model.PublishedAt ?? Model.CreatedAt).ToString("dd/MM/yyyy")</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog-detail-content">
+                    <div class="blog-content">
+                        @Html.Raw(Model.ContentHtml)
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="blog-sidebar-card mb-4">
+                    <div class="p-4 border-bottom">
+                        <div class="meta-pill mb-3">Thông tin bài viết</div>
+                        <p class="mb-2"><strong>Tác giả:</strong> @(Model.Admin?.FullName ?? "Admin")</p>
+                        <p class="mb-0"><strong>Ngày đăng:</strong> @(Model.PublishedAt ?? Model.CreatedAt).ToString("dd/MM/yyyy HH:mm")</p>
+                    </div>
+                    <div class="p-4">
+                        <a class="btn btn-dark btn-block" href="@Url.Action("Index", "Shop")">Mua sản phẩm ngay</a>
+                    </div>
+                </div>
+
+                @if (related.Any())
+                {
+                    <div class="blog-sidebar-card">
+                        <div class="p-4 border-bottom">
+                            <h5 class="mb-0">Bài viết liên quan</h5>
+                        </div>
+                        <div class="p-4">
+                            @foreach (var item in related)
+                            {
+                                <div class="blog-related-item py-3">
+                                    <small class="text-muted d-block mb-1">@(item.PublishedAt ?? item.CreatedAt).ToString("dd/MM/yyyy")</small>
+                                    <a href="@Url.Action("Detail", "Blog", new { slug = item.Slug })" class="font-weight-bold d-block mb-1">@item.Title</a>
+                                    <p class="text-muted mb-0">@(item.Summary ?? Excerpt(item.ContentHtml))</p>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
