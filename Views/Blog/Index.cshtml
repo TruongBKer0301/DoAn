@@ -1,0 +1,338 @@
+@model IEnumerable<LapTopBD.Models.BlogPost>
+@using System.Text.RegularExpressions
+@{
+    ViewData["Title"] = "Blog";
+    var featured = ViewBag.FeaturedPost as LapTopBD.Models.BlogPost;
+    var currentPage = ViewBag.CurrentPage as int? ?? 1;
+    var totalPages = ViewBag.TotalPages as int? ?? 1;
+    var searchQuery = ViewBag.SearchQuery as string;
+
+    string Excerpt(string? html, int length = 180)
+    {
+        var text = Regex.Replace(html ?? string.Empty, "<.*?>", string.Empty).Trim();
+        if (text.Length <= length)
+        {
+            return text;
+        }
+
+        return text.Substring(0, length).TrimEnd() + "...";
+    }
+}
+
+<style>
+    .blog-hero {
+        position: relative;
+        overflow: hidden;
+        border-radius: 28px;
+        background: linear-gradient(135deg, #102d4a 0%, #0f172a 48%, #7c2d12 100%);
+        color: #fff;
+        padding: 56px;
+        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.22);
+    }
+
+    .blog-hero::after {
+        content: "";
+        position: absolute;
+        inset: auto -80px -120px auto;
+        width: 260px;
+        height: 260px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(248, 113, 113, 0.35), transparent 70%);
+    }
+
+    .blog-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.12);
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 12px;
+    }
+
+    .blog-hero h1 {
+        font-size: clamp(2.2rem, 4vw, 4.6rem);
+        line-height: 1.02;
+        letter-spacing: -0.04em;
+        margin: 18px 0;
+        max-width: 11ch;
+    }
+
+    .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: 24px;
+    }
+
+    .blog-featured,
+    .blog-card {
+        border-radius: 24px;
+        overflow: hidden;
+        background: #fff;
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+        border: 1px solid rgba(148, 163, 184, 0.16);
+    }
+
+    .blog-featured {
+        grid-column: span 12;
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        min-height: 420px;
+    }
+
+    .blog-featured-media {
+        position: relative;
+        background: #e5eef8;
+        min-height: 320px;
+    }
+
+    .blog-featured-media img,
+    .blog-card-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .blog-featured-content,
+    .blog-card-body {
+        padding: 28px;
+    }
+
+    .blog-card {
+        grid-column: span 4;
+        transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .blog-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 24px 48px rgba(15, 23, 42, 0.12);
+    }
+
+    .blog-card-media {
+        aspect-ratio: 16 / 10;
+        background: linear-gradient(135deg, #cbd5e1, #e2e8f0);
+    }
+
+    .meta-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: #eef2ff;
+        color: #3730a3;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .08em;
+    }
+
+    .blog-title {
+        color: #0f172a;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+    }
+
+    .blog-title a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .blog-title a:hover {
+        color: #c2410c;
+    }
+
+    .blog-excerpt {
+        color: #475569;
+        line-height: 1.8;
+    }
+
+    .blog-pagination .page-link {
+        border-radius: 14px !important;
+        margin: 0 6px;
+        border: 1px solid rgba(148, 163, 184, 0.28);
+        color: #0f172a;
+    }
+
+    .blog-pagination .active .page-link {
+        background: #0f172a;
+        border-color: #0f172a;
+        color: #fff;
+    }
+
+    .blog-search-box {
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        border-radius: 20px;
+        padding: 18px;
+        backdrop-filter: blur(16px);
+    }
+
+    .blog-search-box .form-control {
+        background: rgba(255, 255, 255, 0.92);
+        border: 0;
+        border-radius: 14px;
+        min-height: 52px;
+    }
+
+    @@media (max-width: 992px) {
+        .blog-featured {
+            grid-template-columns: 1fr;
+        }
+
+        .blog-card {
+            grid-column: span 6;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .blog-hero {
+            padding: 28px;
+        }
+
+        .blog-card {
+            grid-column: span 12;
+        }
+    }
+</style>
+
+<div class="container-fluid py-5">
+    <div class="container">
+        <section class="blog-hero mb-5">
+            <div class="position-relative" style="z-index:1;">
+                <span class="blog-kicker mb-3">Blog / Tin tức / Mẹo hay</span>
+                <h3 style="color: #202abc;">Bài Viết Công Nghệ Dành Cho Khách Hàng</h3>
+                <p class="lead mb-4" style="max-width: 760px; color: rgba(255,255,255,.84);">
+                    Cập nhật tin tức, mẹo sử dụng laptop và những chia sẻ ngắn gọn, dễ đọc ngay trên website.
+                </p>
+                <div class="blog-search-box mb-4">
+                    <form asp-action="Index" asp-controller="Blog" method="get" class="row g-2 align-items-center">
+                        <div class="col-md-9">
+                            <input name="q" value="@searchQuery" class="form-control form-control-lg rounded-pill"
+                                   placeholder="Tìm bài viết theo từ khóa..." />
+                        </div>
+                        <div class="col-md-3 d-grid gap-2">
+                            <button type="submit" class="btn btn-light btn-lg rounded-pill">
+                                Tìm kiếm
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="d-flex flex-wrap gap-2">
+                    <a class="btn btn-light btn-lg px-4 rounded-pill" href="#latest-posts">
+                        Xem bài viết mới
+                    </a>
+                    <a class="btn btn-outline-light btn-lg px-4 rounded-pill" href="@Url.Action("Index", "Shop")">
+                        Mua sản phẩm
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        @if (!string.IsNullOrWhiteSpace(searchQuery))
+        {
+            <div class="alert alert-light border mb-4">
+                Kết quả cho từ khóa <strong>@searchQuery</strong>.
+                <a class="ms-2" href="@Url.Action("Index", "Blog")">Xóa lọc</a>
+            </div>
+        }
+
+        @if (featured != null)
+        {
+            <section class="blog-featured mb-5">
+                <div class="blog-featured-media">
+                    <img src="@(string.IsNullOrWhiteSpace(featured.CoverImageUrl) ? "/images/laptop.png" : featured.CoverImageUrl)"
+                         alt="@featured.Title" />
+                </div>
+                <div class="blog-featured-content d-flex flex-column justify-content-center">
+                    <div class="meta-pill mb-3">Bài nổi bật</div>
+                    <h2 class="blog-title mb-3">
+                        <a href="@Url.Action("Detail", "Blog", new { slug = featured.Slug })">@featured.Title</a>
+                    </h2>
+                    <p class="blog-excerpt mb-4">@(featured.Summary ?? Excerpt(featured.ContentHtml))</p>
+                    <div class="d-flex flex-wrap align-items-center gap-3 text-muted mb-4">
+                        <span><i class="fa fa-user mr-2"></i>@(featured.Admin?.FullName ?? "Admin")</span>
+                        <span><i class="fa fa-calendar mr-2"></i>@(featured.PublishedAt ??
+                                                    featured.CreatedAt).ToString("dd/MM/yyyy")</span>
+                        </div>
+                        <div>
+                            <a class="btn btn-dark px-4" href="@Url.Action("Detail", "Blog", new { slug = featured.Slug })">Đọc
+                                ngay</a>
+                            </div>
+                        </div>
+                    </section>
+                }
+
+                <div id="latest-posts" class="d-flex justify-content-between align-items-end mb-3">
+                    <div>
+                        <h3 class="mb-1">Bài viết mới nhất</h3>
+                        <p class="text-muted mb-0">Chọn một bài để đọc chi tiết.</p>
+                    </div>
+                </div>
+
+                <section class="blog-grid">
+                    @if (!Model.Any())
+                    {
+                        <div class="col-12">
+                            <div class="alert alert-info mb-0">Chưa có bài blog nào được đăng.</div>
+                        </div>
+                    }
+                    else
+                    {
+                        foreach (var post in Model)
+                        {
+                            var imageUrl = string.IsNullOrWhiteSpace(post.CoverImageUrl) ? "/images/laptop.png" : post.CoverImageUrl;
+                            <article class="blog-card">
+                                <a href="@Url.Action("Detail", "Blog", new { slug = post.Slug })" class="text-decoration-none">
+                                    <div class="blog-card-media">
+                                        <img src="@imageUrl" alt="@post.Title" />
+                                    </div>
+                                </a>
+                                <div class="blog-card-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <span class="meta-pill">Blog</span>
+                                        <small class="text-muted">@(post.PublishedAt ?? post.CreatedAt).ToString("dd/MM/yyyy")</small>
+                                    </div>
+                                    <h4 class="blog-title mb-3">
+                                        <a href="@Url.Action("Detail", "Blog", new { slug = post.Slug })">@post.Title</a>
+                                    </h4>
+                                    <p class="blog-excerpt mb-4">@(post.Summary ?? Excerpt(post.ContentHtml, 150))</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <small class="text-muted">@(post.Admin?.FullName ?? "Admin")</small>
+                                        <a class="btn btn-outline-dark btn-sm"
+                                           href="@Url.Action("Detail", "Blog", new { slug = post.Slug })">Đọc bài</a>
+                                    </div>
+                                </div>
+                            </article>
+                        }
+                    }
+                </section>
+
+                @if (totalPages > 1)
+                {
+                    <nav class="mt-5" aria-label="Blog pagination">
+                        <ul class="pagination justify-content-center blog-pagination mb-0">
+                            <li class="page-item @(currentPage <= 1 ? "disabled" : "")">
+                                <a class="page-link"
+                                   href="@Url.Action("Index", "Blog", new { page = currentPage - 1, q = searchQuery })">Trước</a>
+                            </li>
+                            @for (var i = 1; i <= totalPages; i++)
+                            {
+                                <li class="page-item @(i == currentPage ? "active" : "")">
+                                    <a class="page-link" href="@Url.Action("Index", "Blog", new { page = i, q = searchQuery })">@i</a>
+                                </li>
+                            }
+                            <li class="page-item @(currentPage >= totalPages ? "disabled" : "")">
+                                <a class="page-link"
+                                   href="@Url.Action("Index", "Blog", new { page = currentPage + 1, q = searchQuery })">Sau</a>
+                            </li>
+                        </ul>
+                    </nav>
+                }
+            </div>
+        </div>

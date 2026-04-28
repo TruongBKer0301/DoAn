@@ -1,0 +1,89 @@
+@model LapTopBD.Models.BlogPost
+@{
+	Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+	ViewData["Title"] = "Tạo bài viết blog";
+}
+
+<div class="row justify-content-center">
+	<div class="col-xl-10">
+		<div class="card">
+			<div class="card-header d-flex justify-content-between align-items-center">
+				<h5 class="card-title mb-0">Tạo bài viết blog</h5>
+				<a class="btn btn-light" asp-area="Admin" asp-controller="Blog" asp-action="Index">Danh sách bài viết</a>
+			</div>
+			<div class="card-body">
+				<form asp-area="Admin" asp-controller="Blog" asp-action="Create" method="post" enctype="multipart/form-data">
+					@Html.AntiForgeryToken()
+					<div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+					<div class="mb-3">
+						<label asp-for="Title" class="form-label">Tiêu đề</label>
+						<input asp-for="Title" class="form-control" maxlength="200" placeholder="Nhập tiêu đề bài viết" />
+						<span asp-validation-for="Title" class="text-danger"></span>
+					</div>
+
+					<div class="mb-3">
+						<label asp-for="Summary" class="form-label">Tóm tắt ngắn</label>
+						<textarea asp-for="Summary" class="form-control" rows="3" maxlength="500" placeholder="Tóm tắt ngắn để hiển thị preview"></textarea>
+						<span asp-validation-for="Summary" class="text-danger"></span>
+					</div>
+
+					<div class="mb-3">
+						<label asp-for="CoverImageUrl" class="form-label">Ảnh đại diện (URL)</label>
+						<input asp-for="CoverImageUrl" class="form-control" maxlength="300" placeholder="https://..." />
+						<span asp-validation-for="CoverImageUrl" class="text-danger"></span>
+					</div>
+
+					<div class="mb-3">
+						<label class="form-label">Hoặc upload ảnh đại diện</label>
+						<input type="file" name="CoverImageFile" class="form-control" accept="image/*" />
+						<small class="text-muted">Nếu có file upload, hệ thống sẽ ưu tiên file này thay cho URL.</small>
+					</div>
+
+					<div class="mb-3">
+						<label asp-for="ContentHtml" class="form-label">Nội dung</label>
+						<textarea asp-for="ContentHtml" class="form-control" rows="14" id="blogEditor" placeholder="Nhập nội dung bài viết"></textarea>
+						<span asp-validation-for="ContentHtml" class="text-danger"></span>
+						<small class="text-muted d-block mt-2">Trình soạn thảo CKEditor hỗ trợ đầy đủ toolbar.</small>
+					</div>
+
+					<div class="form-check form-switch mb-4">
+						<input asp-for="IsPublished" class="form-check-input" type="checkbox" />
+						<label asp-for="IsPublished" class="form-check-label">Đăng bài ngay</label>
+					</div>
+
+					<div class="d-flex justify-content-end gap-2">
+						<a class="btn btn-light" asp-area="Admin" asp-controller="Blog" asp-action="Index">Hủy</a>
+						<button type="submit" class="btn btn-primary">Lưu bài viết</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+	<script src="https://cdn.ckeditor.com/ckeditor5/48.0.0/classic/ckeditor.js"></script>
+	<script>
+		let editorInstance;
+
+		document.addEventListener("DOMContentLoaded", function () {
+			ClassicEditor
+				.create(document.querySelector('#blogEditor'))
+				.then(editor => {
+					editorInstance = editor;
+					editor.ui.view.editable.element.style.minHeight = '400px';
+				})
+				.catch(error => {
+					console.error(error);
+				});
+
+			document.querySelector('form').addEventListener('submit', function () {
+				if (editorInstance) {
+					document.querySelector('#blogEditor').value = editorInstance.getData();
+				}
+			});
+		});
+	</script>
+}

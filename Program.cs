@@ -130,6 +130,132 @@ END
 ");
 
     db.Database.ExecuteSqlRaw(@"
+IF OBJECT_ID(N'dbo.BlogPosts', N'U') IS NULL
+BEGIN
+    CREATE TABLE [dbo].[BlogPosts] (
+        [Id] INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+        [AdminId] INT NOT NULL,
+        [Title] NVARCHAR(200) NOT NULL,
+        [Slug] NVARCHAR(220) NOT NULL,
+        [Summary] NVARCHAR(500) NULL,
+        [ContentHtml] NVARCHAR(MAX) NOT NULL,
+        [CoverImageUrl] NVARCHAR(300) NULL,
+        [IsPublished] BIT NOT NULL CONSTRAINT [DF_BlogPosts_IsPublished] DEFAULT(1),
+        [CreatedAt] DATETIME2 NOT NULL,
+        [UpdatedAt] DATETIME2 NULL,
+        [PublishedAt] DATETIME2 NULL,
+        CONSTRAINT [FK_BlogPosts_admin_AdminId] FOREIGN KEY ([AdminId]) REFERENCES [dbo].[admin]([Id]) ON DELETE CASCADE
+    );
+
+    CREATE UNIQUE INDEX [IX_BlogPosts_Slug] ON [dbo].[BlogPosts] ([Slug]);
+    CREATE INDEX [IX_BlogPosts_AdminId] ON [dbo].[BlogPosts] ([AdminId]);
+    CREATE INDEX [IX_BlogPosts_CreatedAt] ON [dbo].[BlogPosts] ([CreatedAt]);
+END
+
+IF COL_LENGTH('dbo.BlogPosts', 'Summary') IS NULL
+BEGIN
+    ALTER TABLE [dbo].[BlogPosts]
+    ADD [Summary] NVARCHAR(500) NULL;
+END
+
+IF COL_LENGTH('dbo.BlogPosts', 'CoverImageUrl') IS NULL
+BEGIN
+    ALTER TABLE [dbo].[BlogPosts]
+    ADD [CoverImageUrl] NVARCHAR(300) NULL;
+END
+
+IF COL_LENGTH('dbo.BlogPosts', 'IsPublished') IS NULL
+BEGIN
+    ALTER TABLE [dbo].[BlogPosts]
+    ADD [IsPublished] BIT NOT NULL CONSTRAINT [DF_BlogPosts_IsPublished] DEFAULT(1);
+END
+
+IF COL_LENGTH('dbo.BlogPosts', 'UpdatedAt') IS NULL
+BEGIN
+    ALTER TABLE [dbo].[BlogPosts]
+    ADD [UpdatedAt] DATETIME2 NULL;
+END
+
+IF COL_LENGTH('dbo.BlogPosts', 'PublishedAt') IS NULL
+BEGIN
+    ALTER TABLE [dbo].[BlogPosts]
+    ADD [PublishedAt] DATETIME2 NULL;
+END
+
+IF COL_LENGTH('dbo.BlogPosts', 'AdminId') IS NULL
+BEGIN
+    DECLARE @DefaultAdminId INT;
+    SELECT TOP 1 @DefaultAdminId = [Id] FROM [dbo].[admin] ORDER BY [Id];
+
+    ALTER TABLE [dbo].[BlogPosts]
+    ADD [AdminId] INT NULL;
+
+    IF @DefaultAdminId IS NOT NULL
+    BEGIN
+        EXEC sp_executesql
+            N'UPDATE [dbo].[BlogPosts] SET [AdminId] = @AdminId WHERE [AdminId] IS NULL;',
+            N'@AdminId INT',
+            @AdminId = @DefaultAdminId;
+
+        EXEC(N'ALTER TABLE [dbo].[BlogPosts] ALTER COLUMN [AdminId] INT NOT NULL;');
+    END
+END
+
+IF COL_LENGTH('dbo.BlogPosts', 'AdminId') IS NOT NULL
+AND NOT EXISTS (
+    SELECT 1
+    FROM sys.foreign_keys
+    WHERE name = N'FK_BlogPosts_admin_AdminId'
+      AND parent_object_id = OBJECT_ID(N'dbo.BlogPosts')
+)
+BEGIN
+    DECLARE @NullAdminCount INT = 0;
+    EXEC sp_executesql
+        N'SELECT @c = COUNT(1) FROM [dbo].[BlogPosts] WHERE [AdminId] IS NULL;',
+        N'@c INT OUTPUT',
+        @c = @NullAdminCount OUTPUT;
+
+    IF @NullAdminCount = 0
+    BEGIN
+        EXEC(N'ALTER TABLE [dbo].[BlogPosts] WITH CHECK ADD CONSTRAINT [FK_BlogPosts_admin_AdminId] FOREIGN KEY ([AdminId]) REFERENCES [dbo].[admin]([Id]) ON DELETE CASCADE;');
+    END
+END
+
+IF NOT EXISTS (
+    SELECT 1
+    FROM sys.indexes
+    WHERE name = N'IX_BlogPosts_Slug'
+      AND object_id = OBJECT_ID(N'dbo.BlogPosts')
+)
+AND COL_LENGTH('dbo.BlogPosts', 'Slug') IS NOT NULL
+BEGIN
+    CREATE UNIQUE INDEX [IX_BlogPosts_Slug] ON [dbo].[BlogPosts] ([Slug]);
+END
+
+IF NOT EXISTS (
+    SELECT 1
+    FROM sys.indexes
+    WHERE name = N'IX_BlogPosts_AdminId'
+      AND object_id = OBJECT_ID(N'dbo.BlogPosts')
+)
+AND COL_LENGTH('dbo.BlogPosts', 'AdminId') IS NOT NULL
+BEGIN
+    EXEC(N'CREATE INDEX [IX_BlogPosts_AdminId] ON [dbo].[BlogPosts] ([AdminId]);');
+END
+
+IF NOT EXISTS (
+    SELECT 1
+    FROM sys.indexes
+    WHERE name = N'IX_BlogPosts_CreatedAt'
+      AND object_id = OBJECT_ID(N'dbo.BlogPosts')
+)
+AND COL_LENGTH('dbo.BlogPosts', 'CreatedAt') IS NOT NULL
+BEGIN
+    CREATE INDEX [IX_BlogPosts_CreatedAt] ON [dbo].[BlogPosts] ([CreatedAt]);
+END
+");
+
+    db.Database.ExecuteSqlRaw(@"
 IF COL_LENGTH('dbo.Users', 'IsEmailVerified') IS NULL
 BEGIN
     ALTER TABLE [dbo].[Users]
