@@ -29,7 +29,7 @@ builder.Services.AddSession(options =>
     options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // Chỉ dùng với HTTPS
 });
 
-// Cấu hình xác thực với các scheme (không đặt default scheme ở đây)
+// Cấu hình xác thực với các scheme 
 builder.Services.AddAuthentication()
     .AddCookie("AdminAuth", options =>
     {

@@ -1,5 +1,23 @@
 ﻿<Project>
   <ItemGroup>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\avatar\24bd59e4-27ee-419c-8ca5-cea7fa9e54ef.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>LapTopBD</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/LapTopBD</BasePath>
+      <RelativePath>avatar/24bd59e4-27ee-419c-8ca5-cea7fa9e54ef.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>bek2151dke</Fingerprint>
+      <Integrity>w/g0jdg6MV1C6vwOVvXQOihrhmBJ3Gumd3u3jekHuAM=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\avatar\24bd59e4-27ee-419c-8ca5-cea7fa9e54ef.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\avatar\66eb1fd7-c52e-4f13-9002-9958d6900e68.png'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
@@ -53,6 +71,24 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\avatar\d7f5d48f-7a38-4295-96c4-05c05748dc98.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\avatar\de6438c4-e12e-4e89-9636-17ee20a39c58.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>LapTopBD</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/LapTopBD</BasePath>
+      <RelativePath>avatar/de6438c4-e12e-4e89-9636-17ee20a39c58.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>zuc5y8va8y</Fingerprint>
+      <Integrity>W8IR2MREaXJaYffFWagPY4EQlWBpo0aOhHH2tEX/DUw=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\avatar\de6438c4-e12e-4e89-9636-17ee20a39c58.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\cart.html'))">
       <SourceType>Package</SourceType>
@@ -444,8 +480,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>5mwhiowmh1</Fingerprint>
-      <Integrity>XfGJOOq19E9L94hf0rnqbs7Q5En4Bx7SaphX50mZA64=</Integrity>
+      <Fingerprint>8xwby37dn9</Fingerprint>
+      <Integrity>bHnNTb2EE7d+f8sUS2Fjf2tvMcQozG0XDv0DKfm6Ufk=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\style.css'))</OriginalItemSpec>
@@ -1794,8 +1830,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>b1nc4gt363</Fingerprint>
-      <Integrity>Yay01VuJ+M2TGTmog21ZD3BgpEhbArt4J4caqWWNlBg=</Integrity>
+      <Fingerprint>xcaydq4nhh</Fingerprint>
+      <Integrity>8T1TB7gCFVFtdTkB43cimQn0sjRONzl6jALU8XAU0Jk=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\script.js'))</OriginalItemSpec>
@@ -3815,6 +3851,24 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\2e35b339-3ec7-4ac7-bd9a-bc31f12ab27a_pkit.367.webp'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\2ed7703f-2d51-4f69-9a14-80e2e4237ba6_Quản lý sản phẩm.png'))">
+      <SourceType>Package</SourceType>
+      <SourceId>LapTopBD</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/LapTopBD</BasePath>
+      <RelativePath>uploads/productimages/2ed7703f-2d51-4f69-9a14-80e2e4237ba6_Quản lý sản phẩm.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>7vyh08owgd</Fingerprint>
+      <Integrity>PZUIlKpgSy7D3UgLfmTPc2nqqArFQkoaA9BDnoDbKdw=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\2ed7703f-2d51-4f69-9a14-80e2e4237ba6_Quản lý sản phẩm.png'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\317974e3-3a62-481d-9b37-c74757b75c5e_ban-phim-gaming-msi-forge-gk100-rgb-led-den-5.webp'))">
       <SourceType>Package</SourceType>

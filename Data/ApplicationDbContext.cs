@@ -17,7 +17,7 @@ namespace LapTopBD.Data
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<OrderTrackHistory> OrderTrackHistories { get; set; }
         public DbSet<ProductReview> ProductReviews { get; set; }
-        public DbSet<Wishlist> Wishlists { get; set; }
+        public DbSet<Wishlist> Wishlist { get; set; }
         public DbSet<Banner> Banner { get; set; }
         public DbSet<VisitLog> VisitLogs { get; set; }
         public DbSet<ContactRequest> ContactRequests { get; set; }
@@ -78,7 +78,7 @@ namespace LapTopBD.Data
 
             modelBuilder.Entity<Wishlist>()
                 .HasOne(w => w.User)
-                .WithMany(u => u.Wishlists)
+                .WithMany(u => u.Wishlist)
                 .HasForeignKey(w => w.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
@@ -88,7 +88,8 @@ namespace LapTopBD.Data
 
             modelBuilder.Entity<Wishlist>()
                 .HasOne(w => w.Product)
-                .WithMany(p => p.Wishlists)
+                .WithMany(p => p.Wishlist
+                )
                 .HasForeignKey(w => w.ProductId)
                 .OnDelete(DeleteBehavior.Cascade);
 

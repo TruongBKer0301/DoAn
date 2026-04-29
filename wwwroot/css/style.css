@@ -951,6 +951,19 @@
 
 /*#endregion */
 
+.fav-count {
+    display: inline-block;
+    padding: 2px 5px;
+    border-radius: 50%;
+    background: red;
+    color: white;
+    font-weight: bold;
+}
+
+
+
+/*#endregion */
+
 /*#region Custom - Cart - checkout */
 
 .custom-table-container {
