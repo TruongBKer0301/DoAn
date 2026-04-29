@@ -354,7 +354,7 @@
         topIps: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.TopIps)),
         totalUsers: @Model.TotalUsers,
         totalOrders: @Model.TotalOrders,
-        weekRevenue: @Model.WeekRevenue,
+        weekRevenue: @Convert.ToInt64(Model.WeekRevenue),
         totalProduct: @Model.TotalProduct
     };
 

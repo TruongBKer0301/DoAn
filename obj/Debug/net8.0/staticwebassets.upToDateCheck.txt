@@ -1,6 +1,8 @@
+wwwroot\avatar\24bd59e4-27ee-419c-8ca5-cea7fa9e54ef.jpg
 wwwroot\avatar\66eb1fd7-c52e-4f13-9002-9958d6900e68.png
 wwwroot\avatar\7a9688bf-2742-437e-90ab-aba8de573ef1.jpg
 wwwroot\avatar\d7f5d48f-7a38-4295-96c4-05c05748dc98.jpg
+wwwroot\avatar\de6438c4-e12e-4e89-9636-17ee20a39c58.jpg
 wwwroot\cart.html
 wwwroot\css\admin.css
 wwwroot\css\aos.css
@@ -209,6 +211,7 @@ wwwroot\uploads\productimages\29ecb574-a28c-4f0c-a1b1-f757c81e46de_cu-sac-anker-
 wwwroot\uploads\productimages\2a2cd518-77a4-4228-a708-f099b5b2f792_thinkpad-e14-1.jpg
 wwwroot\uploads\productimages\2c728997-599f-437d-9ec6-7df22f6fe90c_Samsung-Galaxy-S25-Ultra-Titan-Grey.webp
 wwwroot\uploads\productimages\2e35b339-3ec7-4ac7-bd9a-bc31f12ab27a_pkit.367.webp
+wwwroot\uploads\productimages\2ed7703f-2d51-4f69-9a14-80e2e4237ba6_Quản lý sản phẩm.png
 wwwroot\uploads\productimages\317974e3-3a62-481d-9b37-c74757b75c5e_ban-phim-gaming-msi-forge-gk100-rgb-led-den-5.webp
 wwwroot\uploads\productimages\3245cc41-b946-447e-8e02-33941dd3e943_dell_5625_2.jpg
 wwwroot\uploads\productimages\34d8a06b-c658-487f-82dc-9aec72623eac_ban-phim-co-co-day-aula-win68he-max-xam-trang-8.webp

@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\LapTopBD.evwzrwujdv.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\avatar\\24bd59e4-27ee-419c-8ca5-cea7fa9e54ef.jpg",
+      "PackagePath": "staticwebassets\\avatar\\24bd59e4-27ee-419c-8ca5-cea7fa9e54ef.jpg"
+    },
+    {
       "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\avatar\\66eb1fd7-c52e-4f13-9002-9958d6900e68.png",
       "PackagePath": "staticwebassets\\avatar\\66eb1fd7-c52e-4f13-9002-9958d6900e68.png"
     },
@@ -15,6 +19,10 @@
     {
       "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\avatar\\d7f5d48f-7a38-4295-96c4-05c05748dc98.jpg",
       "PackagePath": "staticwebassets\\avatar\\d7f5d48f-7a38-4295-96c4-05c05748dc98.jpg"
+    },
+    {
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\avatar\\de6438c4-e12e-4e89-9636-17ee20a39c58.jpg",
+      "PackagePath": "staticwebassets\\avatar\\de6438c4-e12e-4e89-9636-17ee20a39c58.jpg"
     },
     {
       "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\cart.html",
@@ -847,6 +855,10 @@
     {
       "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\2e35b339-3ec7-4ac7-bd9a-bc31f12ab27a_pkit.367.webp",
       "PackagePath": "staticwebassets\\uploads\\productimages\\2e35b339-3ec7-4ac7-bd9a-bc31f12ab27a_pkit.367.webp"
+    },
+    {
+      "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\2ed7703f-2d51-4f69-9a14-80e2e4237ba6_Quản lý sản phẩm.png",
+      "PackagePath": "staticwebassets\\uploads\\productimages\\2ed7703f-2d51-4f69-9a14-80e2e4237ba6_Quản lý sản phẩm.png"
     },
     {
       "Id": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\317974e3-3a62-481d-9b37-c74757b75c5e_ban-phim-gaming-msi-forge-gk100-rgb-led-den-5.webp",

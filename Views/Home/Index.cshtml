@@ -22,6 +22,10 @@
                             <a href="@Url.Action("Detail", "Home", new { slug = product.Slug })">
                                 <img src="@product.ProductImage1" alt="@product.ProductName" />
                             </a>
+                            <button class="btn-add-to-fav" id="add-to-fav-btn" data-product-id="@product.Id" title="Thêm vào yêu thích">
+                                <i class="ri-heart-line"></i>
+                            </button>
+
                             @if (product.quantity < 1)
                             {
                                 <span class="discount-tag out-of-stock">Hết hàng</span>
@@ -89,6 +93,7 @@
                                     </button>
                                 </div>
                             }
+                            
                         </div>
                     </div>
                 </div>
@@ -121,6 +126,10 @@
                             <a href="@Url.Action("Detail", "Home", new { slug = product.Slug })">
                                 <img src="@product.ProductImage1" alt="@product.ProductName" />
                             </a>
+
+                            <button class="btn-add-to-fav" id="add-to-fav-btn" data-product-id="@product.Id" title="Thêm vào yêu thích">
+                                <i class="ri-heart-line"></i>
+                            </button>
 
                             @if (product.quantity < 1)
                             {
@@ -201,3 +210,39 @@
     </div>
 </div>
 <!-- Product Hot Deal End -->
+
+<style>
+    .ratio {
+        position: relative;
+    }
+
+    /* Style cho nút yêu thích */
+    .btn-add-to-fav {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 10;
+        background: white;
+        border: none;
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        color: #ff4757; /* Màu đỏ trái tim */
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .btn-add-to-fav:hover {
+            background: #ff4757;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .btn-add-to-fav i {
+            font-size: 1.2rem;
+        }
+</style>
