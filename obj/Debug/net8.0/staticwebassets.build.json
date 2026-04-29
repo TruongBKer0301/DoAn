@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "+hOCt/hxpkf/VMiFoOIDd7o04NgCAsj5IE0oHu4Xtf8=",
+  "Hash": "NIMg1/LLyFvJsphuS79vVDLa2w9JndKVMrDp3l5nmm8=",
   "Source": "LapTopBD",
   "BasePath": "_content/LapTopBD",
   "Mode": "Default",
@@ -4530,6 +4530,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\productimages\\2e35b339-3ec7-4ac7-bd9a-bc31f12ab27a_pkit.367.webp"
+    },
+    {
+      "Identity": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\2ed7703f-2d51-4f69-9a14-80e2e4237ba6_Quản lý sản phẩm.png",
+      "SourceId": "LapTopBD",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\",
+      "BasePath": "_content/LapTopBD",
+      "RelativePath": "uploads/productimages/2ed7703f-2d51-4f69-9a14-80e2e4237ba6_Quản lý sản phẩm#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "7vyh08owgd",
+      "Integrity": "PZUIlKpgSy7D3UgLfmTPc2nqqArFQkoaA9BDnoDbKdw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\productimages\\2ed7703f-2d51-4f69-9a14-80e2e4237ba6_Quản lý sản phẩm.png"
     },
     {
       "Identity": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\317974e3-3a62-481d-9b37-c74757b75c5e_ban-phim-gaming-msi-forge-gk100-rgb-led-den-5.webp",
@@ -25016,6 +25037,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-2xPzfoZ4bWffEW0JRK5fMkJLUoHB22V/ZWDK3zMqRzk="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/productimages/2ed7703f-2d51-4f69-9a14-80e2e4237ba6_Quản lý sản phẩm.7vyh08owgd.png",
+      "AssetFile": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\2ed7703f-2d51-4f69-9a14-80e2e4237ba6_Quản lý sản phẩm.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "29908"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"PZUIlKpgSy7D3UgLfmTPc2nqqArFQkoaA9BDnoDbKdw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 28 Apr 2026 07:25:57 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "7vyh08owgd"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/productimages/2ed7703f-2d51-4f69-9a14-80e2e4237ba6_Quản lý sản phẩm.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-PZUIlKpgSy7D3UgLfmTPc2nqqArFQkoaA9BDnoDbKdw="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/productimages/2ed7703f-2d51-4f69-9a14-80e2e4237ba6_Quản lý sản phẩm.png",
+      "AssetFile": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\wwwroot\\uploads\\productimages\\2ed7703f-2d51-4f69-9a14-80e2e4237ba6_Quản lý sản phẩm.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "29908"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"PZUIlKpgSy7D3UgLfmTPc2nqqArFQkoaA9BDnoDbKdw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 28 Apr 2026 07:25:57 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-PZUIlKpgSy7D3UgLfmTPc2nqqArFQkoaA9BDnoDbKdw="
         }
       ]
     },

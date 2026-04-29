@@ -3852,6 +3852,24 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\2e35b339-3ec7-4ac7-bd9a-bc31f12ab27a_pkit.367.webp'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\2ed7703f-2d51-4f69-9a14-80e2e4237ba6_Quản lý sản phẩm.png'))">
+      <SourceType>Package</SourceType>
+      <SourceId>LapTopBD</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/LapTopBD</BasePath>
+      <RelativePath>uploads/productimages/2ed7703f-2d51-4f69-9a14-80e2e4237ba6_Quản lý sản phẩm.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>7vyh08owgd</Fingerprint>
+      <Integrity>PZUIlKpgSy7D3UgLfmTPc2nqqArFQkoaA9BDnoDbKdw=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\2ed7703f-2d51-4f69-9a14-80e2e4237ba6_Quản lý sản phẩm.png'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\productimages\317974e3-3a62-481d-9b37-c74757b75c5e_ban-phim-gaming-msi-forge-gk100-rgb-led-den-5.webp'))">
       <SourceType>Package</SourceType>
       <SourceId>LapTopBD</SourceId>
