@@ -321,8 +321,6 @@ namespace LapTopBD.Areas.Admin.Controllers
             // Kiểm tra nếu có đổi mật khẩu
             if (!string.IsNullOrEmpty(model.OldPassword) && !string.IsNullOrEmpty(model.NewPassword))
             {
-                string oldPasswordHash = PasswordHelper.HashPassword(model.OldPassword);
-
                 // Kiểm tra mật khẩu cũ mà không hash
                 if (!PasswordHelper.VerifyPassword(model.OldPassword, admin.Password))
                 {

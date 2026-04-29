@@ -705,6 +705,11 @@ namespace LapTopBD.Controllers
             }
 
             var product = await _context.Product.FindAsync(order.ProductId);
+            if (product == null)
+            {
+                return Json(new { success = false, message = "Sản phẩm không tồn tại hoặc đã bị xóa." });
+            }
+
             product.quantity += order.Quantity;
             // Cập nhật trạng thái đơn hàng thành "Cancelled"
             order.OrderStatus = "Cancelled";
