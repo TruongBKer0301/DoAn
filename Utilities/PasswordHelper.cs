@@ -10,8 +10,13 @@ namespace LapTopBD.Utilities
             return BCrypt.Net.BCrypt.HashPassword(password, workFactor: 12);
         }
 
-        public static bool VerifyPassword(string password, string baseHash)
+        public static bool VerifyPassword(string? password, string? baseHash)
         {
+            if (string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(baseHash))
+            {
+                return false;
+            }
+
             return BCrypt.Net.BCrypt.Verify(password, baseHash);
         }
     }
