@@ -2344,19 +2344,25 @@ document.querySelectorAll('.banner-file-input').forEach(bannerInput => {
     }
 // Khởi tạo LC Lightbox
 $(function () {
-    lc_lightbox('.elem', {
-        wrap_class: 'lcl_fade_oc',
-        gallery: true,
-        thumb_attr: 'data-lcl-thumb',
-        skin: 'dark',
-        fullscreen: true,
-        download: true,
-        socials: true
-    });
+    if (typeof lc_lightbox === "function") {
+        lc_lightbox('.elem', {
+            wrap_class: 'lcl_fade_oc',
+            gallery: true,
+            thumb_attr: 'data-lcl-thumb',
+            skin: 'dark',
+            fullscreen: true,
+            download: true,
+            socials: true
+        });
+    } else {
+        console.warn("lc_lightbox is not available. Skipping lightbox init.");
+    }
 });
 
 // Khởi tạo AOS
-AOS.init();
+if (typeof AOS !== "undefined") {
+    AOS.init();
+}
 
 // Load danh mục phụ cho form chỉnh sửa sản phẩm
 if ($("#editCategoryId").length > 0) {
