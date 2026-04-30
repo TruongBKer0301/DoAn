@@ -63,6 +63,19 @@ function appendInputFileIfAny(formData, fieldName, inputOrSelector) {
 // =========================================================================
 $(function () {
 
+    // Clear login fields on page load to avoid any persisted values.
+    if ($("#loginForm").length > 0) {
+        $("#Email").val("");
+        $("#Password").val("");
+        $("#RememberMe").prop("checked", false);
+    }
+
+    if ($("#adminLoginForm").length > 0) {
+        $("#Username").val("");
+        $("#Password").val("");
+        $("#RememberMe").prop("checked", false);
+    }
+
     // Đăng nhập Admin
     $(document).on("submit", "#adminLoginForm", function (e) {
         e.preventDefault(); // Ngăn form submit mặc định
