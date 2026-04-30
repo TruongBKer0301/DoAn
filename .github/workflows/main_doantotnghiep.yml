@@ -1,0 +1,63 @@
+name: Build and deploy ASP.NET Core app to Azure Web App - Doantotnghiep
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.x'
+
+      - name: Restore solution
+        run: dotnet restore DoAn-main.sln
+
+      - name: Build solution
+        run: dotnet build DoAn-main.sln --configuration Release --no-restore
+
+      - name: Publish project
+        run: dotnet publish DoAn-main.sln -c Release -o publish
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app
+          path: publish
+
+  deploy:
+    runs-on: windows-latest
+    needs: build
+
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: app
+          path: publish
+
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_EBAE6DF0851B435A97B52C7BE427364F }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_DCE91D45A05145279A5DCB6B596F9E8C }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_EC6D426C0AD844CB9E5A1A34C6641A4A }}
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: Doantotnghiep
+          package: publish
