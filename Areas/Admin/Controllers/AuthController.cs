@@ -27,8 +27,20 @@ namespace LapTopBD.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(AdminLoginViewModel model)
+        public async Task<IActionResult> Login([FromBody] AdminLoginViewModel model)
         {
+            // Fallback: nếu client gửi form (x-www-form-urlencoded), model sẽ null — đọc từ Request.Form
+            if (model == null)
+            {
+                model = new AdminLoginViewModel
+                {
+                    Username = Request.Form["Username"],
+                    Password = Request.Form["Password"],
+                    RememberMe = (Request.Form["RememberMe"].Count > 0 &&
+                                  (Request.Form["RememberMe"][0] == "true" || Request.Form["RememberMe"][0] == "on"))
+                };
+            }
+
             if (!ModelState.IsValid)
             {
                 return Json(new { success = false, message = "Dữ liệu không hợp lệ!" });
