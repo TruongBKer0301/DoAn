@@ -247,10 +247,10 @@ namespace LapTopBD.Areas.Admin.Controllers
         [Route("list-admins")] 
         public async Task<IActionResult> ListAdmins(int page = 1, int pageSize = 3)
         {
-            var totalAdmins = await _context.admin.CountAsync();
+            var totalAdmins = await _context.Admins.CountAsync();
             var totalPages = (int)Math.Ceiling(totalAdmins / (double)pageSize);
 
-            var admins = await _context.admin
+            var admins = await _context.Admins
                 .OrderBy(a => a.Id)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
@@ -279,7 +279,7 @@ namespace LapTopBD.Areas.Admin.Controllers
         [Route("edit/{id}")]
         public IActionResult Edit(int id)
         {
-            var admin = _context.admin.Find(id);
+            var admin = _context.Admins.Find(id);
             if (admin == null)
             {
                 return NotFound();
@@ -312,7 +312,7 @@ namespace LapTopBD.Areas.Admin.Controllers
                 return Json(new { success = false, message = "Lỗi dữ liệu: " + string.Join(", ", errors) });
             }
 
-            var admin = await _context.admin.FindAsync(id);
+            var admin = await _context.Admins.FindAsync(id);
             if (admin == null)
             {
                 return Json(new { success = false, message = "Không tìm thấy Admin!" });
@@ -427,7 +427,7 @@ namespace LapTopBD.Areas.Admin.Controllers
                 return Json(new { success = false, message = "Vui lòng nhập đầy đủ thông tin!" });
             }
 
-            var existingAdmin = await _context.admin.FirstOrDefaultAsync(a => a.Username == model.Username);
+            var existingAdmin = await _context.Admins.FirstOrDefaultAsync(a => a.Username == model.Username);
             if (existingAdmin != null)
             {
                 return Json(new { success = false, message = "Tên đăng nhập đã tồn tại!" });
@@ -462,7 +462,7 @@ namespace LapTopBD.Areas.Admin.Controllers
                     Avatar = avatarPath
                 };
 
-                _context.admin.Add(newAdmin);
+                _context.Admins.Add(newAdmin);
                 await _context.SaveChangesAsync();
 
                 return Json(new
@@ -485,7 +485,7 @@ namespace LapTopBD.Areas.Admin.Controllers
         [Route("delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var admin = await _context.admin.FindAsync(id);
+            var admin = await _context.Admins.FindAsync(id);
             if (admin == null)
             {
                 return Json(new { success = false, message = "Không tìm thấy Admin!" });
@@ -515,7 +515,7 @@ namespace LapTopBD.Areas.Admin.Controllers
                 }
             }
 
-            _context.admin.Remove(admin);
+            _context.Admins.Remove(admin);
             await _context.SaveChangesAsync();
 
             return Json(new { success = true, message = "Xóa Admin thành công!" });

@@ -92,7 +92,7 @@ namespace LapTopBD.Areas.Admin.Controllers
                 int adminId = int.Parse(adminIdClaim.Value);
 
                 // Kiểm tra AdminId có tồn tại trong DB không
-                var adminExists = await _context.admin.AnyAsync(a => a.Id == adminId);
+                var adminExists = await _context.Admins.AnyAsync(a => a.Id == adminId);
                 if (!adminExists)
                 {
                     return Json(new { success = false, message = "AdminId không hợp lệ." });
@@ -259,7 +259,7 @@ namespace LapTopBD.Areas.Admin.Controllers
                 int adminId = int.Parse(adminIdClaim.Value);
 
                 // Kiểm tra AdminId có tồn tại trong DB không
-                var adminExists = await _context.admin.AnyAsync(a => a.Id == adminId);
+                var adminExists = await _context.Admins.AnyAsync(a => a.Id == adminId);
                 if (!adminExists)
                 {
                     return Json(new { success = false, message = "AdminId không hợp lệ." });

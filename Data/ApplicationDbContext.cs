@@ -8,7 +8,7 @@ namespace LapTopBD.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         // Các DbSet đại diện cho các bảng trong cơ sở dữ liệu
-        public DbSet<Admin> admin { get; set; }
+        public DbSet<Admin> Admins { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<SubCategory> SubCategories { get; set; }
         public DbSet<Product> Product { get; set; }

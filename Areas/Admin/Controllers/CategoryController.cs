@@ -81,7 +81,7 @@ namespace LapTopBD.Areas.Admin.Controllers
                 int adminId = int.Parse(adminIdClaim.Value);
 
                 // Kiểm tra admin có tồn tại không và lấy thông tin admin
-                var admin = await _context.admin.FindAsync(adminId);
+                var admin = await _context.Admins.FindAsync(adminId);
                 if (admin == null)
                 {
                     return Json(new { success = false, message = "Admin không tồn tại." });
