@@ -101,7 +101,7 @@ namespace LapTopBD.Areas.Admin.Controllers
                     return Json(new { success = false, message = "Không tìm thấy AdminId, vui lòng đăng nhập lại." });
                 }
                 int adminId = int.Parse(adminIdClaim.Value);
-                var admin = await _context.admin.FirstOrDefaultAsync(a => a.Id == adminId);
+                var admin = await _context.Admins.FirstOrDefaultAsync(a => a.Id == adminId);
                 if (admin == null)
                 {
                     return Json(new { success = false, message = "Admin không tồn tại." });

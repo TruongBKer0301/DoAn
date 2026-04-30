@@ -27,7 +27,7 @@ namespace LapTopBD.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody] AdminLoginViewModel model)
+        public async Task<IActionResult> Login(AdminLoginViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -35,7 +35,7 @@ namespace LapTopBD.Areas.Admin.Controllers
             }
 
             // Kiểm tra admin có tồn tại không
-            var admin = await _context.admin
+            var admin = await _context.Admins
                 .Where(a => a.Username == model.Username)
                 .FirstOrDefaultAsync();
 

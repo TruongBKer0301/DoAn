@@ -7759,6 +7759,7 @@
     "net8.0": [
       "BCrypt.Net-Next >= 4.1.0",
       "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation >= 8.0.8",
+      "Microsoft.CodeAnalysis.Analyzers >= 3.3.4",
       "Microsoft.EntityFrameworkCore >= 8.0.4",
       "Microsoft.EntityFrameworkCore.Relational >= 8.0.4",
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.4",
@@ -7767,28 +7768,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\PC\\.nuget\\packages\\": {}
+    "C:\\Users\\lucky\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\LapTopBD.csproj",
+      "projectUniqueName": "C:\\Users\\lucky\\Downloads\\DoAn-main\\DoAn-main\\LapTopBD.csproj",
       "projectName": "LapTopBD",
-      "projectPath": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\LapTopBD.csproj",
-      "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\obj\\",
+      "projectPath": "C:\\Users\\lucky\\Downloads\\DoAn-main\\DoAn-main\\LapTopBD.csproj",
+      "packagesPath": "C:\\Users\\lucky\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\lucky\\Downloads\\DoAn-main\\DoAn-main\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\NuGet.Config",
-        "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\lucky\\Downloads\\DoAn-main\\DoAn-main\\NuGet.Config",
+        "C:\\Users\\lucky\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -7807,7 +7805,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.200"
+      "SdkAnalysisLevel": "10.0.200"
     },
     "frameworks": {
       "net8.0": {
@@ -7820,6 +7818,11 @@
           "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
             "target": "Package",
             "version": "[8.0.8, )"
+          },
+          "Microsoft.CodeAnalysis.Analyzers": {
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[3.3.4, )"
           },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
@@ -7863,7 +7866,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
