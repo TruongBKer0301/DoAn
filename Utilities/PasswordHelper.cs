@@ -1,4 +1,6 @@
 ﻿using BCrypt.Net;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace LapTopBD.Utilities
 {
@@ -17,7 +19,34 @@ namespace LapTopBD.Utilities
                 return false;
             }
 
-            return BCrypt.Net.BCrypt.Verify(password, baseHash);
+            // Support both BCrypt and legacy MD5/plaintext passwords.
+            if (baseHash.StartsWith("$2", StringComparison.Ordinal))
+            {
+                try
+                {
+                    return BCrypt.Net.BCrypt.Verify(password, baseHash);
+                }
+                catch (SaltParseException)
+                {
+                    return false;
+                }
+            }
+
+            var md5 = ComputeMd5Hex(password);
+            if (baseHash.Length == 32 && string.Equals(md5, baseHash, StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+
+            return string.Equals(password, baseHash, StringComparison.Ordinal);
+        }
+
+        private static string ComputeMd5Hex(string input)
+        {
+            using var md5 = MD5.Create();
+            var bytes = Encoding.UTF8.GetBytes(input);
+            var hash = md5.ComputeHash(bytes);
+            return Convert.ToHexString(hash).ToLowerInvariant();
         }
     }
 }
