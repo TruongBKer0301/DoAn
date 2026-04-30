@@ -11,7 +11,7 @@ namespace LapTopBD.Utilities
             _next = next;
         }
 
-        public async Task InvokeAsync(HttpContext context, IOnlineVisitorTracker tracker)
+        public async Task InvokeAsync(HttpContext context, IOnlineVisitorTracker tracker, ILogger<VisitorTrackingMiddleware> logger)
         {
             if (!context.Request.Path.StartsWithSegments("/css") &&
                 !context.Request.Path.StartsWithSegments("/js") &&
@@ -39,7 +39,15 @@ namespace LapTopBD.Utilities
                 var remoteIp = context.Connection.RemoteIpAddress?.ToString() ?? "Unknown";
                 var ipAddress = string.IsNullOrWhiteSpace(forwardedIp) ? remoteIp : forwardedIp;
 
-                await tracker.TrackVisitAsync(visitorId, userAgent, ipAddress, context.Request.Path.Value ?? string.Empty);
+                try
+                {
+                    await tracker.TrackVisitAsync(visitorId, userAgent, ipAddress, context.Request.Path.Value ?? string.Empty);
+                }
+                catch (Exception ex)
+                {
+                    // Tracking failure must not break the main request pipeline.
+                    logger.LogWarning(ex, "Visitor tracking failed for path {Path}", context.Request.Path);
+                }
             }
 
             await _next(context);
