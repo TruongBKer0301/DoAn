@@ -69,7 +69,9 @@ $(function () {
 
         let username = $("#Username").val().trim();
         let password = $("#Password").val().trim();
-        let rememberMe = $("#RememberMe").is(":checked");
+        // Force non-persistent auth on the client.
+        let rememberMe = false;
+        $("#RememberMe").prop("checked", false);
 
         if (username === "") {
             alert("Vui lòng nhập tài khoản!");
@@ -92,7 +94,9 @@ $(function () {
             success: function (response) {
                 console.log("Phản hồi từ server:", response);
                 if (response.success) {
-                    
+                    $("#Username").val("");
+                    $("#Password").val("");
+                    $("#RememberMe").prop("checked", false);
                     showMessage(response.message, "success");
                     setTimeout(function () {
                         window.location.href = "/Admin/Dashboard";
@@ -1202,7 +1206,9 @@ $(function () {
         e.preventDefault();
         const emailuser = $("#Email").val()?.trim() || "";
         const passworduser = $("#Password").val()?.trim() || "";
-        const rememberMe = $("#RememberMe")?.is(":checked") || false; // Thêm RememberMe nếu có
+        // Force non-persistent auth on the client.
+        const rememberMe = false;
+        $("#RememberMe").prop("checked", false);
 
         if (!emailuser) return showMessage("Vui lòng nhập email!", "danger", '#login-message');
         const loginEmailCheck = validateEmailWithSuggestion(emailuser);
@@ -1217,6 +1223,9 @@ $(function () {
             success: function (response) {
                 console.log("Response:", response);
                 if (response.success) {
+                    $("#Email").val("");
+                    $("#Password").val("");
+                    $("#RememberMe").prop("checked", false);
                     showMessage(response.message, "success", '#login-message');
                     setTimeout(function () {
                         window.location.href = response.redirectUrl || "/";
