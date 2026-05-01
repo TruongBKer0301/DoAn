@@ -109,14 +109,24 @@ namespace LapTopBD.Controllers
                 return View(model);
             }
 
-            model.CreatedAt = DateTime.Now;
-            model.IsRead = false;
-            model.ReadAt = null;
-            _context.ContactRequests.Add(model);
-            await _context.SaveChangesAsync();
+            try
+            {
+                model.CreatedAt = DateTime.Now;
+                model.IsRead = false;
+                model.ReadAt = null;
 
-            TempData["ContactSuccess"] = "Gửi liên hệ thành công. Chúng tôi sẽ phản hồi sớm nhất có thể.";
-            return RedirectToAction(nameof(Contact));
+                _context.ContactRequests.Add(model);
+                await _context.SaveChangesAsync();
+
+                TempData["ContactSuccess"] = "Gửi liên hệ thành công. Chúng tôi sẽ phản hồi sớm nhất có thể.";
+                return RedirectToAction(nameof(Contact));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to save contact request for {Email}", model.Email);
+                ModelState.AddModelError(string.Empty, "Không thể gửi liên hệ lúc này. Vui lòng thử lại sau.");
+                return View(model);
+            }
         }
 
         [Route("Detail/{slug}")]
