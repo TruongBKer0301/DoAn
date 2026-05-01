@@ -101,6 +101,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthentication();
+app.UseMiddleware<UserAuthHydrationMiddleware>();
 app.UseAuthorization();
 
 app.UseSession();

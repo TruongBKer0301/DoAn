@@ -33,7 +33,14 @@
                         <td class="col-name">@contact.FullName</td>
                         <td class="col-email">@contact.Email</td>
                         <td class="col-phone text-nowrap">@contact.PhoneNumber</td>
-                        <td class="col-message">@contact.Message</td>
+                        <td class="col-message">
+                            <div class="contact-message-wrap">
+                                <div class="contact-message-text" title="@contact.Message">@contact.Message</div>
+                                <button type="button" class="btn btn-link btn-sm p-0 contact-message-toggle" aria-label="Xem thêm nội dung" aria-expanded="false">
+                                    <i class="fa fa-chevron-down"></i>
+                                </button>
+                            </div>
+                        </td>
                         <td class="col-status text-center">
                             @if (contact.IsRead)
                             {
@@ -68,6 +75,11 @@
 </div>
 
 <style>
+    .contact-table {
+        table-layout: fixed;
+        width: 100%;
+    }
+
     .contact-table .col-id {
         width: 70px;
     }
@@ -86,9 +98,62 @@
     }
 
     .contact-table .col-message {
-        min-width: 320px;
-        max-width: 420px;
-        white-space: pre-wrap;
+        width: 320px;
+        max-width: 320px;
+    }
+
+    .contact-message-wrap {
+        display: flex;
+        align-items: flex-start;
+        gap: 6px;
+        width: 100%;
+    }
+
+    .contact-message-text {
+        flex: 1 1 auto;
+        min-width: 0;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        white-space: normal;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+        line-height: 1.4;
+        max-height: 2.8em;
+    }
+
+    .contact-message-wrap.is-expanded .contact-message-text {
+        display: block;
+        -webkit-line-clamp: unset;
+        max-height: none;
+        overflow: visible;
+    }
+
+    .contact-message-toggle {
+        flex: 0 0 auto;
+        color: #0d6efd;
+        text-decoration: none;
+        line-height: 1;
+        box-shadow: none;
+    }
+
+    .contact-message-toggle:hover,
+    .contact-message-toggle:focus {
+        text-decoration: none;
+        box-shadow: none;
+    }
+
+    .contact-message-toggle.is-hidden {
+        display: none;
+    }
+
+    .contact-message-wrap.is-expanded .contact-message-toggle i {
+        transform: rotate(180deg);
+    }
+
+    .contact-message-toggle i {
+        transition: transform 0.15s ease-in-out;
     }
 
     .contact-table .col-status {
@@ -106,6 +171,37 @@
 
 @section Scripts {
     <script>
+        function syncContactMessageToggles() {
+            $(".contact-message-wrap").each(function () {
+                var $wrap = $(this);
+                var $text = $wrap.find(".contact-message-text");
+                var $toggle = $wrap.find(".contact-message-toggle");
+
+                if ($text[0] && $toggle.length) {
+                    // Force reflow to get accurate scrollHeight
+                    var scrollHeight = $text[0].scrollHeight;
+                    var clientHeight = $text[0].clientHeight;
+                    var isOverflowing = scrollHeight > clientHeight + 2;
+                    
+                    // Show toggle if content overflows
+                    if (isOverflowing) {
+                        $toggle.removeClass("is-hidden");
+                    } else {
+                        $toggle.addClass("is-hidden");
+                    }
+                }
+            });
+        }
+
+        $(document).on("click", ".contact-message-toggle", function (e) {
+            e.preventDefault();
+            var $wrap = $(this).closest(".contact-message-wrap");
+            var isExpanded = $wrap.hasClass("is-expanded");
+
+            $wrap.toggleClass("is-expanded", !isExpanded);
+            $(this).attr("aria-expanded", String(!isExpanded));
+        });
+
         $(document).on("click", ".mark-read-btn", function () {
             var id = $(this).data("id");
             $.post("@Url.Action("MarkRead", "Contact", new { area = "Admin" })", { id: id })
@@ -138,6 +234,10 @@
                 .fail(function () {
                     $("#message").html('<div class="alert alert-danger">Không thể xóa liên hệ.</div>');
                 });
+        });
+
+        $(function () {
+            syncContactMessageToggles();
         });
     </script>
 }
