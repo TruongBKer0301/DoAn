@@ -15,13 +15,20 @@ namespace LapTopBD.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            // Lấy danh sách banner đang hoạt động và sắp xếp theo Position
-            var banners = await _context.Banner
-                .Where(b => b.Status) // Chỉ lấy banner có Status = true
-                .OrderBy(b => b.Position) // Sắp xếp theo Position
-                .ToListAsync();
+            try
+            {
+                var banners = await _context.Banner
+                    .AsNoTracking()
+                    .Where(b => b.Status)
+                    .OrderBy(b => b.Position)
+                    .ToListAsync();
 
-            return View(banners); // Truyền danh sách banner vào view
+                return View(banners);
+            }
+            catch
+            {
+                return View(Enumerable.Empty<LapTopBD.Models.Banner>());
+            }
         }
     }
 }
