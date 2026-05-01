@@ -82,15 +82,6 @@ builder.Services.AddHttpClient();
 // =====================
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
-{
-    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    var loggerFactory = scope.ServiceProvider.GetRequiredService<ILoggerFactory>();
-    var logger = loggerFactory.CreateLogger("DatabaseInitializer");
-
-    await DatabaseInitializer.EnsureContactRequestsTableAsync(dbContext, logger);
-}
-
 // =====================
 // PIPELINE
 // =====================
