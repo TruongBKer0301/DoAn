@@ -247,7 +247,7 @@ $(function () {
                     $("#newAvatarPreview").attr("src", "/avatar/default-avatar.png");
                     $("#addAdminModal").modal("hide");
                 } else {
-                    $showMessage(response.message, "danger");
+                    showMessage(response.message, "danger");
                 }
             },
             error: function () {
