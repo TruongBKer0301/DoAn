@@ -1,0 +1,12 @@
+bin/
+obj/
+publish/
+_buildcheck*/
+
+# Keep local tooling and editor files out of App Service packages.
+.vs/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
