@@ -110,12 +110,12 @@ $(function () {
                     $("#Username").val("");
                     $("#Password").val("");
                     $("#RememberMe").prop("checked", false);
-                    showMessage(response.message, "success");
+                    showMessage(response.message, "success", "#message");
                     setTimeout(function () {
                         window.location.href = "/Admin/Dashboard";
                     }, 2000);
                 } else {
-                    showMessage(response.message, "danger");
+                    showMessage(response.message, "danger", "#message");
                 }
             },
             error: function (xhr) {
@@ -205,7 +205,7 @@ $(function () {
             processData: false,
             success: function (response) {
                 if (response.success) {
-                    showMessage(response.message, "success");
+                    showMessage(response.message, "success", "#message");
 
                     // Tạo hàng mới để thêm vào bảng
                     let newRow = `
@@ -247,7 +247,7 @@ $(function () {
                     $("#newAvatarPreview").attr("src", "/avatar/default-avatar.png");
                     $("#addAdminModal").modal("hide");
                 } else {
-                    showMessage(response.message, "danger");
+                    showMessage(response.message, "danger", "#message");
                 }
             },
             error: function () {
@@ -267,7 +267,7 @@ $(function () {
             url: "/admin/delete/" + adminId,
             type: "POST",
             success: function (response) {
-                showMessage(response.message, "success");
+                showMessage(response.message, "success", "#message");
 
                 if (response.success) {
                     // Xóa hàng chứa Admin đã bị xóa
@@ -275,7 +275,7 @@ $(function () {
                         return $(this).find(".delete-admin").data("id") == adminId;
                     }).remove();
                 } else {
-                    showMessage(response.message, "danger");
+                    showMessage(response.message, "danger", "#message");
                 }
             }
         });
@@ -320,9 +320,9 @@ $(function () {
 
                     $('#addCategoryModal').modal('hide');
                     $("#NewCategoryName").val('');
-                    showMessage(response.message, "success");
+                    showMessage(response.message, "success", "#message");
                 } else {
-                    showMessage(response.message, "danger");
+                    showMessage(response.message, "danger", "#message");
                 }
             },
             error: function (xhr, status, error) {
@@ -349,7 +349,7 @@ $(function () {
             success: function (response) {
                 console.log("Phản hồi từ server:", response);
                 if (response.success) {
-                    showMessage(response.message, "success");
+                    showMessage(response.message, "success", "#message");
                     setTimeout(() => window.location.href = "/category/list-category", 2000);
                 } else {
                     $("#message").html('<div class="alert alert-danger">' + response.message + '</div>');
@@ -357,7 +357,7 @@ $(function () {
             },
             error: function (xhr) {
                 console.log("Lỗi AJAX:", xhr.responseText);
-                showMessage(response.message, "danger");
+                showMessage(response.message, "danger", "#message");
             }
         });
     });
@@ -376,9 +376,9 @@ $(function () {
                 console.log("Server response:", response);
                 if (response.success) {
                     $(`a.delete-category[data-id="${categoryId}"]`).closest("tr").remove();
-                    showMessage(response.message, "success");
+                    showMessage(response.message, "success", "#message");
                 } else {
-                    showMessage(response.message, "danger");
+                    showMessage(response.message, "danger", "#message");
                 }
             },
             error: function (xhr, status, error) {
@@ -408,7 +408,7 @@ $(function () {
             },
             success: function (response) {
                 if (response.success) {
-                    showMessage(response.message, "success");
+                    showMessage(response.message, "success", "#message");
 
                     // Tạo hàng mới để thêm vào bảng
                     var newRow = `
@@ -441,7 +441,7 @@ $(function () {
                     $("#addSubCategoryForm")[0].reset();
                     $("#addSubCategoryModal").modal("hide");
                 } else {
-                    showMessage(response.message, "danger");
+                    showMessage(response.message, "danger", "#message");
                 }
             },
             error: function () {
