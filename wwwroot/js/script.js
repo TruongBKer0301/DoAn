@@ -2395,54 +2395,58 @@ if ($("#editCategoryId").length > 0) {
 // =========================================================================
 // SỰ KIỆN GIAO DIỆN
 // =========================================================================
-$('.product-carousel').owlCarousel({
-    loop: true,
-    margin: 8,
-    nav: false,
-    dots: false,
-    responsiveClass: true,
-    responsive: {
-        0: {
-            items: 2,
-            nav: true
-        },
-        600: {
-            items: 2,
-            nav: false
-        },
-        1000: {
-            items: 5,
-            nav: true,
-            loop: false
+if ($.fn.owlCarousel) {
+    $('.product-carousel').owlCarousel({
+        loop: true,
+        margin: 8,
+        nav: false,
+        dots: false,
+        responsiveClass: true,
+        responsive: {
+            0: {
+                items: 2,
+                nav: true
+            },
+            600: {
+                items: 2,
+                nav: false
+            },
+            1000: {
+                items: 5,
+                nav: true,
+                loop: false
+            }
         }
-    }
-})
+    });
 
-$(".main-banner-carousel").owlCarousel({
-    autoplay: true,
-    autoplayTimeout: 3000,
-    loop: true,
-    margin: 10,
-    slideTransition: 'linear',
-    autoplaySpeed: 1000,
-    smartSpeed: 800,
-    responsiveClass: true,
-    responsive: {
-        0: {
-            items: 1,
-            nav: true,
-            dots: true,
-        },
-        600: {
-            items: 1,
-        },
-        1000: {
-            items: 1,
-            nav: true,
-            dots: true,
+    $(".main-banner-carousel").owlCarousel({
+        autoplay: true,
+        autoplayTimeout: 3000,
+        loop: true,
+        margin: 10,
+        slideTransition: 'linear',
+        autoplaySpeed: 1000,
+        smartSpeed: 800,
+        responsiveClass: true,
+        responsive: {
+            0: {
+                items: 1,
+                nav: true,
+                dots: true,
+            },
+            600: {
+                items: 1,
+            },
+            1000: {
+                items: 1,
+                nav: true,
+                dots: true,
+            }
         }
-    }
-});
+    });
+} else {
+    console.warn('Owl Carousel is not loaded, skipping carousel initialization.');
+}
 
 //Overlay
 $(function () {
