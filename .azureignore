@@ -1,7 +1,8 @@
-bin/
-obj/
-publish/
-_buildcheck*/
+**/bin/
+**/obj/
+**/publish/
+**/_buildcheck*/
+**/_publish_check/
 
 # Keep local tooling and editor files out of App Service packages.
 .vs/
