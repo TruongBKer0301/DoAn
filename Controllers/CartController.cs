@@ -729,6 +729,48 @@ namespace LapTopBD.Controllers
             }
         }
 
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult VnPayConfigDebug()
+        {
+            // REMOVE THIS ENDPOINT AFTER TESTING - SECURITY RISK
+            // Get injected VnPayService to inspect loaded config
+            var vnpayServiceType = _vnPayService.GetType();
+            var optionsField = vnpayServiceType.BaseType?.GetField("_options", 
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            
+            if (optionsField != null)
+            {
+                var options = optionsField.GetValue(_vnPayService);
+                var optionsType = options?.GetType();
+                
+                var tmnCodeProp = optionsType?.GetProperty("TmnCode");
+                var secretProp = optionsType?.GetProperty("HashSecret");
+                var baseUrlProp = optionsType?.GetProperty("BaseUrl");
+                
+                var tmnCode = tmnCodeProp?.GetValue(options)?.ToString() ?? "N/A";
+                var secret = secretProp?.GetValue(options)?.ToString() ?? "N/A";
+                var baseUrl = baseUrlProp?.GetValue(options)?.ToString() ?? "N/A";
+                
+                // Mask secret for safety - show first 8 and last 4 chars
+                var maskedSecret = secret.Length > 12 
+                    ? $"{secret.Substring(0, 8)}***{secret.Substring(secret.Length - 4)}" 
+                    : "***";
+                
+                return Json(new
+                {
+                    environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production",
+                    tmnCode = tmnCode,
+                    hashSecret_masked = maskedSecret,
+                    hashSecret_full = secret,  // REMOVE AFTER TESTING
+                    baseUrl = baseUrl,
+                    message = "DEBUG ENDPOINT - DELETE AFTER TESTING FOR SECURITY"
+                });
+            }
+
+            return Json(new { error = "Could not read VNPay options" });
+        }
+
         private async Task<int> GetUserIdAsync()
         {
             var authenticateResult = await HttpContext.AuthenticateAsync("UserAuth");
