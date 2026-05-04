@@ -921,6 +921,10 @@ $(function () {
 
     // Hàm lấy số lượng đơn hàng chưa hủy trong 3 ngày gần nhất và cập nhật badge
     function updateOrderCountBadge() {
+        if ($("#orderCountBadge").length === 0) {
+            return;
+        }
+
         $.ajax({
             url: "/admin/order/get-new-orders-count",
             type: "GET",
@@ -952,16 +956,21 @@ $(function () {
         });
     }
 
-    // Gọi hàm cập nhật badge khi trang được tải
+    // Gọi hàm cập nhật badge khi trang được tải (chỉ trong admin layout)
     $(function () {
-        updateOrderCountBadge();
+        if ($("#orderCountBadge").length > 0) {
+            updateOrderCountBadge();
+        }
     });
 
 
     // Xử lý khi nhấn vào "Thông tin đơn hàng"
     $(document).on("click", "#newOrdersLink", function (e) {
+        if ($("#newOrdersLink").length === 0) {
+            return;
+        }
+
         e.preventDefault();
-            clicked = true;
 
         $.ajax({
             url: "/admin/order/get-new-orders-count",
