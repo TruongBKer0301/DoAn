@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication;
 using LapTopBD.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using LapTopBD.Utilities;
+using Microsoft.Extensions.Options;
 
 namespace LapTopBD.Controllers
 {
@@ -15,15 +16,18 @@ namespace LapTopBD.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IVnPayService _vnPayService;
         private readonly IPendingCheckoutStore _pendingCheckoutStore;
+        private readonly IOptions<VnPayOptions> _vnPayOptions;
 
         public CartController(
             ApplicationDbContext context,
             IVnPayService vnPayService,
-            IPendingCheckoutStore pendingCheckoutStore)
+            IPendingCheckoutStore pendingCheckoutStore,
+            IOptions<VnPayOptions> vnPayOptions)
         {
             _context = context;
             _vnPayService = vnPayService;
             _pendingCheckoutStore = pendingCheckoutStore;
+            _vnPayOptions = vnPayOptions;
         }
 
         public async Task<IActionResult> Index()
@@ -734,41 +738,24 @@ namespace LapTopBD.Controllers
         public IActionResult VnPayConfigDebug()
         {
             // REMOVE THIS ENDPOINT AFTER TESTING - SECURITY RISK
-            // Get injected VnPayService to inspect loaded config
-            var vnpayServiceType = _vnPayService.GetType();
-            var optionsField = vnpayServiceType.BaseType?.GetField("_options", 
-                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            var options = _vnPayOptions.Value;
+            var secret = options.HashSecret ?? "NOT SET";
             
-            if (optionsField != null)
+            // Mask secret for safety - show first 8 and last 4 chars only
+            var maskedSecret = secret.Length > 12 
+                ? $"{secret.Substring(0, 8)}***{secret.Substring(secret.Length - 4)}" 
+                : "***";
+            
+            return Json(new
             {
-                var options = optionsField.GetValue(_vnPayService);
-                var optionsType = options?.GetType();
-                
-                var tmnCodeProp = optionsType?.GetProperty("TmnCode");
-                var secretProp = optionsType?.GetProperty("HashSecret");
-                var baseUrlProp = optionsType?.GetProperty("BaseUrl");
-                
-                var tmnCode = tmnCodeProp?.GetValue(options)?.ToString() ?? "N/A";
-                var secret = secretProp?.GetValue(options)?.ToString() ?? "N/A";
-                var baseUrl = baseUrlProp?.GetValue(options)?.ToString() ?? "N/A";
-                
-                // Mask secret for safety - show first 8 and last 4 chars
-                var maskedSecret = secret.Length > 12 
-                    ? $"{secret.Substring(0, 8)}***{secret.Substring(secret.Length - 4)}" 
-                    : "***";
-                
-                return Json(new
-                {
-                    environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production",
-                    tmnCode = tmnCode,
-                    hashSecret_masked = maskedSecret,
-                    hashSecret_full = secret,  // REMOVE AFTER TESTING
-                    baseUrl = baseUrl,
-                    message = "DEBUG ENDPOINT - DELETE AFTER TESTING FOR SECURITY"
-                });
-            }
-
-            return Json(new { error = "Could not read VNPay options" });
+                environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production",
+                tmnCode = options.TmnCode,
+                hashSecret_masked = maskedSecret,
+                hashSecret_full = secret,
+                baseUrl = options.BaseUrl,
+                returnUrl = options.PaymentBackReturnUrl,
+                message = "DEBUG ENDPOINT - DELETE AFTER TESTING FOR SECURITY"
+            });
         }
 
         private async Task<int> GetUserIdAsync()
