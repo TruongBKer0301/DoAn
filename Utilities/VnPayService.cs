@@ -3,7 +3,6 @@ using System.Globalization;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
-using System.Text.Encodings.Web;
 
 namespace LapTopBD.Utilities
 {
@@ -62,7 +61,7 @@ namespace LapTopBD.Utilities
                 now = DateTime.UtcNow.AddHours(7);
             }
 
-            var vnpData = new SortedDictionary<string, string>
+            var vnpData = new SortedDictionary<string, string>(StringComparer.Ordinal)
             {
                 ["vnp_Version"] = _options.Version,
                 ["vnp_Command"] = _options.Command,
@@ -125,7 +124,7 @@ namespace LapTopBD.Utilities
                 return result;
             }
 
-            var vnpData = new SortedDictionary<string, string>();
+            var vnpData = new SortedDictionary<string, string>(StringComparer.Ordinal);
             foreach (var kv in query)
             {
                 if (kv.Key.StartsWith("vnp_", StringComparison.OrdinalIgnoreCase)
@@ -178,9 +177,11 @@ namespace LapTopBD.Utilities
 
         private static string BuildRequestQuery(SortedDictionary<string, string> data)
         {
+            // Use the same encoder as BuildHashData to avoid signature mismatches caused by
+            // different space encoding (+ vs %20) across hash-data and request query.
             return string.Join("&", data
                 .Where(x => !string.IsNullOrWhiteSpace(x.Value))
-                .Select(x => $"{UrlEncoder.Default.Encode(x.Key)}={UrlEncoder.Default.Encode(x.Value)}"));
+                .Select(x => $"{WebUtility.UrlEncode(x.Key)}={WebUtility.UrlEncode(x.Value)}"));
         }
 
         private static string ComputeHmacSha512(string key, string inputData)
