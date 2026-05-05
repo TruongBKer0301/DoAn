@@ -47,13 +47,13 @@
                                     <td class="align-middle">
                                         <div class="custom-quantity-group mx-auto" data-price="@item.Product.ProductPrice" data-shipping-charge="@item.Product.ShippingCharge">
                                             <div class="input-group-btn">
-                                                <button class="custom-quantity-btn btn-minus" data-id="@item.Id">
+                                                <button type="button" class="custom-quantity-btn btn-minus" data-id="@item.Id">
                                                     <i class="fa fa-minus"></i>
                                                 </button>
                                             </div>
                                             <input type="text" class="custom-quantity-input" value="@item.Quantity">
                                             <div class="input-group-btn">
-                                                <button class="custom-quantity-btn btn-plus" data-id="@item.Id">
+                                                <button type="button" class="custom-quantity-btn btn-plus" data-id="@item.Id">
                                                     <i class="fa fa-plus"></i>
                                                 </button>
                                             </div>
@@ -63,7 +63,7 @@
                                         <span class="custom-total">@((item.Product.ProductPrice * item.Quantity).ToString("#,##0 VNĐ"))</span>
                                     </td>
                                     <td class="align-middle">
-                                        <button class="custom-btn btn-remove" data-id="@item.Id">
+                                        <button type="button" class="custom-btn btn-remove" data-id="@item.Id">
                                             <i class="fa fa-times"></i>
                                         </button>
                                     </td>
@@ -87,7 +87,7 @@
                 <div class="input-group">
                     <input type="text" class="custom-input p-4" placeholder="Mã giảm giá">
                     <div class="input-group-append">
-                        <button class="custom-btn mt-2">Áp dụng</button>
+                        <button type="button" class="custom-btn mt-2">Áp dụng</button>
                     </div>
                 </div>
             </form>
@@ -121,73 +121,6 @@
 
 @section Scripts {
 <script>
-$(document).ready(function () {
-
-    // format tiền
-    function formatMoney(n) {
-        return n.toLocaleString('vi-VN') + ' VNĐ';
-    }
-
-    // 🔥 CORE: tính tổng tiền
-    function updateTotalPrice() {
-        let subtotal = 0;
-        let shipping = 0;
-
-        $('.custom-table-row').each(function () {
-
-            const checkbox = $(this).find('.item-checkbox');
-            if (!checkbox.is(':checked')) return; // ❗ bỏ chọn = bỏ luôn
-
-            const group = $(this).find('.custom-quantity-group');
-            const price = parseFloat(group.data('price'));
-            const ship = parseFloat(group.data('shipping')) || 0;
-            const qty = parseInt($(this).find('.custom-quantity-input').val()) || 0;
-
-            subtotal += price * qty;
-            shipping += ship;
-        });
-
-        $('#subtotal').text(formatMoney(subtotal));
-        $('#shipping').text(formatMoney(shipping));
-        $('#grand-total').text(formatMoney(subtotal + shipping));
-    }
-
-    // 🔥 SELECT ALL
-    $('#selectAll').on('change', function () {
-        $('.item-checkbox').prop('checked', this.checked);
-        updateTotalPrice();
-    });
-
-    // 🔥 CHECKBOX ITEM
-    $(document).on('change', '.item-checkbox', function () {
-
-        const total = $('.item-checkbox').length;
-        const checked = $('.item-checkbox:checked').length;
-
-        $('#selectAll').prop('checked', total === checked);
-
-        updateTotalPrice();
-    });
-
-    // 🔥 TĂNG GIẢM SỐ LƯỢNG
-    $(document).on('click', '.btn-plus', function () {
-        const input = $(this).siblings('.custom-quantity-input');
-        input.val(parseInt(input.val()) + 1);
-        updateTotalPrice();
-    });
-
-    $(document).on('click', '.btn-minus', function () {
-        const input = $(this).siblings('.custom-quantity-input');
-        let val = parseInt(input.val()) - 1;
-        if (val < 1) val = 1;
-        input.val(val);
-        updateTotalPrice();
-    });
-
-    // 🔥 INIT
-    updateTotalPrice();
-});
-
 // 🔥 CHECKOUT
 function checkoutSelected() {
     const selectedIds = $('.item-checkbox:checked').map(function () {
