@@ -6,12 +6,14 @@
         public string? Name { get; set; }
         public string? ContactNo { get; set; }
         public string? City { get; set; }
-        public string? District { get; set; }
         public string? Ward { get; set; }
         public string? Address { get; set; }
 
         // Phương thức thanh toán
         public string? PaymentMethod { get; set; }
+
+        // Danh sách sản phẩm được chọn để thanh toán
+        public List<int> SelectedProductIds { get; set; } = new();
 
         // Danh sách sản phẩm trong giỏ hàng
         public List<CartItem> CartItems { get; set; } = new List<CartItem>();

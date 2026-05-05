@@ -60,6 +60,60 @@
 
 /*#endregion */
 
+.btn-add-to-fav {
+    background: #fff;
+    border: 1px solid #ff4757;
+    color: #ff4757;
+    transition: all 0.25s ease;
+}
+
+    .btn-add-to-fav i {
+        color: inherit;
+    }
+
+    .btn-add-to-fav.is-favorited {
+        background: #ff4757;
+        border-color: #ff4757;
+        color: #fff;
+    }
+
+        .btn-add-to-fav.is-favorited:hover {
+            background: #ff2f41;
+            border-color: #ff2f41;
+            color: #fff;
+        }
+
+    .btn-add-to-fav:hover {
+        transform: translateY(-1px);
+    }
+
+.btn-add-to-fav {
+    background: #fff;
+    border: 1px solid #ff4757;
+    color: #ff4757;
+    transition: all 0.25s ease;
+}
+
+    .btn-add-to-fav i {
+        color: inherit;
+    }
+
+    .btn-add-to-fav.is-favorited {
+        background: #ff4757;
+        border-color: #ff4757;
+        color: #fff;
+    }
+
+        .btn-add-to-fav.is-favorited:hover {
+            background: #ff2f41;
+            border-color: #ff2f41;
+            color: #fff;
+        }
+
+    .btn-add-to-fav:hover {
+        transform: translateY(-1px);
+    }
+
 /*#region Owcarousel */
 
 

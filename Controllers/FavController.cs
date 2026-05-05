@@ -95,7 +95,8 @@ namespace LapTopBD.Controllers
 
             if (existing != null)
             {
-                return Json(new { success = false, message = "Sản phẩm đã có sẵn trong danh sách ưa thích!" });
+                int currentCount = await _context.Wishlist.CountAsync(c => c.UserId == userId);
+                return Json(new { success = true, message = "Sản phẩm đã có sẵn trong danh sách ưa thích!", wishlistcount = currentCount });
             }
 
             var wishlist = new LapTopBD.Models.Wishlist
@@ -117,6 +118,23 @@ namespace LapTopBD.Controllers
                 message = "Đã thêm vào ưa thích!",
                 wishlistcount = newCount // Trả về số lượng mới để JS cập nhật luôn
             });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetFavProductIds()
+        {
+            var userId = await GetUserIdAsync();
+            if (userId == 0)
+            {
+                return Json(new { success = false, productIds = Array.Empty<int>() });
+            }
+
+            var productIds = await _context.Wishlist
+                .Where(c => c.UserId == userId)
+                .Select(c => c.ProductId)
+                .ToListAsync();
+
+            return Json(new { success = true, productIds });
         }
 
         //Số lượng sản phẩm trong giỏ hàng
@@ -152,7 +170,8 @@ namespace LapTopBD.Controllers
             try
             {
                 await _context.SaveChangesAsync();
-                return Json(new { success = true, message = "Đã xóa khỏi mục ưa thích!" });
+                int newCount = await _context.Wishlist.CountAsync(c => c.UserId == userId);
+                return Json(new { success = true, message = "Đã xóa khỏi mục ưa thích!", wishlistcount = newCount });
             }
             catch (Exception ex)
             {

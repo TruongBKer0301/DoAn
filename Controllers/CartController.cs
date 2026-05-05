@@ -8,6 +8,7 @@ using LapTopBD.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using LapTopBD.Utilities;
 using Microsoft.Extensions.Options;
+using System.Text.RegularExpressions;
 
 namespace LapTopBD.Controllers
 {
@@ -197,7 +198,7 @@ namespace LapTopBD.Controllers
 
         [Authorize(AuthenticationSchemes = "UserAuth")]
         [HttpGet]
-        public async Task<IActionResult> Checkout()
+        public async Task<IActionResult> Checkout([FromQuery] List<int>? selectedProductIds)
         {
             var userId = await GetUserIdAsync();
             if (userId == 0)
@@ -232,6 +233,23 @@ namespace LapTopBD.Controllers
                 return RedirectToAction("Index");
             }
 
+            if (selectedProductIds != null && selectedProductIds.Any())
+            {
+                cartItems = cartItems
+                    .Where(item => selectedProductIds.Contains(item.ProductId))
+                    .ToList();
+
+                if (!cartItems.Any())
+                {
+                    TempData["Error"] = "Không có sản phẩm được chọn để thanh toán!";
+                    return RedirectToAction("Index");
+                }
+            }
+
+            var finalSelectedIds = (selectedProductIds != null && selectedProductIds.Any())
+                ? selectedProductIds.Distinct().ToList()
+                : cartItems.Select(item => item.ProductId).Distinct().ToList();
+
             // Tính tổng tiền
             decimal totalPrice = cartItems.Sum(item => item.Subtotal);
 
@@ -241,9 +259,9 @@ namespace LapTopBD.Controllers
                 Name = user.Name,
                 ContactNo = user.ContactNo,
                 City = user.City ?? "",
-                District = user.District ?? "",
                 Ward = user.Ward ?? "",
                 Address = user.Address ?? "",
+                SelectedProductIds = finalSelectedIds,
                 CartItems = cartItems,
                 TotalPrice = totalPrice
             };
@@ -283,17 +301,33 @@ namespace LapTopBD.Controllers
             model.Name = model.Name?.Trim();
             model.ContactNo = model.ContactNo?.Trim();
             model.City = model.City?.Trim();
-            model.District = model.District?.Trim();
             model.Ward = model.Ward?.Trim();
             model.Address = model.Address?.Trim();
 
             if (string.IsNullOrWhiteSpace(model.Name) || string.IsNullOrWhiteSpace(model.ContactNo) ||
-                string.IsNullOrWhiteSpace(model.City) || string.IsNullOrWhiteSpace(model.District) ||
-                string.IsNullOrWhiteSpace(model.Ward) || string.IsNullOrWhiteSpace(model.Address))
+                string.IsNullOrWhiteSpace(model.City) || string.IsNullOrWhiteSpace(model.Ward) ||
+                string.IsNullOrWhiteSpace(model.Address))
             {
                 Console.WriteLine("[DEBUG] Thiếu thông tin giao hàng");
                 return Json(new { success = false, message = "Vui lòng nhập đầy đủ thông tin giao hàng!" });
             }
+
+            if (!Regex.IsMatch(model.ContactNo, @"^(0|\+84)(3|5|7|8|9)[0-9]{8}$"))
+            {
+                return Json(new { success = false, message = "Số điện thoại không hợp lệ!" });
+            }
+
+            // Filter selected items
+            if (model.SelectedProductIds != null && model.SelectedProductIds.Any())
+            {
+                cartItems = cartItems.Where(c => model.SelectedProductIds.Contains(c.ProductId)).ToList();
+            }
+
+            if (!cartItems.Any())
+            {
+                return Json(new { success = false, message = "Không có sản phẩm được chọn để thanh toán!" });
+            }
+
             var errors = cartItems
                 .Where(i => i.Product != null && i.Quantity > i.Product.quantity)
                 .Select(i => new
@@ -345,7 +379,6 @@ namespace LapTopBD.Controllers
                     Name = model.Name,
                     ContactNo = model.ContactNo,
                     City = model.City,
-                    District = model.District,
                     Ward = model.Ward,
                     Address = model.Address,
                     TransactionRef = transactionRef,
@@ -511,7 +544,6 @@ namespace LapTopBD.Controllers
                 var order = new Order
                 {
                     City = model.City,
-                    District = model.District,
                     Ward = model.Ward,
                     Address = model.Address,
                     UserId = userId,
@@ -534,7 +566,6 @@ namespace LapTopBD.Controllers
                 user.Name = model.Name;
                 user.ContactNo = model.ContactNo;
                 user.City = model.City;
-                user.District = model.District;
                 user.Ward = model.Ward;
                 user.Address = model.Address;
                 user.UpdationDate = DateTimeHelper.Now;
@@ -581,9 +612,7 @@ namespace LapTopBD.Controllers
                     // Tạo order
                 var order = new Order
                 {
-
                     City = pendingCheckout.City,
-                    District = pendingCheckout.District,
                     Ward = pendingCheckout.Ward,
                     Address = pendingCheckout.Address,
                     UserId = pendingCheckout.UserId,
@@ -607,7 +636,6 @@ namespace LapTopBD.Controllers
                 user.Name = pendingCheckout.Name;
                 user.ContactNo = pendingCheckout.ContactNo;
                 user.City = pendingCheckout.City;
-                user.District = pendingCheckout.District;
                 user.Ward = pendingCheckout.Ward;
                 user.Address = pendingCheckout.Address;
                 user.UpdationDate = DateTimeHelper.Now;

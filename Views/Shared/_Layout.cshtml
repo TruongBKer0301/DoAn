@@ -142,7 +142,6 @@
     <div class="content">
         @RenderBody()
     </div>
-    @RenderSection("Scripts", required: false)
 
     <!-- Footer Start -->
     <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
@@ -187,6 +186,9 @@
     <!-- Template Javascript -->
     <script src="~/js/main.js"></script>
     <script src="~/js/script.js"></script>
+
+    <!-- Page-specific Scripts (after main libraries loaded) -->
+    @RenderSection("Scripts", required: false)
 </body>
 
 </html>
