@@ -1,6 +1,11 @@
 ﻿@model LapTopBD.Models.ViewModels.CheckoutViewModel
 @{
     ViewData["Title"] = "Thanh toán";
+    var initialName = Model?.Name ?? string.Empty;
+    var initialContactNo = Model?.ContactNo ?? string.Empty;
+    var initialCity = Model?.City ?? string.Empty;
+    var initialWard = Model?.Ward ?? string.Empty;
+    var initialAddress = Model?.Address ?? string.Empty;
 }
 
 <div class="container mt-5">
@@ -23,12 +28,12 @@
 
                 <div class="mb-3">
                     <label>Họ tên</label>
-                    <input type="text" class="form-control" name="Name" required />
+                    <input type="text" class="form-control" name="Name" value="@initialName" required />
                 </div>
 
                 <div class="mb-3">
                     <label>Số điện thoại</label>
-                    <input type="text" class="form-control" name="ContactNo" id="phone" required />
+                    <input type="text" class="form-control" name="ContactNo" id="phone" value="@initialContactNo" required />
                     <small id="phoneError" class="text-danger"></small>
                 </div>
 
@@ -47,10 +52,12 @@
 
                 <div class="custom-form-group">
                     <label>Địa chỉ cụ thể <span class="text-danger">*</span></label>
-                    <input type="text" id="addressDetail" name="Address" class="custom-input" required />
+                    <input type="text" id="addressDetail" name="Address" class="custom-input" value="@initialAddress" required />
                 </div>
                 <script>
                                     const API_BASE = "/api/address";
+                                    const initialCity = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(initialCity));
+                                    const initialWard = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(initialWard));
 
                                     // Load tỉnh (value = province code)
                                     async function loadProvinces() {
@@ -89,8 +96,7 @@
                                             communes.forEach(c => {
                                                 const name = c.name || "";
                                                 const code = c.code || "";
-                                                const districtName = c.districtName || "";
-                                                html += `<option value="${name}" data-code="${code}" data-district="${districtName}">${name}</option>`;
+                                                html += `<option value="${name}" data-code="${code}">${name}</option>`;
                                             });
 
                                             document.getElementById("commune").innerHTML = html;                                        } catch (err) {
@@ -108,6 +114,28 @@
                                     // Init
                                     document.addEventListener("DOMContentLoaded", async function () {
                                         await loadProvinces();
+
+                                        if (initialCity) {
+                                            const provinceSelect = document.getElementById("province");
+                                            const provinceOption = Array.from(provinceSelect.options)
+                                                .find(option => option.value === initialCity);
+
+                                            if (provinceOption) {
+                                                provinceOption.selected = true;
+                                                const provinceCode = provinceOption.dataset.code || "";
+                                                await loadCommunes(provinceCode);
+
+                                                if (initialWard) {
+                                                    const communeSelect = document.getElementById("commune");
+                                                    const communeOption = Array.from(communeSelect.options)
+                                                        .find(option => option.value === initialWard);
+
+                                                    if (communeOption) {
+                                                        communeOption.selected = true;
+                                                    }
+                                                }
+                                            }
+                                        }
                                     });
                 </script>
 
@@ -210,6 +238,22 @@
                 return;
             }
 
+            // Validate that city and ward are not placeholder values
+            if (data.City.includes("--Chọn") || data.Ward.includes("--Chọn")) {
+                showMessage("Vui lòng chọn tỉnh/thành và xã/phường hợp lệ!", "danger");
+                return;
+            }
+
+            if (!data.Address) {
+                showMessage("Vui lòng nhập địa chỉ cụ thể!", "danger");
+                return;
+            }
+
+            if (!data.PaymentMethod) {
+                showMessage("Vui lòng chọn phương thức thanh toán!", "danger");
+                return;
+            }
+
             // Get selected items from cart selection (hidden inputs)
             const selectedItems = $('input[name="SelectedProductIds"]').map(function () {
                 return $(this).val();
@@ -239,6 +283,17 @@
                     } else {
                         showMessage(res.message, "danger");
                     }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Checkout error:", error);
+                    let errorMsg = "Lỗi khi đặt hàng. Vui lòng thử lại!";
+                    try {
+                        const response = JSON.parse(xhr.responseText);
+                        if (response && response.message) {
+                            errorMsg = response.message;
+                        }
+                    } catch (e) { }
+                    showMessage(errorMsg, "danger");
                 }
             });
         }

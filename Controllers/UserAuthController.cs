@@ -168,7 +168,6 @@ namespace LapTopBD.Controllers
                 EmailVerificationOtp = otp,
                 EmailVerificationOtpExpiry = otpExpiry,
                 City = string.Empty,
-                District = string.Empty,
                 Ward = string.Empty,
                 Address = string.Empty
             };

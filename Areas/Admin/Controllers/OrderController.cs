@@ -36,7 +36,6 @@ namespace LapTopBD.Areas.Admin.Controllers
                     o.OrderStatus,
                     o.TotalPrice,
                     o.City,
-                    o.District,
                     o.Ward,
                     o.Address
                 })
@@ -51,7 +50,6 @@ namespace LapTopBD.Areas.Admin.Controllers
                     OrderStatus = o.OrderStatus,
                     TotalPrice = o.TotalPrice,
                     City = o.City,
-                    District = o.District,
                     Ward = o.Ward,
                     Address = o.Address
                 })

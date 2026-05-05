@@ -42,9 +42,6 @@ namespace LapTopBD.Models
         public string? City { get; set; }  // Thành phố
 
         [StringLength(255)]
-        public string? District { get; set; } // Quận/Huyện
-
-        [StringLength(255)]
         public string? Ward { get; set; } // Phường/Xã
 
         [StringLength(500)]

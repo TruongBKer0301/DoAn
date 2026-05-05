@@ -123,6 +123,25 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+    try
+    {
+        await dbContext.Database.ExecuteSqlRawAsync(@"
+            IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'order' AND COLUMN_NAME = 'district')
+                ALTER TABLE [dbo].[order] DROP COLUMN [district];
+
+            IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'users' AND COLUMN_NAME = 'district')
+                ALTER TABLE [dbo].[users] DROP COLUMN [district];");
+    }
+    catch (Exception ex)
+    {
+        Console.Error.WriteLine($"Schema cleanup warning: {ex.Message}");
+    }
+}
+
 app.Run();
 }
 catch (Exception ex)
