@@ -129,6 +129,13 @@ using (var scope = app.Services.CreateScope())
 
     try
     {
+        await dbContext.Database.ExecuteSqlRawAsync(@"
+            IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'dbo' AND TABLE_NAME = 'order' AND COLUMN_NAME = 'district')
+                ALTER TABLE [dbo].[order] DROP COLUMN [district];
+
+            IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'dbo' AND TABLE_NAME = 'users' AND COLUMN_NAME = 'district')
+                ALTER TABLE [dbo].[users] DROP COLUMN [district];");
+
         await dbContext.Database.MigrateAsync();
     }
     catch (Exception ex)
