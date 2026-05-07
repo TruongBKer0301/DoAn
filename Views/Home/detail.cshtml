@@ -136,16 +136,16 @@
                 <p class="text-dark font-weight-medium mb-0 mr-3">Số lượng hàng còn lại: @Model?.quantity</p>
             </div>
 
-            <div class="d-flex align-items-center mb-2" style="flex-wrap: wrap; gap: 8px;">
+            <div class="d-flex align-items-center mb-2 flex-wrap gap-2 gap-md-3">
                 <!-- Nút trừ -->
                 <button type="button" class="btn btn-primary" id="btn-minus" onclick="decreaseQty(event)">
                     <i class="fa fa-minus"></i>
                 </button>
 
                 <!-- Input số lượng -->
-                <input type="number" class="form-control text-center"
+                  <input type="number" class="form-control text-center flex-shrink-0"
                        value="1" id="quantity" min="1" max="@Model?.quantity"
-                       style="width: 90px;" />
+                      style="width: 90px; max-width: 100%;" />
 
                 <!-- Nút cộng -->
                 <button type="button" class="btn btn-primary" id="btn-plus" onclick="increaseQty(event)">
@@ -170,7 +170,7 @@
                         </button>
                     </div>
                 }
-                <button class="btn btn-outline-primary btn-add-to-fav ml-3"
+                <button class="btn btn-outline-primary btn-add-to-fav ms-0 ms-md-3"
                         id="add-to-fav-btn"
                         data-product-id="@Model?.Id"
                         title="Thêm vào yêu thích">
@@ -179,7 +179,7 @@
             </div>
 
             <!-- Thông báo lỗi -->
-            <div id="qty-message" style="color:red; font-size:0.85rem; margin-top:4px;"></div>
+            <div id="qty-message" class="text-danger small mt-1"></div>
             
         </div>
     </div>

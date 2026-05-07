@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LapTopBD")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cd55d3cb35a90815ac0cbcc4a986b74d1edafa45")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+69aede8a95bd534478d9605243eed007f6ba15d6")]
 [assembly: System.Reflection.AssemblyProductAttribute("LapTopBD")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LapTopBD")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

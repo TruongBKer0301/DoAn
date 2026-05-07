@@ -1,0 +1,120 @@
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+img, video, canvas, svg {
+    max-width: 100%;
+    height: auto;
+}
+
+.table-responsive {
+    -webkit-overflow-scrolling: touch;
+}
+
+.dropdown-menu {
+    max-width: calc(100vw - 1rem);
+}
+
+@media (max-width: 991.98px) {
+    .px-xl-5 {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    .menu > ul {
+        flex-direction: column;
+        gap: .5rem;
+    }
+
+    .menu > ul > li > ul {
+        position: static !important;
+        left: auto !important;
+        top: auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 1rem !important;
+        gap: 1rem !important;
+        flex-direction: column !important;
+    }
+
+    .menu > ul > li > ul > li {
+        width: 100% !important;
+    }
+
+    .banner-grid > div {
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    [style*="min-height: 300px"],
+    [style*="min-height: 260px"] {
+        min-height: 220px !important;
+    }
+
+    .min-hero-260,
+    .min-hero-300 {
+        min-height: 220px !important;
+    }
+
+    [style*="width: 1000px"] {
+        width: min(100%, 1000px) !important;
+    }
+
+    [style*="width: 350px"] {
+        width: min(100%, 350px) !important;
+    }
+
+    [style*="width: 260px"] {
+        width: min(100%, 260px) !important;
+    }
+
+    [style*="width: 90px"] {
+        width: 72px !important;
+    }
+
+    [style*="width: 50px"] {
+        width: 40px !important;
+    }
+
+    [style*="width: 35px"] {
+        width: 30px !important;
+        height: 30px !important;
+    }
+
+    .logo-shop {
+        max-width: 96px !important;
+    }
+
+    .main-banner,
+    .banner-children {
+        width: 100% !important;
+    }
+
+    .main-banner-carousel .owl-item img,
+    .banner-children img {
+        width: 100% !important;
+        object-fit: cover;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .px-xl-5 {
+        padding-left: .75rem !important;
+        padding-right: .75rem !important;
+    }
+
+    .card {
+        max-width: 100%;
+    }
+
+    .table,
+    .table thead,
+    .table tbody,
+    .table tr,
+    .table th,
+    .table td {
+        word-break: break-word;
+    }
+}

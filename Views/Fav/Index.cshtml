@@ -34,7 +34,7 @@
                                         <div class="card shadow h-100">
                                             <div class="ratio ratio-1x1">
                                                 <a href="@Url.Action("Detail", "Home", new { slug = product.Slug })">
-                                                    <img class="w-100 h-100 object-fit-cover" src="@product.ProductImage1" alt="@(product.ProductName ?? "Product")" />
+                                                    <img class="img-fluid w-100 h-100 object-fit-cover" src="@product.ProductImage1" alt="@(product.ProductName ?? "Product")" />
                                                 </a>
 
                                                 <button class="remove-fav-btn btn-remove-to-fav" data-id="@product.Id" title="Xóa khỏi yêu thích">

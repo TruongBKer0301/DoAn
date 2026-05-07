@@ -15,7 +15,7 @@
 
     <div class="row">
         <!-- FORM -->
-        <div class="col-lg-6">
+        <div class="col-lg-6 mb-4 mb-lg-0">
             <form id="checkoutForm">
 
                 @if (Model?.SelectedProductIds != null)
@@ -156,40 +156,42 @@
         <!-- ORDER SUMMARY -->
         <div class="col-lg-6">
             <h3 class="mb-4">Thông tin đơn hàng</h3>
-            <table class="custom-table">
-                <thead class="custom-table-head">
-                    <tr>
-                        <th>Ảnh sản phẩm</th>
-                        <th>Sản phẩm</th>
-                        <th>Số lượng</th>
-                        <th>Giá</th>
-                        <th>Tổng</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.CartItems)
-                    {
-                        <tr class="custom-table-row">
-                            <td><img width="150" src="@item.ProductImage" /></td>
-                            <td>@item.ProductName</td>
-                            <td>@item.Quantity</td>
-                            <td class="custom-price">@item.ProductPrice.ToString("N0") VNĐ</td>
-                            <td class="custom-total">@item.Subtotal.ToString("N0") VNĐ</td>
-                        </tr>
+            <div class="table-responsive">
+                <table class="custom-table">
+                    <thead class="custom-table-head">
                         <tr>
-                            <td colspan="5">
-                                <div class="text-danger product-error" id="error-@item.ProductId"></div>
-                            </td>
+                            <th>Ảnh sản phẩm</th>
+                            <th>Sản phẩm</th>
+                            <th>Số lượng</th>
+                            <th>Giá</th>
+                            <th>Tổng</th>
                         </tr>
-                    }
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="4">Tổng cộng</td>
-                        <td class="custom-total" id="totalAmount">@Model.TotalPrice.ToString("N0") VNĐ</td>
-                    </tr>
-                </tfoot>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.CartItems)
+                        {
+                            <tr class="custom-table-row">
+                                <td><img class="img-fluid" style="width: 96px; max-width: 96px; height: auto;" src="@item.ProductImage" alt="@item.ProductName" /></td>
+                                <td>@item.ProductName</td>
+                                <td>@item.Quantity</td>
+                                <td class="custom-price">@item.ProductPrice.ToString("N0") VNĐ</td>
+                                <td class="custom-total">@item.Subtotal.ToString("N0") VNĐ</td>
+                            </tr>
+                            <tr>
+                                <td colspan="5">
+                                    <div class="text-danger product-error" id="error-@item.ProductId"></div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4">Tổng cộng</td>
+                            <td class="custom-total" id="totalAmount">@Model.TotalPrice.ToString("N0") VNĐ</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
             <button type="button" class="custom-btn custom-btn-block" onclick="submitCheckout()">Đặt hàng</button>
         </div>
     </div>

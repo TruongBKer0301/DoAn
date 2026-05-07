@@ -2,8 +2,8 @@
 
 <!-- Banner Start -->
 <div class="container-fluid mb-5" id="showbanner">
-    <div class="row border-top px-xl-5">
-        <div class="col-8">
+    <div class="row border-top px-xl-5 banner-grid">
+        <div class="col-12 col-lg-8 mb-3 mb-lg-0">
             <div class="main-banner">
                 <div class="owl-carousel main-banner-carousel owl-loaded">
                     <div class="owl-stage-outer">
@@ -11,7 +11,7 @@
                             @foreach (var banner in Model.OrderBy(b => b.Position))
                             {
                                 <div class="owl-item">
-                                    <img src="@banner.ImageUrl" alt="@banner.Position" />
+                                    <img src="@banner.ImageUrl" alt="@banner.Position" class="img-fluid w-100" />
                                 </div>
                             }
                         </div>
@@ -19,12 +19,12 @@
                 </div>
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-12 col-lg-4">
             <div class="banner-children">
-                <img  src="~/uploads/banners/adver_1.jpg" />
+                <img src="~/uploads/banners/adver_1.jpg" class="img-fluid w-100" alt="advertisement 1" />
             </div>
             <div class="banner-children">
-                <img src="~/uploads/banners/adver_2.jpg" />
+                <img src="~/uploads/banners/adver_2.jpg" class="img-fluid w-100" alt="advertisement 2" />
             </div>
         </div>
     </div>
