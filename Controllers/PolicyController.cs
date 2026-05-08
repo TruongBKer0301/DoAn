@@ -21,7 +21,7 @@ public class PolicyController : Controller
         ViewBag.ShowBanner = false;
         return View("Page", new PolicyPageViewModel
         {
-            PageTitle = "Chinh sach bao hanh",
+            PageTitle = "Chính Sách Bảo Hành",
             HtmlContent = content.WarrantyHtml
         });
     }

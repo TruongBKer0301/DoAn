@@ -5,14 +5,19 @@
 }
 
 <!-- Page Header Start -->
-<div class="container-fluid bg-secondary mb-5">
-    <div class="d-flex flex-column align-items-center justify-content-center py-5 py-md-0 min-hero-300">
-        <h1 class="font-weight-semi-bold text-uppercase mb-3">Trang Đăng Nhập / Đăng Ký</h1>
-        <div class="d-inline-flex">
-            <p class="m-0"><a href="@Url.Action("Index", "Home")">Trang Chủ</a></p>
-            <p class="m-0 px-2">-</p>
-            <p class="text-danger m-0">Đăng nhập / Đăng ký</p>
+<div class="container-fluid bg-secondary login-header mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center text-center py-5 py-md-0 min-hero-300">
+
+        <h1 class="login-title" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+            Trang Đăng Nhập / Đăng Ký
+        </h1>
+
+        <div class="login-breadcrumb">
+            <a href="@Url.Action("Index", "Home")">Trang Chủ</a>
+            <span>/</span>
+            <span class="active">Đăng nhập / Đăng ký</span>
         </div>
+
     </div>
 </div>
 
@@ -26,10 +31,13 @@
 
             <div id="login-form">
                 <form id="loginForm">
-                    <input type="email" id="Email" name="Email" class="form-control mb-3" placeholder="Email đăng nhập" />
+                    <input type="email" id="Email" name="Email" class="form-control mb-3"
+                           placeholder="Email đăng nhập" />
                     <div class="password-field mb-3">
-                        <input type="password" id="Password" name="Password" class="form-control" placeholder="Nhập mật khẩu" />
-                        <button type="button" class="btn toggle-password-btn" data-target="#Password" aria-label="Hiện mật khẩu" title="Hiện mật khẩu">
+                        <input type="password" id="Password" name="Password" class="form-control"
+                               placeholder="Nhập mật khẩu" />
+                        <button type="button" class="btn toggle-password-btn" data-target="#Password"
+                                aria-label="Hiện mật khẩu" title="Hiện mật khẩu">
                             <i class="ri-eye-line"></i>
                         </button>
                     </div>
@@ -47,14 +55,19 @@
                 </form>
             </div>
 
-            <div id="signup-form" >
+            <div id="signup-form">
                 <form id="signupForm" novalidate autocomplete="off">
-                    <input type="email" id="SignupEmail" name="Email" class="form-control mb-3" placeholder="Nhập email của bạn" autocomplete="off" />
-                    <input type="text" id="Username" name="Username" class="form-control mb-3" placeholder="Nhập Họ Tên" autocomplete="off" />
-                    <input type="tel" id="Phone" name="Phone" class="form-control mb-3" placeholder="Nhập số điện thoại" autocomplete="off" />
+                    <input type="email" id="SignupEmail" name="Email" class="form-control mb-3"
+                           placeholder="Nhập email của bạn" autocomplete="off" />
+                    <input type="text" id="Username" name="Username" class="form-control mb-3" placeholder="Nhập Họ Tên"
+                           autocomplete="off" />
+                    <input type="tel" id="Phone" name="Phone" class="form-control mb-3" placeholder="Nhập số điện thoại"
+                           autocomplete="off" />
                     <div class="password-field mb-3">
-                        <input type="password" id="SignupPassword" name="Password" class="form-control" placeholder="Mật khẩu" autocomplete="new-password" />
-                        <button type="button" class="btn toggle-password-btn" data-target="#SignupPassword" aria-label="Hiện mật khẩu" title="Hiện mật khẩu">
+                        <input type="password" id="SignupPassword" name="Password" class="form-control"
+                               placeholder="Mật khẩu" autocomplete="new-password" />
+                        <button type="button" class="btn toggle-password-btn" data-target="#SignupPassword"
+                                aria-label="Hiện mật khẩu" title="Hiện mật khẩu">
                             <i class="ri-eye-line"></i>
                         </button>
                     </div>
@@ -66,178 +79,279 @@
                         <li id="signup-rule-digit" class="invalid">Có ít nhất 1 chữ số</li>
                     </ul>
                     <div class="password-field mb-3">
-                        <input type="password" id="SignupConfirmPassword" name="Password2" class="form-control" placeholder="Xác nhận mật khẩu" autocomplete="new-password" />
-                        <button type="button" class="btn toggle-password-btn" data-target="#SignupConfirmPassword" aria-label="Hiện mật khẩu" title="Hiện mật khẩu">
+                        <input type="password" id="SignupConfirmPassword" name="Password2" class="form-control"
+                               placeholder="Xác nhận mật khẩu" autocomplete="new-password" />
+                        <button type="button" class="btn toggle-password-btn" data-target="#SignupConfirmPassword"
+                                aria-label="Hiện mật khẩu" title="Hiện mật khẩu">
                             <i class="ri-eye-line"></i>
                         </button>
                     </div>
                     <div id="signup-message"></div>
                     <button type="submit" class="btn signup">Tạo tài khoản</button>
-                    <p>Nhấn <span class="signup-emphasis">tạo tài khoản</span> có nghĩa là bạn đã đồng ý với <a href="javascript:void(0)">điều khoản và dịch vụ của chúng tôi</a>.</p>
-                    <hr />
-                </form>
-            </div>
+                    <p>Nhấn <span class="signup-emphasis">tạo tài khoản</span> có nghĩa là bạn đã đồng ý với <a
+                        href="javascript:void(0)">điều khoản và dịch vụ của chúng tôi</a>.</p>
+                        <hr />
+                    </form>
+                </div>
 
-            <div id="verify-email-form" style="display:none;">
-                <form id="verifyEmailForm" novalidate>
-                    <h5 class="mb-3 text-center">Xác thực email đăng ký</h5>
-                    <input type="email" id="VerifyEmail" name="Email" class="form-control mb-3" placeholder="Email" readonly />
-                    <input type="text" id="VerifyOtp" name="Otp" class="form-control mb-3" placeholder="Nhập OTP 6 số" maxlength="6" />
-                    <div id="verify-otp-hint" class="otp-hint">OTP có hiệu lực trong 1 phút.</div>
-                    <div id="verify-message"></div>
-                    <button type="submit" class="btn signup">Xác nhận OTP</button>
-                    <button type="button" class="btn login mt-2" id="resend-verify-otp-btn">Gửi lại OTP</button>
-                    <p class="mt-2"><a href="javascript:void(0)" id="back-to-login-from-verify">Quay lại đăng nhập</a></p>
-                </form>
-            </div>
+                <div id="verify-email-form" style="display:none;">
+                    <form id="verifyEmailForm" novalidate>
+                        <h5 class="mb-3 text-center">Xác thực email đăng ký</h5>
+                        <input type="email" id="VerifyEmail" name="Email" class="form-control mb-3" placeholder="Email"
+                               readonly />
+                        <input type="text" id="VerifyOtp" name="Otp" class="form-control mb-3" placeholder="Nhập OTP 6 số"
+                               maxlength="6" />
+                        <div id="verify-otp-hint" class="otp-hint">OTP có hiệu lực trong 1 phút.</div>
+                        <div id="verify-message"></div>
+                        <button type="submit" class="btn signup">Xác nhận OTP</button>
+                        <button type="button" class="btn login mt-2" id="resend-verify-otp-btn">Gửi lại OTP</button>
+                        <p class="mt-2"><a href="javascript:void(0)" id="back-to-login-from-verify">Quay lại đăng nhập</a>
+                        </p>
+                    </form>
+                </div>
 
-            <div id="forgot-password-form" style="display:none;">
-                <form id="forgotPasswordRequestForm" novalidate>
-                    <h5 class="mb-3 text-center">Quên mật khẩu</h5>
-                    <div id="forgot-otp-hint" class="otp-hint">OTP sẽ được gửi trực tiếp về email đang nhập ở form đăng nhập.</div>
-                    <input type="text" id="ResetOtp" name="Otp" class="form-control mb-3" placeholder="Nhập OTP" maxlength="6" />
-                    <button type="button" class="btn login mb-2" id="resend-forgot-otp-btn">Gửi lại OTP</button>
-                    <button type="button" class="btn login mb-3" id="verify-reset-otp-btn">Xác nhận OTP</button>
-                    <div id="forgot-message"></div>
-                    <p class="mt-2"><a href="javascript:void(0)" id="back-to-login-from-forgot">Quay lại đăng nhập</a></p>
-                </form>
+                <div id="forgot-password-form" style="display:none;">
+                    <form id="forgotPasswordRequestForm" novalidate>
+                        <h5 class="mb-3 text-center">Quên mật khẩu</h5>
+                        <div id="forgot-otp-hint" class="otp-hint">OTP sẽ được gửi trực tiếp về email đang nhập ở form đăng
+                            nhập.</div>
+                            <input type="text" id="ResetOtp" name="Otp" class="form-control mb-3" placeholder="Nhập OTP"
+                                   maxlength="6" />
+                            <button type="button" class="btn login mb-2" id="resend-forgot-otp-btn">Gửi lại OTP</button>
+                            <button type="button" class="btn login mb-3" id="verify-reset-otp-btn">Xác nhận OTP</button>
+                            <div id="forgot-message"></div>
+                            <p class="mt-2"><a href="javascript:void(0)" id="back-to-login-from-forgot">Quay lại đăng nhập</a>
+                            </p>
+                        </form>
 
-                <form id="resetPasswordForm" novalidate style="display:none; margin-top:12px;">
-                    <div id="reset-otp-hint" class="otp-hint">OTP đặt lại mật khẩu có hiệu lực trong 1 phút.</div>
-                    <input type="hidden" id="ResetEmail" name="Email" />
-                    <div id="reset-password-step" style="display:none;">
-                        <div class="password-field mb-3">
-                            <input type="password" id="ResetNewPassword" name="NewPassword" class="form-control" placeholder="Mật khẩu mới" />
-                            <button type="button" class="btn toggle-password-btn" data-target="#ResetNewPassword" aria-label="Hiện mật khẩu" title="Hiện mật khẩu">
-                                <i class="ri-eye-line"></i>
-                            </button>
-                        </div>
-                        <div class="password-field mb-3">
-                            <input type="password" id="ResetConfirmPassword" name="ConfirmPassword" class="form-control" placeholder="Xác nhận mật khẩu mới" />
-                            <button type="button" class="btn toggle-password-btn" data-target="#ResetConfirmPassword" aria-label="Hiện mật khẩu" title="Hiện mật khẩu">
-                                <i class="ri-eye-line"></i>
-                            </button>
-                        </div>
-                        <button type="submit" class="btn signup">Đặt lại mật khẩu</button>
+                        <form id="resetPasswordForm" novalidate style="display:none; margin-top:12px;">
+                            <div id="reset-otp-hint" class="otp-hint">OTP đặt lại mật khẩu có hiệu lực trong 1 phút.</div>
+                            <input type="hidden" id="ResetEmail" name="Email" />
+                            <div id="reset-password-step" style="display:none;">
+                                <div class="password-field mb-3">
+                                    <input type="password" id="ResetNewPassword" name="NewPassword" class="form-control"
+                                           placeholder="Mật khẩu mới" />
+                                    <button type="button" class="btn toggle-password-btn" data-target="#ResetNewPassword"
+                                            aria-label="Hiện mật khẩu" title="Hiện mật khẩu">
+                                        <i class="ri-eye-line"></i>
+                                    </button>
+                                </div>
+                                <div class="password-field mb-3">
+                                    <input type="password" id="ResetConfirmPassword" name="ConfirmPassword" class="form-control"
+                                           placeholder="Xác nhận mật khẩu mới" />
+                                    <button type="button" class="btn toggle-password-btn" data-target="#ResetConfirmPassword"
+                                            aria-label="Hiện mật khẩu" title="Hiện mật khẩu">
+                                        <i class="ri-eye-line"></i>
+                                    </button>
+                                </div>
+                                <button type="submit" class="btn signup">Đặt lại mật khẩu</button>
+                            </div>
+                            <div id="reset-message"></div>
+                        </form>
                     </div>
-                    <div id="reset-message"></div>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
-<style>
-    .min-hero-300 {
-        min-height: 300px;
-    }
+        <style>
+            .min-hero-300 {
+                min-height: 300px;
+            }
 
-    @@media (max-width: 767.98px) {
-        .min-hero-300 {
-            min-height: 220px;
-        }
-    }
+            @@media (max-width: 767.98px) {
+                .min-hero-300 {
+                    min-height: 220px;
+                }
+            }
 
-    .admin-login-link {
-        display: flex;
-        justify-content: center;
-        align-items: center; /* căn giữa dọc */
-        gap: 8px;
-        width: 100%;
-        padding: 12px;
-        font-size: 16px;
-        font-weight: 600;
-        color: #4a6cf7;
-        border: 2px solid #4a6cf7;
-        border-radius: 30px;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        line-height: 1; /* fix lệch */
-    }
+            .admin-login-link {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                /* căn giữa dọc */
+                gap: 8px;
+                width: 100%;
+                padding: 12px;
+                font-size: 16px;
+                font-weight: 600;
+                color: #4a6cf7;
+                border: 2px solid #4a6cf7;
+                border-radius: 30px;
+                text-decoration: none;
+                transition: all 0.3s ease;
+                line-height: 1;
+                /* fix lệch */
+            }
 
 
-        .admin-login-link:hover {
-            background-color: #4a6cf7;
-            color: #fff;
-        }
+            .admin-login-link:hover {
+                background-color: #4a6cf7;
+                color: #fff;
+            }
 
-    #verify-email-form .btn,
-    #forgot-password-form .btn {
-        width: 100%;
-    }
+            #verify-email-form .btn,
+            #forgot-password-form .btn {
+                width: 100%;
+            }
 
-    .otp-hint {
-        font-size: 13px;
-        color: #5f6b7a;
-        margin: -4px 0 10px;
-    }
+            .otp-hint {
+                font-size: 13px;
+                color: #5f6b7a;
+                margin: -4px 0 10px;
+            }
 
-    .password-field {
-        position: relative;
-    }
+            .password-field {
+                position: relative;
+            }
 
-    .password-field .form-control {
-        padding-right: 46px;
-    }
+            .password-field .form-control {
+                padding-right: 46px;
+            }
 
-    .toggle-password-btn {
-        position: absolute !important;
-        right: 12px;
-        top: 50%;
-        transform: translateY(-50%);
-        border: none !important;
-        background: transparent !important;
-        box-shadow: none !important;
-        min-width: auto !important;
-        width: auto !important;
-        height: auto !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        color: #5f6b7a;
-        font-size: 18px;
-        line-height: 1;
-        z-index: 5;
-    }
+            .toggle-password-btn {
+                position: absolute !important;
+                right: 12px;
+                top: 50%;
+                transform: translateY(-50%);
+                border: none !important;
+                background: transparent !important;
+                box-shadow: none !important;
+                min-width: auto !important;
+                width: auto !important;
+                height: auto !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                color: #5f6b7a;
+                font-size: 18px;
+                line-height: 1;
+                z-index: 5;
+            }
 
-    .toggle-password-btn.active {
-        color: #3a79ff;
-    }
+            .toggle-password-btn.active {
+                color: #3a79ff;
+            }
 
-    .password-rule-hint {
-        font-size: 13px;
-        color: #5f6b7a;
-        margin: -4px 0 12px;
-    }
+            .password-rule-hint {
+                font-size: 13px;
+                color: #5f6b7a;
+                margin: -4px 0 12px;
+            }
 
-    .password-checklist {
-        margin: -6px 0 14px;
-        padding-left: 18px;
-        font-size: 13px;
-        line-height: 1.5;
-    }
+            .password-checklist {
+                margin: -6px 0 14px;
+                padding-left: 18px;
+                font-size: 13px;
+                line-height: 1.5;
+            }
 
-    .password-checklist li {
-        color: #8a94a6;
-    }
+            .password-checklist li {
+                color: #8a94a6;
+            }
 
-    .password-checklist li.valid {
-        color: #239b56;
-        font-weight: 600;
-    }
+            .password-checklist li.valid {
+                color: #239b56;
+                font-weight: 600;
+            }
 
-    .password-checklist li.invalid {
-        color: #8a94a6;
-    }
+            .password-checklist li.invalid {
+                color: #8a94a6;
+            }
 
-    .signup-emphasis {
-        font-family: inherit;
-        font-weight: 700;
-        letter-spacing: 0;
-        color: #4a6cf7;
-    }
+            .signup-emphasis {
+                font-family: inherit;
+                font-weight: 700;
+                letter-spacing: 0;
+                color: #4a6cf7;
+            }
 
-</style>
+            .login-header {
+                background: linear-gradient(135deg, #0f172a, #1e3a8a) !important;
+                border-radius: 0 0 32px 32px;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .login-header::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background:
+                    radial-gradient(circle at top right,
+                        rgba(255, 255, 255, 0.12),
+                        transparent 35%),
+                    radial-gradient(circle at bottom left,
+                        rgba(255, 255, 255, 0.08),
+                        transparent 30%);
+            }
+
+            .login-title {
+                color: #fff;
+                font-size: 42px;
+                font-weight: 800;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                margin-bottom: 20px;
+                text-align: center;
+                position: relative;
+                z-index: 2;
+            }
+
+            .login-breadcrumb {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+
+                padding: 12px 24px;
+
+                border-radius: 999px;
+
+                background: rgba(255, 255, 255, 0.12);
+                border: 1px solid rgba(255, 255, 255, 0.18);
+
+                backdrop-filter: blur(12px);
+
+                position: relative;
+                z-index: 2;
+            }
+
+            .login-breadcrumb a,
+            .login-breadcrumb span {
+                color: #fff;
+                text-decoration: none;
+                font-size: 15px;
+                font-weight: 500;
+            }
+
+            .login-breadcrumb a:hover {
+                color: #bfdbfe;
+            }
+
+            .login-breadcrumb .active {
+                color: #93c5fd;
+                font-weight: 700;
+            }
+
+            @@media (max-width: 768px) {
+
+                .login-title {
+                    font-size: 28px;
+                    line-height: 1.4;
+                }
+
+                .login-breadcrumb {
+                    padding: 10px 18px;
+                    gap: 6px;
+                    flex-wrap: wrap;
+                }
+
+                .login-breadcrumb a,
+                .login-breadcrumb span {
+                    font-size: 13px;
+                }
+            }
+        </style>

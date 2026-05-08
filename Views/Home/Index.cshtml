@@ -10,11 +10,14 @@
     <div class="owl-carousel product-carousel owl-theme product-new">
         @if (ViewBag.NewProduct != null && ViewBag.NewProduct.Count > 0)
         {
-            @foreach (var product in (ViewBag.NewProduct as List<LapTopBD.ViewModels.ProductViewModel>) ?? new List<LapTopBD.ViewModels.ProductViewModel>())
+            @foreach (var product in (ViewBag.NewProduct as List<LapTopBD.ViewModels.ProductViewModel>) ?? new
+                                List<LapTopBD.ViewModels.ProductViewModel>())
             {
                 // Sửa lại logic kiểm tra hasDiscount
-                var hasDiscount = product.ProductPriceBeforeDiscount.HasValue && product.ProductPriceBeforeDiscount.Value > product.ProductPrice;
-                var discountPercentage = hasDiscount ? (1 - product.ProductPrice / product.ProductPriceBeforeDiscount.GetValueOrDefault()) * 100 : 0;
+                var hasDiscount = product.ProductPriceBeforeDiscount.HasValue && product.ProductPriceBeforeDiscount.Value >
+        product.ProductPrice;
+                var discountPercentage = hasDiscount ? (1 - product.ProductPrice /
+        product.ProductPriceBeforeDiscount.GetValueOrDefault()) * 100 : 0;
 
                 <div class="item" data-aos="fade-up" data-aos-duration="2500">
                     <div class="card shadow h-100">
@@ -22,7 +25,8 @@
                             <a href="@Url.Action("Detail", "Home", new { slug = product.Slug })">
                                 <img class="img-fluid w-100" src="@product.ProductImage1" alt="@product.ProductName" />
                             </a>
-                            <button class="btn-add-to-fav" id="add-to-fav-btn" data-product-id="@product.Id" title="Thêm vào yêu thích">
+                            <button class="btn-add-to-fav" id="add-to-fav-btn" data-product-id="@product.Id"
+                                    title="Thêm vào yêu thích">
                                 <i class="ri-heart-line"></i>
                             </button>
 
@@ -68,7 +72,8 @@
                             <div class="price-wrapper">
                                 @if (hasDiscount)
                                 {
-                                    <div class="original-price">@(product.ProductPriceBeforeDiscount?.ToString("N0") ?? "") VND</div>
+                                    <div class="original-price">@(product.ProductPriceBeforeDiscount?.ToString("N0") ?? "") VND
+                                    </div>
                                     <div class="discount-price">@product.ProductPrice.ToString("N0") VND</div>
                                 }
                                 else
@@ -114,11 +119,14 @@
     <div class="owl-carousel product-carousel owl-theme product-hot-deal">
         @if (ViewBag.HotDeals != null && ViewBag.HotDeals.Count > 0)
         {
-            @foreach (var product in (ViewBag.HotDeals as List<LapTopBD.ViewModels.ProductViewModel>) ?? new List<LapTopBD.ViewModels.ProductViewModel>())
+            @foreach (var product in (ViewBag.HotDeals as List<LapTopBD.ViewModels.ProductViewModel>) ?? new
+                                List<LapTopBD.ViewModels.ProductViewModel>())
             {
                 // Sửa lại logic kiểm tra hasDiscount
-                var hasDiscount = product.ProductPriceBeforeDiscount.HasValue && product.ProductPriceBeforeDiscount.Value > product.ProductPrice;
-                var discountPercentage = hasDiscount ? (1 - product.ProductPrice / product.ProductPriceBeforeDiscount.GetValueOrDefault()) * 100 : 0;
+                var hasDiscount = product.ProductPriceBeforeDiscount.HasValue && product.ProductPriceBeforeDiscount.Value >
+        product.ProductPrice;
+                var discountPercentage = hasDiscount ? (1 - product.ProductPrice /
+        product.ProductPriceBeforeDiscount.GetValueOrDefault()) * 100 : 0;
 
                 <div class="item" data-aos="fade-up" data-aos-duration="2500">
                     <div class="card shadow h-100">
@@ -127,7 +135,8 @@
                                 <img class="img-fluid w-100" src="@product.ProductImage1" alt="@product.ProductName" />
                             </a>
 
-                            <button class="btn-add-to-fav" id="add-to-fav-btn" data-product-id="@product.Id" title="Thêm vào yêu thích">
+                            <button class="btn-add-to-fav" id="add-to-fav-btn" data-product-id="@product.Id"
+                                    title="Thêm vào yêu thích">
                                 <i class="ri-heart-line"></i>
                             </button>
 
@@ -173,7 +182,8 @@
                             <div class="price-wrapper">
                                 @if (hasDiscount)
                                 {
-                                    <div class="original-price">@(product.ProductPriceBeforeDiscount?.ToString("N0") ?? "") VND</div>
+                                    <div class="original-price">@(product.ProductPriceBeforeDiscount?.ToString("N0") ?? "") VND
+                                    </div>
                                     <div class="discount-price">@product.ProductPrice.ToString("N0") VND</div>
                                 }
                                 else
@@ -212,42 +222,208 @@
 <!-- Product Hot Deal End -->
 
 <style>
-    .ratio {
-        position: relative;
+    /* ===== SEARCH BAR ===== */
+
+    #searchForm {
+        width: 100%;
+        max-width: 420px;
     }
 
-    /* Style cho nút yêu thích */
-    .btn-add-to-fav {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        z-index: 10;
-        background: white;
-        border: 1px solid #ff4757;
-        border-radius: 50%;
-        width: 35px;
-        height: 35px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        color: #ff4757; /* Màu đỏ trái tim */
-        transition: all 0.3s ease;
+    #searchForm .input-group {
+        border-radius: 16px;
+        overflow: hidden;
+        background: #fff;
+        box-shadow: 0 4px 18px rgba(15, 23, 42, 0.06);
+        border: 1px solid #e2e8f0;
+        transition: all 0.25s ease;
+    }
+
+    #searchForm .input-group:focus-within {
+        border-color: #1d4ed8;
+        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
+    }
+
+    #searchInput {
+        height: 52px;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 18px;
+        font-size: 14px;
+        color: #111827;
+        background: transparent;
+    }
+
+    #searchInput::placeholder {
+        color: #9ca3af;
+        font-weight: 400;
+    }
+
+    #searchForm .input-group-text {
+        border: none !important;
+        background: linear-gradient(135deg, #1a1a2e, #0f3460) !important;
+        color: #fff !important;
+        padding: 0 22px;
         cursor: pointer;
+        transition: all 0.25s ease;
     }
 
-    .btn-add-to-fav.is-favorited {
-        background: #ff4757;
+    #searchForm .input-group-text:hover {
+        opacity: 0.92;
+    }
+
+    #searchForm .input-group-text i {
+        font-size: 15px;
+    }
+
+    /* ===== SORT BUTTON ===== */
+
+    .dropdown .btn {
+        height: 52px;
+        border-radius: 16px;
+        border: 1px solid #e2e8f0;
+        background: #fff;
+        padding: 0 20px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #111827;
+        box-shadow: 0 4px 18px rgba(15, 23, 42, 0.05);
+        transition: all 0.25s ease;
+    }
+
+    .dropdown .btn:hover {
+        border-color: #1d4ed8;
+        color: #1d4ed8;
+    }
+
+    .dropdown .btn:focus {
+        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
+    }
+
+    .dropdown-menu {
+        border: none;
+        border-radius: 16px;
+        overflow: hidden;
+        padding: 8px;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    .dropdown-item {
+        border-radius: 10px;
+        padding: 12px 14px;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+    }
+
+    .dropdown-item:hover {
+        background: #eff6ff;
+        color: #1d4ed8;
+    }
+
+    /* ===== MAIN PRODUCT BUTTONS ===== */
+
+    .btn-add-to-cart,
+    .btn-buy-now {
+        position: relative;
+        overflow: hidden;
+        border: none;
+        border-radius: 14px;
+        padding: 13px 16px;
+        font-size: 14px;
+        font-weight: 600;
+        transition: all 0.28s ease;
+    }
+
+    /* ADD TO CART */
+
+    .btn-add-to-cart {
+        background: linear-gradient(135deg, #1a1a2e, #0f3460);
         color: #fff;
+        box-shadow: 0 8px 20px rgba(15, 52, 96, 0.18);
     }
 
-    .btn-add-to-fav:hover {
-            background: #ff4757;
-            color: white;
-            transform: scale(1.1);
+    .btn-add-to-cart:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 14px 28px rgba(15, 52, 96, 0.28);
+    }
+
+    /* BUY NOW */
+
+    .btn-buy-now {
+        background: #eff6ff;
+        color: #1d4ed8;
+        border: 1px solid #bfdbfe;
+    }
+
+    .btn-buy-now:hover {
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        color: #fff;
+        transform: translateY(-3px);
+        box-shadow: 0 14px 28px rgba(37, 99, 235, 0.22);
+    }
+
+    /* BUTTON ICON */
+
+    .btn-add-to-cart i,
+    .btn-buy-now i {
+        margin-right: 6px;
+    }
+
+    /* OUT OF STOCK BUTTON */
+
+    .bg-danger.btn-add-to-cart {
+        background: linear-gradient(135deg, #dc2626, #ef4444) !important;
+        border: none !important;
+        box-shadow: 0 10px 22px rgba(220, 38, 38, 0.22);
+    }
+
+    .bg-danger.btn-add-to-cart:hover {
+        transform: translateY(-2px);
+    }
+
+    /* ===== BUTTON RIPPLE EFFECT ===== */
+
+    .btn-add-to-cart::before,
+    .btn-buy-now::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -120%;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.16);
+        transform: skewX(-25deg);
+        transition: 0.55s;
+    }
+
+    .btn-add-to-cart:hover::before,
+    .btn-buy-now:hover::before {
+        left: 120%;
+    }
+
+    /* ===== RESPONSIVE ===== */
+
+    @@media
+    (max-width: 768px) {
+
+        #searchForm {
+            max-width: 100%;
+            margin-bottom: 12px;
         }
 
-        .btn-add-to-fav i {
-            font-size: 1.2rem;
+        .dropdown {
+            width: 100%;
+            margin-left: 0 !important;
         }
+
+        .dropdown .btn {
+            width: 100%;
+        }
+
+        .d-flex.align-items-center.justify-content-between.mb-4 {
+            flex-direction: column;
+            align-items: stretch !important;
+            gap: 12px;
+        }
+    }
 </style>

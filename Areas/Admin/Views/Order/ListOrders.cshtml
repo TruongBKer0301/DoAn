@@ -19,6 +19,7 @@
                         <th class="col-product">Sản phẩm</th>
                         <th class="col-qty">Số lượng</th>
                         <th class="col-date">Ngày đặt hàng</th>
+                        <th class="col-payment">Thanh toán</th>
                         <th class="col-status">Trạng thái</th>
                         <th class="col-total">Tổng giá</th>
                         <th class="col-actions">Thao tác</th>
@@ -30,26 +31,88 @@
                     {
                         <tr>
                             <td class="col-id text-center">@order.Id</td>
-                            <td class="col-customer">@order.UserName</td>
-                            <td class="col-product">@order.ProductName</td>
-                            <td class="col-qty text-center">@order.Quantity</td>
-                            <td class="col-date text-nowrap">@order.OrderDate.ToString("dd/MM/yyyy HH:mm")</td>
+
+                            <td class="col-customer">
+                                @order.UserName
+                            </td>
+
+                            <td class="col-product">
+                                @order.ProductName
+                            </td>
+
+                            <td class="col-qty text-center">
+                                @order.Quantity
+                            </td>
+
+                            <td class="col-date text-nowrap">
+                                @order.OrderDate.ToString("dd/MM/yyyy HH:mm")
+                            </td>
+
+                            <td class="col-payment text-center">
+                                <span class="badge @(order.PaymentMethod == "VNPAY" ? "bg-primary" : "bg-secondary")">
+                                    @(order.PaymentMethod == "COD"
+                                        ? "COD"
+                                        : order.PaymentMethod == "VNPAY"
+                                        ? "VNPAY"
+                                        : "Không xác định")
+                                </span>
+                            </td>
+
                             <td class="col-status text-center">
-                                <span class="badge @(order.OrderStatus == "Pending" ? "bg-warning text-dark" : order.OrderStatus == "Paid" ? "bg-info" : order.OrderStatus == "Shipping" ? "bg-info" : order.OrderStatus == "Delivered" ? "bg-success" : "bg-danger")">
+                                <span class="badge
+                                    @(order.OrderStatus == "Pending"
+                                        ? "bg-warning text-dark"
+                                        : order.OrderStatus == "Paid"
+                                        ? "bg-info"
+                                        : order.OrderStatus == "Shipping"
+                                        ? "bg-primary"
+                                        : order.OrderStatus == "Delivered"
+                                        ? "bg-success"
+                                        : "bg-danger")">
+
                                     @order.OrderStatus
                                 </span>
                             </td>
-                            <td class="col-total text-nowrap">@order.TotalPrice.ToString("N0") VNĐ</td>
+
+                            <td class="col-total text-nowrap">
+                                @order.TotalPrice.ToString("N0") VNĐ
+                            </td>
+
                             <td class="col-actions">
-                                <select class="form-control form-control-sm update-status" data-order-id="@order.Id" data-current-status="@order.OrderStatus">
-                                    <option value="Pending" selected="@(order.OrderStatus == "Pending" ? "selected" : null)">Pending</option>
-                                    <option value="Paid" selected="@(order.OrderStatus == "Paid" ? "selected" : null)">Paid</option>
-                                    <option value="Shipping" selected="@(order.OrderStatus == "Shipping" ? "selected" : null)">Shipping</option>
-                                    <option value="Delivered" selected="@(order.OrderStatus == "Delivered" ? "selected" : null)">Delivered</option>
-                                    <option value="Cancelled" selected="@(order.OrderStatus == "Cancelled" ? "selected" : null)">Cancelled</option>
+                                <select class="form-control form-control-sm update-status"
+                                        data-order-id="@order.Id"
+                                        data-current-status="@order.OrderStatus">
+
+                                    <option value="Pending"
+                                            selected="@(order.OrderStatus == "Pending" ? "selected" : null)">
+                                        Pending
+                                    </option>
+
+                                    <option value="Paid"
+                                            selected="@(order.OrderStatus == "Paid" ? "selected" : null)">
+                                        Paid
+                                    </option>
+
+                                    <option value="Shipping"
+                                            selected="@(order.OrderStatus == "Shipping" ? "selected" : null)">
+                                        Shipping
+                                    </option>
+
+                                    <option value="Delivered"
+                                            selected="@(order.OrderStatus == "Delivered" ? "selected" : null)">
+                                        Delivered
+                                    </option>
+
+                                    <option value="Cancelled"
+                                            selected="@(order.OrderStatus == "Cancelled" ? "selected" : null)">
+                                        Cancelled
+                                    </option>
                                 </select>
                             </td>
-                            <td class="col-address">@order.FullAddress</td>
+
+                            <td class="col-address">
+                                @order.FullAddress
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -84,11 +147,15 @@
     }
 
     .order-table .col-date {
-        width: 165px;
+        width: 170px;
+    }
+
+    .order-table .col-payment {
+        width: 130px;
     }
 
     .order-table .col-status {
-        width: 120px;
+        width: 130px;
     }
 
     .order-table .col-total {
@@ -96,7 +163,7 @@
     }
 
     .order-table .col-actions {
-        min-width: 150px;
+        min-width: 160px;
     }
 
     .order-table .col-address {
@@ -104,5 +171,15 @@
         max-width: 380px;
         white-space: normal;
         word-break: break-word;
+    }
+
+    .order-table td,
+    .order-table th {
+        vertical-align: middle;
+    }
+
+    .badge {
+        font-size: 0.85rem;
+        padding: 6px 10px;
     }
 </style>

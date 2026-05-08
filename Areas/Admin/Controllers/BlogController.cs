@@ -2,7 +2,6 @@ using LapTopBD.Data;
 using LapTopBD.Models;
 using LapTopBD.Utilities;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,9 +36,10 @@ public class BlogController : Controller
         if (!string.IsNullOrWhiteSpace(q))
         {
             var keyword = q.Trim();
+
             postsQuery = postsQuery.Where(b =>
                 EF.Functions.Like(b.Title, $"%{keyword}%") ||
-                EF.Functions.Like(b.Summary ?? string.Empty, $"%{keyword}%") ||
+                EF.Functions.Like(b.Summary ?? "", $"%{keyword}%") ||
                 EF.Functions.Like(b.ContentHtml, $"%{keyword}%"));
         }
 
@@ -59,24 +59,32 @@ public class BlogController : Controller
     public async Task<IActionResult> Create(BlogPost model, IFormFile? CoverImageFile)
     {
         var adminId = GetAdminId();
+
         if (adminId == null)
         {
             return Unauthorized();
         }
 
-        model.Title = model.Title?.Trim() ?? string.Empty;
+        model.Title = model.Title?.Trim() ?? "";
         model.Summary = model.Summary?.Trim();
+        model.ContentHtml = model.ContentHtml?.Trim() ?? "";
         model.CoverImageUrl = model.CoverImageUrl?.Trim();
-        model.ContentHtml = model.ContentHtml?.Trim() ?? string.Empty;
+
+        // TẠO SLUG TRƯỚC KHI VALIDATE
+        var baseSlug = SlugHelper.GenerateSlug(model.Title);
+        model.Slug = await BuildUniqueSlugAsync(baseSlug);
+
+        // XÓA LỖI VALIDATE CŨ
+        ModelState.Remove("Slug");
 
         if (string.IsNullOrWhiteSpace(model.Title))
         {
-            ModelState.AddModelError(nameof(BlogPost.Title), "Vui lòng nhập tiêu đề bài viết.");
+            ModelState.AddModelError("Title", "Vui lòng nhập tiêu đề.");
         }
 
         if (string.IsNullOrWhiteSpace(model.ContentHtml))
         {
-            ModelState.AddModelError(nameof(BlogPost.ContentHtml), "Vui lòng nhập nội dung bài viết.");
+            ModelState.AddModelError("ContentHtml", "Vui lòng nhập nội dung.");
         }
 
         if (!ModelState.IsValid)
@@ -84,18 +92,22 @@ public class BlogController : Controller
             return View(model);
         }
 
-        model.CoverImageUrl = await SaveCoverImageAsync(CoverImageFile, model.CoverImageUrl);
-        var baseSlug = SlugHelper.GenerateSlug(model.Title);
-        model.Slug = await BuildUniqueSlugAsync(baseSlug);
+        model.CoverImageUrl =
+            await SaveCoverImageAsync(CoverImageFile, model.CoverImageUrl);
+
         model.AdminId = adminId.Value;
         model.CreatedAt = DateTime.Now;
         model.UpdatedAt = DateTime.Now;
-        model.PublishedAt = model.IsPublished ? DateTime.Now : null;
+        model.PublishedAt = model.IsPublished
+            ? DateTime.Now
+            : null;
 
         _context.BlogPosts.Add(model);
+
         await _context.SaveChangesAsync();
 
-        TempData["Success"] = "Đã tạo bài viết blog thành công.";
+        TempData["Success"] = "Đã tạo bài viết thành công.";
+
         return RedirectToAction(nameof(Index));
     }
 
@@ -103,6 +115,7 @@ public class BlogController : Controller
     public async Task<IActionResult> Edit(int id)
     {
         var post = await _context.BlogPosts.FindAsync(id);
+
         if (post == null)
         {
             return NotFound();
@@ -113,57 +126,69 @@ public class BlogController : Controller
 
     [HttpPost("edit/{id:int}")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, BlogPost model, IFormFile? CoverImageFile)
+    public async Task<IActionResult> Edit(
+        int id,
+        BlogPost model,
+        IFormFile? CoverImageFile)
     {
         var post = await _context.BlogPosts.FindAsync(id);
+
         if (post == null)
         {
             return NotFound();
         }
 
-        model.Title = model.Title?.Trim() ?? string.Empty;
+        model.Title = model.Title?.Trim() ?? "";
         model.Summary = model.Summary?.Trim();
+        model.ContentHtml = model.ContentHtml?.Trim() ?? "";
         model.CoverImageUrl = model.CoverImageUrl?.Trim();
-        model.ContentHtml = model.ContentHtml?.Trim() ?? string.Empty;
+
+        ModelState.Remove("Slug");
 
         if (string.IsNullOrWhiteSpace(model.Title))
         {
-            ModelState.AddModelError(nameof(BlogPost.Title), "Vui lòng nhập tiêu đề bài viết.");
+            ModelState.AddModelError("Title", "Vui lòng nhập tiêu đề.");
         }
 
         if (string.IsNullOrWhiteSpace(model.ContentHtml))
         {
-            ModelState.AddModelError(nameof(BlogPost.ContentHtml), "Vui lòng nhập nội dung bài viết.");
+            ModelState.AddModelError("ContentHtml", "Vui lòng nhập nội dung.");
         }
 
         if (!ModelState.IsValid)
         {
-            model.Id = id;
-            model.AdminId = post.AdminId;
-            model.CreatedAt = post.CreatedAt;
-            model.Slug = post.Slug;
             return View(model);
-        }
-
-        model.CoverImageUrl = await SaveCoverImageAsync(CoverImageFile, model.CoverImageUrl ?? post.CoverImageUrl);
-
-        if (!string.Equals(post.Title, model.Title, StringComparison.OrdinalIgnoreCase))
-        {
-            var newSlug = SlugHelper.GenerateSlug(model.Title);
-            post.Slug = await BuildUniqueSlugAsync(newSlug, id);
         }
 
         post.Title = model.Title;
         post.Summary = model.Summary;
         post.ContentHtml = model.ContentHtml;
-        post.CoverImageUrl = model.CoverImageUrl;
         post.IsPublished = model.IsPublished;
+
+        post.CoverImageUrl =
+            await SaveCoverImageAsync(
+                CoverImageFile,
+                model.CoverImageUrl ?? post.CoverImageUrl);
+
+        if (!string.Equals(post.Title, model.Title,
+            StringComparison.OrdinalIgnoreCase))
+        {
+            var newSlug = SlugHelper.GenerateSlug(model.Title);
+
+            post.Slug = await BuildUniqueSlugAsync(newSlug, id);
+        }
+
         post.UpdatedAt = DateTime.Now;
-        post.PublishedAt = post.IsPublished ? post.PublishedAt ?? DateTime.Now : null;
+
+        if (post.IsPublished && post.PublishedAt == null)
+        {
+            post.PublishedAt = DateTime.Now;
+        }
 
         await _context.SaveChangesAsync();
 
-        TempData["Success"] = "Đã cập nhật bài viết blog.";
+        TempData["Success"] = "Đã cập nhật bài viết.";
+
         return RedirectToAction(nameof(Index));
     }
 
@@ -172,22 +197,25 @@ public class BlogController : Controller
     public async Task<IActionResult> Delete(int id)
     {
         var post = await _context.BlogPosts.FindAsync(id);
+
         if (post == null)
         {
-            TempData["Error"] = "Không tìm thấy bài viết để xóa.";
-            return RedirectToAction(nameof(Index));
+            return NotFound();
         }
 
         _context.BlogPosts.Remove(post);
+
         await _context.SaveChangesAsync();
 
-        TempData["Success"] = "Đã xóa bài viết blog.";
+        TempData["Success"] = "Đã xóa bài viết.";
+
         return RedirectToAction(nameof(Index));
     }
 
     private int? GetAdminId()
     {
         var claim = User.FindFirst("AdminId")?.Value;
+
         if (int.TryParse(claim, out var adminId))
         {
             return adminId;
@@ -196,17 +224,25 @@ public class BlogController : Controller
         return null;
     }
 
-    private async Task<string?> SaveCoverImageAsync(IFormFile? coverImageFile, string? fallbackUrl)
+    private async Task<string?> SaveCoverImageAsync(
+        IFormFile? coverImageFile,
+        string? fallbackUrl)
     {
         if (coverImageFile == null || coverImageFile.Length == 0)
         {
-            return string.IsNullOrWhiteSpace(fallbackUrl) ? null : fallbackUrl.Trim();
+            return string.IsNullOrWhiteSpace(fallbackUrl)
+                ? null
+                : fallbackUrl.Trim();
         }
 
-        var uploadsFolder = Path.Combine(_env.WebRootPath, "uploads/blog");
+        var uploadsFolder =
+            Path.Combine(_env.WebRootPath, "uploads/blog");
+
         Directory.CreateDirectory(uploadsFolder);
 
-        var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(coverImageFile.FileName)}";
+        var fileName =
+            $"{Guid.NewGuid()}_{Path.GetFileName(coverImageFile.FileName)}";
+
         var filePath = Path.Combine(uploadsFolder, fileName);
 
         using (var stream = new FileStream(filePath, FileMode.Create))
@@ -217,13 +253,22 @@ public class BlogController : Controller
         return $"/uploads/blog/{fileName}";
     }
 
-    private async Task<string> BuildUniqueSlugAsync(string baseSlug, int? ignoreId = null)
+    private async Task<string> BuildUniqueSlugAsync(
+        string baseSlug,
+        int? ignoreId = null)
     {
-        var safeBase = string.IsNullOrWhiteSpace(baseSlug) ? "blog-post" : baseSlug;
+        var safeBase =
+            string.IsNullOrWhiteSpace(baseSlug)
+                ? "blog-post"
+                : baseSlug;
+
         var candidate = safeBase;
+
         var counter = 2;
 
-        while (await _context.BlogPosts.AnyAsync(b => b.Slug == candidate && (!ignoreId.HasValue || b.Id != ignoreId.Value)))
+        while (await _context.BlogPosts.AnyAsync(b =>
+            b.Slug == candidate &&
+            (!ignoreId.HasValue || b.Id != ignoreId.Value)))
         {
             candidate = $"{safeBase}-{counter}";
             counter++;

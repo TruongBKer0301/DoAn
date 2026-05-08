@@ -66,20 +66,20 @@
         <div class="row align-items-center py-3 px-xl-5">
             <div class="col-lg-3 d-none d-lg-block ">
                 <a href="@Url.Action("Index", "Home")" class="text-decoration-none d-flex align-items-center">
-                    <img class="logo-shop img-fluid" src="~/images/laptop.png" alt="TheEgo Shop" style="max-width:120px;" />
+                    <img class="logo-shop img-fluid" src="~/images/laptop.png" alt="TheEgo Shop"
+                         style="max-width:120px;" />
                     <span class="blockquote text-x px-2 font-weight-bold ms-2">TheEgo Shop</span>
                 </a>
             </div>
             <div class="col-lg-5 col-6 text-left">
-                <form id="searchForm" method="get" action="@Url.Action("Index", "Shop")">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="searchInput" name="search"
-                               placeholder="Search for Product">
-                        <div class="input-group-append">
-                            <button type="submit" class="input-group-text bg-transparent text-primary">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </div>
+                <form id="searchForm" method="get" action="@Url.Action("Index", "Shop")" class="top-search-form">
+                    <div class="top-search-box">
+                        <input type="text" id="searchInput" name="search" class="top-search-input"
+                               placeholder="Tìm kiếm sản phẩm..." />
+
+                        <button type="submit" class="top-search-btn">
+                            <i class="fa fa-search"></i>
+                        </button>
                     </div>
                 </form>
             </div>
@@ -154,7 +154,8 @@
         <div class="row px-xl-5 pt-5">
             <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
                 <a href="@Url.Action("Index", "Home")" class="text-decoration-none d-flex align-items-center">
-                    <img class="logo-shop img-fluid" src="~/images/laptop.png" alt="TheEgo Shop" style="max-width:120px;" />
+                    <img class="logo-shop img-fluid" src="~/images/laptop.png" alt="TheEgo Shop"
+                         style="max-width:120px;" />
                     <span class="blockquote text-x px-2 font-weight-bold ms-2">TheEgo Shop</span>
                 </a>
                 <p>Cung cấp sản phẩm chất lượng với giá tốt nhất. Sự hài lòng của bạn là niềm vui của chúng tôi!</p>
@@ -181,8 +182,8 @@
                                                 </div>
                                             </div>
                                             <div class="ml-3">
-                                                   <img src="https://help.haravan.com/assets/images/Mo9gDy2XMZLppkUw4sWCsYV-lk65HqqgQw-97bdbbe9c2042c7044bf7b0f74855894.gif"
-                                                       alt="support" class="img-fluid" style="max-width:100px;border-radius:8px;">
+                                                <img src="https://help.haravan.com/assets/images/Mo9gDy2XMZLppkUw4sWCsYV-lk65HqqgQw-97bdbbe9c2042c7044bf7b0f74855894.gif"
+                                                     alt="support" class="img-fluid" style="max-width:100px;border-radius:8px;">
                                             </div>
                                         </div>
                                     </div>
@@ -213,3 +214,58 @@
                             </body>
 
                         </html>
+                        <style>
+                            /* ===== TOP SEARCH (đồng bộ Shop Index UI) ===== */
+                            .top-search-box {
+                            display: flex;
+                            align-items: center;
+                            background: #fff;
+                            border-radius: 14px;
+                            overflow: hidden;
+                            border: 1px solid #e5e7eb;
+                            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+                            transition: all 0.25s ease;
+                            }
+
+                            .top-search-box:focus-within {
+                            border-color: #0f3460;
+                            box-shadow: 0 0 0 4px rgba(15, 52, 96, 0.12);
+                            }
+
+                            .top-search-input {
+                            flex: 1;
+                            border: none;
+                            outline: none;
+                            padding: 10px 14px;
+                            font-size: 14px;
+                            background: transparent;
+                            color: #111827;
+                            }
+
+                            .top-search-input::placeholder {
+                            color: #9ca3af;
+                            }
+
+                            .top-search-btn {
+                            background: linear-gradient(135deg, #1a1a2e, #0f3460);
+                            color: #fff;
+                            border: none;
+                            padding: 10px 16px;
+                            cursor: pointer;
+                            transition: 0.2s ease;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            }
+
+                            .top-search-btn:hover {
+                            opacity: 0.9;
+                            }
+
+                            /* mobile */
+                            @@media (max-width: 768px) {
+                            .top-search-box {
+                            width: 100%;
+                            }
+                            }
+                        </style>

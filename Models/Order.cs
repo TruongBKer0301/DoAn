@@ -22,7 +22,7 @@ namespace LapTopBD.Models
         public int Quantity { get; set; }
 
         [Required]
-        public string? PaymentMethod { get; set; }
+        public string PaymentMethod { get; set; } = "COD";
 
         [Required]
         public string? OrderStatus { get; set; }

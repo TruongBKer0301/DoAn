@@ -2,7 +2,8 @@
 @using System.Text.RegularExpressions
 @{
     ViewData["Title"] = Model.Title;
-    var related = ViewBag.RelatedPosts as IEnumerable<LapTopBD.Models.BlogPost> ?? Enumerable.Empty<LapTopBD.Models.BlogPost>();
+    var related = ViewBag.RelatedPosts as IEnumerable<LapTopBD.Models.BlogPost> ??
+Enumerable.Empty<LapTopBD.Models.BlogPost>();
 
     string Excerpt(string? html, int length = 140)
     {
@@ -90,7 +91,7 @@
         border: 1px solid rgba(148, 163, 184, 0.16);
     }
 
-    .blog-related-item + .blog-related-item {
+    .blog-related-item+.blog-related-item {
         border-top: 1px solid rgba(148, 163, 184, 0.18);
     }
 
@@ -117,58 +118,70 @@
                 <div class="blog-detail-hero mb-4">
                     <div class="row no-gutters">
                         <div class="col-md-5">
-                            <img src="@(string.IsNullOrWhiteSpace(Model.CoverImageUrl) ? "/images/laptop.png" : Model.CoverImageUrl)" alt="@Model.Title" />
+                            <img src="@(string.IsNullOrWhiteSpace(Model.CoverImageUrl) ? "/images/laptop.png" : Model.CoverImageUrl)"
+                                 alt="@Model.Title" />
                         </div>
                         <div class="col-md-7 p-4 p-lg-5 d-flex flex-column justify-content-center">
                             <span class="blog-kicker mb-3">Blog / Bài viết</span>
-                            <h1 class="mb-3">@Model.Title</h1>
-                            <p class="mb-4" style="color: rgba(255,255,255,.82);">@(Model.Summary ?? Excerpt(Model.ContentHtml, 180))</p>
-                            <div class="d-flex flex-wrap gap-3 text-white-50">
-                                <span><i class="fa fa-user mr-2"></i>@(Model.Admin?.FullName ?? "Admin")</span>
-                                <span><i class="fa fa-calendar mr-2"></i>@(Model.PublishedAt ?? Model.CreatedAt).ToString("dd/MM/yyyy")</span>
+                            <h1 class="mb-3" style="color: rgba(255,255,255,.82)">@Model.Title</h1>
+                            <p class="mb-4" style="color: rgba(255,255,255,.82);">@(Model.Summary ??
+                                                                Excerpt(Model.ContentHtml, 180))</p>
+                                <div class="d-flex flex-column gap-2 text-white-50">
+                                    <span>
+                                        <i class="fa fa-user mr-2"></i>
+                                        @(Model.Admin?.FullName ?? "Admin")
+                                    </span>
+
+                                    <span>
+                                        <i class="fa fa-calendar mr-2"></i>
+                                        @((Model.PublishedAt ?? Model.CreatedAt) )
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="blog-detail-content">
-                    <div class="blog-content">
-                        @Html.Raw(Model.ContentHtml)
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4">
-                <div class="blog-sidebar-card mb-4">
-                    <div class="p-4 border-bottom">
-                        <div class="meta-pill mb-3">Thông tin bài viết</div>
-                        <p class="mb-2"><strong>Tác giả:</strong> @(Model.Admin?.FullName ?? "Admin")</p>
-                        <p class="mb-0"><strong>Ngày đăng:</strong> @(Model.PublishedAt ?? Model.CreatedAt).ToString("dd/MM/yyyy HH:mm")</p>
-                    </div>
-                    <div class="p-4">
-                        <a class="btn btn-dark btn-block" href="@Url.Action("Index", "Shop")">Mua sản phẩm ngay</a>
-                    </div>
-                </div>
-
-                @if (related.Any())
-                {
-                    <div class="blog-sidebar-card">
-                        <div class="p-4 border-bottom">
-                            <h5 class="mb-0">Bài viết liên quan</h5>
+                    <div class="blog-detail-content">
+                        <div class="blog-content">
+                            @Html.Raw(Model.ContentHtml)
                         </div>
-                        <div class="p-4">
-                            @foreach (var item in related)
-                            {
-                                <div class="blog-related-item py-3">
-                                    <small class="text-muted d-block mb-1">@(item.PublishedAt ?? item.CreatedAt).ToString("dd/MM/yyyy")</small>
-                                    <a href="@Url.Action("Detail", "Blog", new { slug = item.Slug })" class="font-weight-bold d-block mb-1">@item.Title</a>
-                                    <p class="text-muted mb-0">@(item.Summary ?? Excerpt(item.ContentHtml))</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="blog-sidebar-card mb-4">
+                        <div class="p-4 border-bottom">
+                            <div class="meta-pill mb-3">Thông tin bài viết</div>
+                            <p class="mb-2"><strong>Tác giả:</strong> @(Model.Admin?.FullName ?? "Admin")</p>
+                            <p class="mb-0"><strong>Ngày đăng:</strong> @(Model.PublishedAt ??
+                                                            Model.CreatedAt) </p>
+                            </div>
+                            <div class="p-4">
+                                <a class="btn btn-dark btn-block" style="border-radius: 20px;" href="@Url.Action("Index", "Shop")">Mua sản phẩm ngay</a>
+                            </div>
+                        </div>
+
+                        @if (related.Any())
+                        {
+                            <div class="blog-sidebar-card">
+                                <div class="p-4 border-bottom">
+                                    <h5 class="mb-0">Bài viết liên quan</h5>
+                                </div>
+                                <div class="p-4">
+                                    @foreach (var item in related)
+                                    {
+                                        <div class="blog-related-item py-3">
+                                            <small class="text-muted d-block mb-1">@(item.PublishedAt ??
+                                                                                item.CreatedAt) </small>
+                                                <a href="@Url.Action("Detail", "Blog", new { slug = item.Slug })"
+                                                   class="font-weight-bold d-block mb-1">@item.Title</a>
+                                                <p class="text-muted mb-0">@(item.Summary ?? Excerpt(item.ContentHtml))</p>
+                                            </div>
+                                        }
+                                    </div>
                                 </div>
                             }
                         </div>
                     </div>
-                }
+                </div>
             </div>
-        </div>
-    </div>
-</div>

@@ -35,9 +35,13 @@
                         <td class="col-phone text-nowrap">@contact.PhoneNumber</td>
                         <td class="col-message">
                             <div class="contact-message-wrap">
-                                <div class="contact-message-text" title="@contact.Message">@contact.Message</div>
-                                <button type="button" class="btn btn-link btn-sm p-0 contact-message-toggle" aria-label="Xem thêm nội dung" aria-expanded="false">
-                                    <i class="fa fa-chevron-down"></i>
+                                <div class="contact-message-text">@contact.Message</div>
+                                <button type="button"
+                                        class="btn btn-link btn-sm p-0 contact-message-toggle is-hidden"
+                                        data-message="@contact.Message"
+                                        data-name="@contact.FullName"
+                                        aria-label="Hiện tất cả nội dung">
+                                    Hiện tất cả
                                 </button>
                             </div>
                         </td>
@@ -60,7 +64,7 @@
                             <div class="d-flex gap-2 flex-wrap">
                                 @if (!contact.IsRead)
                                 {
-                                    <button type="button" class="btn btn-sm btn-success mark-read-btn" data-id="@contact.Id">Đánh dấu đã xử lý</button>
+                                    <button type="button" class="btn btn-sm btn-success mark-read-btn" data-id="@contact.Id">Đã xử lý</button>
                                 }
                                 <button type="button" class="btn btn-sm btn-danger delete-contact-btn" data-id="@contact.Id">Xóa</button>
                             </div>
@@ -74,44 +78,47 @@
     <div id="message" class="mt-3"></div>
 </div>
 
+<div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="messageModalLabel">Nội dung liên hệ</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-muted small mb-2" id="modalSenderName"></p>
+                <p id="modalMessageContent" class="mb-0" style="white-space: pre-wrap; word-break: break-word;"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <style>
     .contact-table {
         table-layout: fixed;
         width: 100%;
     }
 
-    .contact-table .col-id {
-        width: 70px;
-    }
-
-    .contact-table .col-name {
-        min-width: 160px;
-    }
-
-    .contact-table .col-email {
-        min-width: 230px;
-        word-break: break-word;
-    }
-
-    .contact-table .col-phone {
-        min-width: 130px;
-    }
-
-    .contact-table .col-message {
-        width: 320px;
-        max-width: 320px;
-    }
+    .contact-table .col-id { width: 70px; }
+    .contact-table .col-name { min-width: 160px; }
+    .contact-table .col-email { min-width: 230px; word-break: break-word; }
+    .contact-table .col-phone { min-width: 130px; }
+    .contact-table .col-message { width: 320px; max-width: 320px; }
+    .contact-table .col-status { width: 130px; }
+    .contact-table .col-created { width: 160px; }
+    .contact-table .col-actions { min-width: 180px; }
 
     .contact-message-wrap {
         display: flex;
-        align-items: flex-start;
-        gap: 6px;
+        flex-direction: column;
+        gap: 4px;
         width: 100%;
     }
 
     .contact-message-text {
-        flex: 1 1 auto;
-        min-width: 0;
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
@@ -123,85 +130,50 @@
         max-height: 2.8em;
     }
 
-    .contact-message-wrap.is-expanded .contact-message-text {
-        display: block;
-        -webkit-line-clamp: unset;
-        max-height: none;
-        overflow: visible;
-    }
-
     .contact-message-toggle {
-        flex: 0 0 auto;
+        align-self: flex-start;
+        font-size: 0.8rem;
         color: #0d6efd;
-        text-decoration: none;
-        line-height: 1;
-        box-shadow: none;
-    }
-
-    .contact-message-toggle:hover,
-    .contact-message-toggle:focus {
-        text-decoration: none;
-        box-shadow: none;
+        text-decoration: underline;
+        box-shadow: none !important;
+        padding: 0 !important;
     }
 
     .contact-message-toggle.is-hidden {
         display: none;
     }
 
-    .contact-message-wrap.is-expanded .contact-message-toggle i {
-        transform: rotate(180deg);
-    }
-
-    .contact-message-toggle i {
-        transition: transform 0.15s ease-in-out;
-    }
-
-    .contact-table .col-status {
-        width: 130px;
-    }
-
-    .contact-table .col-created {
-        width: 160px;
-    }
-
-    .contact-table .col-actions {
-        min-width: 180px;
+    .contact-message-toggle:hover {
+        color: #0a58ca;
     }
 </style>
 
 @section Scripts {
     <script>
+        // Hiện nút "Hiện tất cả" nếu nội dung bị tràn
         function syncContactMessageToggles() {
             $(".contact-message-wrap").each(function () {
-                var $wrap = $(this);
-                var $text = $wrap.find(".contact-message-text");
-                var $toggle = $wrap.find(".contact-message-toggle");
+                var $text = $(this).find(".contact-message-text");
+                var $toggle = $(this).find(".contact-message-toggle");
 
                 if ($text[0] && $toggle.length) {
-                    // Force reflow to get accurate scrollHeight
-                    var scrollHeight = $text[0].scrollHeight;
-                    var clientHeight = $text[0].clientHeight;
-                    var isOverflowing = scrollHeight > clientHeight + 2;
-                    
-                    // Show toggle if content overflows
-                    if (isOverflowing) {
-                        $toggle.removeClass("is-hidden");
-                    } else {
-                        $toggle.addClass("is-hidden");
-                    }
+                    var isOverflowing = $text[0].scrollHeight > $text[0].clientHeight + 2;
+                    $toggle.toggleClass("is-hidden", !isOverflowing);
                 }
             });
         }
 
-        $(document).on("click", ".contact-message-toggle", function (e) {
-            e.preventDefault();
-            var $wrap = $(this).closest(".contact-message-wrap");
-            var isExpanded = $wrap.hasClass("is-expanded");
+        // Mở modal khi bấm "Hiện tất cả"
+        $(document).on("click", ".contact-message-toggle", function () {
+            var message = $(this).data("message");
+            var name = $(this).data("name");
 
-            $wrap.toggleClass("is-expanded", !isExpanded);
-            $(this).attr("aria-expanded", String(!isExpanded));
+            $("#modalSenderName").text("Người gửi: " + name);
+            $("#modalMessageContent").text(message);
+            $("#messageModal").modal("show");
         });
 
+        // Đánh dấu đã xử lý
         $(document).on("click", ".mark-read-btn", function () {
             var id = $(this).data("id");
             $.post("@Url.Action("MarkRead", "Contact", new { area = "Admin" })", { id: id })
@@ -217,10 +189,9 @@
                 });
         });
 
+        // Xóa liên hệ
         $(document).on("click", ".delete-contact-btn", function () {
-            if (!confirm("Bạn có chắc muốn xóa liên hệ này không?")) {
-                return;
-            }
+            if (!confirm("Bạn có chắc muốn xóa liên hệ này không?")) return;
 
             var id = $(this).data("id");
             $.post("@Url.Action("DeleteContact", "Contact", new { area = "Admin" })", { id: id })

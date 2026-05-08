@@ -1370,12 +1370,12 @@
           "lib/netstandard2.0/_._": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Design/8.0.4": {
+      "Microsoft.EntityFrameworkCore.Design/8.0.0": {
         "type": "package",
         "dependencies": {
           "Humanizer.Core": "2.14.1",
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "4.5.0",
-          "Microsoft.EntityFrameworkCore.Relational": "8.0.4",
+          "Microsoft.EntityFrameworkCore.Relational": "8.0.0",
           "Microsoft.Extensions.DependencyModel": "8.0.0",
           "Mono.TextTemplating": "2.2.1"
         },
@@ -1427,10 +1427,10 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Tools/8.0.4": {
+      "Microsoft.EntityFrameworkCore.Tools/10.0.7": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Design": "8.0.4"
+          "Microsoft.EntityFrameworkCore.Design": "8.0.0"
         },
         "compile": {
           "lib/net8.0/_._": {}
@@ -5060,19 +5060,18 @@
         "microsoft.entityframeworkcore.analyzers.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Design/8.0.4": {
-      "sha512": "QD5/h3+h4N7GlUaA4bzaYFW9CoeB7ne2KMiDIENIT0GPx+E6up/v9fDA36FAS3NIq9zeKUAQgN8aj6IwE7tMGw==",
+    "Microsoft.EntityFrameworkCore.Design/8.0.0": {
+      "sha512": "94reKYu63jg4O75UI3LMJHwOSi8tQ6IfubiZhdnSsWcgtmAuF8OyLfjK/MIxuvaQRJZAF6E747FIuxjOtb8/og==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.design/8.0.4",
+      "path": "microsoft.entityframeworkcore.design/8.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
-        "PACKAGE.md",
         "build/net8.0/Microsoft.EntityFrameworkCore.Design.props",
         "lib/net8.0/Microsoft.EntityFrameworkCore.Design.dll",
         "lib/net8.0/Microsoft.EntityFrameworkCore.Design.xml",
-        "microsoft.entityframeworkcore.design.8.0.4.nupkg.sha512",
+        "microsoft.entityframeworkcore.design.8.0.0.nupkg.sha512",
         "microsoft.entityframeworkcore.design.nuspec"
       ]
     },
@@ -5106,10 +5105,10 @@
         "microsoft.entityframeworkcore.sqlserver.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Tools/8.0.4": {
-      "sha512": "txPWQf+SGx8Aa6Z8FbdQ8zMHckArroaE0AlV6iqnqJp9w46RiOBtkJlkPgohteQS1uhxIwjtHfwFiQATw059fg==",
+    "Microsoft.EntityFrameworkCore.Tools/10.0.7": {
+      "sha512": "Ui7+Y+E2KwwQvRlbOclMP8HAGXrQFQcOu3NLpKlYdmd5pbhlueyLhnW3SBv1WuXALKESGHR3lMqeANNnl/02Bw==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.tools/8.0.4",
+      "path": "microsoft.entityframeworkcore.tools/10.0.7",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -5117,7 +5116,7 @@
         "Icon.png",
         "docs/PACKAGE.md",
         "lib/net8.0/_._",
-        "microsoft.entityframeworkcore.tools.8.0.4.nupkg.sha512",
+        "microsoft.entityframeworkcore.tools.10.0.7.nupkg.sha512",
         "microsoft.entityframeworkcore.tools.nuspec",
         "tools/EntityFrameworkCore.PS2.psd1",
         "tools/EntityFrameworkCore.PS2.psm1",
@@ -5125,11 +5124,11 @@
         "tools/EntityFrameworkCore.psm1",
         "tools/about_EntityFrameworkCore.help.txt",
         "tools/init.ps1",
-        "tools/net461/any/ef.exe",
-        "tools/net461/win-arm64/ef.exe",
-        "tools/net461/win-x86/ef.exe",
-        "tools/netcoreapp2.0/any/ef.dll",
-        "tools/netcoreapp2.0/any/ef.runtimeconfig.json"
+        "tools/net472/any/ef.exe",
+        "tools/net472/win-arm64/ef.exe",
+        "tools/net472/win-x86/ef.exe",
+        "tools/net8.0/any/ef.dll",
+        "tools/net8.0/any/ef.runtimeconfig.json"
       ]
     },
     "Microsoft.Extensions.Caching.Abstractions/8.0.0": {
@@ -7763,33 +7762,30 @@
       "Microsoft.EntityFrameworkCore >= 8.0.4",
       "Microsoft.EntityFrameworkCore.Relational >= 8.0.4",
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.4",
-      "Microsoft.EntityFrameworkCore.Tools >= 8.0.4",
+      "Microsoft.EntityFrameworkCore.Tools >= 10.0.7",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 9.0.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\PC\\.nuget\\packages\\": {}
+    "C:\\Users\\lucky\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\LapTopBD.csproj",
+      "projectUniqueName": "C:\\Users\\lucky\\Downloads\\DoAn-main\\DoAn-main\\LapTopBD.csproj",
       "projectName": "LapTopBD",
-      "projectPath": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\LapTopBD.csproj",
-      "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\obj\\",
+      "projectPath": "C:\\Users\\lucky\\Downloads\\DoAn-main\\DoAn-main\\LapTopBD.csproj",
+      "packagesPath": "C:\\Users\\lucky\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\lucky\\Downloads\\DoAn-main\\DoAn-main\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\PC\\source\\repos\\DoAn\\DoAn\\NuGet.Config",
-        "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\lucky\\Downloads\\DoAn-main\\DoAn-main\\NuGet.Config",
+        "C:\\Users\\lucky\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -7808,7 +7804,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.200"
+      "SdkAnalysisLevel": "10.0.200"
     },
     "frameworks": {
       "net8.0": {
@@ -7843,7 +7839,7 @@
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "suppressParent": "All",
             "target": "Package",
-            "version": "[8.0.4, )"
+            "version": "[10.0.7, )"
           },
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
@@ -7869,7 +7865,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
