@@ -130,7 +130,7 @@ $(function () {
         e.preventDefault();
         let formData = new FormData();
         formData.append("Id", $("#Id").val());
-        formData.append("Username", $("#Username").val());
+        formData.append("Username", $("#Edit_Username").val());
         formData.append("FullName", $("#FullName").val());
         formData.append("Roles", $("#Roles").val());
         formData.append("Status", $("#Status").val());

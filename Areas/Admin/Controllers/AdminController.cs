@@ -1,17 +1,18 @@
 ﻿using LapTopBD.Data;
+using LapTopBD.Models.ViewModels;
+using LapTopBD.Models.ViewModels.Admin;
+using LapTopBD.Utilities;
 using LapTopBD.ViewModels;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using LapTopBD.Models.ViewModels.Admin;
-using LapTopBD.Models.ViewModels;
-using LapTopBD.Utilities;
 
 
 namespace LapTopBD.Areas.Admin.Controllers
@@ -296,7 +297,7 @@ namespace LapTopBD.Areas.Admin.Controllers
                 Status = admin.Status,
                 CreationDate = admin.CreationDate
             };
-
+            Console.WriteLine("Giá trị Username: " + model.Username);
             return View("EditAdmin", model);
         }
 

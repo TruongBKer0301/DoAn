@@ -1,0 +1,28 @@
+[
+  {
+    "ContainingType": "LapTopBD.Controllers.AddressApiController",
+    "Method": "GetProvinces",
+    "RelativePath": "api/address/provinces",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "LapTopBD.Controllers.AddressApiController",
+    "Method": "GetCommunes",
+    "RelativePath": "api/address/provinces/{code}/communes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "code",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

@@ -322,3 +322,17 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
+
+/* Giới hạn kích thước logo trong sidebar */
+.navbar-brand-box .logo-lg img {
+    max-height: 120px !important; /* Giới hạn chiều cao tối đa */
+    max-width: 100%; /* Không cho phép rộng quá sidebar */
+    width: auto; /* Giữ đúng tỷ lệ hình ảnh */
+    object-fit: contain;
+    padding: 5px 0; /* Tạo khoảng cách trên dưới cho đẹp */
+}
+
+.navbar-brand-box .logo-sm img {
+    max-height: 120px !important;
+}
