@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -29,11 +30,10 @@
     <link href="~/css/styletemp.css" rel="stylesheet" />
     <link href="~/css/style.css" rel="stylesheet" />
     <link href="~/css/responsive.css" rel="stylesheet" />
-
-
 </head>
 
 <body>
+
     <!-- Topbar Start -->
     <div class="container-fluid">
         <div class="row border-bottom py-2 px-xl-5">
@@ -46,44 +46,70 @@
                     <a class="text-dark" href="@Url.Action("Shipping", "Policy")">Chính sách giao hàng</a>
                 </div>
             </div>
+
             <div class="col-lg-6 text-center text-lg-right">
                 <div class="d-inline-flex align-items-center">
                     <a class="text-fb px-2" href="">
                         <i class="fab fa-facebook-f"></i>
                     </a>
+
                     <a class="text-x px-2" href="">
                         <i class="fab fa-twitter"></i>
                     </a>
+
                     <a class="text-dark px-2" href="">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
+
                     <a class="text-youtube pl-2" href="">
                         <i class="fab fa-youtube"></i>
                     </a>
                 </div>
             </div>
         </div>
+
         <div class="row align-items-center py-3 px-xl-5">
+
+            <!-- Logo -->
             <div class="col-lg-3 d-none d-lg-block ">
                 <a href="@Url.Action("Index", "Home")" class="text-decoration-none d-flex align-items-center">
+
                     <img class="logo-shop img-fluid" src="~/images/laptop.png" alt="TheEgo Shop"
                          style="max-width:120px;" />
-                    <span class="blockquote text-x px-2 font-weight-bold ms-2">TheEgo Shop</span>
+
+                    <span class="blockquote text-x px-2 font-weight-bold ms-2">
+                        TheEgo Shop
+                    </span>
                 </a>
             </div>
-            <div class="col-lg-5 col-6 text-left">
-                <form id="searchForm" method="get" action="@Url.Action("Index", "Shop")" class="top-search-form">
-                    <div class="top-search-box">
-                        <input type="text" id="searchInput" name="search" class="top-search-input"
-                               placeholder="Tìm kiếm sản phẩm..." />
 
-                        <button type="submit" class="top-search-btn">
-                            <i class="fa fa-search"></i>
-                        </button>
+            <!-- Search -->
+            <div class="col-lg-5 col-6 text-left">
+
+                <form id="searchForm" method="get" action="@Url.Action("Index", "Shop")" class="top-search-form">
+
+                    <div class="top-search-wrapper">
+
+                        <div class="top-search-box">
+
+                            <input type="text" id="searchInput" name="search" autocomplete="off"
+                                   class="top-search-input" placeholder="Tìm kiếm sản phẩm..." />
+
+                            <button type="submit" class="top-search-btn">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+
+                        <!-- SEARCH SUGGEST -->
+                        <div id="searchSuggestBox" class="search-suggest-box"></div>
+
                     </div>
                 </form>
             </div>
+
+            <!-- Right -->
             <div class="col-lg-4 col-6 text-right">
+
                 <a href="@Url.Action("Index", "Fav")" class="btn">
                     <i class="ri-heart-3-fill"></i>
                     <span class="badge fav-count">0</span>
@@ -93,31 +119,42 @@
                     <i class="ri-shopping-bag-3-fill"></i>
                     <span class="badge shopping-count">0</span>
                 </a>
+
                 <a href="@Url.Action("Index", "Cart")" class="btn">
                     <i class="ri-shopping-cart-2-fill"></i>
                     <span class="badge cart-count">0</span>
                 </a>
+
                 @if (User?.Identity?.IsAuthenticated ?? false)
                 {
                     var userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value ?? "User";
+
                     <button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
+
                         <span class="d-flex align-items-center">
                             <i class="ri-user-3-fill"></i>
+
                             <span class="text-start ms-xl-2">
-                                <span class="d-none d-xl-inline-block ms-1 ml-1 ">
+                                <span class="d-none d-xl-inline-block ms-1 ml-1">
                                     @userName
                                 </span>
                             </span>
                         </span>
                     </button>
+
                     <div class="dropdown-menu dropdown-menu-end">
                         <h6 class="dropdown-header">Xin chào @userName!</h6>
+
                         <form action="@Url.Action("Logout", "UserAuth")" method="post" style="display:inline;">
+
                             @Html.AntiForgeryToken()
+
                             <button type="submit" class="dropdown-item"
                                     style="background:none;border:none;padding:0;color:inherit;text-align:left;width:100%;">
+
                                 <i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>
+
                                 <span class="align-middle">Đăng xuất</span>
                             </button>
                         </form>
@@ -126,16 +163,19 @@
                 else
                 {
                     <a href="@Url.Action("Login", "UserAuth")" class="btn" id="login-link">
+
                         <i class="ri-user-3-fill"></i>
-                        <span class="badge">Đăng nhập / Đăng ký</span>
+
+                        <span class="badge">
+                            Đăng nhập / Đăng ký
+                        </span>
                     </a>
-                    
                 }
             </div>
-
         </div>
     </div>
     <!-- Topbar End -->
+
     <!-- Include Navbar -->
     @await Component.InvokeAsync("Navbar")
 
@@ -144,6 +184,7 @@
     {
         @await Component.InvokeAsync("Banner")
     }
+
     <!-- Page Content -->
     <div class="content">
         @RenderBody()
@@ -151,121 +192,321 @@
 
     <!-- Footer Start -->
     <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
+
         <div class="row px-xl-5 pt-5">
+
             <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
+
                 <a href="@Url.Action("Index", "Home")" class="text-decoration-none d-flex align-items-center">
+
                     <img class="logo-shop img-fluid" src="~/images/laptop.png" alt="TheEgo Shop"
                          style="max-width:120px;" />
-                    <span class="blockquote text-x px-2 font-weight-bold ms-2">TheEgo Shop</span>
+
+                    <span class="blockquote text-x px-2 font-weight-bold ms-2">
+                        TheEgo Shop
+                    </span>
                 </a>
-                <p>Cung cấp sản phẩm chất lượng với giá tốt nhất. Sự hài lòng của bạn là niềm vui của chúng tôi!</p>
-                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>TRƯỜNG ĐẠI HỌC BÁCH KHOA, ĐẠI HỌC
-                    QUỐC GIA - TP HỒ CHÍ MINH</p>
-                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>admin@gmail.com</p>
-                    <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+84 123 456 789</p>
+
+                <p>
+                    Cung cấp sản phẩm chất lượng với giá tốt nhất.
+                    Sự hài lòng của bạn là niềm vui của chúng tôi!
+                </p>
+
+                <p class="mb-2">
+                    <i class="fa fa-map-marker-alt text-primary mr-3"></i>
+                    TRƯỜNG ĐẠI HỌC BÁCH KHOA
+                </p>
+
+                <p class="mb-2">
+                    <i class="fa fa-envelope text-primary mr-3"></i>
+                    admin@gmail.com
+                </p>
+
+                <p class="mb-0">
+                    <i class="fa fa-phone-alt text-primary mr-3"></i>
+                    +84 123 456 789
+                </p>
+            </div>
+
+            <div class="col-lg-8 col-md-12">
+
+                <div class="row">
+
+                    <div class="col-md-4 mb-5">
+
+                        <h5 class="font-weight-bold text-dark mb-4">
+                            Liên kết
+                        </h5>
+
+                        <div class="d-flex flex-column justify-content-start">
+
+                            <a class="text-dark mb-2" href="@Url.Action("Index", "Home")">
+                                <i class="fa fa-angle-right mr-2"></i>
+                                Trang chủ
+                            </a>
+
+                            <a class="text-dark mb-2" href="@Url.Action("Index", "Shop")">
+                                <i class="fa fa-angle-right mr-2"></i>
+                                Cửa hàng
+                            </a>
+
+                            <a class="text-dark mb-2" href="@Url.Action("Index", "Blog")">
+                                <i class="fa fa-angle-right mr-2"></i>
+                                Blog
+                            </a>
+
+                            <a class="text-dark mb-2" href="@Url.Action("Index", "Cart")">
+                                <i class="fa fa-angle-right mr-2"></i>
+                                Giỏ hàng
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="ml-3">
+                        <img src="https://help.haravan.com/assets/images/Mo9gDy2XMZLppkUw4sWCsYV-lk65HqqgQw-97bdbbe9c2042c7044bf7b0f74855894.gif"
+                             alt="support" class="img-fluid" style="max-width:100px;border-radius:8px;">
+                    </div>
+
                 </div>
-                <div class="col-lg-8 col-md-12">
-                    <div class="row">
-                        <div class="col-md-4 mb-5">
-                            <h5 class="font-weight-bold text-dark mb-4">Liên kết</h5>
-                            <div class="d-flex flex-column justify-content-start">
-                                <a class="text-dark mb-2" href="@Url.Action("Index", "Home")"><i
-                                    class="fa fa-angle-right mr-2"></i>Trang chủ</a>
-                                    <a class="text-dark mb-2" href="@Url.Action("Index", "Shop")"><i
-                                        class="fa fa-angle-right mr-2"></i>Cửa hàng</a>
-                                        <a class="text-dark mb-2" href="@Url.Action("Index", "Blog")"><i
-                                            class="fa fa-angle-right mr-2"></i>Blog</a>
-                                            <a class="text-dark mb-2" href="@Url.Action("Index", "Cart")"><i
-                                                class="fa fa-angle-right mr-2"></i>Giỏ hàng</a>
-                                                <a class="text-dark mb-2" href="@Url.Action("OrderConfirmation", "Cart")"><i
-                                                    class="fa fa-angle-right mr-2"></i>Đơn hàng</a>
-                                                </div>
-                                            </div>
-                                            <div class="ml-3">
-                                                <img src="https://help.haravan.com/assets/images/Mo9gDy2XMZLppkUw4sWCsYV-lk65HqqgQw-97bdbbe9c2042c7044bf7b0f74855894.gif"
-                                                     alt="support" class="img-fluid" style="max-width:100px;border-radius:8px;">
-                                            </div>
-                                        </div>
-                                    </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
 
-                    
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary back-to-top">
+        <i class="fa fa-angle-double-up"></i>
+    </a>
+
+    <!-- JavaScript Libraries -->
+    <script src="~/js/jquery-3.7.1.min.js"></script>
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/loading-overlay.jquery.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/lord-icon-2.1.0.js"></script>
+    <script src="~/js/aos.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="~/js/main.js"></script>
+    <script src="~/js/script.js"></script>
+
+    <!-- SEARCH SUGGEST -->
+    <script>
+            $(document).ready(function () {
+
+                $("#searchInput").on("keyup", function () {
+
+                    let keyword = $(this).val();
+
+                    if (keyword.length < 1) {
+                        $("#searchSuggestBox").hide();
+                        return;
+                    }
+
+                    $.ajax({
+                        url: '/Shop/SearchSuggestions',
+                        type: 'GET',
+                        data: { term: keyword },
+
+                        success: function (res) {
+
+                            let html = '';
+
+                            if (res.items.length > 0) {
+
+                                res.items.forEach(function (item) {
+
+                                    html += `
+                            <a href="/user/Detail/${item.slug}" class="suggest-item">
+                                <img src="${item.image}" class="suggest-img"/>
+                                <div class="suggest-info">
+                                    <div class="suggest-name">${item.name}</div>
+                                    <div class="suggest-price">${item.price.toLocaleString('vi-VN')}Đ</div>
                                 </div>
-                                <!-- Footer End -->
-                                <!-- Back to Top -->
-                                <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
-                                <!-- JavaScript Libraries -->
-                                <script src="~/js/jquery-3.7.1.min.js"></script>
-                                <script src="~/js/bootstrap.bundle.min.js"></script>
-                                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-                                <script src="~/js/loading-overlay.jquery.js"></script>
-                                <script src="~/js/owl.carousel.min.js"></script>
-                                <script src="~/js/lord-icon-2.1.0.js"></script>
-                                <script src="~/js/aos.js"></script>
-                                <!-- Contact Javascript File -->
-                                @* <script src="mail/jqBootstrapValidation.min.js"></script>
-    <script src="mail/contact.js"></script> *@
+                            </a>
+                        `;
+                                });
 
-                                <!-- Template Javascript -->
-                                <script src="~/js/main.js"></script>
-                                <script src="~/js/script.js"></script>
+                                // 👉 thêm nút xem thêm nếu có nhiều hơn 5
+                                if (res.hasMore) {
+                                    html += `
+                            <a href="/Shop/Index?search=${keyword}"
+                               class="suggest-more">
+                                Xem thêm kết quả →
+                            </a>
+                        `;
+                                }
 
-                                <!-- Page-specific Scripts (after main libraries loaded) -->
-                                @RenderSection("Scripts", required: false)
-                            </body>
-
-                        </html>
-                        <style>
-                            /* ===== TOP SEARCH (đồng bộ Shop Index UI) ===== */
-                            .top-search-box {
-                            display: flex;
-                            align-items: center;
-                            background: #fff;
-                            border-radius: 14px;
-                            overflow: hidden;
-                            border: 1px solid #e5e7eb;
-                            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
-                            transition: all 0.25s ease;
+                                $("#searchSuggestBox").html(html).show();
                             }
+                            else {
+                                $("#searchSuggestBox").html(
+                                    '<div class="suggest-empty">Không tìm thấy sản phẩm</div>'
+                                ).show();
+                            }
+                        },
+                    });
+                });
 
-                            .top-search-box:focus-within {
-                            border-color: #0f3460;
-                            box-shadow: 0 0 0 4px rgba(15, 52, 96, 0.12);
-                            }
+                $(document).click(function (e) {
 
-                            .top-search-input {
-                            flex: 1;
-                            border: none;
-                            outline: none;
-                            padding: 10px 14px;
-                            font-size: 14px;
-                            background: transparent;
-                            color: #111827;
-                            }
+                    if (!$(e.target).closest(".top-search-wrapper").length) {
+                        $("#searchSuggestBox").hide();
+                    }
+                });
+            });
+    </script>
 
-                            .top-search-input::placeholder {
-                            color: #9ca3af;
-                            }
+    <!-- Page-specific Scripts -->
+    @RenderSection("Scripts", required: false)
 
-                            .top-search-btn {
-                            background: linear-gradient(135deg, #1a1a2e, #0f3460);
-                            color: #fff;
-                            border: none;
-                            padding: 10px 16px;
-                            cursor: pointer;
-                            transition: 0.2s ease;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            }
+</body>
 
-                            .top-search-btn:hover {
-                            opacity: 0.9;
-                            }
+</html>
 
-                            /* mobile */
-                            @@media (max-width: 768px) {
-                            .top-search-box {
-                            width: 100%;
-                            }
-                            }
-                        </style>
+<style>
+    /* ===== SEARCH ===== */
+
+    .top-search-wrapper {
+        position: relative;
+        width: 100%;
+    }
+
+    .top-search-box {
+        display: flex;
+        align-items: center;
+        background: #fff;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+        transition: all 0.25s ease;
+    }
+
+    .top-search-box:focus-within {
+        border-color: #0f3460;
+        box-shadow: 0 0 0 4px rgba(15, 52, 96, 0.12);
+    }
+
+    .top-search-input {
+        flex: 1;
+        border: none;
+        outline: none;
+        padding: 10px 14px;
+        font-size: 14px;
+        background: transparent;
+        color: #111827;
+    }
+
+    .top-search-input::placeholder {
+        color: #9ca3af;
+    }
+
+    .top-search-btn {
+        background: linear-gradient(135deg, #1a1a2e, #0f3460);
+        color: #fff;
+        border: none;
+        padding: 10px 16px;
+        cursor: pointer;
+        transition: 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .top-search-btn:hover {
+        opacity: 0.9;
+    }
+
+    /* ===== SEARCH SUGGEST ===== */
+
+    .search-suggest-box {
+        position: absolute;
+        top: 105%;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+        z-index: 99999;
+        overflow: hidden;
+        display: none;
+        border: 1px solid #ececec;
+    }
+
+    .suggest-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px;
+        text-decoration: none;
+        border-bottom: 1px solid #f3f4f6;
+        transition: all 0.2s ease;
+    }
+
+    .suggest-item:hover {
+        background: #f8fafc;
+        text-decoration: none;
+    }
+
+    .suggest-img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 10px;
+        border: 1px solid #eee;
+    }
+
+    .suggest-info {
+        flex: 1;
+    }
+
+    .suggest-name {
+        font-size: 14px;
+        font-weight: 600;
+        color: #111827;
+        margin-bottom: 5px;
+        line-height: 1.4;
+    }
+
+    .suggest-price {
+        font-size: 13px;
+        font-weight: 700;
+        color: #dc2626;
+    }
+
+    .suggest-empty {
+        padding: 15px;
+        text-align: center;
+        color: #6b7280;
+        font-size: 14px;
+    }
+
+    .suggest-more {
+        display: block;
+        text-align: center;
+        padding: 12px;
+        font-weight: 600;
+        color: #0f3460;
+        background: #f8fafc;
+        text-decoration: none;
+        border-top: 1px solid #eee;
+        transition: 0.2s;
+    }
+
+    .suggest-more:hover {
+        background: #eef2ff;
+    }
+
+    @@media (max-width: 768px) {
+
+        .top-search-box {
+            width: 100%;
+        }
+
+        .search-suggest-box {
+            max-height: 350px;
+            overflow-y: auto;
+        }
+    }
+</style>

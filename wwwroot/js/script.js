@@ -866,7 +866,7 @@ $(function () {
                 }
             },
             error: function (xhr) {
-                console.log(xhr); 
+                console.log(xhr);
 
                 let msg = "Có lỗi xảy ra!";
 
@@ -890,11 +890,11 @@ $(function () {
         if (!confirm("Bạn có chắc chắn muốn xóa sản phẩm này?")) return;
 
         $.ajax({
-            url: "/product/delete-product", 
+            url: "/product/delete-product",
             type: "POST",
-            data: { productId: productId }, 
+            data: { productId: productId },
             headers: {
-                'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val() 
+                'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
             },
             success: function (response) {
                 // Giả sử bạn có hàm showMessage để hiển thị thông báo
@@ -1019,7 +1019,7 @@ $(function () {
                         badge.addClass("bg-info");
                     } else if (newStatus === "Shipping") {
                         badge.addClass("bg-info");
-                    }else if (newStatus === "Delivered") {
+                    } else if (newStatus === "Delivered") {
                         badge.addClass("bg-success");
                     } else if (newStatus === "Cancelled") {
                         badge.addClass("bg-danger");
@@ -1797,7 +1797,7 @@ $(function () {
             success: function (response) {
                 if (response.success) {
                     updateCartCount();
-                  
+
                 } else {
                     showMessage(response.message, 'danger');
                 }
@@ -2028,8 +2028,8 @@ $(function () {
                     // Cập nhật lại số lượng trên icon trái tim ở Header
                     // Bạn có thể dùng hàm updateFavCount() cũ hoặc lấy từ response nếu có
                     setFavoriteState(productid, false);
-                    if (response.wishlistCount !== undefined) {
-                        $('.fav-count').text(response.wishlistCount);
+                    if (response.wishlistcount !== undefined) {
+                        $('.fav-count').text(response.wishlistcount);
                     } else {
                         updateFavCount();
                     }
@@ -2045,7 +2045,7 @@ $(function () {
     });
 
 
-  
+
 });
 
 
@@ -2406,9 +2406,9 @@ document.querySelectorAll('.banner-file-input').forEach(bannerInput => {
 
 // Ẩn banner khi ở trang login
 //Do sử dụng Json nên ko thể sử dụng được viewBag 
-    if (window.location.pathname.toLowerCase() === "/userauth/login") {
-        $("#showbanner").hide();
-    }
+if (window.location.pathname.toLowerCase() === "/userauth/login") {
+    $("#showbanner").hide();
+}
 // Khởi tạo LC Lightbox
 $(function () {
     if (typeof lc_lightbox === "function") {
@@ -2563,7 +2563,7 @@ $(function () {
 
 
 //Mega menu
-$(function () { 
+$(function () {
     "use strict";
 
     // Thêm class và icon cho menu có submenu

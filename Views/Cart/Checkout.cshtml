@@ -305,3 +305,167 @@
         }
     </script>
 }
+
+<style>
+/* =========================
+   BACKGROUND PAGE
+========================= */
+body {
+    background: #f4f7fb;
+}
+
+/* =========================
+   TITLE
+========================= */
+h2, h3 {
+    color: #0f3460;
+    font-weight: 700;
+}
+
+/* =========================
+   FORM CONTAINER
+========================= */
+form#checkoutForm {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    border: 1px solid #eef2f7;
+}
+
+/* =========================
+   INPUTS
+========================= */
+.form-control,
+.custom-input,
+.custom-select {
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    padding: 10px;
+    transition: 0.2s;
+}
+
+.form-control:focus,
+.custom-input:focus,
+.custom-select:focus {
+    border-color: #0f3460;
+    box-shadow: 0 0 0 3px rgba(15,52,96,0.12);
+}
+
+/* label */
+label {
+    font-weight: 600;
+    color: #334155;
+}
+
+/* =========================
+   BUTTON PRIMARY
+========================= */
+.btn-primary {
+    background: linear-gradient(135deg, #1a1a2e, #0f3460);
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    padding: 12px;
+    transition: 0.2s;
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+}
+
+/* custom button */
+.custom-btn {
+    background: linear-gradient(135deg, #1a1a2e, #0f3460);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 12px;
+    font-weight: 600;
+}
+
+.custom-btn:hover {
+    opacity: 0.9;
+}
+
+/* =========================
+   TABLE (ORDER SUMMARY)
+========================= */
+.custom-table {
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+.custom-table-head {
+    background: linear-gradient(135deg, #1a1a2e, #0f3460);
+    color: #fff;
+}
+
+.custom-table-head th {
+    padding: 12px;
+    font-size: 14px;
+}
+
+/* row */
+.custom-table-row td {
+    vertical-align: middle;
+    padding: 12px;
+}
+
+.custom-table-row:hover {
+    background: #f8fafc;
+}
+
+/* =========================
+   PRODUCT IMAGE
+========================= */
+.custom-table-row img {
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* =========================
+   PRICE STYLE
+========================= */
+.custom-price {
+    font-weight: 700;
+    color: #0f3460;
+}
+
+.custom-total {
+    font-weight: 800;
+    color: #dc2626;
+}
+
+/* =========================
+   ERROR TEXT
+========================= */
+.text-danger {
+    font-size: 13px;
+}
+
+/* =========================
+   MESSAGE ALERT
+========================= */
+#message .alert {
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+/* =========================
+   LAYOUT SPACING
+========================= */
+.container {
+    padding-bottom: 40px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@@media (max-width: 768px) {
+    form#checkoutForm {
+        margin-bottom: 20px;
+    }
+}</style>

@@ -4,13 +4,18 @@
 }
 
 <!-- Page Header Start -->
-<div class="container-fluid bg-secondary mb-5">
-    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 100px">
-        <h1 class="font-weight-semi-bold text-uppercase mb-3">Sản phẩm ưa thích</h1>
-        <div class="d-inline-flex">
-            <p class="m-0"><a href="@Url.Action("Index", "Home")">Trang chủ</a></p>
-            <p class="m-0 px-2">-</p>
-            <p class="text-danger m-0">Ưa Thích</p>
+<div class="container-fluid hero-cart mb-5">
+    <div class="hero-inner">
+        <div class="hero-badge">
+            <i class="ti ti-heart"></i>
+            <span>Sản phẩm ưa thích</span>
+        </div>
+        <h1 class="hero-title">Sản phẩm ưa thích</h1>
+        <div class="hero-divider"></div>
+        <div class="hero-breadcrumb">
+            <a href="@Url.Action("Index", "Home")">Trang Chủ</a>
+            <i class="ti ti-chevron-right"></i>
+            <span class="hero-bc-cur">Sản phẩm ưa thích</span>
         </div>
     </div>
 </div>
@@ -37,7 +42,7 @@
                                                     <img class="img-fluid w-100 h-100 object-fit-cover" src="@product.ProductImage1" alt="@(product.ProductName ?? "Product")" />
                                                 </a>
 
-                                                <button class="remove-fav-btn btn-remove-to-fav" data-id="@product.Id" title="Xóa khỏi yêu thích">
+                                                <button class="remove-fav-btn btn-add-to-fav is-favorited" data-id="@product.Id" title="Xóa khỏi yêu thích">
                                                     <i class="ri-heart-fill"></i>
                                                 </button>
 
@@ -128,17 +133,90 @@
 </div>
 
 <style>
+    /* ===== HERO ===== */
+    .hero-cart {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    }
+
+    .hero-cart::before,
+    .hero-cart::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.04);
+        pointer-events: none;
+    }
+
+    .hero-cart::before { width: 300px; height: 300px; top: -80px; left: -60px; }
+    .hero-cart::after  { width: 380px; height: 380px; bottom: -110px; right: -50px; }
+
+    .hero-inner {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 240px;
+        padding: 2.5rem 1rem;
+        text-align: center;
+    }
+
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: rgba(255,255,255,0.08);
+        border: 0.5px solid rgba(255,255,255,0.18);
+        border-radius: 999px;
+        padding: 5px 16px;
+        margin-bottom: 1rem;
+        color: rgba(255,255,255,0.75);
+        font-size: 13px;
+    }
+
+    .hero-badge i { color: #a8c8ff; font-size: 15px; }
+
+    .hero-title {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #fff;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: -0.01em;
+    }
+
+    .hero-divider {
+        width: 44px;
+        height: 2px;
+        background: rgba(255,255,255,0.22);
+        margin: .9rem auto;
+    }
+
+    .hero-breadcrumb {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+    }
+
+    .hero-breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    .hero-breadcrumb a:hover { color: rgba(255,255,255,0.85); }
+    .hero-breadcrumb i { font-size: 11px; color: rgba(255,255,255,0.28); }
+    .hero-bc-cur { color: #f0a0a0; }
     .ratio {
         position: relative;
     }
 
-    .btn-remove-to-fav {
+    .btn-add-to-fav {
         position: absolute;
         top: 10px;
         right: 10px;
         z-index: 10;
         background: white;
-        border: none;
+        border: 1px solid #ff4757;
         border-radius: 50%;
         width: 35px;
         height: 35px;
@@ -146,18 +224,55 @@
         align-items: center;
         justify-content: center;
         box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        color: #ff4757;
+        color: #ff4757; /* Màu đỏ trái tim */
         transition: all 0.3s ease;
         cursor: pointer;
     }
 
-    .btn-remove-to-fav:hover {
+    .btn-add-to-fav.is-favorited {
         background: #ff4757;
-        color: white;
-        transform: scale(1.1);
+        color: #fff;
     }
 
-    .btn-remove-to-fav i {
-        font-size: 1.2rem;
-    }
+    .btn-add-to-fav:hover {
+            background: #ff4757;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .btn-add-to-fav i {
+            font-size: 1.2rem;
+        }
 </style>
+<script>
+    $(document).on("click", ".btn-remove-to-fav", function () {
+
+        const button = $(this);
+        const productId = button.data("id");
+
+        $.ajax({
+            url: '/Fav/RemoveFromFav',
+            type: 'POST',
+            data: { productid: productId },
+
+            success: function (res) {
+
+                if (res.success) {
+
+                    button.closest(".col-lg-3")
+                        .fadeOut(300, function () {
+                            $(this).remove();
+                        });
+
+                } else {
+                    alert(res.message);
+                }
+            },
+
+            error: function () {
+                alert("Có lỗi xảy ra!");
+            }
+        });
+
+    });
+</script>
