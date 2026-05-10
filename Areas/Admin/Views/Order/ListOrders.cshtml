@@ -5,7 +5,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<div class="container mt-4">
+<div class="container-fluid px-4">
     <h2 class="text-center mb-4">Danh sách đơn hàng</h2>
 
     @if (Model.Any())
@@ -17,7 +17,7 @@
                         <th class="col-id">ID</th>
                         <th class="col-customer">Tên khách hàng</th>
                         <th class="col-product">Sản phẩm</th>
-                        <th class="col-qty">Số lượng</th>
+                        <th class="col-qty">SL</th>
                         <th class="col-date">Ngày đặt hàng</th>
                         <th class="col-payment">Thanh toán</th>
                         <th class="col-status">Trạng thái</th>
@@ -49,26 +49,25 @@
                             </td>
 
                             <td class="col-payment text-center">
-                                <span class="badge @(order.PaymentMethod == "VNPAY" ? "bg-primary" : "bg-secondary")">
-                                    @(order.PaymentMethod == "COD"
-                                        ? "COD"
-                                        : order.PaymentMethod == "VNPAY"
-                                        ? "VNPAY"
-                                        : "Không xác định")
+                                <span class="payment-badge @(order.PaymentMethod?.ToLower())">
+                                    @(order.PaymentMethod == "COD" ? "COD"
+                                      : order.PaymentMethod == "VNPAY" ? "VNPAY"
+                                      : "Không xác định")
                                 </span>
                             </td>
 
                             <td class="col-status text-center">
-                                <span class="badge
+                                <span
+                                    class="badge
                                     @(order.OrderStatus == "Pending"
-                                        ? "bg-warning text-dark"
-                                        : order.OrderStatus == "Paid"
-                                        ? "bg-info"
-                                        : order.OrderStatus == "Shipping"
-                                        ? "bg-primary"
-                                        : order.OrderStatus == "Delivered"
-                                        ? "bg-success"
-                                        : "bg-danger")">
+                                                                                                                                                                                                                        ? "bg-warning text-dark"
+                                                                                                                                                                                                                        : order.OrderStatus == "Paid"
+                                                                                                                                                                                                                        ? "bg-info"
+                                                                                                                                                                                                                        : order.OrderStatus == "Shipping"
+                                                                                                                                                                                                                        ? "bg-primary"
+                                                                                                                                                                                                                        : order.OrderStatus == "Delivered"
+                                                                                                                                                                                                                        ? "bg-success"
+                                                                                                                                                                                                                        : "bg-danger")">
 
                                     @order.OrderStatus
                                 </span>
@@ -79,22 +78,18 @@
                             </td>
 
                             <td class="col-actions">
-                                <select class="form-control form-control-sm update-status"
-                                        data-order-id="@order.Id"
+                                <select class="form-control form-control-sm update-status" data-order-id="@order.Id"
                                         data-current-status="@order.OrderStatus">
 
-                                    <option value="Pending"
-                                            selected="@(order.OrderStatus == "Pending" ? "selected" : null)">
+                                    <option value="Pending" selected="@(order.OrderStatus == "Pending" ? "selected" : null)">
                                         Pending
                                     </option>
 
-                                    <option value="Paid"
-                                            selected="@(order.OrderStatus == "Paid" ? "selected" : null)">
+                                    <option value="Paid" selected="@(order.OrderStatus == "Paid" ? "selected" : null)">
                                         Paid
                                     </option>
 
-                                    <option value="Shipping"
-                                            selected="@(order.OrderStatus == "Shipping" ? "selected" : null)">
+                                    <option value="Shipping" selected="@(order.OrderStatus == "Shipping" ? "selected" : null)">
                                         Shipping
                                     </option>
 
@@ -143,15 +138,15 @@
     }
 
     .order-table .col-qty {
-        width: 100px;
+        width: 40px;
     }
 
     .order-table .col-date {
-        width: 170px;
+        width: 140px;
     }
 
     .order-table .col-payment {
-        width: 130px;
+        width: 100px;
     }
 
     .order-table .col-status {
@@ -178,8 +173,31 @@
         vertical-align: middle;
     }
 
-    .badge {
+    .payment-badge {
+        padding: 6px 12px;
+        border-radius: 999px;
         font-size: 0.85rem;
-        padding: 6px 10px;
+        font-weight: 600;
+        color: #fff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* COD - xanh */
+    .payment-badge.cod {
+        background: #198754;
+        /* xanh lá Bootstrap */
+    }
+
+    /* VNPAY - đỏ */
+    .payment-badge.vnpay {
+        background: #dc3545;
+        /* đỏ Bootstrap */
+    }
+
+    /* fallback */
+    .payment-badge {
+        background: #6c757d;
     }
 </style>

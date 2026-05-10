@@ -1,18 +1,16 @@
 ﻿@model IEnumerable<LapTopBD.Models.CartItem>
 
-@* 
-<!-- Page Header Start -->
-<div class="container-fluid bg-secondary mb-5">
-    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
-        <h1 class="font-weight-semi-bold text-uppercase mb-3">Giỏ Hàng</h1>
-        <div class="d-inline-flex">
-            <p class="m-0"><a href="@Url.Action("Index", "Home")">Trang Chủ</a></p>
-            <p class="m-0 px-2">-</p>
-            <p class="m-0">Giỏ Hàng</p>
+<div class="container-fluid hero-cart mb-5">
+    <div class="hero-inner">
+        <h1 class="hero-title">Giỏ Hàng</h1>
+        <div class="hero-divider"></div>
+        <div class="hero-breadcrumb">
+            <a href="@Url.Action("Index", "Home")">Trang Chủ >></a>
+            <i class="ti ti-chevron-right"></i>
+            <span class="hero-bc-cur">Giỏ Hàng</span>
         </div>
     </div>
-</div> *@
-<!-- Cart Start -->
+</div>
 <div class="custom-container pt-5">
     <div class="row px-xl-5">
         <div class="col-lg-8 table-responsive mb-5">

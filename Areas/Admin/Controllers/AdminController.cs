@@ -18,7 +18,7 @@ using System.Text.RegularExpressions;
 namespace LapTopBD.Areas.Admin.Controllers
 {
     [Area("Admin")]
-   [Authorize(AuthenticationSchemes = "AdminAuth")]
+    [Authorize(AuthenticationSchemes = "AdminAuth")]
     [Route("admin")]
     public class AdminController : Controller
     {
@@ -159,57 +159,91 @@ namespace LapTopBD.Areas.Admin.Controllers
             var selectedMonth = month.GetValueOrDefault(now.Month);
             var selectedYear = year.GetValueOrDefault(now.Year);
 
-            if (selectedMonth < 1 || selectedMonth > 12)
-            {
-                selectedMonth = now.Month;
-            }
+            if (selectedMonth < 1 || selectedMonth > 12) selectedMonth = now.Month;
+            if (selectedYear < 2020 || selectedYear > now.Year + 1) selectedYear = now.Year;
 
-            if (selectedYear < 2020 || selectedYear > now.Year + 1)
-            {
-                selectedYear = now.Year;
-            }
-
-            var allOrders = await _context.Order
-                .AsNoTracking()
-                .ToListAsync();
+            // ===== TẤT CẢ ĐƠN HÀNG =====
+            var allOrders = await _context.Order.AsNoTracking().ToListAsync();
 
             var todayOrders = allOrders.Where(o => o.OrderDate.Date == today).ToList();
             var weekOrders = allOrders.Where(o => o.OrderDate.Date >= weekStart && o.OrderDate.Date <= today).ToList();
-            var monthOrders = allOrders.Where(o => o.OrderDate.Date >= monthStart && o.OrderDate.Date <= today).ToList();
+            var monthStart2 = new DateTime(today.Year, today.Month, 1);
+            var monthOrders = allOrders.Where(o => o.OrderDate.Date >= monthStart2 && o.OrderDate.Date <= today).ToList();
 
-            var labels = new List<string>();
-            var dailyOrderCounts = new List<int>();
-            var dailyRevenue = new List<decimal>();
+            // ===== BIỂU ĐỒ: doanh thu từng ngày trong tháng được chọn =====
+            var firstDay = new DateTime(selectedYear, selectedMonth, 1);
+            var daysInMonth = DateTime.DaysInMonth(selectedYear, selectedMonth);
 
-            for (var i = 6; i >= 0; i--)
+            var ordersInMonth = allOrders
+                .Where(o => o.OrderDate.Year == selectedYear && o.OrderDate.Month == selectedMonth)
+                .ToList();
+
+            var monthlyVisitLabels = new List<string>();
+            var monthlyVisitSeries = new List<int>();
+
+            for (int d = 1; d <= daysInMonth; d++)
             {
-                var date = today.AddDays(-i);
-                var dayOrders = allOrders.Where(o => o.OrderDate.Date == date).ToList();
+                var date = new DateTime(selectedYear, selectedMonth, d);
+                var dayRevenue = ordersInMonth
+                    .Where(o => o.OrderDate.Date == date)
+                    .Sum(o => o.TotalPrice);
 
-                labels.Add(date.ToString("dd/MM"));
-                dailyOrderCounts.Add(dayOrders.Count);
-                dailyRevenue.Add(dayOrders.Sum(o => o.TotalPrice));
+                monthlyVisitLabels.Add(date.ToString("dd/MM"));
+                monthlyVisitSeries.Add((int)dayRevenue);
             }
 
-            var monthlyVisits = await _onlineVisitorTracker.GetDailyVisitCountsAsync(selectedYear, selectedMonth);
+            // ===== TOP SẢN PHẨM BÁN CHẠY: lấy từ Order trong tháng được chọn =====
+            var topProducts = await _context.Order
+                .AsNoTracking()
+                .Where(o => o.OrderDate.Year == selectedYear
+                         && o.OrderDate.Month == selectedMonth
+                         && o.OrderStatus != "Cancelled")
+                .Include(o => o.Product)
+                .GroupBy(o => new { o.ProductId, o.Product.ProductName })
+                .Select(g => new DashboardStatItem
+                {
+                    Name = g.Key.ProductName ?? "Không tên",
+                    Value = g.Sum(o => o.Quantity)
+                })
+                .OrderByDescending(x => x.Value)
+                .Take(10)
+                .ToListAsync();
+
+            // ===== DOANH THU 7 NGÀY GẦN NHẤT =====
+            var last7Labels = new List<string>();
+            var last7Revenue = new List<decimal>();
+            var last7OrderCnt = new List<int>();
+
+            for (int i = 6; i >= 0; i--)
+            {
+                var date = today.AddDays(-i);
+                var dayOrders = allOrders
+                    .Where(o => o.OrderDate.Date == date && o.OrderStatus != "Cancelled")
+                    .ToList();
+
+                last7Labels.Add(date.ToString("dd/MM"));
+                last7Revenue.Add(dayOrders.Sum(o => o.TotalPrice));
+                last7OrderCnt.Add(dayOrders.Count);
+            }
+
+            // ===== VISITOR STATS =====
             var browserStats = (await _onlineVisitorTracker.GetTopBrowsersAsync(7))
                 .Select(x => new DashboardStatItem { Name = x.Key, Value = x.Value })
                 .ToList();
+
             var deviceStats = (await _onlineVisitorTracker.GetDeviceBreakdownAsync())
                 .Select(x => new DashboardStatItem { Name = x.Key, Value = x.Value })
                 .ToList();
+
             var ipStats = (await _onlineVisitorTracker.GetTopIpsAsync(7))
                 .Select(x => new DashboardStatItem { Name = x.Key, Value = x.Value })
                 .ToList();
 
-            var monthlyVisitLabels = Enumerable.Range(1, monthlyVisits.Count)
-                .Select(day => $"D{day}")
-                .ToList();
-
+            var monthlyVisits = await _onlineVisitorTracker.GetDailyVisitCountsAsync(selectedYear, selectedMonth);
             var monthlyVisitTotal = monthlyVisits.Sum();
             var totalVisits = await _onlineVisitorTracker.GetTotalVisitCountAsync();
 
-            var viewModel = new AdminDashboardViewModel
+            return new AdminDashboardViewModel
             {
                 TotalUsers = await _context.Users.CountAsync(),
                 TotalOrders = allOrders.Count,
@@ -224,28 +258,27 @@ namespace LapTopBD.Areas.Admin.Controllers
                 WeekRevenue = weekOrders.Sum(o => o.TotalPrice),
                 MonthRevenue = monthOrders.Sum(o => o.TotalPrice),
 
-                Last7DaysLabels = labels,
-                Last7DaysOrderCounts = dailyOrderCounts,
-                Last7DaysRevenue = dailyRevenue,
+                Last7DaysLabels = last7Labels,
+                Last7DaysOrderCounts = last7OrderCnt,
+                Last7DaysRevenue = last7Revenue,
 
                 SelectedMonth = selectedMonth,
                 SelectedYear = selectedYear,
                 MonthlyVisitLabels = monthlyVisitLabels,
-                MonthlyVisitSeries = monthlyVisits.ToList(),
+                MonthlyVisitSeries = monthlyVisitSeries,
+
                 MonthlyVisits = monthlyVisitTotal,
                 TotalVisits = totalVisits,
 
-                BrowserStats = browserStats,
+                BrowserStats = topProducts, // top sản phẩm bán chạy
                 DeviceStats = deviceStats,
                 TopIps = ipStats
             };
-
-            return viewModel;
         }
 
         // Danh sách Admins
         [HttpGet]
-        [Route("list-admins")] 
+        [Route("list-admins")]
         public async Task<IActionResult> ListAdmins(int page = 1, int pageSize = 3)
         {
             var totalAdmins = await _context.Admins.CountAsync();

@@ -90,28 +90,24 @@ namespace LapTopBD.Areas.Admin.Controllers
             try
             {
                 var order = await _context.Order.FindAsync(orderId);
+
                 if (order == null)
-                {
                     return Json(new { success = false, message = "Đơn hàng không tồn tại!" });
-                }
 
-                // Kiểm tra trạng thái hợp lệ
                 var validStatuses = new[] { "Pending", "Shipping", "Delivered", "Cancelled", "Paid" };
-                if (!validStatuses.Contains(status))
-                {
-                    return Json(new { success = false, message = "Trạng thái không hợp lệ!" });
-                }
 
-                // Cập nhật trạng thái
+                if (!validStatuses.Contains(status))
+                    return Json(new { success = false, message = "Trạng thái không hợp lệ!" });
+
                 order.OrderStatus = status;
-                _context.Order.Update(order);
+
                 await _context.SaveChangesAsync();
 
-                return Json(new { success = true, message = "Cập nhật trạng thái đơn hàng thành công!" });
+                return Json(new { success = true });
             }
             catch (Exception ex)
             {
-                return Json(new { success = false, message = "Lỗi khi cập nhật trạng thái: " + ex.Message });
+                return Json(new { success = false, message = ex.Message });
             }
         }
     }
