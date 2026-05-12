@@ -2,6 +2,7 @@
 using LapTopBD.Models;
 using LapTopBD.Models.ViewModels.User;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LapTopBD.Utilities;
@@ -641,6 +642,148 @@ namespace LapTopBD.Controllers
             }
 
             return true;
+        }
+
+        // ===== PROFILE =====
+        [Authorize(AuthenticationSchemes = "UserAuth")]
+        [HttpGet]
+        public async Task<IActionResult> Profile()
+        {
+            var userId = GetUserId();
+            if (userId == 0)
+                return RedirectToAction("Login");
+
+            var user = await _context.Users.FindAsync(userId);
+            if (user == null)
+                return RedirectToAction("Login");
+
+            ViewBag.ShowBanner = false;
+            return View(user);
+        }
+
+        [Authorize(AuthenticationSchemes = "UserAuth")]
+        [HttpPost]
+        public async Task<IActionResult> UpdateProfile([FromBody] UserProfileUpdateViewModel model)
+        {
+            if (model == null)
+                return Json(new { success = false, message = "Dữ liệu không hợp lệ!" });
+
+            var userId = GetUserId();
+            if (userId == 0)
+                return Json(new { success = false, message = "Vui lòng đăng nhập!" });
+
+            var user = await _context.Users.FindAsync(userId);
+            if (user == null)
+                return Json(new { success = false, message = "Tài khoản không tồn tại!" });
+
+            // Validate
+            if (string.IsNullOrWhiteSpace(model.Name))
+                return Json(new { success = false, message = "Tên không được để trống!" });
+
+            if (string.IsNullOrWhiteSpace(model.ContactNo))
+                return Json(new { success = false, message = "Số điện thoại không được để trống!" });
+
+            if (!System.Text.RegularExpressions.Regex.IsMatch(model.ContactNo ?? "", @"^(0|\+84)(3|5|7|8|9)[0-9]{8}$"))
+                return Json(new { success = false, message = "Số điện thoại không hợp lệ!" });
+
+            if (string.IsNullOrWhiteSpace(model.City))
+                return Json(new { success = false, message = "Thành phố không được để trống!" });
+
+            if (string.IsNullOrWhiteSpace(model.Ward))
+                return Json(new { success = false, message = "Phường/Xã không được để trống!" });
+
+            if (string.IsNullOrWhiteSpace(model.Address))
+                return Json(new { success = false, message = "Địa chỉ không được để trống!" });
+
+            try
+            {
+                user.Name = model.Name.Trim();
+                user.ContactNo = model.ContactNo.Trim();
+                user.City = model.City.Trim();
+                user.Ward = model.Ward.Trim();
+                user.Address = model.Address.Trim();
+                user.UpdationDate = DateTimeHelper.Now;
+
+                _context.Users.Update(user);
+                await _context.SaveChangesAsync();
+
+                // Cập nhật claim
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                    new Claim(ClaimTypes.Name, user.Name),
+                    new Claim(ClaimTypes.Email, user.Email ?? string.Empty),
+                    new Claim("UserId", user.Id.ToString())
+                };
+                var claimsIdentity = new ClaimsIdentity(claims, "UserAuth");
+                var authProperties = new AuthenticationProperties
+                {
+                    IsPersistent = true,
+                    ExpiresUtc = DateTimeOffset.UtcNow.AddDays(7)
+                };
+                await HttpContext.SignInAsync("UserAuth", new ClaimsPrincipal(claimsIdentity), authProperties);
+
+                return Json(new { success = true, message = "Cập nhật thông tin thành công!" });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error updating profile");
+                return Json(new { success = false, message = $"Lỗi: {ex.Message}" });
+            }
+        }
+
+        [Authorize(AuthenticationSchemes = "UserAuth")]
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordViewModel model)
+        {
+            if (model == null)
+                return Json(new { success = false, message = "Dữ liệu không hợp lệ!" });
+
+            var userId = GetUserId();
+            if (userId == 0)
+                return Json(new { success = false, message = "Vui lòng đăng nhập!" });
+
+            var user = await _context.Users.FindAsync(userId);
+            if (user == null)
+                return Json(new { success = false, message = "Tài khoản không tồn tại!" });
+
+            // Verify current password
+            if (!PasswordHelper.VerifyPassword(model.CurrentPassword ?? string.Empty, user.Password))
+                return Json(new { success = false, message = "Mật khẩu hiện tại không đúng!" });
+
+            // Validate new password
+            if (string.IsNullOrWhiteSpace(model.NewPassword))
+                return Json(new { success = false, message = "Mật khẩu mới không được để trống!" });
+
+            if (!IsStrongPassword(model.NewPassword))
+                return Json(new { success = false, message = "Mật khẩu phải chứa ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường và số!" });
+
+            if (model.NewPassword != model.ConfirmPassword)
+                return Json(new { success = false, message = "Mật khẩu xác nhận không khớp!" });
+
+            try
+            {
+                user.Password = PasswordHelper.HashPassword(model.NewPassword);
+                user.UpdationDate = DateTimeHelper.Now;
+
+                _context.Users.Update(user);
+                await _context.SaveChangesAsync();
+
+                return Json(new { success = true, message = "Đổi mật khẩu thành công!" });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error changing password");
+                return Json(new { success = false, message = $"Lỗi: {ex.Message}" });
+            }
+        }
+
+        private int GetUserId()
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int userId))
+                return 0;
+            return userId;
         }
     }
 }

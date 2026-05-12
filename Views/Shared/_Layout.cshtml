@@ -146,6 +146,13 @@
                     <div class="dropdown-menu dropdown-menu-end">
                         <h6 class="dropdown-header">Xin chào @userName!</h6>
 
+                        <a href="@Url.Action("Profile", "UserAuth")" class="dropdown-item">
+                            <i class="mdi mdi-account text-muted fs-16 align-middle me-1"></i>
+                            <span class="align-middle">Hồ Sơ Cá Nhân</span>
+                        </a>
+
+                        <div class="dropdown-divider"></div>
+
                         <form action="@Url.Action("Logout", "UserAuth")" method="post" style="display:inline;">
 
                             @Html.AntiForgeryToken()

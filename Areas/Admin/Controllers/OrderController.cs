@@ -37,7 +37,8 @@ namespace LapTopBD.Areas.Admin.Controllers
                     o.TotalPrice,
                     o.City,
                     o.Ward,
-                    o.Address
+                    o.Address,
+                    o.PaymentMethod
                 })
                 .OrderByDescending(o => o.OrderDate)
                 .Select(o => new OrderViewModel
@@ -51,15 +52,16 @@ namespace LapTopBD.Areas.Admin.Controllers
                     TotalPrice = o.TotalPrice,
                     City = o.City,
                     Ward = o.Ward,
-                    Address = o.Address
+                    Address = o.Address,
+                    PaymentMethod = o.PaymentMethod
                 })
                 .ToListAsync();
 
             return View(orders);
         }
 
-        [HttpGet]
         [Route("get-new-orders-count")]
+        [HttpGet]
         public async Task<IActionResult> GetNewOrdersCount()
         {
             try
@@ -87,27 +89,65 @@ namespace LapTopBD.Areas.Admin.Controllers
         [Route("update-order-status")]
         public async Task<IActionResult> UpdateOrderStatus(int orderId, string status)
         {
+            using var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
-                var order = await _context.Order.FindAsync(orderId);
+                var order = await _context.Order
+                    .Include(o => o.Product)
+                    .FirstOrDefaultAsync(o => o.Id == orderId);
 
                 if (order == null)
+                {
+                    Console.WriteLine($"[ERROR] Order not found: {orderId}");
                     return Json(new { success = false, message = "Đơn hàng không tồn tại!" });
+                }
 
                 var validStatuses = new[] { "Pending", "Shipping", "Delivered", "Cancelled", "Paid" };
 
                 if (!validStatuses.Contains(status))
+                {
+                    Console.WriteLine($"[ERROR] Invalid status: {status}");
                     return Json(new { success = false, message = "Trạng thái không hợp lệ!" });
+                }
+
+                // Nếu hủy đơn hàng, khôi phục lại số lượng sản phẩm
+                if (status == "Cancelled" && order.OrderStatus != "Cancelled")
+                {
+                    Console.WriteLine($"[INFO] Cancelling order {orderId}, restoring product quantity");
+                    if (order.Product != null)
+                    {
+                        Console.WriteLine($"[INFO] Product ID: {order.ProductId}, Current quantity: {order.Product.quantity}, Quantity to restore: {order.Quantity}");
+                        order.Product.quantity += order.Quantity;
+                        _context.Product.Update(order.Product);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"[WARNING] Product is null for order {orderId}");
+                    }
+                }
 
                 order.OrderStatus = status;
+                _context.Order.Update(order);
 
                 await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
 
-                return Json(new { success = true });
+                Console.WriteLine($"[SUCCESS] Order {orderId} status updated to {status}");
+                return Json(new { success = true, message = "Cập nhật trạng thái đơn hàng thành công!" });
+            }
+            catch (DbUpdateException dbEx)
+            {
+                await transaction.RollbackAsync();
+                var innerMessage = dbEx.InnerException?.Message ?? dbEx.Message;
+                Console.WriteLine($"[ERROR] DbUpdateException: {innerMessage}");
+                return Json(new { success = false, message = $"Lỗi cơ sở dữ liệu: {innerMessage}" });
             }
             catch (Exception ex)
             {
-                return Json(new { success = false, message = ex.Message });
+                await transaction.RollbackAsync();
+                Console.WriteLine($"[ERROR] Exception: {ex.GetType().Name} - {ex.Message}");
+                Console.WriteLine($"[ERROR] Stack trace: {ex.StackTrace}");
+                return Json(new { success = false, message = $"Lỗi: {ex.Message}" });
             }
         }
     }

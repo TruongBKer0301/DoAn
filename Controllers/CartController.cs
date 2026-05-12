@@ -757,60 +757,6 @@ namespace LapTopBD.Controllers
             return View(orders);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CancelOrder(int orderId)
-        {
-            var userId = await GetUserIdAsync();
-            Console.WriteLine($"[DEBUG] CancelOrder - UserId: {userId}, OrderId: {orderId}");
-
-            if (userId == 0)
-            {
-                Console.WriteLine("[DEBUG] UserId = 0, yêu cầu đăng nhập");
-                return Json(new { success = false, message = "Vui lòng đăng nhập để hủy đơn hàng!" });
-            }
-
-            // Tìm đơn hàng
-            var order = await _context.Order
-                .FirstOrDefaultAsync(o => o.Id == orderId && o.UserId == userId);
-
-            if (order == null)
-            {
-                Console.WriteLine($"[DEBUG] Không tìm thấy đơn hàng - OrderId: {orderId}, UserId: {userId}");
-                return Json(new { success = false, message = "Không tìm thấy đơn hàng!" });
-            }
-
-            // Kiểm tra trạng thái đơn hàng (không phân biệt hoa thường)
-            if (!string.Equals(order.OrderStatus, "Pending", StringComparison.OrdinalIgnoreCase))
-            {
-                Console.WriteLine($"[DEBUG] Đơn hàng không thể hủy - OrderStatus: {order.OrderStatus}");
-                return Json(new { success = false, message = "Đơn hàng không thể hủy vì không ở trạng thái Pending!" });
-            }
-
-            var product = await _context.Product.FindAsync(order.ProductId);
-            if (product == null)
-            {
-                return Json(new { success = false, message = "Sản phẩm không tồn tại hoặc đã bị xóa." });
-            }
-
-            product.quantity += order.Quantity;
-            // Cập nhật trạng thái đơn hàng thành "Cancelled"
-            order.OrderStatus = "Cancelled";
-            _context.Order.Update(order);
-            _context.Product.Update(product);
-
-            try
-            {
-                await _context.SaveChangesAsync();
-                Console.WriteLine($"[DEBUG] Hủy đơn hàng thành công - OrderId: {orderId}");
-                return Json(new { success = true, message = "Đơn hàng đã được hủy thành công!" });
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"[DEBUG] Lỗi khi hủy đơn hàng - OrderId: {orderId}, Error: {ex.Message}");
-                return Json(new { success = false, message = $"Lỗi khi hủy đơn hàng: {ex.Message}" });
-            }
-        }
-
         [AllowAnonymous]
         [HttpGet]
         public IActionResult VnPayConfigDebug()
@@ -834,6 +780,65 @@ namespace LapTopBD.Controllers
                 returnUrl = options.PaymentBackReturnUrl,
                 message = "DEBUG ENDPOINT - DELETE AFTER TESTING FOR SECURITY"
             });
+        }
+
+        [Authorize(AuthenticationSchemes = "UserAuth")]
+        [HttpPost]
+        public async Task<IActionResult> CancelOrder(int orderId)
+        {
+            using var transaction = await _context.Database.BeginTransactionAsync();
+            try
+            {
+                var userId = await GetUserIdAsync();
+                if (userId == 0)
+                {
+                    return Json(new { success = false, message = "Vui lòng đăng nhập để hủy đơn hàng!" });
+                }
+
+                var order = await _context.Order
+                    .Include(o => o.Product)
+                    .FirstOrDefaultAsync(o => o.Id == orderId && o.UserId == userId);
+
+                if (order == null)
+                {
+                    return Json(new { success = false, message = "Đơn hàng không tồn tại!" });
+                }
+
+                // Chỉ cho hủy khi trạng thái là Pending
+                if (order.OrderStatus != "Pending")
+                {
+                    return Json(new { success = false, message = $"Không thể hủy đơn hàng với trạng thái {order.OrderStatus}!" });
+                }
+
+                // Khôi phục lại số lượng sản phẩm
+                if (order.Product != null)
+                {
+                    order.Product.quantity += order.Quantity;
+                    _context.Product.Update(order.Product);
+                }
+
+                order.OrderStatus = "Cancelled";
+                _context.Order.Update(order);
+
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+
+                Console.WriteLine($"[SUCCESS] Order {orderId} cancelled by user {userId}");
+                return Json(new { success = true, message = "Đơn hàng đã được hủy thành công!" });
+            }
+            catch (DbUpdateException dbEx)
+            {
+                await transaction.RollbackAsync();
+                var innerMessage = dbEx.InnerException?.Message ?? dbEx.Message;
+                Console.WriteLine($"[ERROR] DbUpdateException: {innerMessage}");
+                return Json(new { success = false, message = $"Lỗi cơ sở dữ liệu: {innerMessage}" });
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+                Console.WriteLine($"[ERROR] Exception: {ex.GetType().Name} - {ex.Message}");
+                return Json(new { success = false, message = $"Lỗi: {ex.Message}" });
+            }
         }
 
         private async Task<int> GetUserIdAsync()

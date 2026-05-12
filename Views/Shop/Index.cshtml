@@ -8,7 +8,7 @@
 }
 
 <!-- Page Header Start -->
-<div class="container-fluid bg-secondary mb-5">
+<div class="container-fluid shop-header mb-5">
     <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 240px">
         <h1 class="font-weight-semi-bold text-uppercase mb-3">Sản phẩm</h1>
         <div class="d-inline-flex">
@@ -94,19 +94,64 @@
                             </div>
                         </form>
                         <div class="dropdown ml-4">
-                            <button class="btn border dropdown-toggle" type="button" id="triggerId"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Sắp theo
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
-                                <a class="dropdown-item sort-link"
-                                   href="@Url.Action("Index", "Shop", new { categoryId = selectedCategoryId, subCategoryId = selectedSubCategoryId, search = searchTerm, sortBy = "latest" })">Lọc</a>
-                                <a class="dropdown-item sort-link"
-                                   href="@Url.Action("Index", "Shop", new { categoryId = selectedCategoryId, subCategoryId = selectedSubCategoryId, search = searchTerm, sortBy = "price-asc" })">Giá: Từ thấp đến cao</a>
-                                <a class="dropdown-item sort-link"
-                                   href="@Url.Action("Index", "Shop", new { categoryId = selectedCategoryId, subCategoryId = selectedSubCategoryId, search = searchTerm, sortBy = "price-desc" })">Price: Từ cao đến thấp</a>
-                            </div>
-                        </div>
+    <button class="btn border dropdown-toggle"
+            type="button"
+            id="triggerId"
+            data-bs-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false">
+
+        @(sortBy == "price-asc"
+            ? "Giá thấp → cao"
+            : sortBy == "price-desc"
+            ? "Giá cao → thấp"
+            : "Mới nhất")
+    </button>
+
+    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="triggerId">
+
+        <a class="dropdown-item @(sortBy == "latest" ? "active" : "")"
+           href="@Url.Action("Index", "Shop", new {
+                categoryId = selectedCategoryId,
+                subCategoryId = selectedSubCategoryId,
+                search = searchTerm,
+                sortBy = "latest"
+           })">
+            Mới nhất
+        </a>
+
+        <a class="dropdown-item @(sortBy == "bestselling" ? "active" : "")"
+           href="@Url.Action("Index", "Shop", new {
+                categoryId = selectedCategoryId,
+                subCategoryId = selectedSubCategoryId,
+                search = searchTerm,
+                sortBy = "bestselling"
+           })">
+            Bán chạy
+        </a>
+
+        <a class="dropdown-item @(sortBy == "price-asc" ? "active" : "")"
+           href="@Url.Action("Index", "Shop", new {
+                categoryId = selectedCategoryId,
+                subCategoryId = selectedSubCategoryId,
+                search = searchTerm,
+                sortBy = "price-asc"
+           })">
+            Giá: Từ thấp đến cao
+        </a>
+
+        <a class="dropdown-item @(sortBy == "price-desc" ? "active" : "")"
+           href="@Url.Action("Index", "Shop", new {
+                categoryId = selectedCategoryId,
+                subCategoryId = selectedSubCategoryId,
+                search = searchTerm,
+                sortBy = "price-desc"
+           })">
+            Giá: Từ cao đến thấp
+        </a>
+
+    </div>
+</div>
                     </div>
                 </div>
                 <div class="col-12">
@@ -208,26 +253,26 @@
 
 <style>
     /* ===== PAGE HEADER ===== */
-    .bg-secondary {
+    .shop-header {
         background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%) !important;
         position: relative;
         overflow: hidden;
     }
 
-    .bg-secondary::before,
-    .bg-secondary::after {
+    .shop-header::before,
+    .shop-header::after {
         content: "";
         position: absolute;
         border-radius: 50%;
         background: rgba(255,255,255,0.04);
     }
 
-    .bg-secondary::before { width: 280px; height: 280px; top: -80px; left: -50px; }
-    .bg-secondary::after  { width: 380px; height: 380px; right: -100px; bottom: -120px; }
+    .shop-header::before { width: 280px; height: 280px; top: -80px; left: -50px; }
+    .shop-header::after  { width: 380px; height: 380px; right: -100px; bottom: -120px; }
 
-    .bg-secondary h1 { color: #fff; font-weight: 700; letter-spacing: 1px; }
-    .bg-secondary a { color: rgba(255,255,255,0.75); }
-    .bg-secondary .text-danger { color: #ffb3b3 !important; }
+    .shop-header h1 { color: #fff; font-weight: 700; letter-spacing: 1px; }
+    .shop-header a { color: rgba(255,255,255,0.75); }
+    .shop-header .text-danger { color: #ffb3b3 !important; }
 
     /* ===== SIDEBAR ===== */
     .list-group-item {
@@ -400,6 +445,6 @@
     @@media (max-width: 768px) {
         .product-action-row { flex-direction: column; }
         .card-text { min-height: auto; }
-        .bg-secondary h1 { font-size: 28px; }
+        .shop-header h1 { font-size: 28px; }
     }
 </style>

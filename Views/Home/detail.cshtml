@@ -186,16 +186,32 @@
     <div class="row px-xl-5">
         <div class="col">
             <div class="nav nav-tabs justify-content-center border-secondary mb-4">
-                <a class="nav-item nav-link active" data-toggle="tab" href="#tab-pane-1">Mô tả</a>
-                <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-2">Thông tin bổ sung</a>
-                <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-3">Đánh giá ( @Model?.TotalReviews)</a>
+                <a class="nav-item nav-link active" data-bs-toggle="tab" data-bs-target="#tab-pane-1" role="tab" aria-controls="tab-pane-1" aria-selected="true">Mô tả</a>
+                <a class="nav-item nav-link" data-bs-toggle="tab" data-bs-target="#tab-pane-2" role="tab" aria-controls="tab-pane-2" aria-selected="false">Thông tin bổ sung</a>
+                <a class="nav-item nav-link" data-bs-toggle="tab" data-bs-target="#tab-pane-3" role="tab" aria-controls="tab-pane-3" aria-selected="false">Đánh giá ( @Model?.TotalReviews)</a>
             </div>
+            <!-- Hiển thị thông báo thành công hoặc lỗi -->
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    @TempData["SuccessMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    @TempData["ErrorMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
             <div class="tab-content">
-                <div class="tab-pane fade show active" id="tab-pane-1">
+                <div class="tab-pane fade show active" id="tab-pane-1" role="tabpanel">
                     <h4 class="mb-3">Mô tả sản phẩm</h4>
                     <p>@Model?.ProductDescription</p>
                 </div>
-                <div class="tab-pane fade" id="tab-pane-2">
+                <div class="tab-pane fade" id="tab-pane-2" role="tabpanel">
                     <h4 class="mb-3">Thông tin bổ sung</h4>
                     <ul class="list-unstyled">
                         <li>Thương hiệu: @Model?.Brand</li>
@@ -206,23 +222,7 @@
                         <li>VGA: @Model?.VGA</li>
                     </ul>
                 </div>
-                <!-- Hiển thị thông báo thành công hoặc lỗi -->
-                @if (TempData["SuccessMessage"] != null)
-                {
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        @TempData["SuccessMessage"]
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                }
-                @if (TempData["ErrorMessage"] != null)
-                {
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        @TempData["ErrorMessage"]
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                }
-
-                <div class="tab-pane fade" id="tab-pane-3">
+                <div class="tab-pane fade" id="tab-pane-3" role="tabpanel">
                     <div class="row">
                         <div class="col-md-6">
                             <h4 class="mb-4">@Model?.Reviews.Count đánh giá hiển thị (Tổng: @Model?.TotalReviews)</h4>

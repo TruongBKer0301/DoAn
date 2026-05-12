@@ -194,26 +194,49 @@ namespace LapTopBD.Controllers
                 }
             }
 
-            // ===== SORT =====
+            // ===== SORT & GET RESULT =====
+            // Lấy thông tin bán chạy nếu cần
+            Dictionary<int, int>? salesDict = null;
+            if (sortBy == "bestselling")
+            {
+                var salesCount = await _context.Order
+                    .GroupBy(o => o.ProductId)
+                    .Select(g => new { ProductId = g.Key, TotalSold = g.Sum(o => o.Quantity) })
+                    .ToListAsync();
+                
+                salesDict = salesCount.ToDictionary(s => s.ProductId, s => s.TotalSold);
+            }
+
+            List<ProductViewModel> productList;
+
             switch (sortBy)
             {
                 case "price-asc":
                     products = products.OrderBy(p => p.ProductPrice);
+                    productList = await products.ToListAsync();
                     break;
 
                 case "price-desc":
                     products = products.OrderByDescending(p => p.ProductPrice);
+                    productList = await products.ToListAsync();
+                    break;
+
+                case "bestselling":
+                    // Sắp xếp theo tổng số lượng bán (từ Order table)
+                    productList = await products.ToListAsync();
+                    productList = productList
+                        .OrderByDescending(p => salesDict!.ContainsKey(p.Id) ? salesDict[p.Id] : 0)
+                        .ToList();
                     break;
 
                 case "latest":
                 default:
                     products = products.OrderByDescending(p => p.PostingDate);
+                    productList = await products.ToListAsync();
                     break;
             }
 
             ViewBag.ShowBanner = false;
-
-            var productList = await products.ToListAsync();
 
             return View(productList);
         }
