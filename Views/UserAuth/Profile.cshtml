@@ -1,422 +1,824 @@
-
 <style>
-:root{--font-sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;--color-background-primary:#fff;--color-background-secondary:#f5f5f5;--color-background-tertiary:#fafafa;--color-border-primary:#e5e5e5;--color-border-secondary:#e9ecef;--color-border-tertiary:#ddd;--color-border-info:#e1f4ff;--color-text-primary:#1a1a1a;--color-text-secondary:#666;--color-text-tertiary:#999;--color-text-danger:#dc3545;--color-text-success:#28a745;--color-text-info:#0c5460;--color-background-info:#d1ecf1;--border-radius-lg:10px;--border-radius-md:6px}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--font-sans);background:var(--color-background-tertiary)}
-.pg{display:grid;grid-template-columns:220px minmax(0,1fr);gap:20px;padding:24px;max-width:900px;margin:0 auto}
-.sidebar{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:20px;align-self:start;position:sticky;top:0}
-.av{width:52px;height:52px;border-radius:50%;background:#1a1a2e;color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:500;flex-shrink:0}
-.user-row{display:flex;align-items:center;gap:12px;padding-bottom:16px;border-bottom:0.5px solid var(--color-border-tertiary);margin-bottom:12px}
-.uname{font-size:14px;font-weight:500;color:var(--color-text-primary)}
-.urole{font-size:12px;color:var(--color-text-secondary)}
-.nav-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:var(--border-radius-md);font-size:13px;color:var(--color-text-secondary);cursor:pointer;transition:background 0.15s;margin-bottom:2px;border:none;background:transparent;width:100%;text-align:left;font:inherit}
-.nav-item i{font-size:16px}
-.nav-item:hover{background:var(--color-background-secondary);color:var(--color-text-primary)}
-.nav-item.active{background:#1a1a2e;color:#fff}
-.content{display:flex;flex-direction:column;gap:16px}
-.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
-.card-head{background:#1a1a2e;color:#fff;padding:14px 20px;font-size:14px;font-weight:500;display:flex;align-items:center;gap:8px}
-.card-head i{font-size:16px;opacity:0.8}
-.card-body{padding:24px}
-.av-lg{width:72px;height:72px;border-radius:50%;background:#1a1a2e;color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:500;margin:0 auto 6px}
-.av-section{text-align:center;padding-bottom:20px;border-bottom:0.5px solid var(--color-border-tertiary);margin-bottom:20px}
-.av-label{font-size:12px;color:var(--color-text-secondary)}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.form-full{grid-column:1/-1}
-.field label{display:block;font-size:12px;font-weight:500;color:var(--color-text-secondary);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.04em}
-.input-mock{height:36px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:0 12px;font-size:13px;color:var(--color-text-primary);display:flex;align-items:center;background:var(--color-background-primary);font:inherit}
-.input-mock:focus{outline:none;border-color:#1a1a2e;box-shadow:0 0 0 2px rgba(26,26,46,0.1)}
-.input-mock.disabled{background:var(--color-background-secondary);color:var(--color-text-secondary);cursor:not-allowed}
-.input-mock.has-icon{gap:8px}
-.input-hint{font-size:11px;color:var(--color-text-tertiary);margin-top:4px}
-.actions{display:flex;justify-content:flex-end;gap:8px;margin-top:20px;padding-top:16px;border-top:0.5px solid var(--color-border-tertiary)}
-.btn-save{background:#1a1a2e;color:#fff;border:none;border-radius:var(--border-radius-md);padding:8px 20px;font-size:13px;font-weight:500;display:flex;align-items:center;gap:6px;cursor:pointer}
-.btn-save:hover{background:#0f1419}
-.btn-cancel{background:transparent;color:var(--color-text-secondary);border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:8px 16px;font-size:13px;cursor:pointer;font:inherit}
-.btn-cancel:hover{background:var(--color-background-secondary);color:var(--color-text-primary)}
-.tabs{display:flex;gap:0;border-bottom:0.5px solid var(--color-border-tertiary);margin-bottom:20px}
-.tab{padding:8px 16px;font-size:13px;color:var(--color-text-secondary);border-bottom:2px solid transparent;cursor:pointer;font-weight:500}
-.tab.active{color:#1a1a2e;border-bottom-color:#1a1a2e}
-.preview-box{background:var(--color-background-secondary);border:0.5px dashed var(--color-border-secondary);border-radius:var(--border-radius-md);padding:12px 16px;font-size:13px;color:var(--color-text-secondary);display:flex;align-items:flex-start;gap:8px;margin-top:4px}
-.addr-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:14px}
-.pw-wrap{position:relative}
-.pw-eye{position:absolute;right:10px;top:50%;transform:translateY(-50%);color:var(--color-text-tertiary);font-size:15px}
-.strength{margin-top:8px}
-.strength-bar-bg{height:4px;background:var(--color-border-tertiary);border-radius:99px;overflow:hidden;margin-bottom:4px}
-.strength-fill{height:100%;width:55%;background:#22c55e;border-radius:99px;transition:width 0.3s,background-color 0.3s}
-.strength-label{font-size:11px;color:#22c55e;font-weight:500}
-.security-notice{background:var(--color-background-info);border:0.5px solid var(--color-border-info);border-radius:var(--border-radius-md);padding:10px 14px;font-size:12px;color:var(--color-text-info);display:flex;align-items:center;gap:8px;margin-bottom:18px}
-.section-divider{font-size:11px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:0.05em;margin:18px 0 10px;padding-bottom:6px;border-bottom:0.5px solid var(--color-border-tertiary)}
-.badge-member{display:inline-flex;align-items:center;gap:4px;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:99px;padding:3px 10px;font-size:11px;color:var(--color-text-secondary);margin-top:4px}
-.tab-panels>div{display:none}
-.tab-panels>div.show{display:block}
-.bg-secondary{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%)!important;position:relative;overflow:hidden}
-.bg-secondary::before,.bg-secondary::after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,0.04)}
-.bg-secondary::before{width:280px;height:280px;top:-80px;left:-50px}
-.bg-secondary::after{width:380px;height:380px;right:-100px;bottom:-120px}
-.bg-secondary h1{color:#fff;font-weight:700;letter-spacing:1px}
-.bg-secondary a{color:rgba(255,255,255,0.75)}
-.bg-secondary .text-danger{color:#ffb3b3!important}
-@@media(max-width:768px){.pg{grid-template-columns:1fr;gap:16px}.addr-grid{grid-template-columns:1fr}}
+/* ===== RESET & BASE ===== */
+.pg *{box-sizing:border-box}
+
+/* ===== LAYOUT ===== */
+.pg{
+    display:grid;
+    grid-template-columns:230px minmax(0,1fr);
+    gap:24px;
+    max-width:980px;
+    margin:0 auto;
+    padding:32px 20px 60px;
+    align-items:start;
+}
+
+/* ===== SIDEBAR ===== */
+.pg-sidebar{
+    background:#fff;
+    border:1px solid #f0f0f0;
+    border-radius:16px;
+    padding:22px;
+    box-shadow:0 2px 16px rgba(0,0,0,0.05);
+    position:sticky;
+    top:90px;
+}
+
+.sb-user{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding-bottom:18px;
+    border-bottom:1px solid #f3f4f6;
+    margin-bottom:14px;
+}
+
+.sb-av{
+    width:50px;height:50px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#1a1a2e,#0f3460);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:20px;font-weight:600;
+    flex-shrink:0;
+}
+
+.sb-name{font-size:14px;font-weight:600;color:#111827;line-height:1.3}
+.sb-role{
+    display:inline-flex;align-items:center;gap:4px;
+    background:#f3f4f6;border:1px solid #e5e7eb;
+    border-radius:99px;padding:2px 8px;
+    font-size:11px;color:#6b7280;margin-top:4px;
+}
+
+.sb-nav{display:flex;flex-direction:column;gap:2px}
+
+.sb-link{
+    display:flex;align-items:center;gap:9px;
+    padding:10px 12px;
+    border-radius:10px;
+    font-size:13px;font-weight:500;
+    color:#6b7280;
+    text-decoration:none;
+    border:none;background:none;
+    width:100%;text-align:left;
+    cursor:pointer;
+    transition:all 0.15s ease;
+    font-family:inherit;
+}
+.sb-link i{font-size:16px;flex-shrink:0}
+.sb-link:hover{background:#f1f5f9;color:#1a1a2e;text-decoration:none}
+.sb-link.active{background:linear-gradient(135deg,#1a1a2e,#0f3460);color:#fff}
+.sb-link.sb-logout{color:#ef4444}
+.sb-link.sb-logout:hover{background:#fef2f2;color:#dc2626}
+
+.sb-divider{height:1px;background:#f3f4f6;margin:10px 0}
+
+/* ===== MAIN CONTENT ===== */
+.pg-main{display:flex;flex-direction:column;gap:0}
+
+/* ===== CARD ===== */
+.pf-card{
+    background:#fff;
+    border:1px solid #f0f0f0;
+    border-radius:16px;
+    box-shadow:0 2px 16px rgba(0,0,0,0.05);
+    overflow:hidden;
+}
+
+.pf-card-head{
+    background:linear-gradient(135deg,#1a1a2e,#0f3460);
+    color:#fff;
+    padding:15px 24px;
+    font-size:14px;font-weight:600;
+    display:flex;align-items:center;gap:8px;
+}
+.pf-card-head i{font-size:16px;opacity:0.85}
+
+.pf-card-body{padding:28px 24px}
+
+/* ===== AVATAR SECTION ===== */
+.pf-av-section{
+    text-align:center;
+    padding-bottom:22px;
+    border-bottom:1px solid #f3f4f6;
+    margin-bottom:22px;
+}
+
+.pf-av-lg{
+    width:76px;height:76px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#1a1a2e,#0f3460);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:28px;font-weight:600;
+    margin:0 auto 10px;
+}
+
+.pf-av-name{font-size:15px;font-weight:600;color:#111827;margin-bottom:5px}
+.pf-av-badge{
+    display:inline-flex;align-items:center;gap:5px;
+    background:#f3f4f6;border:1px solid #e5e7eb;
+    border-radius:99px;padding:4px 12px;
+    font-size:12px;color:#6b7280;
+}
+
+/* ===== SECTION DIVIDER ===== */
+.pf-divider{
+    font-size:11px;font-weight:600;color:#9ca3af;
+    text-transform:uppercase;letter-spacing:0.06em;
+    margin:0 0 14px;
+    padding-bottom:8px;
+    border-bottom:1px solid #f3f4f6;
+}
+.pf-divider-mt{margin-top:20px}
+
+/* ===== FORM GRID ===== */
+.pf-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pf-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:14px}
+.pf-full{grid-column:1/-1}
+
+.pf-field{display:flex;flex-direction:column}
+
+.pf-label{
+    font-size:11px;font-weight:600;
+    color:#6b7280;
+    text-transform:uppercase;letter-spacing:0.05em;
+    margin-bottom:6px;
+}
+
+.pf-input{
+    height:40px;
+    border:1px solid #e5e7eb;
+    border-radius:10px;
+    padding:0 14px;
+    font-size:14px;color:#111827;
+    background:#fff;
+    transition:all 0.2s;
+    outline:none;
+    font-family:inherit;
+    width:100%;
+}
+.pf-input:focus{border-color:#0f3460;box-shadow:0 0 0 3px rgba(15,52,96,0.08)}
+.pf-input:disabled,.pf-input.pf-disabled{background:#f9fafb;color:#9ca3af;cursor:not-allowed}
+.pf-input.pf-select{cursor:pointer}
+.pf-input.pf-textarea{height:auto;min-height:80px;padding:10px 14px;resize:vertical}
+
+.pf-hint{font-size:11px;color:#9ca3af;margin-top:4px}
+
+/* ===== ADDRESS PREVIEW ===== */
+.pf-preview{
+    display:none;
+    align-items:flex-start;gap:10px;
+    background:#f8fafc;
+    border:1px dashed #cbd5e1;
+    border-radius:10px;
+    padding:12px 16px;
+    font-size:13px;color:#374151;
+    margin-top:6px;
+}
+.pf-preview i{color:#dc2626;flex-shrink:0;margin-top:2px;font-size:15px}
+
+/* ===== PASSWORD ===== */
+.pf-pw-wrap{position:relative}
+.pf-pw-wrap .pf-input{padding-right:44px}
+
+.pf-pw-eye{
+    position:absolute;right:13px;top:50%;
+    transform:translateY(-50%);
+    background:none;border:none;
+    color:#9ca3af;cursor:pointer;
+    font-size:16px;padding:0;line-height:1;
+}
+.pf-pw-eye:hover{color:#0f3460}
+
+.pf-strength-wrap{margin-top:8px;display:flex;align-items:center;gap:10px}
+.pf-strength-bg{
+    flex:1;height:5px;
+    background:#e5e7eb;border-radius:99px;overflow:hidden;
+}
+.pf-strength-fill{
+    height:100%;width:0;border-radius:99px;
+    transition:width 0.3s ease,background 0.3s ease;
+}
+.pf-strength-text{font-size:12px;font-weight:600;min-width:70px}
+
+.pf-match{
+    font-size:12px;margin-top:6px;
+    display:flex;align-items:center;gap:4px;
+}
+
+/* ===== SECURITY NOTICE ===== */
+.pf-security{
+    display:flex;align-items:center;gap:10px;
+    background:#eff6ff;border:1px solid #bfdbfe;
+    border-radius:10px;padding:12px 16px;
+    font-size:13px;color:#1d4ed8;
+    margin-bottom:20px;
+}
+.pf-security i{font-size:18px;flex-shrink:0}
+
+/* ===== ACTIONS ===== */
+.pf-actions{
+    display:flex;justify-content:flex-end;align-items:center;gap:10px;
+    margin-top:24px;padding-top:18px;
+    border-top:1px solid #f3f4f6;
+}
+
+.pf-btn-save{
+    display:inline-flex;align-items:center;gap:6px;
+    background:linear-gradient(135deg,#1a1a2e,#0f3460);
+    color:#fff;border:none;border-radius:10px;
+    padding:10px 22px;font-size:13px;font-weight:600;
+    cursor:pointer;transition:opacity 0.2s;
+    font-family:inherit;
+}
+.pf-btn-save:hover{opacity:0.88}
+
+.pf-btn-cancel{
+    display:inline-flex;align-items:center;gap:6px;
+    background:#fff;color:#6b7280;
+    border:1px solid #e5e7eb;border-radius:10px;
+    padding:9px 18px;font-size:13px;font-weight:500;
+    cursor:pointer;transition:all 0.15s;
+    font-family:inherit;
+}
+.pf-btn-cancel:hover{background:#f3f4f6;color:#374151}
+
+/* ===== FEEDBACK MESSAGES ===== */
+.pf-msg{font-size:13px;margin-top:14px;display:flex;align-items:center;gap:6px;padding:10px 14px;border-radius:8px}
+.pf-msg.success{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0}
+.pf-msg.error{background:#fef2f2;color:#dc2626;border:1px solid #fecaca}
+
+/* ===== RESPONSIVE ===== */
+@@media(max-width:768px){
+    .pg{grid-template-columns:1fr;padding:16px 16px 40px}
+    .pg-sidebar{position:static}
+    .pf-grid,.pf-grid-3{grid-template-columns:1fr}
+}
 </style>
 
-<h2 class="sr-only">Giao diện trang quản lý tài khoản người dùng</h2>
+<h2 class="sr-only">Trang quản lý tài khoản người dùng</h2>
 
 <div class="pg">
-  <aside class="sidebar">
-    <div class="user-row">
-      <div class="av">@Model.Name?.Substring(0, 1).ToUpper()</div>
-      <div>
-        <div class="uname">@Model.Name</div>
-        <div class="urole">Thành viên</div>
-      </div>
-    </div>
 
-    <button type="button" class="nav-item active" onclick="switchTab('info',this)">
-      <i class="ri-user-line"></i> Thông tin cá nhân
-    </button>
-    <button type="button" class="nav-item" onclick="switchTab('address',this)">
-      <i class="ri-map-pin-line"></i> Địa chỉ giao hàng
-    </button>
-    <button type="button" class="nav-item" onclick="switchTab('password',this)">
-      <i class="ri-lock-line"></i> Đổi mật khẩu
-    </button>
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="pg-sidebar">
+        <div class="sb-user">
+            <div class="sb-av">@Model.Name?.Substring(0, 1).ToUpper()</div>
+            <div>
+                <div class="sb-name">@Model.Name</div>
+                <div class="sb-role"><i class="ri-star-line" style="font-size:11px"></i> Thành viên</div>
+            </div>
+        </div>
 
-    <div style="border-top:0.5px solid var(--color-border-tertiary);margin-top:12px;padding-top:12px">
-      <a href="@Url.Action("Logout", "UserAuth")" class="nav-item" style="color:var(--color-text-danger);text-decoration:none">
-        <i class="ri-logout-box-line"></i> Đăng xuất
-      </a>
-    </div>
-  </aside>
+        <nav class="sb-nav">
+            <button type="button" class="sb-link active" onclick="switchTab('info',this)">
+                <i class="ri-user-line"></i> Thông tin cá nhân
+            </button>
+            <button type="button" class="sb-link" onclick="switchTab('address',this)">
+                <i class="ri-map-pin-line"></i> Địa chỉ giao hàng
+            </button>
+            <button type="button" class="sb-link" onclick="switchTab('password',this)">
+                <i class="ri-lock-line"></i> Đổi mật khẩu
+            </button>
 
-  <main class="content">
-    <div class="tab-panels">
+            <div class="sb-divider"></div>
 
-      <div id="panel-info" class="show">
-        <div class="card">
-          <div class="card-head">
-            <i class="ri-edit-line"></i> Chỉnh sửa thông tin
-          </div>
-          <div class="card-body">
-            <div class="av-section">
-              <div class="av-lg">@Model.Name?.Substring(0, 1).ToUpper()</div>
-              <div class="uname" style="font-size:15px">@Model.Name</div>
-              <div class="badge-member"><i class="ri-star-line" style="font-size:12px"></i> Thành viên</div>
+            <a href="@Url.Action("Logout","UserAuth")" class="sb-link sb-logout">
+                <i class="ri-logout-box-line"></i> Đăng xuất
+            </a>
+        </nav>
+    </aside>
+
+    <!-- ===== MAIN ===== -->
+    <main class="pg-main">
+        <div class="tab-panels">
+
+            <!-- ── Tab: Thông tin cá nhân ── -->
+            <div id="panel-info" class="show">
+                <div class="pf-card">
+                    <div class="pf-card-head">
+                        <i class="ri-edit-line"></i> Chỉnh sửa thông tin
+                    </div>
+                    <div class="pf-card-body">
+
+                        <!-- Avatar -->
+                        <div class="pf-av-section">
+                            <div class="pf-av-lg">@Model.Name?.Substring(0,1).ToUpper()</div>
+                            <div class="pf-av-name">@Model.Name</div>
+                            <div class="pf-av-badge">
+                                <i class="ri-star-line" style="font-size:12px"></i> Thành viên TheEgo Shop
+                            </div>
+                        </div>
+
+                        <form id="profileForm">
+                            <div class="pf-divider">Thông tin liên hệ</div>
+
+                            <div class="pf-grid">
+                                <div class="pf-field">
+                                    <label class="pf-label">Họ và tên</label>
+                                    <input type="text" id="name" name="name"
+                                           class="pf-input" value="@Model.Name"
+                                           placeholder="Nhập họ và tên" />
+                                </div>
+
+                                <div class="pf-field">
+                                    <label class="pf-label">
+                                        Email <i class="ri-lock-line" style="font-size:11px;vertical-align:1px"></i>
+                                    </label>
+                                    <input type="email" class="pf-input pf-disabled"
+                                           value="@Model.Email" disabled />
+                                    <div class="pf-hint">Email không thể thay đổi</div>
+                                </div>
+
+                                <div class="pf-field">
+                                    <label class="pf-label">Số điện thoại</label>
+                                    <input type="tel" id="contactNo" name="contactNo"
+                                           class="pf-input" value="@Model.ContactNo"
+                                           placeholder="0901 234 567" />
+                                </div>
+                            </div>
+
+                            <div id="message"></div>
+
+                            <div class="pf-actions">
+                                <button type="button" class="pf-btn-cancel" onclick="location.reload()">
+                                    Hủy
+                                </button>
+                                <button type="submit" class="pf-btn-save">
+                                    <i class="ri-save-line"></i> Lưu thay đổi
+                                </button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
             </div>
 
-            <form id="profileForm">
-              <div class="section-divider">Thông tin liên hệ</div>
-              <div class="form-grid">
-                <div class="field">
-                  <label>Họ và tên</label>
-                  <input type="text" id="name" name="name" class="input-mock" value="@Model.Name" placeholder="Nhập tên" style="height:36px;padding:0 12px">
+            <!-- ── Tab: Địa chỉ giao hàng ── -->
+            <div id="panel-address">
+                <div class="pf-card">
+                    <div class="pf-card-head">
+                        <i class="ri-map-pin-line"></i> Địa chỉ giao hàng mặc định
+                    </div>
+                    <div class="pf-card-body">
+
+                        <form id="addressForm">
+                            <div class="pf-divider">Địa chỉ chi tiết</div>
+
+                            <div class="pf-field pf-full" style="margin-bottom:0">
+                                <label class="pf-label">Số nhà, tên đường</label>
+                                <textarea id="addressDetail" name="address"
+                                          class="pf-input pf-textarea"
+                                          placeholder="VD: 123 Đường Lê Lợi"
+                                          data-current="@Model.Address">@Model.Address</textarea>
+                                <small style="color:#666;font-size:11px;display:block;margin-top:4px;">Current: @(string.IsNullOrEmpty(Model?.Address) ? "(trống)" : Model.Address)</small>
+                            </div>
+
+                            <div class="pf-grid">
+                                <div class="pf-field">
+                                    <label class="pf-label">Tỉnh / Thành phố</label>
+                                    <select id="province" name="city" class="pf-input pf-select"
+                                            data-current="@Model.City">
+                                        <option value="">-- Chọn Tỉnh/Thành --</option>
+                                    </select>
+                                    <small style="color:#666;font-size:11px;display:block;margin-top:4px;">Current: @(string.IsNullOrEmpty(Model?.City) ? "(trống)" : Model.City)</small>
+                                </div>
+                                <div class="pf-field">
+                                    <label class="pf-label">Phường / Xã</label>
+                                    <select id="commune" name="ward" class="pf-input pf-select"
+                                            data-current="@Model.Ward">
+                                        <option value="">-- Chọn Phường/Xã --</option>
+                                    </select>
+                                    <small style="color:#666;font-size:11px;display:block;margin-top:4px;">Current: @(string.IsNullOrEmpty(Model?.Ward) ? "(trống)" : Model.Ward)</small>
+                                </div>
+                            </div>
+
+                            <!-- Preview -->
+                            <div style="margin-top:18px">
+                                <div class="pf-label" style="display:flex;align-items:center;gap:5px;margin-bottom:6px">
+                                    <i class="ri-eye-line" style="font-size:13px"></i> Xem trước địa chỉ
+                                </div>
+                                <div class="pf-preview" id="addressPreview">
+                                    <i class="ri-map-pin-fill"></i>
+                                    <span id="previewText"></span>
+                                </div>
+                            </div>
+
+                            <div id="addressMessage"></div>
+
+                            <div class="pf-actions">
+                                <button type="button" class="pf-btn-cancel" onclick="location.reload()">
+                                    Hủy
+                                </button>
+                                <button type="submit" class="pf-btn-save">
+                                    <i class="ri-save-line"></i> Lưu địa chỉ
+                                </button>
+                            </div>
+                        </form>
+
+                    </div>
                 </div>
-                <div class="field">
-                  <label>Email <i class="ri-lock-line" style="font-size:12px"></i></label>
-                  <input type="email" class="input-mock disabled" value="@Model.Email" disabled style="height:36px;padding:0 12px;cursor:not-allowed">
-                  <div class="input-hint">Email không thể thay đổi</div>
-                </div>
-                <div class="field">
-                  <label>Số điện thoại</label>
-                  <input type="tel" id="contactNo" name="contactNo" class="input-mock" value="@Model.ContactNo" placeholder="Nhập số điện thoại" style="height:36px;padding:0 12px">
-                </div>
-              </div>
-
-              <div id="message"></div>
-
-              <div class="actions">
-                <button type="button" class="btn-cancel" onclick="location.reload()">Hủy</button>
-                <button type="submit" class="btn-save"><i class="ri-save-line"></i> Lưu thay đổi</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-
-      <div id="panel-address">
-        <div class="card">
-          <div class="card-head">
-            <i class="ri-map-pin-line"></i> Địa chỉ giao hàng mặc định
-          </div>
-          <div class="card-body">
-            <form id="addressForm">
-              <div class="field form-full" style="margin-bottom:0">
-                <label>Số nhà, tên đường</label>
-                <textarea id="addressDetail" name="address" class="input-mock" placeholder="VD: 123 Đường Lê Lợi" style="height:auto;min-height:80px;padding:10px 12px">@Model.Address</textarea>
-              </div>
-
-              <div class="addr-grid">
-                <div class="field">
-                  <label>Phường / Xã</label>
-                  <select id="commune" name="ward" class="input-mock" required style="height:36px;padding:0 12px">
-                    <option value="">-- Chọn Phường/Xã --</option>
-                  </select>
-                </div>
-                <div class="field">
-                  <label>Quận / Huyện</label>
-                  <select id="district" name="district" class="input-mock" required style="height:36px;padding:0 12px">
-                    <option value="">-- Chọn Quận/Huyện --</option>
-                  </select>
-                </div>
-                <div class="field">
-                  <label>Tỉnh / Thành phố</label>
-                  <select id="province" name="city" class="input-mock" required style="height:36px;padding:0 12px">
-                    <option value="">-- Chọn Tỉnh/Thành --</option>
-                  </select>
-                </div>
-              </div>
-
-              <div style="margin-top:18px">
-                <div style="font-size:12px;font-weight:500;color:var(--color-text-secondary);margin-bottom:6px;display:flex;align-items:center;gap:5px"><i class="ri-eye-line" style="font-size:14px"></i> Xem trước địa chỉ</div>
-                <div class="preview-box" id="addressPreview" style="display:none">
-                  <i class="ri-map-pin-fill" style="font-size:15px;color:var(--color-text-danger);flex-shrink:0;margin-top:1px"></i>
-                  <span id="previewText"></span>
-                </div>
-              </div>
-
-              <div id="addressMessage"></div>
-
-              <div class="actions">
-                <button type="button" class="btn-cancel" onclick="location.reload()">Hủy</button>
-                <button type="submit" class="btn-save"><i class="ri-save-line"></i> Lưu địa chỉ</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-
-      <div id="panel-password">
-        <div class="card">
-          <div class="card-head">
-            <i class="ri-lock-password-line"></i> Thay đổi mật khẩu
-          </div>
-          <div class="card-body">
-            <div class="security-notice">
-              <i class="ri-shield-check-line" style="font-size:16px;flex-shrink:0"></i>
-              <span>Mật khẩu mới phải có ít nhất <strong style="margin:0 3px">8 ký tự</strong>. Nên kết hợp chữ hoa, số và ký tự đặc biệt.</span>
             </div>
 
-            <form id="passwordForm">
-              <div class="section-divider">Mật khẩu hiện tại</div>
-              <div class="field" style="max-width:360px">
-                <label>Mật khẩu hiện tại</label>
-                <div class="pw-wrap">
-                  <input type="password" id="currentPassword" name="currentPassword" class="input-mock" placeholder="••••••••" style="height:36px;padding:0 12px;padding-right:40px;width:100%">
-                  <span class="pw-eye" onclick="togglePassword(this)" style="cursor:pointer"><i class="ri-eye-off-line"></i></span>
-                </div>
-              </div>
+            <!-- ── Tab: Đổi mật khẩu ── -->
+            <div id="panel-password">
+                <div class="pf-card">
+                    <div class="pf-card-head">
+                        <i class="ri-lock-password-line"></i> Thay đổi mật khẩu
+                    </div>
+                    <div class="pf-card-body">
 
-              <div class="section-divider" style="margin-top:20px">Mật khẩu mới</div>
-              <div class="form-grid">
-                <div class="field">
-                  <label>Mật khẩu mới</label>
-                  <div class="pw-wrap">
-                    <input type="password" id="newPassword" name="newPassword" class="input-mock" placeholder="••••••••••" style="height:36px;padding:0 12px;padding-right:40px;width:100%">
-                    <span class="pw-eye" onclick="togglePassword(this)" style="cursor:pointer"><i class="ri-eye-off-line"></i></span>
-                  </div>
-                  <div class="strength">
-                    <div class="strength-bar-bg"><div id="passwordStrength" class="strength-fill" style="width:0%"></div></div>
-                    <div id="strengthText" class="strength-label"></div>
-                  </div>
-                </div>
-                <div class="field">
-                  <label>Xác nhận mật khẩu mới</label>
-                  <div class="pw-wrap">
-                    <input type="password" id="confirmPassword" name="confirmPassword" class="input-mock" placeholder="••••••••••" style="height:36px;padding:0 12px;padding-right:40px;width:100%">
-                    <span class="pw-eye" onclick="togglePassword(this)" style="cursor:pointer"><i class="ri-eye-off-line"></i></span>
-                  </div>
-                  <div id="matchStatus" class="input-hint" style="margin-top:6px;display:flex;align-items:center;gap:4px"></div>
-                </div>
-              </div>
+                        <div class="pf-security">
+                            <i class="ri-shield-check-line"></i>
+                            <span>Mật khẩu mới phải có ít nhất <strong>8 ký tự</strong>. Nên kết hợp chữ hoa, số và ký tự đặc biệt.</span>
+                        </div>
 
-              <div id="passwordMessage"></div>
+                        <form id="passwordForm">
+                            <div class="pf-divider">Mật khẩu hiện tại</div>
 
-              <div class="actions">
-                <button type="button" class="btn-cancel" onclick="resetPasswordForm()">Hủy</button>
-                <button type="submit" class="btn-save"><i class="ri-save-line"></i> Cập nhật mật khẩu</button>
-              </div>
-            </form>
-          </div>
+                            <div class="pf-field" style="max-width:380px;margin-bottom:4px">
+                                <label class="pf-label">Mật khẩu hiện tại</label>
+                                <div class="pf-pw-wrap">
+                                    <input type="password" id="currentPassword" name="currentPassword"
+                                           class="pf-input" placeholder="••••••••" />
+                                    <button type="button" class="pf-pw-eye" onclick="togglePassword(this)">
+                                        <i class="ri-eye-off-line"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="pf-divider pf-divider-mt">Mật khẩu mới</div>
+
+                            <div class="pf-grid">
+                                <div class="pf-field">
+                                    <label class="pf-label">Mật khẩu mới</label>
+                                    <div class="pf-pw-wrap">
+                                        <input type="password" id="newPassword" name="newPassword"
+                                               class="pf-input" placeholder="••••••••" />
+                                        <button type="button" class="pf-pw-eye" onclick="togglePassword(this)">
+                                            <i class="ri-eye-off-line"></i>
+                                        </button>
+                                    </div>
+                                    <div class="pf-strength-wrap">
+                                        <div class="pf-strength-bg">
+                                            <div id="passwordStrength" class="pf-strength-fill"></div>
+                                        </div>
+                                        <span id="strengthText" class="pf-strength-text"></span>
+                                    </div>
+                                </div>
+
+                                <div class="pf-field">
+                                    <label class="pf-label">Xác nhận mật khẩu mới</label>
+                                    <div class="pf-pw-wrap">
+                                        <input type="password" id="confirmPassword" name="confirmPassword"
+                                               class="pf-input" placeholder="••••••••" />
+                                        <button type="button" class="pf-pw-eye" onclick="togglePassword(this)">
+                                            <i class="ri-eye-off-line"></i>
+                                        </button>
+                                    </div>
+                                    <div id="matchStatus" class="pf-match"></div>
+                                </div>
+                            </div>
+
+                            <div id="passwordMessage"></div>
+
+                            <div class="pf-actions">
+                                <button type="button" class="pf-btn-cancel" onclick="resetPasswordForm()">
+                                    Hủy
+                                </button>
+                                <button type="submit" class="pf-btn-save">
+                                    <i class="ri-save-line"></i> Cập nhật mật khẩu
+                                </button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
         </div>
-      </div>
-
-    </div>
-  </main>
+    </main>
 </div>
 
 <script>
-let originalData = { name: '@Model.Name', contactNo: '@Model.ContactNo', address: '@Model.Address' };
-
+/* ===== TAB SWITCHING ===== */
 function switchTab(name, btn) {
-  document.querySelectorAll('.tab-panels > div').forEach(p => p.classList.remove('show'));
-  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-  document.getElementById('panel-' + name).classList.add('show');
-  btn.classList.add('active');
-  if (name === 'address') { loadProvinces(); }
+    document.querySelectorAll('.tab-panels > div').forEach(p => p.classList.remove('show'));
+    document.querySelectorAll('.sb-link').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + name).classList.add('show');
+    btn.classList.add('active');
+    if (name === 'address') loadProvinces();
 }
 
-function togglePassword(icon) {
-  const input = icon.closest('.pw-wrap').querySelector('input');
-  const isPassword = input.type === 'password';
-  input.type = isPassword ? 'text' : 'password';
-  icon.innerHTML = isPassword ? '<i class="ri-eye-line"></i>' : '<i class="ri-eye-off-line"></i>';
+/* ===== TOGGLE PASSWORD VISIBILITY ===== */
+function togglePassword(btn) {
+    const input = btn.closest('.pf-pw-wrap').querySelector('input');
+    const isHidden = input.type === 'password';
+    input.type = isHidden ? 'text' : 'password';
+    btn.querySelector('i').className = isHidden ? 'ri-eye-line' : 'ri-eye-off-line';
 }
+
+/* ===== ADDRESS API ===== */
+let addressDataLoaded = false; // Flag to track if API data is loaded
 
 async function loadProvinces() {
-  try {
-    const res = await fetch('/api/address/provinces');
-    const data = await res.json();
-    const select = document.getElementById('province');
-    select.innerHTML = '<option value="">-- Chọn Tỉnh/Thành --</option>';
-    data.forEach(p => {
-      const opt = document.createElement('option');
-      opt.value = p.code;
-      opt.text = p.name;
-      select.appendChild(opt);
-    });
-    if ('@Model.City') {
-      select.value = '@Model.City';
-      await loadDistricts('@Model.City');
+    try {
+        addressDataLoaded = false; // Mark as loading
+        const res  = await fetch('/api/address/provinces');
+        const data = await res.json();
+        const sel  = document.getElementById('province');
+        const currentCity = (sel.dataset.current || '').trim();
+        console.log('Current city from data:', currentCity);
+        sel.innerHTML = '<option value="">-- Chọn Tỉnh/Thành --</option>';
+        data.forEach(p => {
+            const opt = document.createElement('option');
+            opt.value = p.code;
+            opt.text = p.name;
+            opt.dataset.name = p.name.trim();
+            sel.appendChild(opt);
+        });
+        if (currentCity) {
+            const option = Array.from(sel.options).find(o => {
+                const dataName = (o.dataset.name || '').trim();
+                return dataName === currentCity;
+            });
+            console.log('Found province option:', option ? option.text : 'NOT FOUND');
+            if (option) {
+                option.selected = true;
+                await loadCommunes(option.value);
+            } else {
+                console.log('Available options:', Array.from(sel.options).map(o => o.dataset.name));
+            }
+        }
+        addressDataLoaded = true; // Mark as loaded
+    } catch(e) { 
+        console.error('Load provinces:', e);
+        addressDataLoaded = false;
     }
-  } catch (e) { console.error('Load provinces:', e); }
-}
-
-async function loadDistricts(code) {
-  try {
-    const res = await fetch('/api/address/provinces/' + code + '/districts');
-    const data = await res.json();
-    const select = document.getElementById('district');
-    select.innerHTML = '<option value="">-- Chọn Quận/Huyện --</option>';
-    data.forEach(d => {
-      const opt = document.createElement('option');
-      opt.value = d.code;
-      opt.text = d.name;
-      select.appendChild(opt);
-    });
-    if ('@Model.Ward') {
-      select.value = '@Model.Ward';
-      await loadCommunes('@Model.Ward');
-    }
-  } catch (e) { console.error('Load districts:', e); }
 }
 
 async function loadCommunes(code) {
-  try {
-    const res = await fetch('/api/address/districts/' + code + '/communes');
-    const data = await res.json();
-    const select = document.getElementById('commune');
-    select.innerHTML = '<option value="">-- Chọn Phường/Xã --</option>';
-    data.forEach(c => {
-      const opt = document.createElement('option');
-      opt.value = c.code;
-      opt.text = c.name;
-      select.appendChild(opt);
-    });
-  } catch (e) { console.error('Load communes:', e); }
+    try {
+        const res  = await fetch('/api/address/provinces/' + code + '/communes');
+        const data = await res.json();
+        const sel  = document.getElementById('commune');
+        const currentWard = (sel.dataset.current || '').trim();
+        console.log('Current ward from data:', currentWard);
+        sel.innerHTML = '<option value="">-- Chọn Phường/Xã --</option>';
+        data.forEach(c => {
+            const opt = document.createElement('option');
+            opt.value = c.code;
+            opt.text = c.name;
+            opt.dataset.name = c.name.trim();
+            sel.appendChild(opt);
+        });
+        if (currentWard) {
+            const option = Array.from(sel.options).find(o => {
+                const dataName = (o.dataset.name || '').trim();
+                return dataName === currentWard;
+            });
+            console.log('Found commune option:', option ? option.text : 'NOT FOUND');
+            if (option) {
+                option.selected = true;
+            } else {
+                console.log('Available commune options:', Array.from(sel.options).map(o => o.dataset.name));
+            }
+        }
+    } catch(e) { console.error('Load communes:', e); }
 }
 
-document.getElementById('province').addEventListener('change', (e) => loadDistricts(e.target.value));
-document.getElementById('district').addEventListener('change', (e) => loadCommunes(e.target.value));
-document.getElementById('commune').addEventListener('change', () => updateAddressPreview());
-document.getElementById('addressDetail').addEventListener('input', () => updateAddressPreview());
+document.getElementById('province').addEventListener('change', e => loadCommunes(e.target.value));
+document.getElementById('commune').addEventListener('change', updateAddressPreview);
+document.getElementById('addressDetail').addEventListener('input', updateAddressPreview);
 
 function updateAddressPreview() {
-  const prov = document.getElementById('province').options[document.getElementById('province').selectedIndex].text;
-  const dist = document.getElementById('district').options[document.getElementById('district').selectedIndex].text;
-  const comm = document.getElementById('commune').options[document.getElementById('commune').selectedIndex].text;
-  const addr = document.getElementById('addressDetail').value;
-  if (prov && dist && comm && addr) {
-    document.getElementById('previewText').textContent = addr + ', ' + comm + ', ' + dist + ', ' + prov;
-    document.getElementById('addressPreview').style.display = 'flex';
-  } else {
-    document.getElementById('addressPreview').style.display = 'none';
-  }
+    const prov = document.getElementById('province');
+    const comm = document.getElementById('commune');
+    const addr = document.getElementById('addressDetail').value.trim();
+    const pTxt = prov.options[prov.selectedIndex]?.text;
+    const cTxt = comm.options[comm.selectedIndex]?.text;
+    const box  = document.getElementById('addressPreview');
+
+    if (addr && pTxt && cTxt &&
+        pTxt !== '-- Chọn Tỉnh/Thành --' &&
+        cTxt !== '-- Chọn Phường/Xã --') {
+        document.getElementById('previewText').textContent = addr + ', ' + cTxt + ', ' + pTxt;
+        box.style.display = 'flex';
+    } else {
+        box.style.display = 'none';
+    }
 }
 
+/* ===== PASSWORD STRENGTH ===== */
 document.getElementById('newPassword').addEventListener('input', updatePasswordStrength);
 document.getElementById('confirmPassword').addEventListener('input', checkPasswordMatch);
 
 function updatePasswordStrength() {
-  const pwd = document.getElementById('newPassword').value;
-  let strength = 0;
-  if (pwd.length >= 8) strength += 20;
-  if (/[a-z]/.test(pwd)) strength += 20;
-  if (/[A-Z]/.test(pwd)) strength += 20;
-  if (/[0-9]/.test(pwd)) strength += 20;
-  if (/[^A-Za-z0-9]/.test(pwd)) strength += 20;
-  const bar = document.getElementById('passwordStrength');
-  const label = document.getElementById('strengthText');
-  bar.style.width = strength + '%';
-  if (strength < 40) { bar.style.background = '#dc3545'; label.textContent = 'Yếu'; label.style.color = '#dc3545'; }
-  else if (strength < 80) { bar.style.background = '#ffc107'; label.textContent = 'Trung bình'; label.style.color = '#ffc107'; }
-  else { bar.style.background = '#22c55e'; label.textContent = 'Mạnh'; label.style.color = '#22c55e'; }
-  checkPasswordMatch();
+    const pwd = document.getElementById('newPassword').value;
+    let score = 0;
+    if (pwd.length >= 8)           score += 20;
+    if (/[a-z]/.test(pwd))         score += 20;
+    if (/[A-Z]/.test(pwd))         score += 20;
+    if (/[0-9]/.test(pwd))         score += 20;
+    if (/[^A-Za-z0-9]/.test(pwd))  score += 20;
+
+    const bar   = document.getElementById('passwordStrength');
+    const label = document.getElementById('strengthText');
+    bar.style.width = score + '%';
+
+    if (score < 40) {
+        bar.style.background = '#ef4444'; label.textContent = 'Yếu'; label.style.color = '#ef4444';
+    } else if (score < 80) {
+        bar.style.background = '#f97316'; label.textContent = 'Trung bình'; label.style.color = '#f97316';
+    } else {
+        bar.style.background = '#22c55e'; label.textContent = 'Mạnh'; label.style.color = '#22c55e';
+    }
+    checkPasswordMatch();
 }
 
 function checkPasswordMatch() {
-  const pwd = document.getElementById('newPassword').value;
-  const confirm = document.getElementById('confirmPassword').value;
-  const status = document.getElementById('matchStatus');
-  if (!pwd && !confirm) { status.innerHTML = ''; return; }
-  if (pwd === confirm && pwd) {
-    status.innerHTML = '<i class="ri-check-line" style="color:#22c55e;font-size:13px"></i><span style="color:#22c55e">Mật khẩu khớp</span>';
-  } else if (confirm) {
-    status.innerHTML = '<i class="ri-close-line" style="color:#dc3545;font-size:13px"></i><span style="color:#dc3545">Mật khẩu không khớp</span>';
-  }
+    const pwd     = document.getElementById('newPassword').value;
+    const confirm = document.getElementById('confirmPassword').value;
+    const status  = document.getElementById('matchStatus');
+    if (!pwd && !confirm) { status.innerHTML = ''; return; }
+    if (confirm) {
+        if (pwd === confirm) {
+            status.innerHTML = '<i class="ri-check-line" style="color:#22c55e;font-size:14px"></i><span style="color:#22c55e">Mật khẩu khớp</span>';
+        } else {
+            status.innerHTML = '<i class="ri-close-line" style="color:#ef4444;font-size:14px"></i><span style="color:#ef4444">Mật khẩu không khớp</span>';
+        }
+    }
 }
 
 function resetPasswordForm() {
-  document.getElementById('passwordForm').reset();
-  document.getElementById('passwordStrength').style.width = '0%';
-  document.getElementById('strengthText').textContent = '';
-  document.getElementById('matchStatus').innerHTML = '';
+    document.getElementById('passwordForm').reset();
+    document.getElementById('passwordStrength').style.width = '0%';
+    document.getElementById('strengthText').textContent = '';
+    document.getElementById('matchStatus').innerHTML = '';
 }
 
-$(document).on('submit', '#profileForm', function(e) {
-  e.preventDefault();
-  $.post('/userauth/updateprofile', {
-    name: $('#name').val(),
-    contactNo: $('#contactNo').val()
-  }, function(res) {
-    if (res.success) {
-      originalData = { name: $('#name').val(), contactNo: $('#contactNo').val() };
-      $('#message').html('<div style="color:#22c55e;font-size:12px;margin:14px 0"><i class="ri-check-line"></i> Cập nhật thành công</div>');
-      setTimeout(() => location.reload(), 1000);
-    }
-  }).fail(() => $('#message').html('<div style="color:#dc3545;font-size:12px;margin:14px 0"><i class="ri-close-line"></i> Cập nhật thất bại</div>'));
-});
+function showMsg(id, type, text) {
+    document.getElementById(id).innerHTML =
+        '<div class="pf-msg ' + type + '"><i class="ri-' +
+        (type === 'success' ? 'check' : 'close') + '-line"></i>' + text + '</div>';
+}
 
-$(document).on('submit', '#addressForm', function(e) {
-  e.preventDefault();
-  $.post('/userauth/updateprofile', {
-    city: $('#province').val(),
-    ward: $('#commune').val(),
-    address: $('#addressDetail').val()
-  }, function(res) {
-    if (res.success) {
-      $('#addressMessage').html('<div style="color:#22c55e;font-size:12px;margin:14px 0"><i class="ri-check-line"></i> Cập nhật địa chỉ thành công</div>');
-      setTimeout(() => location.reload(), 1000);
-    }
-  }).fail(() => $('#addressMessage').html('<div style="color:#dc3545;font-size:12px;margin:14px 0"><i class="ri-close-line"></i> Cập nhật thất bại</div>'));
-});
+/* ===== FORM SUBMISSIONS ===== */
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Document ready');
 
-$(document).on('submit', '#passwordForm', function(e) {
-  e.preventDefault();
-  if (document.getElementById('newPassword').value !== document.getElementById('confirmPassword').value) {
-    $('#passwordMessage').html('<div style="color:#dc3545;font-size:12px;margin:14px 0"><i class="ri-close-line"></i> Mật khẩu không khớp</div>');
-    return;
-  }
-  $.post('/userauth/changepassword', {
-    currentPassword: $('#currentPassword').val(),
-    newPassword: $('#newPassword').val(),
-    confirmPassword: $('#confirmPassword').val()
-  }, function(res) {
-    if (res.success) {
-      $('#passwordMessage').html('<div style="color:#22c55e;font-size:12px;margin:14px 0"><i class="ri-check-line"></i> Đổi mật khẩu thành công, vui lòng đăng nhập lại</div>');
-      setTimeout(() => location.href = '/userauth/login', 2000);
-    } else {
-      $('#passwordMessage').html('<div style="color:#dc3545;font-size:12px;margin:14px 0"><i class="ri-close-line"></i> ' + (res.message || 'Đổi mật khẩu thất bại') + '</div>');
+    const provinceElem = document.getElementById('province');
+    const communeElem = document.getElementById('commune');
+    const addressDetailElem = document.getElementById('addressDetail');
+    const newPasswordElem = document.getElementById('newPassword');
+    const confirmPasswordElem = document.getElementById('confirmPassword');
+
+    if (provinceElem) provinceElem.addEventListener('change', e => loadCommunes(e.target.value));
+    if (communeElem) communeElem.addEventListener('change', updateAddressPreview);
+    if (addressDetailElem) addressDetailElem.addEventListener('input', updateAddressPreview);
+    if (newPasswordElem) newPasswordElem.addEventListener('input', updatePasswordStrength);
+    if (confirmPasswordElem) confirmPasswordElem.addEventListener('input', checkPasswordMatch);
+
+    const profileForm = document.getElementById('profileForm');
+    if (profileForm) {
+        profileForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name')?.value || '';
+            const contactNo = document.getElementById('contactNo')?.value || '';
+            const data = { Name: name, ContactNo: contactNo };
+
+            fetch('/userauth/updateprofile', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(res => res.json())
+            .then(res => {
+                if (res.success) {
+                    showMsg('message', 'success', 'Cập nhật thành công');
+                    setTimeout(() => location.reload(), 1000);
+                } else {
+                    showMsg('message', 'error', res.message || 'Cập nhật thất bại');
+                }
+            })
+            .catch(err => {
+                console.error('Error:', err);
+                showMsg('message', 'error', 'Cập nhật thất bại: ' + err.message);
+            });
+        });
     }
-  }).fail(() => $('#passwordMessage').html('<div style="color:#dc3545;font-size:12px;margin:14px 0"><i class="ri-close-line"></i> Lỗi kết nối</div>'));
+
+    const addressForm = document.getElementById('addressForm');
+    if (addressForm) {
+        addressForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            if (!addressDataLoaded) {
+                showMsg('addressMessage', 'error', 'Dữ liệu địa chỉ vẫn đang tải, vui lòng chờ...');
+                return;
+            }
+
+            const provinceSelect = document.getElementById('province');
+            const communeSelect = document.getElementById('commune');
+            const addressDetailInput = document.getElementById('addressDetail');
+
+            if (!provinceSelect.value || provinceSelect.selectedIndex === 0) {
+                showMsg('addressMessage', 'error', 'Vui lòng chọn tỉnh/thành phố');
+                return;
+            }
+
+            if (!communeSelect.value || communeSelect.selectedIndex === 0) {
+                showMsg('addressMessage', 'error', 'Vui lòng chọn phường/xã');
+                return;
+            }
+
+            const addressDetail = (addressDetailInput.value || '').trim();
+            if (!addressDetail) {
+                showMsg('addressMessage', 'error', 'Vui lòng nhập địa chỉ chi tiết');
+                return;
+            }
+
+            const provinceName = (provinceSelect.options[provinceSelect.selectedIndex]?.text || '').trim();
+            const communeName = (communeSelect.options[communeSelect.selectedIndex]?.text || '').trim();
+
+            if (provinceName.includes('--') || communeName.includes('--')) {
+                showMsg('addressMessage', 'error', 'Vui lòng chọn đầy đủ tỉnh và xã');
+                return;
+            }
+
+            const data = {
+                City: provinceName,
+                Ward: communeName,
+                Address: addressDetail
+            };
+
+            fetch('/userauth/updateprofile', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(res => res.json())
+            .then(res => {
+                if (res.success) {
+                    showMsg('addressMessage', 'success', 'Cập nhật địa chỉ thành công');
+                    setTimeout(() => {
+                        addressDataLoaded = false;
+                        location.reload();
+                    }, 1000);
+                } else {
+                    showMsg('addressMessage', 'error', res.message || 'Cập nhật thất bại');
+                }
+            })
+            .catch(err => {
+                console.error('Error:', err);
+                showMsg('addressMessage', 'error', 'Lỗi kết nối: ' + err.message);
+            });
+        });
+    }
+
+    const passwordForm = document.getElementById('passwordForm');
+    if (passwordForm) {
+        passwordForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const newPwd = document.getElementById('newPassword')?.value || '';
+            const confirmPwd = document.getElementById('confirmPassword')?.value || '';
+            if (newPwd !== confirmPwd) {
+                showMsg('passwordMessage', 'error', 'Mật khẩu xác nhận không khớp');
+                return;
+            }
+
+            const data = {
+                CurrentPassword: document.getElementById('currentPassword')?.value || '',
+                NewPassword: newPwd,
+                ConfirmPassword: confirmPwd
+            };
+
+            fetch('/userauth/changepassword', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(res => res.json())
+            .then(res => {
+                if (res.success) {
+                    showMsg('passwordMessage', 'success', 'Đổi mật khẩu thành công, đang chuyển hướng...');
+                    setTimeout(() => location.href = '/userauth/login', 2000);
+                } else {
+                    showMsg('passwordMessage', 'error', res.message || 'Đổi mật khẩu thất bại');
+                }
+            })
+            .catch(err => {
+                console.error('Error:', err);
+                showMsg('passwordMessage', 'error', 'Lỗi kết nối');
+            });
+        });
+    }
 });
 </script>
+
+<style>
+.tab-panels > div { display: none }
+.tab-panels > div.show { display: block }
+</style>

@@ -8,6 +8,7 @@ using LapTopBD.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using LapTopBD.Utilities;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Logging;
 using System.Text.RegularExpressions;
 
 namespace LapTopBD.Controllers
@@ -18,17 +19,20 @@ namespace LapTopBD.Controllers
         private readonly IVnPayService _vnPayService;
         private readonly IPendingCheckoutStore _pendingCheckoutStore;
         private readonly IOptions<VnPayOptions> _vnPayOptions;
+        private readonly ILogger<CartController> _logger;
 
         public CartController(
             ApplicationDbContext context,
             IVnPayService vnPayService,
             IPendingCheckoutStore pendingCheckoutStore,
-            IOptions<VnPayOptions> vnPayOptions)
+            IOptions<VnPayOptions> vnPayOptions,
+            ILogger<CartController> logger)
         {
             _context = context;
             _vnPayService = vnPayService;
             _pendingCheckoutStore = pendingCheckoutStore;
             _vnPayOptions = vnPayOptions;
+            _logger = logger;
         }
 
         public async Task<IActionResult> Index()
@@ -206,12 +210,14 @@ namespace LapTopBD.Controllers
                 return RedirectToAction("Login", "UserAuth");
             }
 
-            // Lấy thông tin user để điền sẵn
-            var user = await _context.Users.FindAsync(userId);
+            // Lấy thông tin user để điền sẵn - AsNoTracking để lấy dữ liệu mới nhất
+            var user = await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == userId);
             if (user == null)
             {
                 return RedirectToAction("Login", "UserAuth");
             }
+
+            _logger.LogInformation($"Checkout - User {userId} data: Name={user.Name}, City={user.City}, Ward={user.Ward}, Address={user.Address}");
 
             // Fix for CS8602: Dereference of a possibly null reference.
             var cartItems = await _context.CartItems

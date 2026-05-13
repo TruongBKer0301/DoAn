@@ -55,88 +55,105 @@
                     <input type="text" id="addressDetail" name="Address" class="custom-input" value="@initialAddress" required />
                 </div>
                 <script>
-                                    const API_BASE = "/api/address";
-                                    const initialCity = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(initialCity));
-                                    const initialWard = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(initialWard));
+                    const API_BASE = "/api/address";
+                    const initialCity = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(initialCity));
+                    const initialWard = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(initialWard));
+                    
+                    console.log('=== CHECKOUT DEBUG ===');
+                    console.log('initialCity:', initialCity);
+                    console.log('initialWard:', initialWard);
+                    console.log('initialAddress:', @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model?.Address ?? "")));
 
-                                    // Load tỉnh (value = province code)
-                                    async function loadProvinces() {
-                                        try {
-                                            let res = await fetch(`${API_BASE}/provinces`);
-                                            if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                                            let data = await res.json();
-                                            let provinces = Array.isArray(data) ? data : [];
+                    // Load xã/phường by province code
+                    async function loadCommunes(provinceCode) {
+                        if (!provinceCode) {
+                            document.getElementById("commune").innerHTML = '<option value="">-- Chọn xã/phường --</option>';
+                            return;
+                        }
 
-                                            let html = '<option value="">-- Chọn tỉnh --</option>';
-                                            provinces.forEach(p => {
-                                                const code = p.code || "";
-                                                const name = p.name || "";
-                                                html += `<option value="${name}" data-code="${code}">${name}</option>`;
-                                            });
+                        try {
+                            let res = await fetch(`${API_BASE}/provinces/${provinceCode}/communes`);
+                            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                            let data = await res.json();
+                            let communes = Array.isArray(data) ? data : [];
 
-                                            document.getElementById("province").innerHTML = html;                                        } catch (err) {
-                                            console.error("Lỗi load tỉnh:", err);
-                                        }
+                            let html = '<option value="">-- Chọn xã/phường --</option>';
+                            communes.forEach(c => {
+                                const name = c.name || "";
+                                const code = c.code || "";
+                                html += `<option value="${name}" data-code="${code}">${name}</option>`;
+                            });
+
+                            document.getElementById("commune").innerHTML = html;
+                            console.log('Communes loaded for province', provinceCode, ':', communes.length);
+                        } catch (err) {
+                            console.error("Lỗi load xã:", err);
+                        }
+                    }
+
+                    // Load tỉnh
+                    async function loadProvinces() {
+                        try {
+                            let res = await fetch(`${API_BASE}/provinces`);
+                            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                            let data = await res.json();
+                            let provinces = Array.isArray(data) ? data : [];
+
+                            let html = '<option value="">-- Chọn tỉnh --</option>';
+                            provinces.forEach(p => {
+                                const code = p.code || "";
+                                const name = p.name || "";
+                                html += `<option value="${name}" data-code="${code}">${name}</option>`;
+                            });
+
+                            document.getElementById("province").innerHTML = html;
+                            console.log('Provinces loaded:', provinces.length);
+                        } catch(e) { 
+                            console.error('Load provinces:', e);
+                        }
+                    }
+
+                    // Event change tỉnh
+                    document.getElementById("province").addEventListener("change", function (e) {
+                        const selected = e.target.options[e.target.selectedIndex];
+                        const provinceCode = selected ? selected.dataset.code : "";
+                        loadCommunes(provinceCode);
+                    });
+
+                    // Init
+                    document.addEventListener("DOMContentLoaded", async function () {
+                        console.log('Checkout page initialized');
+                        await loadProvinces();
+
+                        if (initialCity) {
+                            console.log('Trying to find province:', initialCity);
+                            const provinceSelect = document.getElementById("province");
+                            const provinceOption = Array.from(provinceSelect.options)
+                                .find(option => option.value === initialCity);
+
+                            console.log('Found province option:', provinceOption ? provinceOption.text : 'NOT FOUND');
+                            if (provinceOption) {
+                                provinceOption.selected = true;
+                                const provinceCode = provinceOption.dataset.code || "";
+                                console.log('Loading communes for code:', provinceCode);
+                                await loadCommunes(provinceCode);
+
+                                if (initialWard) {
+                                    console.log('Trying to find ward:', initialWard);
+                                    const communeSelect = document.getElementById("commune");
+                                    const communeOption = Array.from(communeSelect.options)
+                                        .find(option => option.value === initialWard);
+
+                                    console.log('Found ward option:', communeOption ? communeOption.text : 'NOT FOUND');
+                                    if (communeOption) {
+                                        communeOption.selected = true;
                                     }
-
-                                    // Load xã/phường by province code
-                                    async function loadCommunes(provinceCode) {
-                                        if (!provinceCode) {
-                                            document.getElementById("commune").innerHTML = '<option value="">-- Chọn xã/phường --</option>';
-                                            return;
-                                        }
-
-                                        try {
-                                            let res = await fetch(`${API_BASE}/provinces/${provinceCode}/communes`);
-                                            if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                                            let data = await res.json();
-                                            let communes = Array.isArray(data) ? data : [];
-
-                                            let html = '<option value="">-- Chọn xã/phường --</option>';
-                                            communes.forEach(c => {
-                                                const name = c.name || "";
-                                                const code = c.code || "";
-                                                html += `<option value="${name}" data-code="${code}">${name}</option>`;
-                                            });
-
-                                            document.getElementById("commune").innerHTML = html;                                        } catch (err) {
-                                            console.error("Lỗi load xã:", err);
-                                        }
-                                    }
-
-                                    // Event change tỉnh
-                                    document.getElementById("province").addEventListener("change", function (e) {
-                                        const selected = e.target.options[e.target.selectedIndex];
-                                        const provinceCode = selected ? selected.dataset.code : "";
-                                        loadCommunes(provinceCode);
-                                    });
-
-                                    // Init
-                                    document.addEventListener("DOMContentLoaded", async function () {
-                                        await loadProvinces();
-
-                                        if (initialCity) {
-                                            const provinceSelect = document.getElementById("province");
-                                            const provinceOption = Array.from(provinceSelect.options)
-                                                .find(option => option.value === initialCity);
-
-                                            if (provinceOption) {
-                                                provinceOption.selected = true;
-                                                const provinceCode = provinceOption.dataset.code || "";
-                                                await loadCommunes(provinceCode);
-
-                                                if (initialWard) {
-                                                    const communeSelect = document.getElementById("commune");
-                                                    const communeOption = Array.from(communeSelect.options)
-                                                        .find(option => option.value === initialWard);
-
-                                                    if (communeOption) {
-                                                        communeOption.selected = true;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    });
+                                }
+                            } else {
+                                console.log('Available province options:', Array.from(provinceSelect.options).map(o => o.value));
+                            }
+                        }
+                    });
                 </script>
 
 

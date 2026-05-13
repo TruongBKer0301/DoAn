@@ -653,9 +653,14 @@ namespace LapTopBD.Controllers
             if (userId == 0)
                 return RedirectToAction("Login");
 
-            var user = await _context.Users.FindAsync(userId);
+            // Clear any cached entries for this user to ensure fresh data from DB
+            _context.ChangeTracker.Clear();
+
+            var user = await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == userId);
             if (user == null)
                 return RedirectToAction("Login");
+
+            _logger.LogInformation($"Profile GET - User {userId} data loaded from DB: Name={user.Name}, City={user.City}, Ward={user.Ward}, Address={user.Address}");
 
             ViewBag.ShowBanner = false;
             return View(user);
@@ -663,55 +668,115 @@ namespace LapTopBD.Controllers
 
         [Authorize(AuthenticationSchemes = "UserAuth")]
         [HttpPost]
+        [Authorize(AuthenticationSchemes = "UserAuth")]
+        [HttpPost]
         public async Task<IActionResult> UpdateProfile([FromBody] UserProfileUpdateViewModel model)
         {
+            _logger.LogInformation($"[UpdateProfile START] Received request with data: Name={model?.Name}, ContactNo={model?.ContactNo}, City={model?.City}, Ward={model?.Ward}, Address={model?.Address}");
+
             if (model == null)
+            {
+                _logger.LogError("[UpdateProfile] Model is null");
                 return Json(new { success = false, message = "Dữ liệu không hợp lệ!" });
+            }
 
             var userId = GetUserId();
+            _logger.LogInformation($"[UpdateProfile] UserId: {userId}");
+
             if (userId == 0)
+            {
+                _logger.LogError("[UpdateProfile] User not authenticated");
                 return Json(new { success = false, message = "Vui lòng đăng nhập!" });
+            }
 
-            var user = await _context.Users.FindAsync(userId);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
             if (user == null)
+            {
+                _logger.LogError($"[UpdateProfile] User {userId} not found in database");
                 return Json(new { success = false, message = "Tài khoản không tồn tại!" });
+            }
 
-            // Validate
-            if (string.IsNullOrWhiteSpace(model.Name))
-                return Json(new { success = false, message = "Tên không được để trống!" });
+            _logger.LogInformation($"[UpdateProfile] User found - Current State: Name={user.Name}, ContactNo={user.ContactNo}, City={user.City}, Ward={user.Ward}, Address={user.Address}");
 
-            if (string.IsNullOrWhiteSpace(model.ContactNo))
-                return Json(new { success = false, message = "Số điện thoại không được để trống!" });
+            bool hasNameUpdate = !string.IsNullOrWhiteSpace(model.Name);
+            bool hasContactNoUpdate = !string.IsNullOrWhiteSpace(model.ContactNo);
+            bool hasAddressUpdate = !string.IsNullOrWhiteSpace(model.City) && 
+                                    !string.IsNullOrWhiteSpace(model.Ward) && 
+                                    !string.IsNullOrWhiteSpace(model.Address);
+            bool hasPartialAddressUpdate = (!string.IsNullOrWhiteSpace(model.City) || 
+                                           !string.IsNullOrWhiteSpace(model.Ward) || 
+                                           !string.IsNullOrWhiteSpace(model.Address)) && !hasAddressUpdate;
 
-            if (!System.Text.RegularExpressions.Regex.IsMatch(model.ContactNo ?? "", @"^(0|\+84)(3|5|7|8|9)[0-9]{8}$"))
-                return Json(new { success = false, message = "Số điện thoại không hợp lệ!" });
+            _logger.LogInformation($"[UpdateProfile] Update flags - Name:{hasNameUpdate}, ContactNo:{hasContactNoUpdate}, Address:{hasAddressUpdate}, PartialAddress:{hasPartialAddressUpdate}");
 
-            if (string.IsNullOrWhiteSpace(model.City))
-                return Json(new { success = false, message = "Thành phố không được để trống!" });
+            // If any address field is provided but not all, return error
+            if (hasPartialAddressUpdate)
+            {
+                _logger.LogError("[UpdateProfile] Partial address update detected");
+                return Json(new { success = false, message = "Vui lòng điền đầy đủ tỉnh/thành, phường/xã và địa chỉ!" });
+            }
 
-            if (string.IsNullOrWhiteSpace(model.Ward))
-                return Json(new { success = false, message = "Phường/Xã không được để trống!" });
+            // Validate ContactNo if provided
+            if (hasContactNoUpdate)
+            {
+                if (!System.Text.RegularExpressions.Regex.IsMatch(model.ContactNo.Trim(), @"^(0|\+84)(3|5|7|8|9)[0-9]{8}$"))
+                {
+                    _logger.LogError($"[UpdateProfile] ContactNo validation failed: {model.ContactNo}");
+                    return Json(new { success = false, message = "Số điện thoại không hợp lệ!" });
+                }
+            }
 
-            if (string.IsNullOrWhiteSpace(model.Address))
-                return Json(new { success = false, message = "Địa chỉ không được để trống!" });
+            bool hasUpdate = hasNameUpdate || hasContactNoUpdate || hasAddressUpdate;
+            if (!hasUpdate)
+            {
+                _logger.LogWarning("[UpdateProfile] No updates to perform");
+                return Json(new { success = false, message = "Không có dữ liệu để cập nhật!" });
+            }
 
             try
             {
-                user.Name = model.Name.Trim();
-                user.ContactNo = model.ContactNo.Trim();
-                user.City = model.City.Trim();
-                user.Ward = model.Ward.Trim();
-                user.Address = model.Address.Trim();
+                if (hasNameUpdate)
+                {
+                    user.Name = model.Name.Trim();
+                    _logger.LogInformation($"[UpdateProfile] Setting Name: {user.Name}");
+                }
+
+                if (hasContactNoUpdate)
+                {
+                    user.ContactNo = model.ContactNo.Trim();
+                    _logger.LogInformation($"[UpdateProfile] Setting ContactNo: {user.ContactNo}");
+                }
+
+                if (hasAddressUpdate)
+                {
+                    user.City = model.City.Trim();
+                    user.Ward = model.Ward.Trim();
+                    user.Address = model.Address.Trim();
+                    _logger.LogInformation($"[UpdateProfile] Setting Address - City: {user.City}, Ward: {user.Ward}, Address: {user.Address}");
+                }
+
                 user.UpdationDate = DateTimeHelper.Now;
 
+                _logger.LogInformation($"[UpdateProfile BEFORE SAVE] Entity state in DbContext");
+                var entry = _context.Entry(user);
+                _logger.LogInformation($"[UpdateProfile] Entry state: {entry.State}");
+
                 _context.Users.Update(user);
-                await _context.SaveChangesAsync();
+                
+                _logger.LogInformation($"[UpdateProfile] Calling SaveChangesAsync...");
+                int changes = await _context.SaveChangesAsync();
+                _logger.LogInformation($"[UpdateProfile] SaveChangesAsync completed - {changes} row(s) affected");
+
+                if (changes == 0)
+                {
+                    _logger.LogWarning($"[UpdateProfile] SaveChangesAsync returned 0 changes");
+                }
 
                 // Cập nhật claim
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                    new Claim(ClaimTypes.Name, user.Name),
+                    new Claim(ClaimTypes.Name, user.Name ?? ""),
                     new Claim(ClaimTypes.Email, user.Email ?? string.Empty),
                     new Claim("UserId", user.Id.ToString())
                 };
@@ -723,11 +788,12 @@ namespace LapTopBD.Controllers
                 };
                 await HttpContext.SignInAsync("UserAuth", new ClaimsPrincipal(claimsIdentity), authProperties);
 
+                _logger.LogInformation($"[UpdateProfile SUCCESS] Updated user {userId} successfully");
                 return Json(new { success = true, message = "Cập nhật thông tin thành công!" });
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error updating profile");
+                _logger.LogError(ex, $"[UpdateProfile ERROR] Exception occurred for user {userId}");
                 return Json(new { success = false, message = $"Lỗi: {ex.Message}" });
             }
         }

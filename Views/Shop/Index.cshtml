@@ -205,14 +205,14 @@
                                                     @if (hasDiscount)
                                                     {
                                                         <div class="original-price text-muted">
-                                                            <del>@product.ProductPriceBeforeDiscount!.Value.ToString("N0") VND</del>
+                                                            <del>@(product!.ProductPriceBeforeDiscount?.ToString("N0") ?? "0") VND</del>
                                                         </div>
-                                                        <div class="discount-price">@product.ProductPrice.ToString("N0") VND</div>
+                                                        <div class="discount-price">@product!.ProductPrice.ToString("N0") VND</div>
                                                     }
                                                     else
                                                     {
                                                         <div class="original-price text-dark font-weight-bold">
-                                                            @product.ProductPrice.ToString("N0") VND
+                                                            @product!.ProductPrice.ToString("N0") VND
                                                         </div>
                                                     }
                                                 </div>

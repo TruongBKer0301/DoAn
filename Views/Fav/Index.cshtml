@@ -34,12 +34,12 @@
                             {
                                 var hasDiscount = product.ProductPriceBeforeDiscount.HasValue && product.ProductPriceBeforeDiscount > product.ProductPrice;
                                 var discountPercentage = hasDiscount ? (product.ProductPriceBeforeDiscount!.Value - product.ProductPrice) / product.ProductPriceBeforeDiscount!.Value * 100 : 0;
-                                <div class="col-lg-3 col-md-6 col-sm-12 pb-5">
+                                <div class="col-lg-4 col-md-6 col-sm-12 pb-5">
                                     <div class="item" data-aos="fade-up" data-aos-duration="2500">
                                         <div class="card shadow h-100">
                                             <div class="ratio ratio-1x1">
                                                 <a href="@Url.Action("Detail", "Home", new { slug = product.Slug })">
-                                                    <img class="img-fluid w-100 h-100 object-fit-cover" src="@product.ProductImage1" alt="@(product.ProductName ?? "Product")" />
+                                                    <img class="w-100 h-100 object-fit-cover" src="@product.ProductImage1" alt="@(product.ProductName ?? "Product")" onerror="this.src='/images/laptop.png'" />
                                                 </a>
 
                                                 <button class="remove-fav-btn btn-add-to-fav is-favorited" data-id="@product.Id" title="Xóa khỏi yêu thích">
@@ -56,45 +56,35 @@
                                                 }
                                             </div>
                                             <div class="card-body text-center">
-                                                <div>
-                                                    <a href="@Url.Action("Detail", "Home", new { slug = product.Slug })">
-                                                        <p class="card-text">@(product.ProductName ?? "Unnamed Product")</p>
-                                                    </a>
-                                                </div>
-
-                                                <div class="d-flex mb-3">
+                                                <a href="@Url.Action("Detail", "Home", new { slug = product.Slug })">
+                                                    <p class="card-text">@(product.ProductName ?? "Unnamed Product")</p>
+                                                </a>
+                                                <div class="d-flex justify-content-center mb-2">
                                                     @{
                                                         double averageRating = product?.AverageRating ?? 0;
                                                         int fullStars = (int)averageRating;
                                                         bool hasHalfStar = (averageRating - fullStars) >= 0.5;
                                                         int emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
                                                     }
-
-                                                    <div class="review-star mr-2">
-                                                        @for (int i = 0; i < fullStars; i++)
-                                                        {
-                                                            <small class="fas fa-star"></small>
-                                                        }
-                                                        @if (hasHalfStar)
-                                                        {
-                                                            <small class="fas fa-star-half-alt"></small>
-                                                        }
-                                                        @for (int i = 0; i < emptyStars; i++)
-                                                        {
-                                                            <small class="far fa-star"></small>
-                                                        }
+                                                    <div class="review-star">
+                                                        @for (int i = 0; i < fullStars; i++) { <small class="fas fa-star"></small> }
+                                                        @if (hasHalfStar) { <small class="fas fa-star-half-alt"></small> }
+                                                        @for (int i = 0; i < emptyStars; i++) { <small class="far fa-star"></small> }
                                                     </div>
                                                 </div>
-
                                                 <div class="price-wrapper">
                                                     @if (hasDiscount)
                                                     {
-                                                        <div class="original-price text-muted"><del>@product.ProductPriceBeforeDiscount!.Value.ToString("N0") VND</del></div>
-                                                        <div class="discount-price text-danger font-weight-bold">@product.ProductPrice.ToString("N0") VND</div>
+                                                        <div class="original-price text-muted">
+                                                            <del>@(product!.ProductPriceBeforeDiscount?.ToString("N0") ?? "0") VND</del>
+                                                        </div>
+                                                        <div class="discount-price">@product!.ProductPrice.ToString("N0") VND</div>
                                                     }
                                                     else
                                                     {
-                                                        <div class="original-price text-dark font-weight-bold">@product.ProductPrice.ToString("N0") VND</div>
+                                                        <div class="original-price text-dark font-weight-bold">
+                                                            @product!.ProductPrice.ToString("N0") VND
+                                                        </div>
                                                     }
                                                 </div>
 
@@ -206,73 +196,224 @@
     .hero-breadcrumb a:hover { color: rgba(255,255,255,0.85); }
     .hero-breadcrumb i { font-size: 11px; color: rgba(255,255,255,0.28); }
     .hero-bc-cur { color: #f0a0a0; }
+
+    /* ===== CARD ===== */
+    .card {
+        border: none;
+        border-radius: 18px;
+        overflow: hidden;
+        transition: all 0.35s ease;
+        background: #fff;
+    }
+
+    .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 18px 40px rgba(15,52,96,0.12) !important;
+    }
+
     .ratio {
         position: relative;
     }
 
+    .ratio img { transition: transform 0.45s ease; }
+    .card:hover .ratio img { transform: scale(1.06); }
+
+    /* ===== FAV BUTTON ===== */
     .btn-add-to-fav {
         position: absolute;
-        top: 10px;
-        right: 10px;
+        top: 12px;
+        right: 12px;
         z-index: 10;
-        background: white;
-        border: 1px solid #ff4757;
+        background: rgba(255,255,255,0.95);
+        border: none;
         border-radius: 50%;
-        width: 35px;
-        height: 35px;
+        width: 42px;
+        height: 42px;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        color: #ff4757; /* Màu đỏ trái tim */
-        transition: all 0.3s ease;
+        color: #ff4d6d;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        transition: all 0.25s ease;
         cursor: pointer;
     }
 
-    .btn-add-to-fav.is-favorited {
-        background: #ff4757;
+    .btn-add-to-fav:hover { background: #ff4d6d; color: #fff; transform: scale(1.08); }
+    .btn-add-to-fav.is-favorited { background: #ff4d6d; color: #fff; }
+    .btn-add-to-fav i { font-size: 18px; }
+
+    /* ===== DISCOUNT TAG ===== */
+    .discount-tag {
+        position: absolute;
+        left: 12px;
+        top: 12px;
+        background: linear-gradient(135deg, #dc2626, #ef4444);
+        color: #fff;
+        padding: 6px 12px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+        box-shadow: 0 6px 14px rgba(220,38,38,0.25);
+    }
+
+    .out-of-stock { background: linear-gradient(135deg, #374151, #4b5563); }
+
+    /* ===== CARD TEXT ===== */
+    .card-text {
+        color: #111827;
+        font-weight: 600;
+        font-size: 15px;
+        line-height: 1.5;
+        min-height: 48px;
+        margin-bottom: 10px;
+        transition: color 0.2s;
+    }
+
+    .card-text:hover { color: #1d4ed8; }
+
+    /* ===== RATING ===== */
+    .review-star small { color: #f59e0b; font-size: 13px; }
+
+    /* ===== PRICE ===== */
+    .price-wrapper { margin: 14px 0; }
+    .original-price { font-size: 14px; margin-bottom: 3px; }
+    .discount-price { font-size: 22px; font-weight: 700; color: #dc2626 !important; }
+
+    /* ===== BUTTONS ===== */
+    .product-action-row {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .btn-add-to-cart,
+    .btn-buy-now {
+        flex: 1;
+        border: none;
+        border-radius: 12px;
+        padding: 11px 14px;
+        font-size: 14px;
+        font-weight: 600;
+        transition: all 0.25s ease;
+        cursor: pointer;
+    }
+
+    .btn-add-to-cart {
+        background: linear-gradient(135deg, #1a1a2e, #0f3460);
         color: #fff;
     }
 
-    .btn-add-to-fav:hover {
-            background: #ff4757;
-            color: white;
-            transform: scale(1.1);
-        }
+    .btn-add-to-cart:hover { transform: translateY(-2px); opacity: 0.92; }
 
-        .btn-add-to-fav i {
-            font-size: 1.2rem;
-        }
+    .btn-add-to-cart.bg-danger {
+        background: linear-gradient(135deg, #dc2626, #ef4444) !important;
+    }
+
+    .btn-buy-now { background: #eff6ff; color: #1d4ed8; }
+    .btn-buy-now:hover { background: #1d4ed8; color: #fff; }
+
+    /* ===== RESPONSIVE ===== */
+    @@media (max-width: 768px) {
+        .product-action-row { flex-direction: column; }
+        .card-text { min-height: auto; }
+        .hero-cart .hero-title { font-size: 28px; }
+    }
 </style>
 <script>
-    $(document).on("click", ".btn-remove-to-fav", function () {
+    document.addEventListener('DOMContentLoaded', function() {
+        // Handle remove from favorites
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.remove-fav-btn')) {
+                const button = e.target.closest('.remove-fav-btn');
+                const productId = button.dataset.id;
 
-        const button = $(this);
-        const productId = button.data("id");
+                console.log('Removing product from favorites:', productId);
 
-        $.ajax({
-            url: '/Fav/RemoveFromFav',
-            type: 'POST',
-            data: { productid: productId },
-
-            success: function (res) {
-
-                if (res.success) {
-
-                    button.closest(".col-lg-3")
-                        .fadeOut(300, function () {
-                            $(this).remove();
-                        });
-
-                } else {
-                    alert(res.message);
-                }
-            },
-
-            error: function () {
-                alert("Có lỗi xảy ra!");
+                fetch('/Fav/RemoveFromFav', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ productid: productId })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    console.log('Response:', data);
+                    if (data.success) {
+                        const productCard = button.closest('.col-lg-4');
+                        productCard.style.opacity = '0';
+                        productCard.style.transform = 'scale(0.95)';
+                        setTimeout(() => productCard.remove(), 300);
+                    } else {
+                        alert(data.message || 'Có lỗi xảy ra!');
+                    }
+                })
+                .catch(err => {
+                    console.error('Error:', err);
+                    alert('Có lỗi xảy ra!');
+                });
             }
         });
 
+        // Handle add to cart
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.btn-add-to-cart') && e.target.closest('.btn-add-to-cart').dataset.productId) {
+                const button = e.target.closest('.btn-add-to-cart');
+                const productId = button.dataset.productId;
+                
+                console.log('Adding to cart:', productId);
+                
+                fetch('/Cart/AddToCart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ productId: productId, quantity: 1 })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    console.log('Response:', data);
+                    if (data.success) {
+                        alert(data.message || 'Thêm vào giỏ hàng thành công!');
+                    } else {
+                        alert(data.message || 'Có lỗi xảy ra!');
+                    }
+                })
+                .catch(err => {
+                    console.error('Error:', err);
+                    alert('Có lỗi xảy ra!');
+                });
+            }
+        });
+
+        // Handle buy now
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.btn-buy-now')) {
+                const button = e.target.closest('.btn-buy-now');
+                const productId = button.dataset.productId;
+                
+                console.log('Buy now:', productId);
+                
+                fetch('/Cart/AddToCart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ productId: productId, quantity: 1 })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        window.location.href = '/Cart/Index';
+                    } else {
+                        alert(data.message || 'Có lỗi xảy ra!');
+                    }
+                })
+                .catch(err => {
+                    console.error('Error:', err);
+                    alert('Có lỗi xảy ra!');
+                });
+            }
+        });
     });
 </script>
