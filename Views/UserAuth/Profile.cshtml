@@ -285,9 +285,12 @@
 
             <div class="sb-divider"></div>
 
-            <a href="@Url.Action("Logout","UserAuth")" class="sb-link sb-logout">
-                <i class="ri-logout-box-line"></i> Đăng xuất
-            </a>
+            <form id="logoutForm" method="post" action="@Url.Action("Logout","UserAuth")" style="margin:0">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="sb-link sb-logout" style="border:none;background:none;padding:10px 12px;text-align:left;width:100%;font-family:inherit;cursor:pointer">
+                    <i class="ri-logout-box-line"></i> Đăng xuất
+                </button>
+            </form>
         </nav>
     </aside>
 
