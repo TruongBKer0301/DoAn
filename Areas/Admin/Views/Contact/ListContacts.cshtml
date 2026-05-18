@@ -5,112 +5,74 @@
     ViewData["Title"] = "Quản lý liên hệ";
 }
 
-<div class="container-fluid py-3">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="mb-0">Quản lý liên hệ</h2>
-        <span class="badge bg-primary">@Model.Count() liên hệ</span>
-    </div>
-
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped align-middle contact-table">
-            <thead>
-                <tr>
-                    <th class="col-id">ID</th>
-                    <th class="col-name">Họ và tên</th>
-                    <th class="col-email">Email</th>
-                    <th class="col-phone">Số điện thoại</th>
-                    <th class="col-message">Nội dung</th>
-                    <th class="col-status">Trạng thái</th>
-                    <th class="col-created">Ngày gửi</th>
-                    <th class="col-actions">Thao tác</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var contact in Model)
-                {
-                    <tr class="@(contact.IsRead ? string.Empty : "table-warning")">
-                        <td class="col-id text-center">@contact.Id</td>
-                        <td class="col-name">@contact.FullName</td>
-                        <td class="col-email">@contact.Email</td>
-                        <td class="col-phone text-nowrap">@contact.PhoneNumber</td>
-                        <td class="col-message">
-                            <div class="contact-message-wrap">
-                                <div class="contact-message-text">@contact.Message</div>
-                                <button type="button"
-                                        class="btn btn-link btn-sm p-0 contact-message-toggle is-hidden"
-                                        data-message="@contact.Message"
-                                        data-name="@contact.FullName"
-                                        aria-label="Hiện tất cả nội dung">
-                                    Hiện tất cả
-                                </button>
-                            </div>
-                        </td>
-                        <td class="col-status text-center">
-                            @if (contact.IsRead)
-                            {
-                                <span class="badge bg-success">Đã xử lý</span>
-                                if (contact.ReadAt.HasValue)
-                                {
-                                    <div class="small text-muted mt-1">@contact.ReadAt.Value.ToString("dd/MM HH:mm")</div>
-                                }
-                            }
-                            else
-                            {
-                                <span class="badge bg-warning text-dark">Mới</span>
-                            }
-                        </td>
-                        <td class="col-created text-nowrap">@contact.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
-                        <td class="col-actions">
-                            <div class="d-flex gap-2 flex-wrap">
-                                @if (!contact.IsRead)
-                                {
-                                    <button type="button" class="btn btn-sm btn-success mark-read-btn" data-id="@contact.Id">Đã xử lý</button>
-                                }
-                                <button type="button" class="btn btn-sm btn-danger delete-contact-btn" data-id="@contact.Id">Xóa</button>
-                            </div>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-
-    <div id="message" class="mt-3"></div>
-</div>
-
-<div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="messageModalLabel">Nội dung liên hệ</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
-            </div>
-            <div class="modal-body">
-                <p class="text-muted small mb-2" id="modalSenderName"></p>
-                <p id="modalMessageContent" class="mb-0" style="white-space: pre-wrap; word-break: break-word;"></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <style>
-    .contact-table {
-        table-layout: fixed;
-        width: 100%;
+    /* --- HỆ THỐNG ĐÈ CSS THU GỌN BẢNG & TRÁNH GIÃN KHOẢNG CÁCH --- */
+    .custom-table-wrapper {
+        background-color: #ffffff;
+        border: 1px solid #e3e6f0;
+        width: 100% !important;
+        overflow-x: auto !important; /* Kích hoạt thanh cuộn ngang mượt mà trên điện thoại */
+        -webkit-overflow-scrolling: touch;
     }
 
-    .contact-table .col-id { width: 70px; }
-    .contact-table .col-name { min-width: 160px; }
-    .contact-table .col-email { min-width: 230px; word-break: break-word; }
-    .contact-table .col-phone { min-width: 130px; }
-    .contact-table .col-message { width: 320px; max-width: 320px; }
-    .contact-table .col-status { width: 130px; }
-    .contact-table .col-created { width: 160px; }
-    .contact-table .col-actions { min-width: 180px; }
+        .custom-table-wrapper table.contact-table {
+            /* Giải pháp cốt lõi: Giúp các cột gom sát nhau trên PC, tự co giãn tự nhiên */
+            width: max-content !important;
+            min-width: 100% !important;
+            table-layout: auto !important; /* Đổi từ fixed sang auto để tự tính toán không gian hợp lý */
+            border-collapse: collapse !important;
+            margin-bottom: 0 !important;
+        }
 
+    .contact-table td,
+    .contact-table th {
+        vertical-align: middle !important;
+        padding: 12px 15px !important; /* Padding vừa vặn tinh tế */
+    }
+
+    /* --- CỐ ĐỊNH KÍCH THƯỚC LINH HOẠT CHO CÁC CỘT --- */
+    .contact-table .col-id {
+        width: 60px !important;
+    }
+
+    .contact-table .col-name {
+        min-width: 150px !important;
+        max-width: 220px !important;
+        white-space: normal !important;
+        word-break: break-word;
+    }
+
+    .contact-table .col-email {
+        min-width: 180px !important;
+        max-width: 250px !important;
+        white-space: normal !important;
+        word-break: break-all; /* Ngắt dòng email nếu quá dài tránh tràn bảng */
+    }
+
+    .contact-table .col-phone {
+        width: 130px !important;
+        white-space: nowrap !important;
+    }
+
+    .contact-table .col-message {
+        min-width: 260px !important;
+        max-width: 340px !important;
+    }
+
+    .contact-table .col-status {
+        width: 120px !important;
+    }
+
+    .contact-table .col-created {
+        width: 150px !important;
+        white-space: nowrap !important;
+    }
+
+    .contact-table .col-actions {
+        width: 160px !important;
+    }
+
+    /* --- CẤU TRÚC ĐOẠN TIN NHẮN THU GỌN --- */
     .contact-message-wrap {
         display: flex;
         flex-direction: column;
@@ -121,36 +83,166 @@
     .contact-message-text {
         display: -webkit-box;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
+        -webkit-line-clamp: 2; /* Chỉ hiển thị tối đa 2 dòng */
         overflow: hidden;
         white-space: normal;
         word-break: break-word;
         overflow-wrap: anywhere;
         line-height: 1.4;
         max-height: 2.8em;
+        color: #4e73df;
     }
 
     .contact-message-toggle {
         align-self: flex-start;
-        font-size: 0.8rem;
+        font-size: 0.825rem;
         color: #0d6efd;
-        text-decoration: underline;
+        text-decoration: none;
+        font-weight: 600;
         box-shadow: none !important;
         padding: 0 !important;
     }
 
-    .contact-message-toggle.is-hidden {
-        display: none;
-    }
+        .contact-message-toggle:hover {
+            text-decoration: underline;
+            color: #0a58ca;
+        }
 
-    .contact-message-toggle:hover {
-        color: #0a58ca;
+        .contact-message-toggle.is-hidden {
+            display: none !important;
+        }
+
+    /* --- ĐOẠN CSS DÀNH RIÊNG CHO ĐIỆN THOẠI (RESPONSIVE MOBILE) --- */
+    @@media (max-width: 767.98px) {
+        h2 {
+            font-size: 1.5rem !important;
+        }
+
+        .container-fluid {
+            padding-left: 10px !important;
+            padding-right: 10px !important;
+        }
+        /* Thu nhỏ chữ trong bảng một chút trên Mobile để tăng không gian hiển thị */
+        .contact-table th,
+        .contact-table td {
+            font-size: 0.85rem !important;
+            padding: 8px 10px !important;
+        }
+        /* Giãn nút thao tác xuống hàng dọc nếu màn hình quá bé */
+        .contact-table .col-actions .d-flex {
+            gap: 5px !important;
+        }
+
+        .contact-table .btn-sm {
+            padding: 4px 8px !important;
+            font-size: 0.75rem !important;
+        }
     }
 </style>
 
+<div class="container-fluid py-3">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0 fw-bold text-dark">Quản lý liên hệ</h2>
+        <span class="badge bg-primary px-3 py-2 rounded-pill fs-6 shadow-sm">@Model.Count() liên hệ</span>
+    </div>
+
+    @if (Model.Any())
+    {
+        <div class="custom-table-wrapper shadow-sm rounded-3">
+            <table class="table table-hover align-middle contact-table">
+                <thead class="table-primary">
+                    <tr>
+                        <th class="col-id text-center">ID</th>
+                        <th class="col-name">Họ và tên</th>
+                        <th class="col-email">Email</th>
+                        <th class="col-phone">Số điện thoại</th>
+                        <th class="col-message">Nội dung</th>
+                        <th class="col-status text-center">Trạng thái</th>
+                        <th class="col-created">Ngày gửi</th>
+                        <th class="col-actions text-center">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var contact in Model)
+                    {
+                        <tr class="@(contact.IsRead ? string.Empty : "table-warning-subtle table-warning")">
+                            <td class="col-id text-center fw-bold text-secondary">@contact.Id</td>
+                            <td class="col-name fw-bold text-dark">@contact.FullName</td>
+                            <td class="col-email text-secondary">@contact.Email</td>
+                            <td class="col-phone text-nowrap">@contact.PhoneNumber</td>
+                            <td class="col-message">
+                                <div class="contact-message-wrap">
+                                    <div class="contact-message-text">@contact.Message</div>
+                                    <button type="button"
+                                            class="btn btn-link btn-sm p-0 contact-message-toggle is-hidden"
+                                            data-message="@contact.Message"
+                                            data-name="@contact.FullName"
+                                            aria-label="Hiện tất cả nội dung">
+                                        Xem chi tiết
+                                    </button>
+                                </div>
+                            </td>
+                            <td class="col-status text-center">
+                                @if (contact.IsRead)
+                                {
+                                    <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1.5 rounded">Đã xử lý</span>
+                                    if (contact.ReadAt.HasValue)
+                                    {
+                                        <div class="small text-muted mt-1" style="font-size: 0.75rem;">@contact.ReadAt.Value.ToString("dd/MM HH:mm")</div>
+                                    }
+                                }
+                                else
+                                {
+                                    <span class="badge bg-warning text-dark px-2 py-1.5 rounded animate-pulse">Mới</span>
+                                }
+                            </td>
+                            <td class="col-created text-muted">@contact.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td class="col-actions text-center">
+                                <div class="d-flex gap-1 justify-content-center flex-wrap">
+                                    @if (!contact.IsRead)
+                                    {
+                                        <button type="button" class="btn btn-sm btn-success mark-read-btn shadow-sm" data-id="@contact.Id">Đã xử lý</button>
+                                    }
+                                    <button type="button" class="btn btn-sm btn-outline-danger delete-contact-btn" data-id="@contact.Id">Xóa</button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-light text-center border shadow-sm my-4 py-4 rounded-3">
+            <p class="mb-0 text-muted fw-bold">Không tìm thấy yêu cầu liên hệ nào.</p>
+        </div>
+    }
+
+    <div id="message" class="mt-3"></div>
+</div>
+
+<div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content shadow">
+            <div class="modal-header bg-light">
+                <h5 class="modal-title fw-bold text-dark" id="messageModalLabel">Nội dung liên hệ</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+            </div>
+            <div class="modal-body py-3">
+                <p class="text-primary small fw-bold mb-3 border-bottom pb-2" id="modalSenderName"></p>
+                <p id="modalMessageContent" class="mb-0 text-dark" style="white-space: pre-wrap; word-break: break-word; line-height: 1.6;"></p>
+            </div>
+            <div class="modal-footer bg-light py-2">
+                <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
     <script>
-        // Hiện nút "Hiện tất cả" nếu nội dung bị tràn
+        // Tính toán hiển thị hoặc ẩn nút "Xem chi tiết" nếu chuỗi văn bản bị tràn dòng
         function syncContactMessageToggles() {
             $(".contact-message-wrap").each(function () {
                 var $text = $(this).find(".contact-message-text");
@@ -163,7 +255,7 @@
             });
         }
 
-        // Mở modal khi bấm "Hiện tất cả"
+        // Kích hoạt Modal hiển thị nội dung trọn vẹn
         $(document).on("click", ".contact-message-toggle", function () {
             var message = $(this).data("message");
             var name = $(this).data("name");
@@ -173,7 +265,7 @@
             $("#messageModal").modal("show");
         });
 
-        // Đánh dấu đã xử lý
+        // Ajax xử lý đánh dấu đã xem / đã giải quyết liên hệ
         $(document).on("click", ".mark-read-btn", function () {
             var id = $(this).data("id");
             $.post("@Url.Action("MarkRead", "Contact", new { area = "Admin" })", { id: id })
@@ -181,17 +273,17 @@
                     if (response.success) {
                         location.reload();
                     } else {
-                        $("#message").html('<div class="alert alert-danger">' + response.message + '</div>');
+                        $("#message").html('<div class="alert alert-danger shadow-sm">' + response.message + '</div>');
                     }
                 })
                 .fail(function () {
-                    $("#message").html('<div class="alert alert-danger">Không thể cập nhật trạng thái liên hệ.</div>');
+                    $("#message").html('<div class="alert alert-danger shadow-sm">Không thể cập nhật trạng thái liên hệ.</div>');
                 });
         });
 
-        // Xóa liên hệ
+        // Ajax gửi lệnh xóa bản ghi liên hệ khỏi cơ sở dữ liệu
         $(document).on("click", ".delete-contact-btn", function () {
-            if (!confirm("Bạn có chắc muốn xóa liên hệ này không?")) return;
+            if (!confirm("Bạn có chắc chắn muốn xóa vĩnh viễn liên hệ này không?")) return;
 
             var id = $(this).data("id");
             $.post("@Url.Action("DeleteContact", "Contact", new { area = "Admin" })", { id: id })
@@ -199,16 +291,20 @@
                     if (response.success) {
                         location.reload();
                     } else {
-                        $("#message").html('<div class="alert alert-danger">' + response.message + '</div>');
+                        $("#message").html('<div class="alert alert-danger shadow-sm">' + response.message + '</div>');
                     }
                 })
                 .fail(function () {
-                    $("#message").html('<div class="alert alert-danger">Không thể xóa liên hệ.</div>');
+                    $("#message").html('<div class="alert alert-danger shadow-sm">Không thể xóa liên hệ.</div>');
                 });
         });
 
         $(function () {
             syncContactMessageToggles();
+            // Đảm bảo tính toán lại nút khi người dùng xoay màn hình điện thoại
+            $(window).on('resize', function() {
+                syncContactMessageToggles();
+            });
         });
     </script>
 }

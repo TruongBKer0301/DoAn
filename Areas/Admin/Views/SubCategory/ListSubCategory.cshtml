@@ -4,12 +4,68 @@
     ViewData["Title"] = "Danh sách Danh Mục Phụ";
 }
 
-<h1 class="text-center">Danh sách Danh Mục Phụ</h1>
+<style>
+    /* Khung bao ngoài tạo thanh cuộn ngang chống vỡ layout trên di động */
+    .custom-table-wrapper {
+        background-color: #ffffff;
+        border: 1px solid #e3e6f0;
+        width: 100% !important;
+        overflow-x: auto !important; /* Kích hoạt thanh cuộn ngang khi màn hình nhỏ */
+        -webkit-overflow-scrolling: touch; /* Vuốt chạm mượt mà trên iOS */
+    }
 
-<!-- Nút mở modal cho SubCategory -->
-<button id="addSubCategoryBtn" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addSubCategoryModal">Thêm Danh Mục Phụ</button>
+        /* Ép bảng giữ độ rộng giống máy tính để hiển thị đủ thông tin */
+        .custom-table-wrapper table {
+            width: 100% !important;
+            min-width: 850px !important;
+            table-layout: auto !important;
+        }
 
-<!-- Modal thêm danh mục phụ -->
+        /* Giữ chữ trên một hàng, cách đều đẹp mắt */
+        .custom-table-wrapper .table th,
+        .custom-table-wrapper .table td {
+            padding: 14px 12px !important;
+            vertical-align: middle;
+            white-space: nowrap !important; /* Không cho chữ tự xuống dòng lung tung */
+        }
+
+    /* Định dạng nút Thao tác hành động */
+    .action .btn-action {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 35px;
+        height: 35px;
+        padding: 0;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: all 0.2s ease;
+    }
+
+    /* CSS tinh chỉnh riêng cho màn hình Điện thoại (Mobile) */
+    @@media (max-width: 767.98px) {
+        h1.text-center {
+            font-size: 1.6rem !important;
+            margin-top: 15px !important;
+            margin-bottom: 15px !important;
+        }
+
+        .custom-btn-add {
+            width: 100%; /* Nút thêm tràn màn hình trên điện thoại để dễ bấm */
+            padding: 10px;
+            font-weight: 600;
+        }
+    }
+</style>
+
+<h1 class="text-center my-4 fw-bold text-dark">Danh sách Danh Mục Phụ</h1>
+
+<div class="mb-3">
+    <button id="addSubCategoryBtn" class="btn btn-primary custom-btn-add px-4 py-2 shadow-sm" data-bs-toggle="modal" data-bs-target="#addSubCategoryModal">
+        <i class="ri-add-box-line me-1"></i> Thêm Danh Mục Phụ
+    </button>
+</div>
+
 <div class="modal fade" id="addSubCategoryModal" tabindex="-1" role="dialog" aria-labelledby="addSubCategoryModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen-sm-down" role="document">
         <div class="modal-content">
@@ -19,9 +75,9 @@
             </div>
             <div class="modal-body">
                 <form id="addSubCategoryForm">
-                    <div class="form-group">
-                        <label for="CategoryId">Danh mục chính</label>
-                        <select class="form-control" id="CategoryId" required>
+                    <div class="form-group mb-3">
+                        <label for="CategoryId" class="fw-bold mb-1">Danh mục chính</label>
+                        <select class="form-control form-select" id="CategoryId" required>
                             <option value="">Chọn danh mục chính</option>
                             @foreach (var category in ViewBag.Categories)
                             {
@@ -29,60 +85,66 @@
                             }
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="NewSubCategoryName">Tên danh mục phụ</label>
-                        <input type="text" class="form-control" id="NewSubCategoryName" required />
+                    <div class="form-group mb-3">
+                        <label for="NewSubCategoryName" class="fw-bold mb-1">Tên danh mục phụ</label>
+                        <input type="text" class="form-control" id="NewSubCategoryName" placeholder="Nhập tên danh mục phụ..." required />
                     </div>
-                    <button type="button" class="btn btn-primary mt-3" id="saveNewSubCategoryBtn">Thêm Danh Mục Phụ</button>
+                    <button type="button" class="btn btn-primary mt-2 w-100" id="saveNewSubCategoryBtn">Thêm Danh Mục Phụ</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Danh sách danh mục phụ -->
-<table class="list" cellspacing="0">
-    <thead>
-        <tr class="parent-title">
-            <th>Tên danh mục phụ</th>
-            <th>Danh mục chính</th>
-            <th>Ngày tạo</th>
-            <th>Ngày cập nhật</th>
-            <th>Hành động</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var subCategory in Model)
-        {
-            <tr>
-                <td class="title">
-                    <span>@subCategory.SubCategoryName</span>
-                </td>
-                <td>@subCategory.CategoryName</td>
-                <td class="create-date">
-                    <span>@(subCategory.CreationDate ?? "Không có dữ liệu")</span>
-                </td>
-                <td class="update-date">
-                    <span class="@(subCategory.UpdationDate == null ? "text-danger" : "")">@(subCategory.UpdationDate ?? "Chưa cập nhật")</span>
-                </td>
-                <td class="action">
-                    <a href="@Url.Action("EditSubCategory", "SubCategory", new { id = subCategory.Id })">
-                        <i class="ri-pencil-line"></i>
-                    </a>
-                    <a href="javascript:void(0);" class="delete-subcategory" data-id="@subCategory.Id">
-                        <i class="ri-delete-bin-6-line"></i>
-                    </a>
-                </td>
+<div class="table-responsive shadow-sm custom-table-wrapper rounded-3">
+    <table class="table table-hover align-middle mb-0">
+        <thead class="table-primary">
+            <tr class="text-nowrap">
+                <th scope="col">Tên danh mục phụ</th>
+                <th scope="col">Danh mục chính</th>
+                <th scope="col">Ngày tạo</th>
+                <th scope="col">Ngày cập nhật</th>
+                <th scope="col" class="text-center" style="width: 110px;">Hành động</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var subCategory in Model)
+            {
+                <tr>
+                    <td class="title text-nowrap">
+                        <span class="fw-bold text-dark">@subCategory.SubCategoryName</span>
+                    </td>
+                    <td class="text-secondary text-nowrap">
+                        <span class="badge bg-light text-dark border px-2 py-1.5">@subCategory.CategoryName</span>
+                    </td>
+                    <td class="create-date text-muted text-nowrap">
+                        <span>@(subCategory.CreationDate ?? "Không có dữ liệu")</span>
+                    </td>
+                    <td class="update-date text-nowrap">
+                        <span class="@(subCategory.UpdationDate == null ? "badge bg-light text-danger border" : "text-secondary")">
+                            @(subCategory.UpdationDate ?? "Chưa cập nhật")
+                        </span>
+                    </td>
+                    <td class="action text-center text-nowrap">
+                        <a href="@Url.Action("EditSubCategory", "SubCategory", new { id = subCategory.Id })" class="btn btn-action btn-outline-primary me-1" title="Sửa">
+                            <i class="ri-pencil-line"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="delete-subcategory btn btn-action btn-outline-danger" data-id="@subCategory.Id" title="Xóa">
+                            <i class="ri-delete-bin-6-line"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
 <div class="mt-3 " id="message"></div>
-<!-- Phân trang -->
+
 @if (ViewBag.TotalPages > 1)
 {
-    <nav aria-label="Page navigation" class="d-flex justify-content-center mt-3">
-        <ul class="pagination">
+    <nav aria-label="Page navigation" class="d-flex justify-content-center mt-4">
+        <ul class="pagination shadow-sm">
             <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
                 <a class="page-link" href="@Url.Action("ListSubCategory", new { page = 1 })">««</a>
             </li>

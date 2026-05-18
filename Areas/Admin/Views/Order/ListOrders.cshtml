@@ -5,22 +5,159 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
+<style>
+    /* --- CẤU TRÚC ĐÈ CSS CHỐNG GIÃN TRÊN PC & HỖ TRỢ MOBILE --- */
+    .custom-table-wrapper {
+        background-color: #ffffff;
+        border: 1px solid #e3e6f0;
+        width: 100% !important;
+        overflow-x: auto !important; /* Kích hoạt thanh cuộn ngang mượt mà trên điện thoại */
+        -webkit-overflow-scrolling: touch;
+    }
+
+        .custom-table-wrapper table.order-table {
+            /* Giải pháp cốt lõi: Giúp các cột gom sát nhau trên PC, tự co giãn tự nhiên */
+            width: max-content !important;
+            min-width: 100% !important;
+            table-layout: auto !important;
+            border-collapse: collapse !important;
+            margin-bottom: 0 !important;
+        }
+
+    .order-table td,
+    .order-table th {
+        vertical-align: middle !important;
+        padding: 10px 12px !important; /* Padding vừa vặn tinh tế */
+    }
+
+    /* --- CỐ ĐỊNH KÍCH THƯỚC HỢP LÝ CHO CÁC CỘT --- */
+    .order-table .col-id {
+        width: 60px !important;
+    }
+
+    .order-table .col-customer {
+        min-width: 150px !important;
+        max-width: 200px !important;
+        white-space: normal !important;
+        word-break: break-word;
+    }
+
+    .order-table .col-product {
+        min-width: 200px !important;
+        max-width: 280px !important;
+        white-space: normal !important;
+        word-break: break-word;
+    }
+
+    .order-table .col-qty {
+        width: 50px !important;
+    }
+
+    .order-table .col-date {
+        width: 140px !important;
+        white-space: nowrap !important;
+    }
+
+    .order-table .col-payment {
+        width: 110px !important;
+    }
+
+    .order-table .col-status {
+        width: 120px !important;
+    }
+
+    .order-table .col-total {
+        width: 130px !important;
+        white-space: nowrap !important;
+    }
+
+    .order-table .col-actions {
+        width: 140px !important;
+    }
+
+    .order-table .col-address {
+        min-width: 220px !important;
+        max-width: 320px !important;
+        white-space: normal !important;
+        word-break: break-word;
+    }
+
+    /* --- ĐỊNH DẠNG BADGE THANH TOÁN --- */
+    .payment-badge {
+        padding: 5px 10px;
+        border-radius: 6px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        /* Thay đổi màu sắc tinh tế, hiện đại hơn cho badge */
+        .payment-badge.cod {
+            background-color: #d1e7dd !important;
+            color: #0f5132 !important;
+            border: 1px solid #badbcc;
+        }
+
+        .payment-badge.vnpay {
+            background-color: #cff4fc !important;
+            color: #055160 !important;
+            border: 1px solid #b6effb;
+        }
+
+    .payment-badge-default {
+        background-color: #f8f9fa;
+        color: #6c757d;
+        border: 1px solid #dee2e6;
+    }
+
+    /* --- ĐOẠN CSS DÀNH RIÊNG CHO ĐIỆN THOẠI (RESPONSIVE mobile) --- */
+    @@media (max-width: 767.98px) {
+        h2.text-center {
+            font-size: 1.5rem !important;
+            margin-top: 15px !important;
+            margin-bottom: 15px !important;
+        }
+
+        .container-fluid {
+            padding-left: 10px !important;
+            padding-right: 10px !important;
+        }
+        /* Thu nhỏ chữ trong bảng một chút trên Mobile để hiển thị nhiều thông tin hơn */
+        .order-table th {
+            font-size: 0.85rem !important;
+            padding: 8px !important;
+        }
+
+        .order-table td {
+            font-size: 0.85rem !important;
+            padding: 8px !important;
+        }
+        /* Thu nhỏ thanh select cập nhật trạng thái trên mobile */
+        .update-status {
+            font-size: 0.8rem !important;
+            padding: 4px 6px !important;
+        }
+    }
+</style>
+
 <div class="container-fluid px-4">
-    <h2 class="text-center mb-4">Danh sách đơn hàng</h2>
+    <h2 class="text-center my-4 fw-bold text-dark">Danh sách đơn hàng</h2>
 
     @if (Model.Any())
     {
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped align-middle order-table">
-                <thead>
+        <div class="custom-table-wrapper shadow-sm rounded-3">
+            <table class="table table-hover align-middle order-table">
+                <thead class="table-primary">
                     <tr>
-                        <th class="col-id">ID</th>
+                        <th class="col-id text-center">ID</th>
                         <th class="col-customer">Tên khách hàng</th>
                         <th class="col-product">Sản phẩm</th>
-                        <th class="col-qty">SL</th>
+                        <th class="col-qty text-center">SL</th>
                         <th class="col-date">Ngày đặt hàng</th>
-                        <th class="col-payment">Thanh toán</th>
-                        <th class="col-status">Trạng thái</th>
+                        <th class="col-payment text-center">Thanh toán</th>
+                        <th class="col-status text-center">Trạng thái</th>
                         <th class="col-total">Tổng giá</th>
                         <th class="col-actions">Thao tác</th>
                         <th class="col-address">Địa chỉ</th>
@@ -30,174 +167,78 @@
                     @foreach (var order in Model)
                     {
                         <tr>
-                            <td class="col-id text-center">@order.Id</td>
+                            <td class="col-id text-center fw-bold text-secondary">@order.Id</td>
 
-                            <td class="col-customer">
+                            <td class="col-customer fw-bold text-dark">
                                 @order.UserName
                             </td>
 
-                            <td class="col-product">
+                            <td class="col-product text-secondary">
                                 @order.ProductName
                             </td>
 
-                            <td class="col-qty text-center">
+                            <td class="col-qty text-center fw-bold">
                                 @order.Quantity
                             </td>
 
-                            <td class="col-date text-nowrap">
+                            <td class="col-date">
                                 @order.OrderDate.ToString("dd/MM/yyyy HH:mm")
                             </td>
 
                             <td class="col-payment text-center">
-                                <span class="payment-badge @(order.PaymentMethod?.ToLower())">
-                                    @(order.PaymentMethod == "COD" ? "COD"
-                                      : order.PaymentMethod == "VNPAY" ? "VNPAY"
-                                      : "Không xác định")
-                                </span>
+                                @if (order.PaymentMethod?.ToUpper() == "COD")
+                                {
+                                    <span class="payment-badge cod">COD</span>
+                                }
+                                else if (order.PaymentMethod?.ToUpper() == "VNPAY")
+                                {
+                                    <span class="payment-badge vnpay">VNPAY</span>
+                                }
+                                else
+                                {
+                                    <span class="payment-badge payment-badge-default">Khác</span>
+                                }
                             </td>
 
                             <td class="col-status text-center">
-                                <span
-                                    class="badge
-                                    @(order.OrderStatus == "Pending"
-                                                                                                                                                                                                                        ? "bg-warning text-dark"
-                                                                                                                                                                                                                        : order.OrderStatus == "Paid"
-                                                                                                                                                                                                                        ? "bg-info"
-                                                                                                                                                                                                                        : order.OrderStatus == "Shipping"
-                                                                                                                                                                                                                        ? "bg-primary"
-                                                                                                                                                                                                                        : order.OrderStatus == "Delivered"
-                                                                                                                                                                                                                        ? "bg-success"
-                                                                                                                                                                                                                        : "bg-danger")">
+                                <span class="badge @(order.OrderStatus == "Pending" ? "bg-warning text-dark"
+                                                                                           : order.OrderStatus == "Paid" ? "bg-info"
+                                                                                           : order.OrderStatus == "Shipping" ? "bg-primary"
+                                                                                           : order.OrderStatus == "Delivered" ? "bg-success"
+                                                                                           : "bg-danger") px-2 py-1.5 rounded">
+                            @order.OrderStatus
+                        </span>
+                    </td>
 
-                                    @order.OrderStatus
-                                </span>
-                            </td>
-
-                            <td class="col-total text-nowrap">
-                                @order.TotalPrice.ToString("N0") VNĐ
+                            <td class="col-total fw-bold text-danger">
+                                @order.TotalPrice.ToString("N0") đ
                             </td>
 
                             <td class="col-actions">
-                                <select class="form-control form-control-sm update-status" data-order-id="@order.Id"
-                                        data-current-status="@order.OrderStatus">
-
-                                    <option value="Pending" selected="@(order.OrderStatus == "Pending" ? "selected" : null)">
-                                        Pending
-                                    </option>
-
-                                    <option value="Paid" selected="@(order.OrderStatus == "Paid" ? "selected" : null)">
-                                        Paid
-                                    </option>
-
-                                    <option value="Shipping" selected="@(order.OrderStatus == "Shipping" ? "selected" : null)">
-                                        Shipping
-                                    </option>
-
-                                    <option value="Delivered"
-                                            selected="@(order.OrderStatus == "Delivered" ? "selected" : null)">
-                                        Delivered
-                                    </option>
-
-                                    <option value="Cancelled"
-                                            selected="@(order.OrderStatus == "Cancelled" ? "selected" : null)">
-                                        Cancelled
-                                    </option>
+                                <select class="form-select form-select-sm update-status shadow-sm border-secondary-subtle" data-order-id="@order.Id" data-current-status="@order.OrderStatus">
+                                    <option value="Pending" selected="@(order.OrderStatus == "Pending" ? "selected" : null)">Pending</option>
+                                    <option value="Paid" selected="@(order.OrderStatus == "Paid" ? "selected" : null)">Paid</option>
+                                    <option value="Shipping" selected="@(order.OrderStatus == "Shipping" ? "selected" : null)">Shipping</option>
+                                    <option value="Delivered" selected="@(order.OrderStatus == "Delivered" ? "selected" : null)">Delivered</option>
+                                    <option value="Cancelled" selected="@(order.OrderStatus == "Cancelled" ? "selected" : null)">Cancelled</option>
                                 </select>
                             </td>
 
-                            <td class="col-address">
+                            <td class="col-address text-muted text-wrap">
                                 @order.FullAddress
                             </td>
                         </tr>
-                    }
+                                }
                 </tbody>
             </table>
         </div>
     }
     else
     {
-        <p class="text-center">Không có đơn hàng nào.</p>
+        <div class="alert alert-light text-center border shadow-sm my-4 py-4 rounded-3">
+            <p class="mb-0 text-muted fw-bold">Không có đơn hàng nào trong hệ thống.</p>
+        </div>
     }
 
     <div id="message" class="mt-3"></div>
 </div>
-
-<style>
-    .order-table .col-id {
-        width: 70px;
-    }
-
-    .order-table .col-customer {
-        min-width: 180px;
-    }
-
-    .order-table .col-product {
-        min-width: 220px;
-        max-width: 320px;
-        word-break: break-word;
-    }
-
-    .order-table .col-qty {
-        width: 40px;
-    }
-
-    .order-table .col-date {
-        width: 140px;
-    }
-
-    .order-table .col-payment {
-        width: 100px;
-    }
-
-    .order-table .col-status {
-        width: 130px;
-    }
-
-    .order-table .col-total {
-        width: 150px;
-    }
-
-    .order-table .col-actions {
-        min-width: 160px;
-    }
-
-    .order-table .col-address {
-        min-width: 260px;
-        max-width: 380px;
-        white-space: normal;
-        word-break: break-word;
-    }
-
-    .order-table td,
-    .order-table th {
-        vertical-align: middle;
-    }
-
-    .payment-badge {
-        padding: 6px 12px;
-        border-radius: 999px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        color: #fff;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    /* COD - xanh */
-    .payment-badge.cod {
-        background: #198754;
-        /* xanh lá Bootstrap */
-    }
-
-    /* VNPAY - đỏ */
-    .payment-badge.vnpay {
-        background: #dc3545;
-        /* đỏ Bootstrap */
-    }
-
-    /* fallback */
-    .payment-badge {
-        background: #6c757d;
-    }
-</style>

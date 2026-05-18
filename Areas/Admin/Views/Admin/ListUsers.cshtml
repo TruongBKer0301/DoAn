@@ -5,44 +5,79 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1 class="text-center">Danh sách người dùng</h1>
+<style>
+    /* Khung bao ngoài tạo thanh cuộn ngang chống vỡ layout trên di động */
+    .custom-table-wrapper {
+        background-color: #ffffff;
+        border: 1px solid #e3e6f0;
+        width: 100% !important;
+        overflow-x: auto !important; /* Kích hoạt thanh cuộn ngang khi màn hình nhỏ */
+        -webkit-overflow-scrolling: touch; /* Vuốt chạm mượt mà trên iOS */
+    }
 
-<table class="list" cellspacing="0">
-    <thead>
-        <tr class="parent-title">
-            <th>ID</th>
-            <th>Tên</th>
-            <th>Email</th>
-            <th>Số điện thoại</th>
-            <th>Ngày đăng ký</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var user in Model)
-        {
-            <tr>
-                <td>@user.Id</td>
-                <td class="title">
-                    <span>@user.Name</span>
-                </td>
-                <td>@user.Email</td>
-                <td>@user.ContactNo</td>
-                <td class="create-date">
-                    <span>@user.RegDate.ToString("dd/MM/yyyy")</span>
-                </td>
-        
-            </tr>
+        /* Ép bảng giữ độ rộng giống máy tính để hiển thị đủ thông tin */
+        .custom-table-wrapper table {
+            width: 100% !important;
+            min-width: 800px !important;
+            table-layout: auto !important;
         }
-    </tbody>
-</table>
+
+        /* Giữ chữ trên một hàng, cách đều đẹp mắt */
+        .custom-table-wrapper .table th,
+        .custom-table-wrapper .table td {
+            padding: 14px 12px !important;
+            vertical-align: middle;
+            white-space: nowrap !important; /* Không cho chữ tự xuống dòng lung tung */
+        }
+
+    /* CSS tinh chỉnh riêng cho màn hình Điện thoại (Mobile) */
+    @@media (max-width: 767.98px) {
+        h1.text-center {
+            font-size: 1.6rem !important;
+            margin-top: 15px !important;
+            margin-bottom: 15px !important;
+        }
+    }
+</style>
+
+<h1 class="text-center my-4 fw-bold text-dark">Danh sách người dùng</h1>
+
+<div class="table-responsive shadow-sm custom-table-wrapper rounded-3">
+    <table class="table table-hover align-middle mb-0">
+        <thead class="table-primary">
+            <tr class="text-nowrap">
+                <th scope="col" style="width: 80px;">ID</th>
+                <th scope="col">Tên người dùng</th>
+                <th scope="col">Email</th>
+                <th scope="col">Số điện thoại</th>
+                <th scope="col">Ngày đăng ký</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td class="fw-bold text-secondary">@user.Id</td>
+                    <td class="text-nowrap">
+                        <span class="fw-bold text-dark">@user.Name</span>
+                    </td>
+                    <td class="text-secondary text-nowrap">@user.Email</td>
+                    <td class="text-dark text-nowrap">@user.ContactNo</td>
+                    <td class="text-muted text-nowrap">
+                        <span>@user.RegDate.ToString("dd/MM/yyyy")</span>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 <div class="mt-3" id="message"></div>
 
-<!-- Phân trang -->
 @if (ViewBag.TotalPages > 1)
 {
-    <nav aria-label="Page navigation" class="d-flex justify-content-center mt-3">
-        <ul class="pagination">
+    <nav aria-label="Page navigation" class="d-flex justify-content-center mt-4">
+        <ul class="pagination shadow-sm">
             <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
                 <a class="page-link" href="@Url.Action("ListUsers", new { page = ViewBag.CurrentPage - 1 })">«</a>
             </li>

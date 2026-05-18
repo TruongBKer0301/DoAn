@@ -4,10 +4,101 @@
     ViewData["Title"] = "Danh sách Admin";
 }
 
-<h1 class="text-center">Danh sách Admin</h1>
-<button id="addAdminBtn" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addAdminModal">Thêm Admin</button>
+<style>
+    /* Khung bao ngoài bắt buộc phải có để sinh thanh cuộn ngang */
+    .custom-table-wrapper {
+        background-color: #ffffff;
+        border: 1px solid #e3e6f0;
+        width: 100% !important;
+        overflow-x: auto !important; /* Kích hoạt thanh cuộn ngang khi tràn */
+        -webkit-overflow-scrolling: touch; /* Giúp vuốt chạm trên iPhone mượt hơn */
+    }
 
-<!-- Modal giữ nguyên -->
+        /* Ép bảng PHẢI có độ rộng tối thiểu là 800px trên mobile để không bị co chữ */
+        .custom-table-wrapper table {
+            width: 100% !important;
+            min-width: 800px !important; /* Điểm mấu chốt: Giữ form bảng giống máy tính */
+            table-layout: auto !important; /* Tránh việc cố định kích thước gây đè chữ */
+        }
+
+        /* Giữ chữ trên một hàng, không cho tự xuống dòng */
+        .custom-table-wrapper .table th,
+        .custom-table-wrapper .table td {
+            padding: 14px 12px !important;
+            vertical-align: middle;
+            white-space: nowrap !important; /* Ép mọi text nằm trên 1 hàng để kéo ngang */
+        }
+
+    /* Định dạng ảnh đại diện */
+    .avatar-wrapper {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 45px;
+        height: 45px;
+        overflow: hidden;
+        border-radius: 50%;
+        background-color: #f8f9fc;
+    }
+
+        .avatar-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    /* Tối ưu kích thước nút thao tác */
+    .action .btn-action {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 35px;
+        height: 35px;
+        padding: 0;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: all 0.2s ease;
+    }
+
+    /* CSS Responsive dành riêng cho màn hình Điện thoại (Mobile) */
+    @@media (max-width: 767.98px) {
+        h1.text-center {
+            font-size: 1.6rem !important;
+            margin-top: 15px !important;
+            margin-bottom: 15px !important;
+        }
+
+        .custom-btn-add {
+            width: 100%; /* Nút thêm tràn màn hình trên điện thoại để dễ bấm */
+            padding: 10px;
+            font-weight: 600;
+        }
+    }
+
+    /* Các class màu sắc trạng thái chuẩn, ép đè hoàn toàn background và color */
+    .status-active {
+        color: #1f5132 !important;
+        background-color: #d1e7dd !important;
+        border: 1px solid #badbcc !important;
+        font-weight: bold !important;
+    }
+
+    .status-inactive {
+        color: #842029 !important;
+        background-color: #f8d7da !important;
+        border: 1px solid #f5c2c7 !important;
+        font-weight: bold !important;
+    }
+</style>
+
+<h1 class="text-center my-4 fw-bold text-dark">Danh sách Admin</h1>
+
+<div class="mb-3">
+    <button id="addAdminBtn" class="btn btn-primary custom-btn-add px-4 py-2 shadow-sm" data-bs-toggle="modal" data-bs-target="#addAdminModal">
+        <i class="ri-user-add-line me-1"></i> Thêm Admin
+    </button>
+</div>
+
 <div class="modal fade" id="addAdminModal" tabindex="-1" role="dialog" aria-labelledby="addAdminModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen-sm-down" role="document">
         <div class="modal-content">
@@ -28,89 +119,103 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <label for="NewUsername">Tên đăng nhập</label>
                         <input type="text" class="form-control" id="NewUsername" required />
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <label for="NewFullName">Họ và Tên</label>
                         <input type="text" class="form-control" id="NewFullName" required />
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <label for="NewRoles">Chức vụ</label>
                         <select class="form-control" id="NewRoles" required>
                             <option value="Admin">Admin</option>
                             <option value="Seller">Seller</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <label for="NewPassword">Mật khẩu</label>
                         <input type="password" class="form-control" id="NewPassword" required />
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <label for="NewStatus">Trạng thái</label>
                         <select class="form-control" id="NewStatus">
                             <option value="Hoạt động">Hoạt động</option>
                             <option value="Không hoạt động">Không hoạt động</option>
                         </select>
                     </div>
-                    <div class="mt-3 " id="message"></div>
-                    <button type="button" class="btn btn-primary mt-3" id="saveNewAdminBtn">Thêm Admin</button>
+                    <div class="mt-3" id="message"></div>
+                    <button type="button" class="btn btn-primary mt-3 w-100" id="saveNewAdminBtn">Thêm Admin</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
 
-<table class="list" cellspacing="0">
-    <thead>
-        <tr class="parent-title">
-            <th>Ảnh đại diện</th>
-            <th>Tên đăng nhập</th>
-            <th>Họ và Tên</th>
-            <th>Ngày tạo</th>
-            <th>Trạng thái</th>
-            <th>Chức vụ</th>
-            <th>Hành động</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var admin in Model)
-        {
-            <tr>
-                <td class="avatar">
-                    <img src="@admin.Avatar" alt="Ảnh đại diện" />
-                </td>
-                <td>@admin.Username</td>
-                <td class="title">
-                    <span>@admin.FullName</span>
-                </td>
-                <td class="create-date">
-                    <span>@(admin.CreationDate?.ToString("dd/MM/yyyy") ?? "Không có dữ liệu")</span>
-                </td>
-                <td class="status">
-                    <span class="@admin.StatusClass">@admin.Status</span>
-                </td>
-                <td>@admin.Roles</td>
-                <td class="action">
-                    <a href="@Url.Action("Edit", "Admin", new { id = admin.Id })">
-                        <i class="ri-pencil-line"></i>
-                    </a>
-                    <a href="javascript:void(0);" class="delete-admin" data-id="@admin.Id">
-                        <i class="ri-delete-bin-6-line"></i>
-                    </a>
-                </td>
+<div class="table-responsive shadow-sm custom-table-wrapper rounded-3">
+    <table class="table table-hover align-middle mb-0">
+        <thead>
+            <tr class="text-nowrap">
+                <th scope="col" class="text-center" style="width: 90px;">Ảnh đại diện</th>
+                <th scope="col">Tên đăng nhập</th>
+                <th scope="col">Họ và Tên</th>
+                <th scope="col">Ngày tạo</th>
+                <th scope="col" class="text-center">Trạng thái</th>
+                <th scope="col">Chức vụ</th>
+                <th scope="col" class="text-center" style="width: 110px;">Hành động</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var admin in Model)
+            {
+                <tr>
+                    <td class="text-center">
+                        <div class="avatar-wrapper shadow-sm border">
+                            <img src="@admin.Avatar" alt="Ảnh đại diện" />
+                        </div>
+                    </td>
+                    <td class="fw-bold text-secondary text-nowrap">@admin.Username</td>
+                    <td class="text-nowrap">
+                        <span class="fw-bold text-dark">@admin.FullName</span>
+                    </td>
+                    <td class="text-muted text-nowrap">
+                        <span>@(admin.CreationDate?.ToString("dd/MM/yyyy") ?? "Không có dữ liệu")</span>
+                    </td>
+
+                    <td class="text-center text-nowrap">
+                        @if (admin.Status != null && admin.Status.Contains("Không hoạt động"))
+                        {
+                            <span class="badge status-inactive px-3 py-2 rounded-pill">@admin.Status</span>
+                        }
+                        else
+                        {
+                            <span class="badge status-active px-3 py-2 rounded-pill">@admin.Status</span>
+                        }
+                    </td>
+                    <td class="text-nowrap">
+                        <span class="badge bg-light text-dark border px-2 py-1.5">@admin.Roles</span>
+                    </td>
+                    <td class="action text-center text-nowrap">
+                        <a href="@Url.Action("Edit", "Admin", new { id = admin.Id })" class="btn btn-action btn-outline-primary me-1" title="Sửa">
+                            <i class="ri-pencil-line"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="delete-admin btn btn-action btn-outline-danger" data-id="@admin.Id" title="Xóa">
+                            <i class="ri-delete-bin-6-line"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
 <div class="mt-3" id="message"></div>
 
-<!-- Phân trang giữ nguyên -->
 @if (ViewBag.TotalPages > 1)
 {
-    <nav aria-label="Page navigation" class="d-flex justify-content-center mt-3">
-        <ul class="pagination">
+    <nav aria-label="Page navigation" class="d-flex justify-content-center mt-4">
+        <ul class="pagination shadow-sm">
             <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
                 <a class="page-link" href="@Url.Action("ListAdmins", new { page = ViewBag.CurrentPage - 1 })">«</a>
             </li>
@@ -126,4 +231,3 @@
         </ul>
     </nav>
 }
-
