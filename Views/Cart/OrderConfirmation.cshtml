@@ -60,7 +60,7 @@
                         <td><span class="order-id-badge">#@order.Id</span></td>
                         <td class="product-name-cell">@order.Product.ProductName</td>
                         <td class="text-center">@order.Quantity</td>
-                        <td class="custom-total">@order.TotalPrice.ToString("N0") VNĐ</td>
+                        <td class="custom-total">@order.TotalPrice.ToString("N0")Đ</td>
                         <td>
                             @if (order.PaymentMethod == "COD")
                             {
@@ -445,6 +445,66 @@
         opacity: 0.88;
         color: #fff;
         text-decoration: none;
+    }
+
+    /* RESPONSIVE: make order confirmation table fit smaller screens */
+    .custom-table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .custom-table {
+        table-layout: fixed;
+        width: 100%;
+    }
+
+    .custom-table th,
+    .custom-table td {
+        word-break: break-word;
+        white-space: normal;
+    }
+
+    /* column width hints */
+    .custom-table thead th:nth-child(1), .custom-table td:nth-child(1) { width: 110px; }
+    .custom-table thead th:nth-child(2), .custom-table td:nth-child(2) { width: 220px; }
+    .custom-table thead th:nth-child(3), .custom-table td:nth-child(3) { width: 80px; }
+    .custom-table thead th:nth-child(4), .custom-table td:nth-child(4) { width: 120px; }
+
+   @@media (max-width: 768px) {
+    .custom-table-container { padding: 8px 6px; }
+    .custom-table { min-width: 900px; }
+
+    .custom-table-head th {
+        padding: 10px 8px;
+        font-size: 12px;
+        white-space: nowrap;
+    }
+
+    .custom-table-row td {
+        padding: 8px 8px;
+        font-size: 13px;
+        white-space: nowrap;
+    }
+
+    .custom-table thead th { position: sticky; top: 0; z-index: 8; }
+    .custom-table thead th { background: linear-gradient(135deg, #1a1a2e, #0f3460); }
+
+    .payment-badge, .status-badge { white-space: normal; display: inline-block; padding: 6px 8px; }
+    .order-id-badge { display:inline-block; max-width:120px; overflow:hidden; text-overflow:ellipsis; }
+    .product-name-cell { max-width: 220px; }
+
+    .btn-cancel-order {
+        padding: 6px 10px;
+        font-size: 12px;
+        white-space: nowrap;
+    }
+}
+
+    @@media (max-width: 480px) {
+        .custom-table { min-width: 760px; }
+        .custom-table-head th { font-size: 11px; padding: 8px 6px; }
+        .custom-table-row td { font-size: 12px; padding: 6px 6px; }
+        .payment-badge, .status-badge { font-size: 11px; padding: 4px 6px; }
     }
 </style>
 

@@ -20,12 +20,16 @@
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
+    <!-- Themify Icons (fix missing ti- icons) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/themify-icons/0.1.2/css/themify-icons.min.css" rel="stylesheet">
+
     <!-- Libraries Stylesheet -->
     <link href="~/css/loading-overlay.jquery.css" rel="stylesheet" />
     <link href="~/css/aos.css" rel="stylesheet" />
     <link href="~/css/owl.carousel.min.css" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
     <link href="~/css/icons.min.css" rel="stylesheet" />
     <link href="~/css/styletemp.css" rel="stylesheet" />
     <link href="~/css/style.css" rel="stylesheet" />
@@ -34,7 +38,6 @@
 
 <body>
 
-    <!-- Topbar Start -->
     <div class="container-fluid">
         <div class="row border-bottom py-2 px-xl-5">
             <div class="col-lg-6 d-none d-lg-block">
@@ -67,117 +70,99 @@
                 </div>
             </div>
         </div>
-
         <div class="row align-items-center py-3 px-xl-5">
 
-            <!-- Logo -->
-            <div class="col-lg-3 d-none d-lg-block ">
+            <!-- Logo (desktop: col riêng, mobile: ẩn — sẽ hiện trong search row) -->
+            <div class="col-lg-3 d-none d-lg-block">
                 <a href="@Url.Action("Index", "Home")" class="text-decoration-none d-flex align-items-center">
-
                     <img class="logo-shop img-fluid" src="~/images/laptop.png" alt="TheEgo Shop"
                          style="max-width:120px;" />
-
                     <span class="blockquote text-x px-2 font-weight-bold ms-2">
                         TheEgo Shop
                     </span>
                 </a>
             </div>
 
-            <!-- Search -->
-            <div class="col-lg-5 col-6 text-left">
+            <div class="col-lg-5 col-12 text-left">
+                <div class="mobile-search-row">
+                    <a href="@Url.Action("Index", "Home")"
+                       class="mobile-logo d-lg-none text-decoration-none flex-shrink-0">
+                        <img src="~/images/laptop.png" alt="TheEgo Shop" class="mobile-logo-img" />
+                    </a>
 
-                <form id="searchForm" method="get" action="@Url.Action("Index", "Shop")" class="top-search-form">
-
-                    <div class="top-search-wrapper">
-
-                        <div class="top-search-box">
-
-                            <input type="text" id="searchInput" name="search" autocomplete="off"
-                                   class="top-search-input" placeholder="Tìm kiếm sản phẩm..." />
-
-                            <button type="submit" class="top-search-btn">
-                                <i class="fa fa-search"></i>
-                            </button>
+                    <form id="searchForm" method="get" action="@Url.Action("Index", "Shop")"
+                          class="top-search-form flex-grow-1">
+                        <div class="top-search-wrapper">
+                            <div class="top-search-box">
+                                <input type="text" id="searchInput" name="search" autocomplete="off"
+                                       class="top-search-input" placeholder="Tìm kiếm sản phẩm..." />
+                                <button type="submit" class="top-search-btn">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                            <div id="searchSuggestBox" class="search-suggest-box"></div>
                         </div>
+                    </form>
 
-                        <!-- SEARCH SUGGEST -->
-                        <div id="searchSuggestBox" class="search-suggest-box"></div>
-
-                    </div>
-                </form>
+                </div>
             </div>
-
             <!-- Right -->
-            <div class="col-lg-4 col-6 text-right">
-
-                <a href="@Url.Action("Index", "Fav")" class="btn">
-                    <i class="ri-heart-3-fill"></i>
-                    <span class="badge fav-count">0</span>
-                </a>
-
-                <a href="@Url.Action("OrderConfirmation", "Cart")" class="btn">
-                    <i class="ri-shopping-bag-3-fill"></i>
-                    <span class="badge shopping-count">0</span>
-                </a>
-
-                <a href="@Url.Action("Index", "Cart")" class="btn">
-                    <i class="ri-shopping-cart-2-fill"></i>
-                    <span class="badge cart-count">0</span>
-                </a>
-
-                @if (User?.Identity?.IsAuthenticated ?? false)
-                {
-                    var userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value ?? "User";
-
-                    <button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-
-                        <span class="d-flex align-items-center">
-                            <i class="ri-user-3-fill"></i>
-
-                            <span class="text-start ms-xl-2">
-                                <span class="d-none d-xl-inline-block ms-1 ml-1">
-                                    @userName
-                                </span>
-                            </span>
-                        </span>
-                    </button>
-
-                    <div class="dropdown-menu dropdown-menu-end">
-                        <h6 class="dropdown-header">Xin chào @userName!</h6>
-
-                        <a href="@Url.Action("Profile", "UserAuth")" class="dropdown-item">
-                            <i class="mdi mdi-account text-muted fs-16 align-middle me-1"></i>
-                            <span class="align-middle">Hồ Sơ Cá Nhân</span>
+            <div class="col-lg-4 col-12 text-right">
+                <div class="header-icons">
+                    <div class="top-two-icons">
+                        <a href="@Url.Action("Index", "Fav")" class="btn icon-item icon-fav">
+                            <i class="ri-heart-3-fill"></i>
+                            <span class="badge fav-count">0</span>
                         </a>
 
-                        <div class="dropdown-divider"></div>
-
-                        <form action="@Url.Action("Logout", "UserAuth")" method="post" style="display:inline;">
-
-                            @Html.AntiForgeryToken()
-
-                            <button type="submit" class="dropdown-item"
-                                    style="background:none;border:none;padding:0;color:inherit;text-align:left;width:100%;">
-
-                                <i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>
-
-                                <span class="align-middle">Đăng xuất</span>
-                            </button>
-                        </form>
+                        <a href="@Url.Action("Index", "Cart")" class="btn icon-item icon-cart">
+                            <i class="ri-shopping-cart-2-fill"></i>
+                            <span class="badge cart-count">0</span>
+                        </a>
                     </div>
-                }
-                else
-                {
-                    <a href="@Url.Action("Login", "UserAuth")" class="btn" id="login-link">
 
-                        <i class="ri-user-3-fill"></i>
-
-                        <span class="badge">
-                            Đăng nhập / Đăng ký
-                        </span>
+                    <a href="@Url.Action("OrderConfirmation", "Cart")" class="btn icon-item">
+                        <i class="ri-shopping-bag-3-fill"></i>
+                        <span class="badge shopping-count">0</span>
                     </a>
-                }
+
+                    @if (User?.Identity?.IsAuthenticated ?? false)
+                    {
+                        var userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value ?? "User";
+
+                        <button type="button" class="btn icon-item" id="page-header-user-dropdown" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            <i class="ri-user-3-fill"></i>
+                        </button>
+
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <h6 class="dropdown-header">Xin chào @userName!</h6>
+
+                            <a href="@Url.Action("Profile", "UserAuth")" class="dropdown-item">
+                                <i class="mdi mdi-account text-muted fs-16 align-middle me-1"></i>
+                                <span class="align-middle">Hồ Sơ Cá Nhân</span>
+                            </a>
+
+                            <div class="dropdown-divider"></div>
+
+                            <form action="@Url.Action("Logout", "UserAuth")" method="post" style="display:inline;">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="dropdown-item"
+                                        style="background:none;border:none;padding:0;color:inherit;text-align:left;width:100%;">
+                                    <i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>
+                                    <span class="align-middle">Đăng xuất</span>
+                                </button>
+                            </form>
+                        </div>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Login", "UserAuth")" class="btn icon-item" id="login-link">
+                            <i class="ri-user-3-fill"></i>
+                            <span class="badge">Đăng nhập / Đăng ký</span>
+                        </a>
+                    }
+                </div>
             </div>
         </div>
     </div>
@@ -299,69 +284,69 @@
 
     <!-- SEARCH SUGGEST -->
     <script>
-            $(document).ready(function () {
+        $(document).ready(function () {
 
-                $("#searchInput").on("keyup", function () {
+        $("#searchInput").on("keyup", function () {
 
-                    let keyword = $(this).val();
+        let keyword = $(this).val();
 
-                    if (keyword.length < 1) {
-                        $("#searchSuggestBox").hide();
-                        return;
-                    }
+        if (keyword.length < 1) {
+        $("#searchSuggestBox").hide();
+        return;
+        }
 
-                    $.ajax({
-                        url: '/Shop/SearchSuggestions',
-                        type: 'GET',
-                        data: { term: keyword },
+        $.ajax({
+        url: '/Shop/SearchSuggestions',
+        type: 'GET',
+        data: { term: keyword },
 
-                        success: function (res) {
+        success: function (res) {
 
-                            let html = '';
+        let html = '';
 
-                            if (res.items.length > 0) {
+        if (res.items.length > 0) {
 
-                                res.items.forEach(function (item) {
+        res.items.forEach(function (item) {
 
-                                    html += `
-                            <a href="/user/Detail/${item.slug}" class="suggest-item">
-                                <img src="${item.image}" class="suggest-img"/>
-                                <div class="suggest-info">
-                                    <div class="suggest-name">${item.name}</div>
-                                    <div class="suggest-price">${item.price.toLocaleString('vi-VN')}Đ</div>
-                                </div>
-                            </a>
-                        `;
-                                });
+        html += `
+        <a href="/user/Detail/${item.slug}" class="suggest-item">
+        <img src="${item.image}" class="suggest-img"/>
+        <div class="suggest-info">
+        <div class="suggest-name">${item.name}</div>
+        <div class="suggest-price">${item.price.toLocaleString('vi-VN')}Đ</div>
+        </div>
+        </a>
+        `;
+        });
 
-                                // 👉 thêm nút xem thêm nếu có nhiều hơn 5
-                                if (res.hasMore) {
-                                    html += `
-                            <a href="/Shop/Index?search=${keyword}"
-                               class="suggest-more">
-                                Xem thêm kết quả →
-                            </a>
-                        `;
-                                }
+        // 👉 thêm nút xem thêm nếu có nhiều hơn 5
+        if (res.hasMore) {
+        html += `
+        <a href="/Shop/Index?search=${keyword}"
+        class="suggest-more">
+        Xem thêm kết quả →
+        </a>
+        `;
+        }
 
-                                $("#searchSuggestBox").html(html).show();
-                            }
-                            else {
-                                $("#searchSuggestBox").html(
-                                    '<div class="suggest-empty">Không tìm thấy sản phẩm</div>'
-                                ).show();
-                            }
-                        },
-                    });
-                });
+        $("#searchSuggestBox").html(html).show();
+        }
+        else {
+        $("#searchSuggestBox").html(
+        '<div class="suggest-empty">Không tìm thấy sản phẩm</div>'
+        ).show();
+        }
+        },
+        });
+        });
 
-                $(document).click(function (e) {
+        $(document).click(function (e) {
 
-                    if (!$(e.target).closest(".top-search-wrapper").length) {
-                        $("#searchSuggestBox").hide();
-                    }
-                });
-            });
+        if (!$(e.target).closest(".top-search-wrapper").length) {
+        $("#searchSuggestBox").hide();
+        }
+        });
+        });
     </script>
 
     <!-- Page-specific Scripts -->
@@ -375,216 +360,327 @@
     /* ===== SEARCH ===== */
 
     .top-search-wrapper {
-        position: relative;
-        width: 100%;
+    position: relative;
+    width: 100%;
     }
 
     .top-search-box {
-        display: flex;
-        align-items: center;
-        background: #fff;
-        border-radius: 14px;
-        overflow: hidden;
-        border: 1px solid #e5e7eb;
-        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
-        transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+    transition: all 0.25s ease;
     }
 
     .top-search-box:focus-within {
-        border-color: #0f3460;
-        box-shadow: 0 0 0 4px rgba(15, 52, 96, 0.12);
+    border-color: #0f3460;
+    box-shadow: 0 0 0 4px rgba(15, 52, 96, 0.12);
     }
 
     .top-search-input {
-        flex: 1;
-        border: none;
-        outline: none;
-        padding: 10px 14px;
-        font-size: 14px;
-        background: transparent;
-        color: #111827;
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 10px 14px;
+    font-size: 14px;
+    background: transparent;
+    color: #111827;
     }
 
     .top-search-input::placeholder {
-        color: #9ca3af;
+    color: #9ca3af;
     }
 
     .top-search-btn {
-        background: linear-gradient(135deg, #1a1a2e, #0f3460);
-        color: #fff;
-        border: none;
-        padding: 10px 16px;
-        cursor: pointer;
-        transition: 0.2s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    background: linear-gradient(135deg, #1a1a2e, #0f3460);
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     }
 
     .top-search-btn:hover {
-        opacity: 0.9;
+    opacity: 0.9;
     }
 
     /* ===== SEARCH SUGGEST ===== */
 
     .search-suggest-box {
-        position: absolute;
-        top: 105%;
-        left: 0;
-        width: 100%;
-        background: #fff;
-        border-radius: 16px;
-        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
-        z-index: 99999;
-        overflow: hidden;
-        display: none;
-        border: 1px solid #ececec;
+    position: absolute;
+    top: 105%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+    z-index: 99999;
+    overflow: hidden;
+    display: none;
+    border: 1px solid #ececec;
     }
 
     .suggest-item {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 12px;
-        text-decoration: none;
-        border-bottom: 1px solid #f3f4f6;
-        transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    text-decoration: none;
+    border-bottom: 1px solid #f3f4f6;
+    transition: all 0.2s ease;
     }
 
     .suggest-item:hover {
-        background: #f8fafc;
-        text-decoration: none;
+    background: #f8fafc;
+    text-decoration: none;
     }
 
     .suggest-img {
-        width: 60px;
-        height: 60px;
-        object-fit: cover;
-        border-radius: 10px;
-        border: 1px solid #eee;
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid #eee;
     }
 
     .suggest-info {
-        flex: 1;
+    flex: 1;
     }
 
     .suggest-name {
-        font-size: 14px;
-        font-weight: 600;
-        color: #111827;
-        margin-bottom: 5px;
-        line-height: 1.4;
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 5px;
+    line-height: 1.4;
     }
 
     .suggest-price {
-        font-size: 13px;
-        font-weight: 700;
-        color: #dc2626;
+    font-size: 13px;
+    font-weight: 700;
+    color: #dc2626;
     }
 
     .suggest-empty {
-        padding: 15px;
-        text-align: center;
-        color: #6b7280;
-        font-size: 14px;
+    padding: 15px;
+    text-align: center;
+    color: #6b7280;
+    font-size: 14px;
     }
 
     .suggest-more {
-        display: block;
-        text-align: center;
-        padding: 12px;
-        font-weight: 600;
-        color: #0f3460;
-        background: #f8fafc;
-        text-decoration: none;
-        border-top: 1px solid #eee;
-        transition: 0.2s;
+    display: block;
+    text-align: center;
+    padding: 12px;
+    font-weight: 600;
+    color: #0f3460;
+    background: #f8fafc;
+    text-decoration: none;
+    border-top: 1px solid #eee;
+    transition: 0.2s;
     }
 
     .suggest-more:hover {
-        background: #eef2ff;
+    background: #eef2ff;
     }
+
     .hero-cart {
-        position: relative;
-        overflow: hidden;
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
     }
 
     .hero-cart::before,
     .hero-cart::after {
-        content: "";
-        position: absolute;
-        border-radius: 50%;
-        background: rgba(255,255,255,0.04);
-        pointer-events: none;
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.04);
+    pointer-events: none;
     }
 
-    .hero-cart::before { width: 300px; height: 300px; top: -80px; left: -60px; }
-    .hero-cart::after  { width: 380px; height: 380px; bottom: -110px; right: -50px; }
+    .hero-cart::before {
+    width: 300px;
+    height: 300px;
+    top: -80px;
+    left: -60px;
+    }
+
+    .hero-cart::after {
+    width: 380px;
+    height: 380px;
+    bottom: -110px;
+    right: -50px;
+    }
 
     .hero-inner {
-        position: relative;
-        z-index: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 240px;
-        padding: 2.5rem 1rem;
-        text-align: center;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 240px;
+    padding: 2.5rem 1rem;
+    text-align: center;
     }
 
     .hero-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 7px;
-        background: rgba(255,255,255,0.08);
-        border: 0.5px solid rgba(255,255,255,0.18);
-        border-radius: 999px;
-        padding: 5px 16px;
-        margin-bottom: 1rem;
-        color: rgba(255,255,255,0.75);
-        font-size: 13px;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 0.5px solid rgba(255, 255, 255, 0.18);
+    border-radius: 999px;
+    padding: 5px 16px;
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 13px;
     }
 
-    .hero-badge i { color: #a8c8ff; font-size: 15px; }
+    .hero-badge i {
+    color: #a8c8ff;
+    font-size: 15px;
+    }
 
     .hero-title {
-        font-size: 2rem;
-        font-weight: 600;
-        color: #fff;
-        margin: 0;
-        text-transform: uppercase;
-        letter-spacing: -0.01em;
+    font-size: 2rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
     }
 
     .hero-divider {
-        width: 44px;
-        height: 2px;
-        background: rgba(255,255,255,0.22);
-        margin: .9rem auto;
+    width: 44px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.22);
+    margin: .9rem auto;
     }
 
     .hero-breadcrumb {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        font-size: 13px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
     }
 
-    .hero-breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
-    .hero-breadcrumb a:hover { color: rgba(255,255,255,0.85); }
-    .hero-breadcrumb i { font-size: 11px; color: rgba(255,255,255,0.28); }
-    .hero-bc-cur { color: #f0a0a0; }
+    .hero-breadcrumb a {
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    }
+
+    .hero-breadcrumb a:hover {
+    color: rgba(255, 255, 255, 0.85);
+    }
+
+    .hero-breadcrumb i {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.28);
+    }
+
+    .hero-bc-cur {
+    color: #f0a0a0;
+    }
+
     @@media (max-width: 768px) {
 
-        .top-search-box {
-            width: 100%;
+    .top-search-box { width: 100%; }
+    .search-suggest-box { max-height: 350px; overflow-y: auto; }
+
+    /* Header icons mobile: fav/cart occupy first row, each 50% width */
+    .header-icons {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding: 20px 0 10px 0;
+    width: 100%;
+    box-sizing: border-box;
+    }
+
+    .header-icons .icon-item {
+    min-width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    order: 2;
+    box-sizing: border-box;
+    position: relative;
+    }
+
+    .header-icons .icon-item.icon-fav,
+    .header-icons .icon-item.icon-cart {
+    flex: 0 0 50%;
+    justify-content: center;
+    order: 1;
+    padding: 0;
+    }
+
+    /* show notification/count badges on header icons in mobile */
+    .header-icons .icon-item .badge {
+    display: inline-flex !important;
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    font-size: 12px;
+    border-radius: 999px;
+    background: #dc2626;
+    color: #fff;
+    align-items: center;
+    justify-content: center;
+    }
+
+    /* ── MOBILE LOGO + SEARCH ── */
+    .mobile-search-row { display: flex; align-items: center; gap: 10px; }
+    .mobile-logo-img { height: 42px; width: auto; object-fit: contain; display: block; }
+    }
+
+    @@media (max-width: 400px) {
+        .header-icons {
+            overflow-x: visible !important;
+            padding-bottom: 6px;
         }
 
-        .search-suggest-box {
-            max-height: 350px;
-            overflow-y: auto;
+        .header-icons .icon-item {
+            min-width: 36px;
+            height: 36px;
+        }
+
+        .header-icons .icon-item.icon-fav,
+        .header-icons .icon-item.icon-cart {
+            flex: 0 0 33%;
+            order: 1;
         }
     }
+
+    @@media (min-width: 992px) {
+    .mobile-logo { display: none !important; }
+    }
+    @@media (max-width: 768px) {
+    .row.border-bottom {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        z-index: 9999;
+    }
+}
 </style>

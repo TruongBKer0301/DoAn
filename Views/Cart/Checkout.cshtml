@@ -33,7 +33,8 @@
 
                 <div class="mb-3">
                     <label>Số điện thoại</label>
-                    <input type="text" class="form-control" name="ContactNo" id="phone" value="@initialContactNo" required />
+                    <input type="text" class="form-control" name="ContactNo" id="phone" value="@initialContactNo"
+                           required />
                     <small id="phoneError" class="text-danger"></small>
                 </div>
 
@@ -52,108 +53,109 @@
 
                 <div class="custom-form-group">
                     <label>Địa chỉ cụ thể <span class="text-danger">*</span></label>
-                    <input type="text" id="addressDetail" name="Address" class="custom-input" value="@initialAddress" required />
+                    <input type="text" id="addressDetail" name="Address" class="custom-input" value="@initialAddress"
+                           required />
                 </div>
                 <script>
-                    const API_BASE = "/api/address";
-                    const initialCity = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(initialCity));
-                    const initialWard = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(initialWard));
-                    
-                    console.log('=== CHECKOUT DEBUG ===');
-                    console.log('initialCity:', initialCity);
-                    console.log('initialWard:', initialWard);
-                    console.log('initialAddress:', @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model?.Address ?? "")));
+                                    const API_BASE = "/api/address";
+                                    const initialCity = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(initialCity));
+                                    const initialWard = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(initialWard));
 
-                    // Load xã/phường by province code
-                    async function loadCommunes(provinceCode) {
-                        if (!provinceCode) {
-                            document.getElementById("commune").innerHTML = '<option value="">-- Chọn xã/phường --</option>';
-                            return;
-                        }
+                                    console.log('=== CHECKOUT DEBUG ===');
+                                    console.log('initialCity:', initialCity);
+                                    console.log('initialWard:', initialWard);
+                                    console.log('initialAddress:', @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model?.Address ?? "")));
 
-                        try {
-                            let res = await fetch(`${API_BASE}/provinces/${provinceCode}/communes`);
-                            if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                            let data = await res.json();
-                            let communes = Array.isArray(data) ? data : [];
+                                    // Load xã/phường by province code
+                                    async function loadCommunes(provinceCode) {
+                                        if (!provinceCode) {
+                                            document.getElementById("commune").innerHTML = '<option value="">-- Chọn xã/phường --</option>';
+                                            return;
+                                        }
 
-                            let html = '<option value="">-- Chọn xã/phường --</option>';
-                            communes.forEach(c => {
-                                const name = c.name || "";
-                                const code = c.code || "";
-                                html += `<option value="${name}" data-code="${code}">${name}</option>`;
-                            });
+                                        try {
+                                            let res = await fetch(`${API_BASE}/provinces/${provinceCode}/communes`);
+                                            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                                            let data = await res.json();
+                                            let communes = Array.isArray(data) ? data : [];
 
-                            document.getElementById("commune").innerHTML = html;
-                            console.log('Communes loaded for province', provinceCode, ':', communes.length);
-                        } catch (err) {
-                            console.error("Lỗi load xã:", err);
-                        }
-                    }
+                                            let html = '<option value="">-- Chọn xã/phường --</option>';
+                                            communes.forEach(c => {
+                                                const name = c.name || "";
+                                                const code = c.code || "";
+                                                html += `<option value="${name}" data-code="${code}">${name}</option>`;
+                                            });
 
-                    // Load tỉnh
-                    async function loadProvinces() {
-                        try {
-                            let res = await fetch(`${API_BASE}/provinces`);
-                            if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                            let data = await res.json();
-                            let provinces = Array.isArray(data) ? data : [];
-
-                            let html = '<option value="">-- Chọn tỉnh --</option>';
-                            provinces.forEach(p => {
-                                const code = p.code || "";
-                                const name = p.name || "";
-                                html += `<option value="${name}" data-code="${code}">${name}</option>`;
-                            });
-
-                            document.getElementById("province").innerHTML = html;
-                            console.log('Provinces loaded:', provinces.length);
-                        } catch(e) { 
-                            console.error('Load provinces:', e);
-                        }
-                    }
-
-                    // Event change tỉnh
-                    document.getElementById("province").addEventListener("change", function (e) {
-                        const selected = e.target.options[e.target.selectedIndex];
-                        const provinceCode = selected ? selected.dataset.code : "";
-                        loadCommunes(provinceCode);
-                    });
-
-                    // Init
-                    document.addEventListener("DOMContentLoaded", async function () {
-                        console.log('Checkout page initialized');
-                        await loadProvinces();
-
-                        if (initialCity) {
-                            console.log('Trying to find province:', initialCity);
-                            const provinceSelect = document.getElementById("province");
-                            const provinceOption = Array.from(provinceSelect.options)
-                                .find(option => option.value === initialCity);
-
-                            console.log('Found province option:', provinceOption ? provinceOption.text : 'NOT FOUND');
-                            if (provinceOption) {
-                                provinceOption.selected = true;
-                                const provinceCode = provinceOption.dataset.code || "";
-                                console.log('Loading communes for code:', provinceCode);
-                                await loadCommunes(provinceCode);
-
-                                if (initialWard) {
-                                    console.log('Trying to find ward:', initialWard);
-                                    const communeSelect = document.getElementById("commune");
-                                    const communeOption = Array.from(communeSelect.options)
-                                        .find(option => option.value === initialWard);
-
-                                    console.log('Found ward option:', communeOption ? communeOption.text : 'NOT FOUND');
-                                    if (communeOption) {
-                                        communeOption.selected = true;
+                                            document.getElementById("commune").innerHTML = html;
+                                            console.log('Communes loaded for province', provinceCode, ':', communes.length);
+                                        } catch (err) {
+                                            console.error("Lỗi load xã:", err);
+                                        }
                                     }
-                                }
-                            } else {
-                                console.log('Available province options:', Array.from(provinceSelect.options).map(o => o.value));
-                            }
-                        }
-                    });
+
+                                    // Load tỉnh
+                                    async function loadProvinces() {
+                                        try {
+                                            let res = await fetch(`${API_BASE}/provinces`);
+                                            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                                            let data = await res.json();
+                                            let provinces = Array.isArray(data) ? data : [];
+
+                                            let html = '<option value="">-- Chọn tỉnh --</option>';
+                                            provinces.forEach(p => {
+                                                const code = p.code || "";
+                                                const name = p.name || "";
+                                                html += `<option value="${name}" data-code="${code}">${name}</option>`;
+                                            });
+
+                                            document.getElementById("province").innerHTML = html;
+                                            console.log('Provinces loaded:', provinces.length);
+                                        } catch (e) {
+                                            console.error('Load provinces:', e);
+                                        }
+                                    }
+
+                                    // Event change tỉnh
+                                    document.getElementById("province").addEventListener("change", function (e) {
+                                        const selected = e.target.options[e.target.selectedIndex];
+                                        const provinceCode = selected ? selected.dataset.code : "";
+                                        loadCommunes(provinceCode);
+                                    });
+
+                                    // Init
+                                    document.addEventListener("DOMContentLoaded", async function () {
+                                        console.log('Checkout page initialized');
+                                        await loadProvinces();
+
+                                        if (initialCity) {
+                                            console.log('Trying to find province:', initialCity);
+                                            const provinceSelect = document.getElementById("province");
+                                            const provinceOption = Array.from(provinceSelect.options)
+                                                .find(option => option.value === initialCity);
+
+                                            console.log('Found province option:', provinceOption ? provinceOption.text : 'NOT FOUND');
+                                            if (provinceOption) {
+                                                provinceOption.selected = true;
+                                                const provinceCode = provinceOption.dataset.code || "";
+                                                console.log('Loading communes for code:', provinceCode);
+                                                await loadCommunes(provinceCode);
+
+                                                if (initialWard) {
+                                                    console.log('Trying to find ward:', initialWard);
+                                                    const communeSelect = document.getElementById("commune");
+                                                    const communeOption = Array.from(communeSelect.options)
+                                                        .find(option => option.value === initialWard);
+
+                                                    console.log('Found ward option:', communeOption ? communeOption.text : 'NOT FOUND');
+                                                    if (communeOption) {
+                                                        communeOption.selected = true;
+                                                    }
+                                                }
+                                            } else {
+                                                console.log('Available province options:', Array.from(provinceSelect.options).map(o => o.value));
+                                            }
+                                        }
+                                    });
                 </script>
 
 
@@ -179,7 +181,7 @@
                         <tr>
                             <th>Ảnh sản phẩm</th>
                             <th>Sản phẩm</th>
-                            <th>Số lượng</th>
+                            <th>SL</th>
                             <th>Giá</th>
                             <th>Tổng</th>
                         </tr>
@@ -188,300 +190,374 @@
                         @foreach (var item in Model.CartItems)
                         {
                             <tr class="custom-table-row">
-                                <td><img class="img-fluid" style="width: 96px; max-width: 96px; height: auto;" src="@item.ProductImage" alt="@item.ProductName" /></td>
-                                <td>@item.ProductName</td>
-                                <td>@item.Quantity</td>
-                                <td class="custom-price">@item.ProductPrice.ToString("N0") VNĐ</td>
-                                <td class="custom-total">@item.Subtotal.ToString("N0") VNĐ</td>
-                            </tr>
+                                <td><img class="img-fluid" style="width: 96px; max-width: 96px; height: auto;"
+                                             src="@item.ProductImage" alt="@item.ProductName" /></td>
+                                    <td>@item.ProductName</td>
+                                    <td class="custom-quantity">@item.Quantity</td>
+                                    <td class="custom-price">@item.ProductPrice.ToString("N0") VNĐ</td>
+                                    <td class="custom-total">@item.Subtotal.ToString("N0") VNĐ</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5">
+                                        <div class="text-danger product-error" id="error-@item.ProductId"></div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
                             <tr>
-                                <td colspan="5">
-                                    <div class="text-danger product-error" id="error-@item.ProductId"></div>
-                                </td>
+                                <td colspan="4">Tổng cộng</td>
+                                <td class="custom-total" id="totalAmount">@Model.TotalPrice.ToString("N0") VNĐ</td>
                             </tr>
-                        }
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="4">Tổng cộng</td>
-                            <td class="custom-total" id="totalAmount">@Model.TotalPrice.ToString("N0") VNĐ</td>
-                        </tr>
-                    </tfoot>
-                </table>
+                        </tfoot>
+                    </table>
+                </div>
+                <button type="button" class="custom-btn custom-btn-block" onclick="submitCheckout()">Đặt hàng</button>
             </div>
-            <button type="button" class="custom-btn custom-btn-block" onclick="submitCheckout()">Đặt hàng</button>
         </div>
     </div>
-</div>
 
-@section Scripts {
-    <script>
-        // =========================
-        // VALIDATE PHONE VN
-        // =========================
-        function validatePhoneVN(phone) {
-            const regex = /^(0|\+84)(3|5|7|8|9)[0-9]{8}$/;
-            return regex.test(phone);
-        }
-
-        $('#phone').on('blur', function () {
-            const phone = $(this).val().trim();
-            if (!validatePhoneVN(phone)) {
-                $('#phoneError').text("SĐT không hợp lệ (VD: 098xxxxxxx)");
-            } else {
-                $('#phoneError').text("");
-            }
-        });
-
-        // =========================
-        // SUBMIT
-        // =========================
-        function submitCheckout() {
-            const data = {
-                Name: $('input[name="Name"]').val()?.trim() || '',
-                ContactNo: $('input[name="ContactNo"]').val()?.trim() || '',
-                City: $('#province option:selected').text().trim(),
-                Ward: $('#commune option:selected').text().trim(),
-                Address: $('input[name="Address"]').val()?.trim() || '',
-                PaymentMethod: $('select[name="PaymentMethod"]').val()?.trim() || ''
-            };
-
-            // VALIDATE
-            if (!validatePhoneVN(data.ContactNo)) {
-                showMessage("Số điện thoại không hợp lệ!", "danger");
-                return;
+    @section Scripts {
+        <script>
+            // =========================
+            // VALIDATE PHONE VN
+            // =========================
+            function validatePhoneVN(phone) {
+                const regex = /^(0|\+84)(3|5|7|8|9)[0-9]{8}$/;
+                return regex.test(phone);
             }
 
-            if (!data.City || !data.Ward) {
-                showMessage("Vui lòng chọn đầy đủ địa chỉ!", "danger");
-                return;
-            }
-
-            // Validate that city and ward are not placeholder values
-            if (data.City.includes("--Chọn") || data.Ward.includes("--Chọn")) {
-                showMessage("Vui lòng chọn tỉnh/thành và xã/phường hợp lệ!", "danger");
-                return;
-            }
-
-            if (!data.Address) {
-                showMessage("Vui lòng nhập địa chỉ cụ thể!", "danger");
-                return;
-            }
-
-            if (!data.PaymentMethod) {
-                showMessage("Vui lòng chọn phương thức thanh toán!", "danger");
-                return;
-            }
-
-            // Get selected items from cart selection (hidden inputs)
-            const selectedItems = $('input[name="SelectedProductIds"]').map(function () {
-                return $(this).val();
-            }).get();
-
-            if (selectedItems.length === 0) {
-                showMessage("Vui lòng chọn ít nhất 1 sản phẩm để thanh toán!", "danger");
-                return;
-            }
-
-            // Add selected items to data
-            data.SelectedProductIds = selectedItems.map(id => parseInt(id, 10)).filter(id => !Number.isNaN(id));
-
-            $.ajax({
-                url: '@Url.Action("Checkout", "Cart")',
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(data),
-                success: function (res) {
-                    if (res.success) {
-                        if (data.PaymentMethod === "COD") {
-                            alert("Đặt hàng thành công!");
-                            window.location.href = "/";
-                        } else {
-                            window.location.href = res.redirectUrl;
-                        }
-                    } else {
-                        showMessage(res.message, "danger");
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.error("Checkout error:", error);
-                    let errorMsg = "Lỗi khi đặt hàng. Vui lòng thử lại!";
-                    try {
-                        const response = JSON.parse(xhr.responseText);
-                        if (response && response.message) {
-                            errorMsg = response.message;
-                        }
-                    } catch (e) { }
-                    showMessage(errorMsg, "danger");
+            $('#phone').on('blur', function () {
+                const phone = $(this).val().trim();
+                if (!validatePhoneVN(phone)) {
+                    $('#phoneError').text("SĐT không hợp lệ (VD: 098xxxxxxx)");
+                } else {
+                    $('#phoneError').text("");
                 }
             });
-        }
 
-        function showMessage(msg, type) {
-            $('#message').html(`<div class="alert alert-${type}">${msg}</div>`);
-        }
-    </script>
-}
+            // =========================
+            // SUBMIT
+            // =========================
+            function submitCheckout() {
+                const data = {
+                    Name: $('input[name="Name"]').val()?.trim() || '',
+                    ContactNo: $('input[name="ContactNo"]').val()?.trim() || '',
+                    City: $('#province option:selected').text().trim(),
+                    Ward: $('#commune option:selected').text().trim(),
+                    Address: $('input[name="Address"]').val()?.trim() || '',
+                    PaymentMethod: $('select[name="PaymentMethod"]').val()?.trim() || ''
+                };
 
-<style>
-/* =========================
-   BACKGROUND PAGE
-========================= */
-body {
-    background: #f4f7fb;
-}
+                // VALIDATE
+                if (!validatePhoneVN(data.ContactNo)) {
+                    showMessage("Số điện thoại không hợp lệ!", "danger");
+                    return;
+                }
 
-/* =========================
-   TITLE
-========================= */
-h2, h3 {
-    color: #0f3460;
-    font-weight: 700;
-}
+                if (!data.City || !data.Ward) {
+                    showMessage("Vui lòng chọn đầy đủ địa chỉ!", "danger");
+                    return;
+                }
 
-/* =========================
-   FORM CONTAINER
-========================= */
-form#checkoutForm {
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 14px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-    border: 1px solid #eef2f7;
-}
+                // Validate that city and ward are not placeholder values
+                if (data.City.includes("--Chọn") || data.Ward.includes("--Chọn")) {
+                    showMessage("Vui lòng chọn tỉnh/thành và xã/phường hợp lệ!", "danger");
+                    return;
+                }
 
-/* =========================
-   INPUTS
-========================= */
-.form-control,
-.custom-input,
-.custom-select {
-    border-radius: 10px;
-    border: 1px solid #e5e7eb;
-    transition: 0.2s;
-}
+                if (!data.Address) {
+                    showMessage("Vui lòng nhập địa chỉ cụ thể!", "danger");
+                    return;
+                }
 
-.form-control:focus,
-.custom-input:focus,
-.custom-select:focus {
-    border-color: #0f3460;
-    box-shadow: 0 0 0 3px rgba(15,52,96,0.12);
-}
+                if (!data.PaymentMethod) {
+                    showMessage("Vui lòng chọn phương thức thanh toán!", "danger");
+                    return;
+                }
 
-/* label */
-label {
-    font-weight: 600;
-    color: #334155;
-}
+                // Get selected items from cart selection (hidden inputs)
+                const selectedItems = $('input[name="SelectedProductIds"]').map(function () {
+                    return $(this).val();
+                }).get();
 
-/* =========================
-   BUTTON PRIMARY
-========================= */
-.btn-primary {
-    background: linear-gradient(135deg, #1a1a2e, #0f3460);
-    border: none;
-    border-radius: 12px;
-    font-weight: 600;
-    padding: 12px;
-    transition: 0.2s;
-}
+                if (selectedItems.length === 0) {
+                    showMessage("Vui lòng chọn ít nhất 1 sản phẩm để thanh toán!", "danger");
+                    return;
+                }
 
-.btn-primary:hover {
-    opacity: 0.9;
-}
+                // Add selected items to data
+                data.SelectedProductIds = selectedItems.map(id => parseInt(id, 10)).filter(id => !Number.isNaN(id));
 
-/* custom button */
-.custom-btn {
-    background: linear-gradient(135deg, #1a1a2e, #0f3460);
-    color: #fff;
-    border: none;
-    border-radius: 12px;
-    padding: 12px;
-    font-weight: 600;
-}
+                $.ajax({
+                    url: '@Url.Action("Checkout", "Cart")',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    success: function (res) {
+                        if (res.success) {
+                            if (data.PaymentMethod === "COD") {
+                                alert("Đặt hàng thành công!");
+                                window.location.href = "/";
+                            } else {
+                                window.location.href = res.redirectUrl;
+                            }
+                        } else {
+                            showMessage(res.message, "danger");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Checkout error:", error);
+                        let errorMsg = "Lỗi khi đặt hàng. Vui lòng thử lại!";
+                        try {
+                            const response = JSON.parse(xhr.responseText);
+                            if (response && response.message) {
+                                errorMsg = response.message;
+                            }
+                        } catch (e) { }
+                        showMessage(errorMsg, "danger");
+                    }
+                });
+            }
 
-.custom-btn:hover {
-    opacity: 0.9;
-}
-
-/* =========================
-   TABLE (ORDER SUMMARY)
-========================= */
-.custom-table {
-    background: #fff;
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-}
-
-.custom-table-head {
-    background: linear-gradient(135deg, #1a1a2e, #0f3460);
-    color: #fff;
-}
-
-.custom-table-head th {
-    padding: 12px;
-    font-size: 14px;
-}
-
-/* row */
-.custom-table-row td {
-    vertical-align: middle;
-    padding: 12px;
-}
-
-.custom-table-row:hover {
-    background: #f8fafc;
-}
-
-/* =========================
-   PRODUCT IMAGE
-========================= */
-.custom-table-row img {
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-
-/* =========================
-   PRICE STYLE
-========================= */
-.custom-price {
-    font-weight: 700;
-    color: #0f3460;
-}
-
-.custom-total {
-    font-weight: 800;
-    color: #dc2626;
-}
-
-/* =========================
-   ERROR TEXT
-========================= */
-.text-danger {
-    font-size: 13px;
-}
-
-/* =========================
-   MESSAGE ALERT
-========================= */
-#message .alert {
-    border-radius: 10px;
-    font-weight: 500;
-}
-
-/* =========================
-   LAYOUT SPACING
-========================= */
-.container {
-    padding-bottom: 40px;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-@@media (max-width: 768px) {
-    form#checkoutForm {
-        margin-bottom: 20px;
+            function showMessage(msg, type) {
+                $('#message').html(`<div class="alert alert-${type}">${msg}</div>`);
+            }
+        </script>
     }
-}</style>
+
+    <style>
+        /* =========================
+       BACKGROUND PAGE
+    ========================= */
+        body {
+            background: #f4f7fb;
+        }
+
+        /* =========================
+       TITLE
+    ========================= */
+        h2,
+        h3 {
+            color: #0f3460;
+            font-weight: 700;
+        }
+
+        /* =========================
+       FORM CONTAINER
+    ========================= */
+        form#checkoutForm {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 14px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+            border: 1px solid #eef2f7;
+        }
+
+        /* =========================
+       INPUTS
+    ========================= */
+        .form-control,
+        .custom-input,
+        .custom-select {
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+            transition: 0.2s;
+        }
+
+        .form-control:focus,
+        .custom-input:focus,
+        .custom-select:focus {
+            border-color: #0f3460;
+            box-shadow: 0 0 0 3px rgba(15, 52, 96, 0.12);
+        }
+
+        /* label */
+        label {
+            font-weight: 600;
+            color: #334155;
+        }
+
+        /* =========================
+       BUTTON PRIMARY
+    ========================= */
+        .btn-primary {
+            background: linear-gradient(135deg, #1a1a2e, #0f3460);
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            padding: 12px;
+            transition: 0.2s;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+
+        /* custom button */
+        .custom-btn {
+            background: linear-gradient(135deg, #1a1a2e, #0f3460);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 12px;
+            font-weight: 600;
+        }
+
+        .custom-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* =========================
+       TABLE (ORDER SUMMARY)
+    ========================= */
+        .custom-table {
+            background: #fff;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+        }
+
+        .custom-table-head {
+            background: linear-gradient(135deg, #1a1a2e, #0f3460);
+            color: #fff;
+        }
+
+        .custom-table-head th {
+            padding: 10px 8px;
+            font-size: 13px;
+        }
+
+        /* row */
+        .custom-table-row td {
+            vertical-align: middle;
+            padding: 8px 8px;
+        }
+
+        .custom-table-row:hover {
+            background: #f8fafc;
+        }
+
+        /* =========================
+       PRODUCT IMAGE
+    ========================= */
+        .custom-table-row img {
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+            max-width: 72px;
+            height: auto;
+        }
+
+        /* =========================
+       PRICE STYLE
+    ========================= */
+        .custom-price {
+            font-weight: 700;
+            color: #0f3460;
+            font-size: 13px;
+        }
+
+        .custom-total {
+            font-weight: 800;
+            color: #dc2626;
+            font-size: 14px;
+        }
+
+        /* =========================
+       ERROR TEXT
+    ========================= */
+        .text-danger {
+            font-size: 13px;
+        }
+
+        /* =========================
+       MESSAGE ALERT
+    ========================= */
+        #message .alert {
+            border-radius: 10px;
+            font-weight: 500;
+        }
+
+        /* =========================
+       LAYOUT SPACING
+    ========================= */
+        .container {
+            padding-bottom: 40px;
+        }
+
+        /* =========================
+       RESPONSIVE
+    ========================= */
+        @@media (max-width: 768px) {
+            form#checkoutForm {
+                margin-bottom: 16px;
+            }
+
+            .table-responsive {
+                border: 1px solid #e5e7eb;
+                border-radius: 12px;
+                width: 100%;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                padding: 6px;
+            }
+
+            .custom-table td img {
+                width: 60px !important;
+                height: auto;
+            }
+
+            .custom-quantity {
+                font-size: 12px;
+                width: 24px !important;
+            }
+
+            .custom-price { font-size: 13px; }
+            .custom-total { font-size: 12px; }
+        }
+
+        /* Ensure table fits the container and cells can wrap on small screens */
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .custom-table {
+            width: 100%;
+            table-layout: fixed;
+        }
+
+        .custom-table th,
+        .custom-table td {
+            word-break: break-word;
+            white-space: normal;
+        }
+
+        .custom-table td img {
+            max-width: 72px;
+            width: auto;
+            height: auto;
+        }
+
+        /* Quantity column (SL) - compact */
+        .custom-table th:nth-child(3),
+        .custom-table td:nth-child(3),
+        .custom-quantity {
+            width: 64px;
+            max-width: 80px;
+            text-align: center;
+            white-space: nowrap;
+            font-size: 13px;
+            padding: 6px 6px;
+        }
+
+        @@media (max-width: 576px) {
+            .custom-table th:nth-child(3),
+            .custom-table td:nth-child(3),
+            .custom-quantity {
+                width: 48px;
+                font-size: 12px;
+                padding: 4px 6px;
+            }
+        }
+    </style>

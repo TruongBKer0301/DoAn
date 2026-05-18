@@ -1,216 +1,516 @@
 ﻿@model IEnumerable<LapTopBD.Models.Category>
 @{
-    var currentController = ViewContext.RouteData.Values["Controller"]?.ToString();
-    var currentAction = ViewContext.RouteData.Values["Action"]?.ToString();
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+    var currentCategoryId = Context.Request.Query["categoryId"].FirstOrDefault();
+    var currentSearch = Context.Request.Query["search"].FirstOrDefault();
 }
 
 <style>
-    /* RESET */
-    .menu ul {
+    *, *::before, *::after { box-sizing: border-box; }
+
+    .site-nav {
+        background: #fff;
+        border-bottom: 1px solid #e5e7eb;
+        position: relative;
+        z-index: 100;
+    }
+
+    /* Use site's main font (Poppins) for nav elements */
+    .site-nav,
+    .nav-inner,
+    .nav-links,
+    .mobile-drawer,
+    .drawer-nav,
+    .drawer-sub-section,
+    .drawer-sub-title,
+    .drawer-nav a,{
+        font-family: var(--font-family-sans-serif, "Poppins", sans-serif);
+    }
+
+    .nav-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    /* ── DESKTOP NAV LINKS ── */
+    .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 2px;
         list-style: none;
         margin: 0;
         padding: 0;
     }
 
-    /* menu ngang */
-    .menu>ul {
+    .nav-links > li { position: relative; }
+
+    .nav-links > li > a {
         display: flex;
-        gap: 30px;
+        align-items: center;
+        gap: 4px;
+        padding: 8px 12px;
+        font-size: 16px;
+        font-weight: 500;
+        color: #4b5563;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: background .15s, color .15s;
+        white-space: nowrap;
+        cursor: pointer;
     }
 
-    /* item cha */
-    .menu>ul>li {
-        position: relative;
+    .nav-links > li > a:hover,
+    .nav-links > li > a.active-link {
+        background: #f3f4f6;
+        color: #0f172a;
     }
 
-    /* ===== QUAN TRỌNG: ẨN TOÀN BỘ MENU CON ===== */
-    .menu ul ul {
-        display: none !important;
+    .nav-links > li > a.active-link {
+        font-size: 18px;
+        font-weight: 700;
+        color: #0f3460;
     }
 
-    /* ===== HOVER HIỆN MENU ===== */
-    .menu>ul>li:hover>ul {
-        display: flex !important;
+    /* ── MEGA MENU (desktop hover, giữ nguyên logic cũ) ── */
+    .nav-links ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: none;
+    }
+
+    .nav-links > li:hover > ul {
+        display: flex;
         position: absolute;
         top: 100%;
         left: 0;
-        width: min(1000px, calc(100vw - 2rem));
-        max-width: calc(100vw - 2rem);
-        background: white;
+        width: min(600px, calc(100vw - 2rem));
+        background: #fff;
         padding: 20px;
-        gap: -10px;
+        gap: 10px;
         flex-wrap: wrap;
         z-index: 9999;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 5px 15px rgba(0,0,0,.1);
+        border-radius: 10px;
+        border: 1px solid #e5e7eb;
     }
 
-    /* hiển thị luôn cấp 2 trong mega menu */
-    .menu>ul>li>ul>li>ul {
+    .nav-links > li > ul > li {
+        width: 150px;
+    }
+
+    .nav-links > li > ul > li > a {
+        font-weight: bold;
+        font-size: 13px;
+        color: #0f172a;
+        display: block;
+        margin-bottom: 8px;
+        text-decoration: none;
+    }
+
+    .nav-links > li > ul > li > ul {
         display: block !important;
     }
 
-    /* cột */
-    .menu>ul>li>ul>li {
-        width: 150px;
-        max-width: 100%;
-    }
-
-    /* tiêu đề */
-    .menu>ul>li>ul>li>a {
-        font-weight: bold;
-        margin-bottom: 10px;
+    .nav-links > li > ul > li > ul > li > a {
         display: block;
+        font-size: 13px;
+        color: #4b5563;
+        text-decoration: none;
+        padding: 4px 6px;
+        border-radius: 6px;
     }
 
-    /* hover đẹp */
-    .menu a:hover {
-        color: #007bff;
+    .nav-links > li > ul > li > ul > li > a:hover {
+        background: #eff6ff;
+        color: #185FA5;
     }
 
-    .title-menu {
-        font-size: 16px;
-        font-weight: 500;
-        transition: all 0.25s ease;
+    /* ── HAMBURGER ── */
+    .hamburger-btn {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        background: none;
+        cursor: pointer;
+        margin-left: auto;
+        flex-shrink: 0;
+        margin-top :-100px;
+        margin-right : 20px;
     }
 
-    /* MENU ACTIVE */
+    .hamburger-btn .bar {
+        display: block;
+        width: 18px;
+        height: 2px;
+        background: #374151;
+        border-radius: 2px;
+        position: relative;
+    }
 
-    .title-menu.active-menu {
+    .hamburger-btn .bar::before,
+    .hamburger-btn .bar::after {
+        content: '';
+        position: absolute;
+        width: 18px;
+        height: 2px;
+        background: #374151;
+        border-radius: 2px;
+        left: 0;
+    }
+
+    .hamburger-btn .bar::before { top: -5px; }
+    .hamburger-btn .bar::after  { top:  5px; }
+
+    /* ── OVERLAY ── */
+    .nav-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.35);
+        z-index: 998;
+    }
+    .nav-overlay.show { display: block; }
+
+    /* ── MOBILE DRAWER ── */
+    .mobile-drawer {
+        position: fixed;
+        top: 0; right: 0; bottom: 0;
+        width: min(320px, 85vw);
+        background: #fff;
+        z-index: 999;
+        transform: translateX(100%);
+        transition: transform .28s cubic-bezier(.4,0,.2,1);
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+    }
+    .mobile-drawer.open { transform: translateX(0); }
+
+    .drawer-head {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 14px 16px;
+        border-bottom: 1px solid #f3f4f6;
+        flex-shrink: 0;
+    }
+
+    .drawer-close {
+        width: 32px;
+        height: 32px;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        background: none;
+        cursor: pointer;
         font-size: 18px;
-        font-weight: 700;
-        color: #0f3460 !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
-    @@media (max-width: 991.98px) {
-        .menu>ul>li:hover>ul {
-            position: static;
-            width: 100% !important;
-            max-width: 100% !important;
-            gap: 1rem;
-        }
+    .drawer-body { flex: 1; padding: 12px; }
 
-        .menu>ul>li>ul>li {
-            width: 100%;
-        }
+    .drawer-nav { list-style: none; margin: 0; padding: 0; }
+
+    .drawer-nav > li > a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 11px 12px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #0f172a;
+        text-decoration: none;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+    .drawer-nav > li > a:hover { background: #f9fafb; }
+
+    /* Headings: bold by default */
+    .drawer-nav > li > a { font-weight: 700; font-size: 15px; }
+    .drawer-sub-title { font-weight: 700; font-size: 14px; }
+
+    /* Active / open state: larger and green */
+    .drawer-nav > li.open > a,
+    .drawer-nav > li > a.active,
+    .drawer-nav > li > a:focus {
+        color: #0f3460; /* match desktop active blue */
+        font-size: 17px;
+        font-weight: 800;
+    }
+
+    .drawer-sub-section.open .drawer-sub-title,
+    .drawer-sub-section .drawer-sub-title.active {
+        color: #0f3460;
+        font-size: 15px;
+        font-weight: 800;
+    }
+
+    /* Smooth transition for color/size changes */
+    .drawer-nav > li > a,
+    .drawer-sub-title,
+    .drawer-chevron {
+        transition: color .18s ease, transform .18s ease, font-size .12s ease;
+    }
+
+    .drawer-chevron {
+        font-size: 14px;
+        color: #9ca3af;
+        transition: transform .2s;
+        display: inline-block;
+    }
+    .drawer-nav > li.open > a .drawer-chevron { transform: rotate(180deg); }
+    .drawer-nav > li.open > .drawer-toggle .drawer-chevron { transform: rotate(180deg); }
+    .drawer-sub-section.open .drawer-toggle .drawer-chevron { transform: rotate(180deg); }
+
+    .drawer-sub {
+        display: none;
+        padding: 4px 0 8px 8px;
+    }
+    .drawer-nav > li.open > .drawer-sub { display: block; }
+
+    /* drawer sub-section collapsible list */
+    .drawer-sub-section .sub-list { display: none; padding-left: 8px; }
+    .drawer-sub-section.open .sub-list { display: block; }
+
+    .drawer-sub-section { margin-bottom: 12px; }
+
+    .drawer-sub-section h4 {
+        font-size: 11px;
+        font-weight: 600;
+        color: #9ca3af;
+        text-transform: uppercase;
+        letter-spacing: .05em;
+        padding: 4px 10px 6px;
+        margin: 0;
+    }
+
+    .drawer-sub-section a {
+        display: block;
+        font-size: 13px;
+        color: #4b5563;
+        text-decoration: none;
+        padding: 6px 10px;
+        border-radius: 6px;
+    }
+    .drawer-sub-section a:hover { background: #eff6ff; color: #185FA5; }
+
+    /* ── RESPONSIVE ── */
+    @@media (max-width: 991px) {
+        .nav-links { display: none; }
+        .hamburger-btn { display: flex; }
     }
 </style>
 
-<!-- Navbar Start -->
-<div class="container-fluid menu-parent">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="menu-container">
-                <div class="menu">
-                    <ul>
-                        <li>
-                            <a class="title-menu @(currentController == "Home" && currentAction == "Index" ? "active-menu" : "")"
-                                   href="@Url.Action("Index", "Home")">
-                                Trang Chủ
-                            </a>
-                        </li>
+<!-- NAV -->
+<nav class="site-nav">
+    <div class="nav-inner">
+        <!-- Desktop links (giữ nguyên hover mega menu như cũ) -->
+        <ul class="nav-links">
+            <li>
+                <a href="@Url.Action("Index", "Home")"
+                   class="@(currentController == "Home" && currentAction == "Index" ? "active-link" : "")">
+                    Trang Chủ
+                </a>
+            </li>
+            <li>
+                                <a href="@Url.Action("Index", "Shop")"
+                                    class="@(currentController == "Shop" ? "active-link" : "")">
+                            Sản Phẩm
+                </a>
+                <ul>
+                    <li>
+                        <a href="@Url.Action("Index", "Shop", new { categoryId = 1 })" class="@(currentController == "Shop" && currentCategoryId == "1" ? "active-link" : "")">Điện Thoại</a>
+                        <ul>
+                            @foreach (var category in Model.Where(c => c.CategoryName == "Điện thoại"))
+                                foreach (var sub in category.SubCategories)
+                                {
+                                    <li><a href="@Url.Action("Index", "Shop", new { search = sub.SubCategoryName, categoryId = 1 })" class="@(currentController == "Shop" && currentSearch == sub.SubCategoryName ? "active-link" : "")">@sub.SubCategoryName</a></li>
+                                }
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Shop", new { categoryId = 2 })" class="@(currentController == "Shop" && currentCategoryId == "2" ? "active-link" : "")">LapTop</a>
+                        <ul>
+                            @foreach (var category in Model.Where(c => c.CategoryName == "Laptop"))
+                                foreach (var sub in category.SubCategories)
+                                {
+                                    <li><a href="@Url.Action("Index", "Shop", new { search = sub.SubCategoryName, categoryId = 2 })" class="@(currentController == "Shop" && currentSearch == sub.SubCategoryName ? "active-link" : "")">@sub.SubCategoryName</a></li>
+                                }
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Shop", new { categoryId = 4 })" class="@(currentController == "Shop" && currentCategoryId == "4" ? "active-link" : "")">Tai nghe</a>
+                        <ul>
+                            @foreach (var category in Model.Where(c => c.CategoryName == "Tai nghe"))
+                                foreach (var sub in category.SubCategories)
+                                {
+                                    <li><a href="@Url.Action("Index", "Shop", new { search = sub.SubCategoryName, categoryId = 4 })" class="@(currentController == "Shop" && currentSearch == sub.SubCategoryName ? "active-link" : "")">@sub.SubCategoryName</a></li>
+                                }
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Shop", new { categoryId = 73 })" class="@(currentController == "Shop" && currentCategoryId == "73" ? "active-link" : "")">Sạc</a>
+                        <ul>
+                            @foreach (var category in Model.Where(c => c.CategoryName == "Sạc"))
+                                foreach (var sub in category.SubCategories)
+                                {
+                                    <li><a href="@Url.Action("Index", "Shop", new { search = sub.SubCategoryName, categoryId = 73 })" class="@(currentController == "Shop" && currentSearch == sub.SubCategoryName ? "active-link" : "")">@sub.SubCategoryName</a></li>
+                                }
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Shop", new { categoryId = 62 })" class="@(currentController == "Shop" && currentCategoryId == "62" ? "active-link" : "")">Bàn phím cơ</a>
+                        <ul>
+                            @foreach (var category in Model.Where(c => c.CategoryName == "Bàn phím cơ"))
+                                foreach (var sub in category.SubCategories)
+                                {
+                                    <li><a href="@Url.Action("Index", "Shop", new { search = sub.SubCategoryName, categoryId = 62 })" class="@(currentController == "Shop" && currentSearch == sub.SubCategoryName ? "active-link" : "")">@sub.SubCategoryName</a></li>
+                                }
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Blog")"
+                   class="@(currentController == "Blog" && currentAction == "Index" ? "active-link" : "")">
+                    Blog
+                </a>
+            </li>
+        </ul>
 
-                        <li>
-                            <a class="title-menu @(currentController == "Shop" && currentAction == "Index" ? "active-menu" : "")"
-                                   href="@Url.Action("Index", "Shop")">
-                                Sản Phẩm
-                            </a>
+        <!-- Hamburger (chỉ hiện trên mobile) -->
+        <button class="hamburger-btn" onclick="openDrawer()" aria-label="Mở menu">
+            <span class="bar"></span>
+        </button>
+    </div>
+</nav>
 
-                            <ul>
-                                <!-- MacBook -->
-                                <li>
-                                    <a href="@Url.Action("Index", "Shop", new { categoryId = 1 })">Điện Thoại</a>
-                                    <ul>
-                                        @foreach (var category in Model.Where(c => c.CategoryName == "Điện thoại"))
-                                        {
-                                            foreach (var subCategory in category.SubCategories)
-                                            {
-                                                <li>
-                                                    <a
-                                                    href="@Url.Action("Index", "Shop", new { search = @subCategory.SubCategoryName, categoryId = 1 })">@subCategory.SubCategoryName</a>
-                                                </li>
-                                            }
-                                        }
-                                    </ul>
-                                </li>
+<!-- Overlay -->
+<div class="nav-overlay" id="navOverlay" onclick="closeDrawer()"></div>
 
-                                <li>
-                                    <a href="@Url.Action("Index", "Shop", new { categoryId = 2 })">LapTop</a>
-                                    <ul>
-                                        @foreach (var category in Model.Where(c => c.CategoryName == "Laptop"))
-                                        {
-                                            foreach (var subCategory in category.SubCategories)
-                                            {
-                                                <li>
-                                                    <a
-                                                    href="@Url.Action("Index", "Shop", new { search = @subCategory.SubCategoryName, categoryId = 2 })">@subCategory.SubCategoryName</a>
-                                                </li>
-                                            }
-                                        }
-                                    </ul>
-                                </li>
-
-                                <li>
-                                    <a href="@Url.Action("Index", "Shop", new { categoryId = 4 })">Tai nghe</a>
-                                    <ul>
-                                        @foreach (var category in Model.Where(c => c.CategoryName == "Tai nghe"))
-                                        {
-                                            foreach (var subCategory in category.SubCategories)
-                                            {
-                                                <li>
-                                                    <a
-                                                    href="@Url.Action("Index", "Shop", new { search = @subCategory.SubCategoryName, categoryId = 4 })">@subCategory.SubCategoryName</a>
-                                                </li>
-                                            }
-                                        }
-                                    </ul>
-                                </li>
-
-                                <li>
-                                    <a href="@Url.Action("Index", "Shop", new { categoryId = 73 })">Sạc</a>
-                                    <ul>
-                                        @foreach (var category in Model.Where(c => c.CategoryName == "Sạc"))
-                                        {
-                                            foreach (var subCategory in category.SubCategories)
-                                            {
-                                                <li>
-                                                    <a
-                                                    href="@Url.Action("Index", "Shop", new { search = @subCategory.SubCategoryName, categoryId = 73 })">@subCategory.SubCategoryName</a>
-                                                </li>
-                                            }
-                                        }
-                                    </ul>
-                                </li>
-
-                                <li>
-                                    <a href="@Url.Action("Index", "Shop", new { categoryId = 62 })">Bàn phím cơ</a>
-                                    <ul>
-                                        @foreach (var category in Model.Where(c => c.CategoryName == "Bàn phím cơ"))
-                                        {
-                                            foreach (var subCategory in category.SubCategories)
-                                            {
-                                                <li>
-                                                    <a
-                                                    href="@Url.Action("Index", "Shop", new { search = @subCategory.SubCategoryName, categoryId = 62 })">@subCategory.SubCategoryName</a>
-                                                </li>
-                                            }
-                                        }
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="title-menu @(currentController == "Blog" && currentAction == "Index" ? "active-menu" : "")"
-                               href="@Url.Action("Index", "Blog")">
-                                Blog
-                            </a>
-                        </li>
-
-
-
-                    </ul>
+<!-- Mobile Drawer -->
+<div class="mobile-drawer" id="mobileDrawer">
+    <div class="drawer-head">
+        <button class="drawer-close" onclick="closeDrawer()" aria-label="Đóng menu">&#x2715;</button>
+    </div>
+    <div class="drawer-body">
+        <ul class="drawer-nav">
+            <li>
+                <a href="@Url.Action("Index", "Home")" class="@(currentController == "Home" && currentAction == "Index" ? "active" : "")">Trang Chủ</a>
+            </li>
+            <li id="drawerShopLi">
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <a href="@Url.Action("Index", "Shop")" class="@(currentController == "Shop" ? "active" : "")" style="flex:1;padding:11px 12px;display:block;text-decoration:none;color:inherit;">Sản Phẩm</a>
+                    <button class="drawer-toggle" onclick="toggleDrawer(event, 'drawerShopLi')" aria-label="Mở rộng danh mục" style="border:0;background:none;padding:11px 12px;"> <i class="fa fa-chevron-down drawer-chevron" aria-hidden="true"></i> </button>
                 </div>
-            </div>
-        </div>
+                <div class="drawer-sub">
+                    <div class="drawer-sub-section" id="sub-1">
+                        <div style="display:flex;align-items:center;justify-content:space-between;">
+                            <a href="@Url.Action("Index", "Shop", new { categoryId = 1 })" class="drawer-sub-title @(currentController == "Shop" && currentCategoryId == "1" ? "active" : "")">Điện Thoại</a>
+                            <button class="drawer-toggle" onclick="toggleSection(event,'sub-1')" aria-label="Mở rộng Điện Thoại"> <i class="fa fa-chevron-down drawer-chevron" aria-hidden="true"></i> </button>
+                        </div>
+                        <div class="sub-list">
+                        @foreach (var category in Model.Where(c => c.CategoryName == "Điện thoại"))
+                            foreach (var sub in category.SubCategories)
+                            {
+                                <a href="@Url.Action("Index", "Shop", new { search = sub.SubCategoryName, categoryId = 1 })">@sub.SubCategoryName</a>
+                            }
+                        </div>
+                    </div>
+                    <div class="drawer-sub-section" id="sub-2">
+                        <div style="display:flex;align-items:center;justify-content:space-between;">
+                            <a href="@Url.Action("Index", "Shop", new { categoryId = 2 })" class="drawer-sub-title @(currentController == "Shop" && currentCategoryId == "2" ? "active" : "")">Laptop</a>
+                            <button class="drawer-toggle" onclick="toggleSection(event,'sub-2')" aria-label="Mở rộng Laptop"> <i class="fa fa-chevron-down drawer-chevron" aria-hidden="true"></i> </button>
+                        </div>
+                        <div class="sub-list">
+                        @foreach (var category in Model.Where(c => c.CategoryName == "Laptop"))
+                            foreach (var sub in category.SubCategories)
+                            {
+                                <a href="@Url.Action("Index", "Shop", new { search = sub.SubCategoryName, categoryId = 2 })">@sub.SubCategoryName</a>
+                            }
+                        </div>
+                    </div>
+                    <div class="drawer-sub-section" id="sub-4">
+                        <div style="display:flex;align-items:center;justify-content:space-between;">
+                            <a href="@Url.Action("Index", "Shop", new { categoryId = 4 })" class="drawer-sub-title @(currentController == "Shop" && currentCategoryId == "4" ? "active" : "")">Tai nghe</a>
+                            <button class="drawer-toggle" onclick="toggleSection(event,'sub-4')" aria-label="Mở rộng Tai nghe"> <i class="fa fa-chevron-down drawer-chevron" aria-hidden="true"></i> </button>
+                        </div>
+                        <div class="sub-list">
+                        @foreach (var category in Model.Where(c => c.CategoryName == "Tai nghe"))
+                            foreach (var sub in category.SubCategories)
+                            {
+                                <a href="@Url.Action("Index", "Shop", new { search = sub.SubCategoryName, categoryId = 4 })">@sub.SubCategoryName</a>
+                            }
+                        </div>
+                    </div>
+                    <div class="drawer-sub-section" id="sub-73">
+                        <div style="display:flex;align-items:center;justify-content:space-between;">
+                            <a href="@Url.Action("Index", "Shop", new { categoryId = 73 })" class="drawer-sub-title @(currentController == "Shop" && currentCategoryId == "73" ? "active" : "")">Sạc</a>
+                            <button class="drawer-toggle" onclick="toggleSection(event,'sub-73')" aria-label="Mở rộng Sạc"> <i class="fa fa-chevron-down drawer-chevron" aria-hidden="true"></i> </button>
+                        </div>
+                        <div class="sub-list">
+                        @foreach (var category in Model.Where(c => c.CategoryName == "Sạc"))
+                            foreach (var sub in category.SubCategories)
+                            {
+                                <a href="@Url.Action("Index", "Shop", new { search = sub.SubCategoryName, categoryId = 73 })">@sub.SubCategoryName</a>
+                            }
+                        </div>
+                    </div>
+                    <div class="drawer-sub-section" id="sub-62">
+                        <div style="display:flex;align-items:center;justify-content:space-between;">
+                            <a href="@Url.Action("Index", "Shop", new { categoryId = 62 })" class="drawer-sub-title @(currentController == "Shop" && currentCategoryId == "62" ? "active" : "")">Bàn phím cơ</a>
+                            <button class="drawer-toggle" onclick="toggleSection(event,'sub-62')" aria-label="Mở rộng Bàn phím cơ"> <i class="fa fa-chevron-down drawer-chevron" aria-hidden="true"></i> </button>
+                        </div>
+                        <div class="sub-list">
+                        @foreach (var category in Model.Where(c => c.CategoryName == "Bàn phím cơ"))
+                            foreach (var sub in category.SubCategories)
+                            {
+                                <a href="@Url.Action("Index", "Shop", new { search = sub.SubCategoryName, categoryId = 62 })">@sub.SubCategoryName</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Blog")" class="@(currentController == "Blog" && currentAction == "Index" ? "active" : "")">Blog</a>
+            </li>
+        </ul>
     </div>
 </div>
-<!-- Navbar End -->
+
+<script>
+    function openDrawer() {
+        document.getElementById('mobileDrawer').classList.add('open');
+        document.getElementById('navOverlay').classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeDrawer() {
+        document.getElementById('mobileDrawer').classList.remove('open');
+        document.getElementById('navOverlay').classList.remove('show');
+        document.body.style.overflow = '';
+    }
+
+    function toggleDrawer(e, id) {
+        e.preventDefault();
+        document.getElementById(id).classList.toggle('open');
+    }
+
+    function toggleSection(e, id) {
+        e.preventDefault();
+        var el = document.getElementById(id);
+        if (!el) return;
+        el.classList.toggle('open');
+    }
+</script>

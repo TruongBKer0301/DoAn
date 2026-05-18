@@ -896,11 +896,7 @@
     }
 }
 
-@media only screen and (max-width:400px) {
-    i {
-        display: none !important;
-    }
-}
+/* Removed overly-broad rule that hid all <i> icons on very small screens. */
 
 /*#endregion */
 

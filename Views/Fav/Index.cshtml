@@ -34,7 +34,7 @@
                             {
                                 var hasDiscount = product.ProductPriceBeforeDiscount.HasValue && product.ProductPriceBeforeDiscount > product.ProductPrice;
                                 var discountPercentage = hasDiscount ? (product.ProductPriceBeforeDiscount!.Value - product.ProductPrice) / product.ProductPriceBeforeDiscount!.Value * 100 : 0;
-                                <div class="col-lg-4 col-md-6 col-sm-12 pb-5">
+                                <div class="col-6 col-sm-6 col-md-6 col-lg-4 pb-5">
                                     <div class="item" data-aos="fade-up" data-aos-duration="2500">
                                         <div class="card shadow h-100">
                                             <div class="ratio ratio-1x1">
@@ -313,7 +313,7 @@
     .btn-buy-now:hover { background: #1d4ed8; color: #fff; }
 
     /* ===== RESPONSIVE ===== */
-    @@media (max-width: 768px) {
+        @@media (max-width: 768px) {
         .product-action-row { flex-direction: column; }
         .card-text { min-height: auto; }
         .hero-cart .hero-title { font-size: 28px; }
@@ -340,10 +340,13 @@
                 .then(data => {
                     console.log('Response:', data);
                     if (data.success) {
-                        const productCard = button.closest('.col-lg-4');
-                        productCard.style.opacity = '0';
-                        productCard.style.transform = 'scale(0.95)';
-                        setTimeout(() => productCard.remove(), 300);
+                        // Safely find the closest grid column container (works with col-6, col-md-6, col-lg-4, etc.)
+                        const productCard = button.closest('[class*="col-"]');
+                        if (productCard) {
+                            productCard.style.opacity = '0';
+                            productCard.style.transform = 'scale(0.95)';
+                            setTimeout(() => productCard.remove(), 300);
+                        }
                     } else {
                         alert(data.message || 'Có lỗi xảy ra!');
                     }
