@@ -44,7 +44,6 @@ public class BlogController : Controller
         }
 
         var posts = await postsQuery.ToListAsync();
-
         return View(posts);
     }
 
@@ -59,37 +58,32 @@ public class BlogController : Controller
     public async Task<IActionResult> Create(BlogPost model, IFormFile? CoverImageFile)
     {
         var adminId = GetAdminId();
-        if (adminId == null)
-        {
-            return Unauthorized();
-        }
+        if (adminId == null) return Unauthorized();
 
-        model.Title = model.Title?.Trim() ?? string.Empty;
-        model.Summary = model.Summary?.Trim();
+        // ✅ FIX: Xóa ModelState cũ từ auto model binding để tránh lỗi giả với CKEditor
+        ModelState.Clear();
+
+        model.Title         = model.Title?.Trim() ?? string.Empty;
+        model.Summary       = model.Summary?.Trim();
         model.CoverImageUrl = model.CoverImageUrl?.Trim();
-        model.ContentHtml = model.ContentHtml?.Trim() ?? string.Empty;
+        model.ContentHtml   = model.ContentHtml?.Trim() ?? string.Empty;
 
         if (string.IsNullOrWhiteSpace(model.Title))
-        {
             ModelState.AddModelError(nameof(BlogPost.Title), "Vui lòng nhập tiêu đề bài viết.");
-        }
 
         if (string.IsNullOrWhiteSpace(model.ContentHtml))
-        {
             ModelState.AddModelError(nameof(BlogPost.ContentHtml), "Vui lòng nhập nội dung bài viết.");
-        }
 
         if (!ModelState.IsValid)
-        {
             return View(model);
-        }
 
         model.CoverImageUrl = await SaveCoverImageAsync(CoverImageFile, model.CoverImageUrl);
-        var baseSlug = SlugHelper.GenerateSlug(model.Title);
-        model.Slug = await BuildUniqueSlugAsync(baseSlug);
+
+        var baseSlug  = SlugHelper.GenerateSlug(model.Title);
+        model.Slug    = await BuildUniqueSlugAsync(baseSlug);
         model.AdminId = adminId.Value;
-        model.CreatedAt = DateTime.Now;
-        model.UpdatedAt = DateTime.Now;
+        model.CreatedAt   = DateTime.Now;
+        model.UpdatedAt   = DateTime.Now;
         model.PublishedAt = model.IsPublished ? DateTime.Now : null;
 
         _context.BlogPosts.Add(model);
@@ -103,11 +97,7 @@ public class BlogController : Controller
     public async Task<IActionResult> Edit(int id)
     {
         var post = await _context.BlogPosts.FindAsync(id);
-        if (post == null)
-        {
-            return NotFound();
-        }
-
+        if (post == null) return NotFound();
         return View(post);
     }
 
@@ -116,49 +106,45 @@ public class BlogController : Controller
     public async Task<IActionResult> Edit(int id, BlogPost model, IFormFile? CoverImageFile)
     {
         var post = await _context.BlogPosts.FindAsync(id);
-        if (post == null)
-        {
-            return NotFound();
-        }
+        if (post == null) return NotFound();
 
-        model.Title = model.Title?.Trim() ?? string.Empty;
-        model.Summary = model.Summary?.Trim();
+        // ✅ FIX: Xóa ModelState cũ từ auto model binding để tránh lỗi giả với CKEditor
+        ModelState.Clear();
+
+        model.Title         = model.Title?.Trim() ?? string.Empty;
+        model.Summary       = model.Summary?.Trim();
         model.CoverImageUrl = model.CoverImageUrl?.Trim();
-        model.ContentHtml = model.ContentHtml?.Trim() ?? string.Empty;
+        model.ContentHtml   = model.ContentHtml?.Trim() ?? string.Empty;
 
         if (string.IsNullOrWhiteSpace(model.Title))
-        {
             ModelState.AddModelError(nameof(BlogPost.Title), "Vui lòng nhập tiêu đề bài viết.");
-        }
 
         if (string.IsNullOrWhiteSpace(model.ContentHtml))
-        {
             ModelState.AddModelError(nameof(BlogPost.ContentHtml), "Vui lòng nhập nội dung bài viết.");
-        }
 
         if (!ModelState.IsValid)
         {
-            model.Id = id;
-            model.AdminId = post.AdminId;
+            model.Id        = id;
+            model.AdminId   = post.AdminId;
             model.CreatedAt = post.CreatedAt;
-            model.Slug = post.Slug;
+            model.Slug      = post.Slug;
             return View(model);
         }
 
-        model.CoverImageUrl = await SaveCoverImageAsync(CoverImageFile, model.CoverImageUrl ?? post.CoverImageUrl);
+        var coverFallback  = string.IsNullOrWhiteSpace(model.CoverImageUrl) ? post.CoverImageUrl : model.CoverImageUrl;
+        post.CoverImageUrl = await SaveCoverImageAsync(CoverImageFile, coverFallback);
 
         if (!string.Equals(post.Title, model.Title, StringComparison.OrdinalIgnoreCase))
         {
             var newSlug = SlugHelper.GenerateSlug(model.Title);
-            post.Slug = await BuildUniqueSlugAsync(newSlug, id);
+            post.Slug   = await BuildUniqueSlugAsync(newSlug, id);
         }
 
-        post.Title = model.Title;
-        post.Summary = model.Summary;
+        post.Title       = model.Title;
+        post.Summary     = model.Summary;
         post.ContentHtml = model.ContentHtml;
-        post.CoverImageUrl = model.CoverImageUrl;
         post.IsPublished = model.IsPublished;
-        post.UpdatedAt = DateTime.Now;
+        post.UpdatedAt   = DateTime.Now;
         post.PublishedAt = post.IsPublished ? post.PublishedAt ?? DateTime.Now : null;
 
         await _context.SaveChangesAsync();
@@ -185,23 +171,18 @@ public class BlogController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    // ── HELPERS ──────────────────────────────────────────────────────────────
+
     private int? GetAdminId()
     {
         var claim = User.FindFirst("AdminId")?.Value;
-        if (int.TryParse(claim, out var adminId))
-        {
-            return adminId;
-        }
-
-        return null;
+        return int.TryParse(claim, out var adminId) ? adminId : null;
     }
 
     private async Task<string?> SaveCoverImageAsync(IFormFile? coverImageFile, string? fallbackUrl)
     {
         if (coverImageFile == null || coverImageFile.Length == 0)
-        {
             return string.IsNullOrWhiteSpace(fallbackUrl) ? null : fallbackUrl.Trim();
-        }
 
         var uploadsFolder = Path.Combine(_env.WebRootPath, "uploads/blog");
         Directory.CreateDirectory(uploadsFolder);
@@ -219,11 +200,12 @@ public class BlogController : Controller
 
     private async Task<string> BuildUniqueSlugAsync(string baseSlug, int? ignoreId = null)
     {
-        var safeBase = string.IsNullOrWhiteSpace(baseSlug) ? "blog-post" : baseSlug;
+        var safeBase  = string.IsNullOrWhiteSpace(baseSlug) ? "blog-post" : baseSlug;
         var candidate = safeBase;
-        var counter = 2;
+        var counter   = 2;
 
-        while (await _context.BlogPosts.AnyAsync(b => b.Slug == candidate && (!ignoreId.HasValue || b.Id != ignoreId.Value)))
+        while (await _context.BlogPosts.AnyAsync(b =>
+            b.Slug == candidate && (!ignoreId.HasValue || b.Id != ignoreId.Value)))
         {
             candidate = $"{safeBase}-{counter}";
             counter++;

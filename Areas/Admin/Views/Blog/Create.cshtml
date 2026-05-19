@@ -63,27 +63,46 @@
 </div>
 
 @section Scripts {
-	<partial name="_ValidationScriptsPartial" />
-	<script src="https://cdn.ckeditor.com/ckeditor5/48.0.0/classic/ckeditor.js"></script>
+
+    <partial name="_ValidationScriptsPartial" />
+
 	<script>
 		let editorInstance;
 
 		document.addEventListener("DOMContentLoaded", function () {
-			ClassicEditor
-				.create(document.querySelector('#blogEditor'))
-				.then(editor => {
-					editorInstance = editor;
-					editor.ui.view.editable.element.style.minHeight = '400px';
-				})
-				.catch(error => {
-					console.error(error);
-				});
 
-			document.querySelector('form').addEventListener('submit', function () {
-				if (editorInstance) {
-					document.querySelector('#blogEditor').value = editorInstance.getData();
-				}
-			});
+			if (window.ClassicEditor) {
+				ClassicEditor
+					.create(document.querySelector('#blogEditor'))
+					.then(editor => {
+						editorInstance = editor;
+						editor.ui.view.editable.element.style.minHeight = "350px";
+
+						var initial = document.querySelector('#blogEditor').value || '';
+						editor.setData(initial);
+					})
+					.catch(error => {
+						console.error('CKEditor init error:', error);
+					});
+			} else {
+				console.warn('CKEditor not found on page.');
+			}
+
+			// Ensure editor data is synced on form submit (covers Enter key, programmatic submit)
+			const formEl = document.querySelector('#blogEditor')?.closest('form') || document.querySelector('form');
+			if (formEl) {
+				formEl.addEventListener('submit', function (e) {
+					if (editorInstance) {
+						var data = editorInstance.getData();
+						console.log('📝 Create (submit): content length =', data.length);
+						document.querySelector('#blogEditor').value = data;
+					} else {
+						console.log('📝 Create (submit): no editor instance, using textarea value');
+					}
+					// allow submit to continue
+				});
+			}
+
 		});
 	</script>
 }

@@ -1,130 +1,47 @@
 @model IEnumerable<LapTopBD.Models.BlogPost>
+
 @{
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
     ViewData["Title"] = "Danh sách blog";
 }
 
-<style>
-    /* --- CẤU TRÚC LỚP BỌC CHỐNG GIÃN TRÊN PC & HỖ TRỢ CUỘN TRÊN MOBILE --- */
-    .custom-table-wrapper {
-        background-color: #ffffff;
-        border: 1px solid #e3e6f0;
-        width: 100% !important;
-        overflow-x: auto !important; /* Kích hoạt cuộn ngang mượt mà cho điện thoại */
-        -webkit-overflow-scrolling: touch;
-    }
-
-        .custom-table-wrapper table.blog-table {
-            /* Giúp bảng ôm sát nội dung trên PC, tự co giãn tự nhiên không bị thưa thớt */
-            width: max-content !important;
-            min-width: 100% !important;
-            table-layout: auto !important;
-            border-collapse: collapse !important;
-            margin-bottom: 0 !important;
-        }
-
-    .blog-table td,
-    .blog-table th {
-        vertical-align: middle !important;
-        padding: 12px 15px !important;
-    }
-
-    /* --- PHÂN BỔ KÍCH THƯỚC CÁC CỘT HỢP LÝ --- */
-    .blog-table .col-id {
-        width: 60px !important;
-    }
-
-    .blog-table .col-title {
-        min-width: 250px !important;
-        max-width: 400px !important;
-        white-space: normal !important;
-        word-break: break-word;
-    }
-
-    .blog-table .col-status {
-        width: 130px !important;
-        text-align: center;
-    }
-
-    .blog-table .col-date {
-        width: 160px !important;
-        white-space: nowrap !important;
-    }
-
-    .blog-table .col-author {
-        min-width: 140px !important;
-        max-width: 200px !important;
-        white-space: normal !important;
-        word-break: break-word;
-    }
-
-    .blog-table .col-actions {
-        width: 140px !important;
-    }
-
-    /* --- ĐOẠN CSS ĐÁP ỨNG RIÊNG CHO ĐIỆN THOẠI (RESPONSIVE) --- */
-    @@media (max-width: 767.98px) {
-        .page-header-wrap {
-            flex-direction: column !important;
-            align-items: flex-start !important;
-            gap: 12px !important;
-        }
-
-            .page-header-wrap h4 {
-                font-size: 1.4rem !important;
-                font-weight: 700;
-            }
-
-            .page-header-wrap .btn {
-                width: 100% !important; /* Nút Tạo bài viết phủ rộng toàn màn hình trên mobile để dễ bấm */
-                text-center: center;
-            }
-        /* Thu nhỏ nhẹ font chữ hệ thống bảng để hiển thị nhiều thông tin hơn */
-        .blog-table th,
-        .blog-table td {
-            font-size: 0.85rem !important;
-            padding: 10px 12px !important;
-        }
-    }
-</style>
-
 <div class="row">
     <div class="col-12">
-        <div class="d-flex justify-content-between align-items-center mb-4 page-header-wrap">
-            <h4 class="mb-0 fw-bold text-dark">Danh sách bài viết blog</h4>
-            <a class="btn btn-primary shadow-sm px-4" asp-area="Admin" asp-controller="Blog" asp-action="Create">
-                <i class="fas fa-plus me-1"></i> Tạo bài viết
-            </a>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="mb-0">Danh sách bài viết blog</h4>
+            <a class="btn btn-primary" asp-area="Admin" asp-controller="Blog" asp-action="Create">Tạo bài viết</a>
         </div>
 
         @if (TempData["Success"] != null)
         {
-            <div class="alert alert-success shadow-sm border-0">@TempData["Success"]</div>
+            <div class="alert alert-success">@TempData["Success"]</div>
         }
 
         @if (TempData["Error"] != null)
         {
-            <div class="alert alert-danger shadow-sm border-0">@TempData["Error"]</div>
+            <div class="alert alert-danger">@TempData["Error"]</div>
         }
 
-        <div class="card shadow-sm rounded-3 border-0">
-            <div class="card-body p-0 custom-table-wrapper rounded-3">
-                <table class="table table-hover align-middle blog-table">
-                    <thead class="table-primary">
+        <div class="card">
+            <div class="card-body table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead>
                         <tr>
-                            <th class="col-id text-center">ID</th>
-                            <th class="col-title">Tiêu đề</th>
-                            <th class="col-status text-center">Trạng thái</th>
-                            <th class="col-date">Ngày tạo</th>
-                            <th class="col-author">Tác giả</th>
-                            <th class="col-actions text-end">Thao tác</th>
+                            <th style="width: 60px;">ID</th>
+                            <th>Tiêu đề</th>
+                            <th style="width: 170px;">Trạng thái</th>
+                            <th style="width: 220px;">Ngày tạo</th>
+                            <th style="width: 220px;">Tác giả</th>
+                            <th style="width: 180px;" class="text-end">Thao tác</th>
                         </tr>
                     </thead>
+
                     <tbody>
+
                         @if (!Model.Any())
                         {
                             <tr>
-                                <td colspan="6" class="text-center text-muted py-4 fw-bold">Chưa có bài viết nào trong hệ thống.</td>
+                                <td colspan="6" class="text-center text-muted">Chưa có bài viết nào.</td>
                             </tr>
                         }
                         else
@@ -132,12 +49,12 @@
                             foreach (var post in Model)
                             {
                                 <tr>
-                                    <td class="col-id text-center fw-bold text-secondary">@post.Id</td>
-                                    <td class="col-title">
-                                        <div class="fw-bold text-dark mb-0.5">@post.Title</div>
-                                        <small class="text-muted d-block text-truncate" style="max-width: 350px;">@post.Slug</small>
+                                    <td>@post.Id</td>
+                                    <td>
+                                        <div class="fw-semibold">@post.Title</div>
+                                        <small class="text-muted">@post.Slug</small>
                                     </td>
-                                    <td class="col-status text-center">
+                                    <td>
                                         @if (post.IsPublished)
                                         {
                                             <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1.5 rounded">Đã đăng</span>
@@ -147,23 +64,26 @@
                                             <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle px-2 py-1.5 rounded">Bản nháp</span>
                                         }
                                     </td>
-                                    <td class="col-date text-secondary">@post.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
-                                    <td class="col-author fw-semibold text-dark">@(post.Admin?.FullName ?? "Không rõ")</td>
-                                    <td class="col-actions text-end">
-                                        <div class="d-flex gap-1 justify-content-end">
-                                            <a class="btn btn-sm btn-outline-primary px-2.5" asp-area="Admin" asp-controller="Blog" asp-action="Edit" asp-route-id="@post.Id">Sửa</a>
-                                            <form asp-area="Admin" asp-controller="Blog" asp-action="Delete" asp-route-id="@post.Id" method="post" class="d-inline" onsubmit="return confirm('Bạn có chắc chắn muốn xóa bài viết này?');">
-                                                @Html.AntiForgeryToken()
-                                                <button type="submit" class="btn btn-sm btn-outline-danger px-2.5">Xóa</button>
-                                            </form>
-                                        </div>
+                                    <td>@post.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
+                                    <td>@(post.Admin?.FullName ?? "Không rõ")</td>
+                                    <td class="text-end">
+                                        <a class="btn btn-sm btn-outline-primary" asp-area="Admin" asp-controller="Blog" asp-action="Edit" asp-route-id="@post.Id">Sửa</a>
+                                        <form asp-area="Admin" asp-controller="Blog" asp-action="Delete" asp-route-id="@post.Id" method="post" class="d-inline" onsubmit="return confirm('Bạn có chắc chắn muốn xóa bài viết này?');">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">Xóa</button>
+                                        </form>
                                     </td>
+
                                 </tr>
                             }
                         }
+
                     </tbody>
+
                 </table>
+
             </div>
         </div>
+
     </div>
 </div>

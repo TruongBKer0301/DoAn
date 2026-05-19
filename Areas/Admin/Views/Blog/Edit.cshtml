@@ -1,4 +1,5 @@
 @model LapTopBD.Models.BlogPost
+
 @{
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
     ViewData["Title"] = "Sửa bài viết blog";
@@ -8,71 +9,85 @@
     <div class="col-xl-10">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="card-title mb-0">Chỉnh sửa bài viết</h5>
+                <h5 class="mb-0">Chỉnh sửa bài viết</h5>
                 <a class="btn btn-light" asp-area="Admin" asp-controller="Blog" asp-action="Index">Quay lại</a>
             </div>
 
             <div class="card-body">
-                <form asp-area="Admin" asp-controller="Blog" asp-action="Edit" asp-route-id="@Model.Id" method="post" enctype="multipart/form-data">
-                    @Html.AntiForgeryToken()
+                <form asp-area="Admin"
+                      asp-controller="Blog"
+                      asp-action="Edit"
+                      asp-route-id="@Model.Id"
+                      method="post"
+                      enctype="multipart/form-data"
+                      id="editForm">
 
+                    @Html.AntiForgeryToken()
                     <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-                    <!-- Title -->
+                    <!-- TITLE -->
                     <div class="mb-3">
                         <label asp-for="Title" class="form-label">Tiêu đề</label>
-                        <input asp-for="Title" class="form-control" maxlength="200" />
+                        <input asp-for="Title" class="form-control" />
                         <span asp-validation-for="Title" class="text-danger"></span>
                     </div>
 
-                    <!-- Summary -->
+                    <!-- SUMMARY -->
                     <div class="mb-3">
-                        <label asp-for="Summary" class="form-label">Tóm tắt ngắn</label>
-                        <textarea asp-for="Summary" class="form-control" rows="3" maxlength="500"></textarea>
+                        <label asp-for="Summary" class="form-label">Tóm tắt</label>
+                        <textarea asp-for="Summary" class="form-control" rows="3"></textarea>
                         <span asp-validation-for="Summary" class="text-danger"></span>
                     </div>
 
-                    <!-- Cover URL -->
+                    <!-- COVER URL -->
                     <div class="mb-3">
-                        <label asp-for="CoverImageUrl" class="form-label">Ảnh đại diện (URL)</label>
-                        <input asp-for="CoverImageUrl" class="form-control" maxlength="300" />
-                        <span asp-validation-for="CoverImageUrl" class="text-danger"></span>
+                        <label asp-for="CoverImageUrl" class="form-label">Ảnh URL</label>
+                        <input asp-for="CoverImageUrl" class="form-control" />
                     </div>
 
-                    <!-- Preview image -->
-                    @if (!string.IsNullOrWhiteSpace(Model.CoverImageUrl))
+                    <!-- CURRENT IMAGE -->
+                    @if (!string.IsNullOrEmpty(Model.CoverImageUrl))
                     {
                         <div class="mb-3">
-                            <label class="form-label d-block">Ảnh hiện tại</label>
-                            <img src="@Model.CoverImageUrl"
-                                 class="img-fluid rounded"
-                                 style="max-height:260px;object-fit:cover;" />
+                            <label class="form-label">Ảnh hiện tại</label>
+                            <div>
+                                <img src="@Model.CoverImageUrl"
+                                     style="max-height:200px;object-fit:cover;border-radius:8px;" />
+                            </div>
                         </div>
                     }
 
-                    <!-- Upload -->
+                    <!-- UPLOAD IMAGE -->
                     <div class="mb-3">
-                        <label class="form-label">Hoặc upload ảnh mới</label>
-                        <input type="file" name="CoverImageFile" class="form-control" accept="image/*" />
+                        <label class="form-label">Upload ảnh mới</label>
+                        <input type="file" name="CoverImageFile" class="form-control" />
                     </div>
 
-                    <!-- CONTENT -->
+                    <!-- CONTENT: hidden input gửi lên server, div cho CKEditor -->
                     <div class="mb-3">
-                        <label asp-for="ContentHtml" class="form-label">Nội dung</label>
-                        <textarea asp-for="ContentHtml" id="blogEditor"></textarea>
+                        <label class="form-label">Nội dung</label>
+
+                        {{-- Hidden input thực sự gửi dữ liệu --}}
+                        <input type="hidden" name="ContentHtml" id="ContentHtml" />
+
+                        {{-- Div này CKEditor sẽ attach vào --}}
+                        <div id="blogEditor">@Html.Raw(Model.ContentHtml)</div>
+
                         <span asp-validation-for="ContentHtml" class="text-danger"></span>
                     </div>
 
-                    <!-- Publish -->
-                    <div class="form-check form-switch mb-4">
+                    <!-- PUBLISH -->
+                    <div class="form-check form-switch mb-3">
                         <input asp-for="IsPublished" class="form-check-input" type="checkbox" />
-                        <label asp-for="IsPublished" class="form-check-label">Đăng bài ngay</label>
+                        <label asp-for="IsPublished" class="form-check-label">Đăng bài</label>
                     </div>
 
+                    <!-- BUTTON -->
                     <div class="d-flex justify-content-end gap-2">
-                        <a class="btn btn-light" asp-action="Index">Hủy</a>
-                        <button type="submit" class="btn btn-primary">Cập nhật</button>
+                        <a class="btn btn-light" asp-area="Admin" asp-controller="Blog" asp-action="Index">Hủy</a>
+                        <button type="button" class="btn btn-primary" id="submitBtn">Cập nhật</button>
                     </div>
+
                 </form>
             </div>
         </div>
@@ -82,32 +97,52 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 
-    <!-- CKEditor chuẩn -->
-    <script src="https://cdn.ckeditor.com/ckeditor5/48.0.0/classic/ckeditor.js"></script>
-
     <script>
         let editorInstance;
 
         document.addEventListener("DOMContentLoaded", function () {
 
-            ClassicEditor
-                .create(document.querySelector('#blogEditor'))
-                .then(editor => {
-                    editorInstance = editor;
+            // Attach CKEditor vào div, không phải textarea
+            // Use the CKEditor instance already included by the layout (~/js/ckeditor.js)
+            if (window.ClassicEditor) {
+                ClassicEditor
+                    .create(document.querySelector('#blogEditor'))
+                    .then(editor => {
+                        editorInstance = editor;
+                        editor.ui.view.editable.element.style.minHeight = "350px";
+                        // Set hidden input initial value from editor content
+                        document.getElementById('ContentHtml').value = editor.getData();
+                        console.log("✅ CKEditor loaded");
+                    })
+                    .catch(error => {
+                        console.error("❌ CKEditor error:", error);
+                    });
+            } else {
+                console.warn('CKEditor not found on page.');
+            }
 
-                    // chỉnh chiều cao
-                    editor.ui.view.editable.element.style.minHeight = '400px';
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-
-            // 🔥 FIX REQUIRED (quan trọng)
-            document.querySelector('form').addEventListener('submit', function () {
+            // Nút submit type="button" — không trigger form submit sớm
+            document.getElementById('submitBtn').addEventListener('click', function () {
                 if (editorInstance) {
-                    document.querySelector('#blogEditor').value = editorInstance.getData();
+                    var data = editorInstance.getData();
+                    console.log("📝 Edit (click): Content length:", data.length);
+                    document.getElementById('ContentHtml').value = data;
                 }
+                document.getElementById('editForm').submit();
             });
+
+            // Also sync on form submit (covers Enter key or other submits)
+            var editFormEl = document.getElementById('editForm');
+            if (editFormEl) {
+                editFormEl.addEventListener('submit', function () {
+                    if (editorInstance) {
+                        var data = editorInstance.getData();
+                        console.log("📝 Edit (submit): Content length:", data.length);
+                        document.getElementById('ContentHtml').value = data;
+                    }
+                });
+            }
+
         });
     </script>
 }
