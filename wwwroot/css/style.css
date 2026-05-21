@@ -10,6 +10,33 @@
 
 .hide-scrollbar::-webkit-scrollbar {
     display: none;
+    
+        /* Desktop: increase spacing between header icons */
+        .header-icons {
+            display: flex;
+            gap: 50px !important; /* increased gap between the four icons */
+            align-items: center;
+            justify-content: flex-end;
+            flex-wrap: nowrap;
+            padding: 0;
+        }
+    
+        .header-icons .top-two-icons {
+            display: flex;
+            gap: 30px !important; /* increased gap between fav and cart */
+            align-items: center;
+        }
+    
+        .header-icons .icon-item {
+            min-width: 44px;
+            height: 44px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            box-sizing: border-box;
+        }
 }
 
 .data-list {
@@ -708,6 +735,128 @@
         font-size: 0.9em;
         color: #000000;
     }
+    .top-two-icons {
+        display: flex;
+        gap: 10px !important; /* increased gap between fav and cart */
+        align-items: center;
+        margin-top: 20px;
+    }
+
+}
+
+/* Header icons layout: ensure fav, cart, confirm, user are on one row on desktop */
+@media (min-width: 992px) {
+    .header-icons {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 12px;
+        column-gap: 12px;
+        flex-wrap: nowrap;
+    }
+
+    .header-icons .top-two-icons {
+        display: flex;
+        gap: 50px;
+        align-items: center;
+    }
+
+    .header-icons .icon-item {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        padding: 6px 8px;
+        border-radius: 8px;
+        background: transparent;
+        color: inherit;
+    }
+
+    .header-icons .icon-item .badge {
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        font-size: 12px;
+        min-width: 20px;
+        height: 20px;
+        line-height: 20px;
+        padding: 0 6px;
+        border-radius: 10px;
+    }
+}
+
+/* Ensure the header icons keep DOM order and don't wrap on small screens */
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+}
+
+.header-icons > * {
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Force the responsive order: fav, cart, confirm, user */
+.header-icons .top-two-icons {
+    order: 1;
+    display: inline-flex;
+    align-items: center;
+}
+
+.header-icons .icon-confirm {
+    order: 2;
+}
+
+.header-icons .user-block {
+    order: 3;
+}
+
+/* Make header icons black by default and ensure badges stay visible */
+.header-icons .icon-item i {
+    color: #000 !important;
+}
+
+.header-icons .icon-item .badge {
+    background: #ff4757;
+    color: #fff;
+}
+
+/* Username above user icon */
+.user-block .user-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #000;
+    line-height: 1;
+    margin-bottom: 2px;
+}
+
+@media (max-width: 991px) {
+    .user-block .user-name {
+        font-size: 12px;
+    }
+}
+
+/* Small diagonal badge showing last name on top-right of user icon */
+.user-block {
+    position: relative; /* container for badge */
+}
+.user-block .user-badge {
+    position: absolute;
+    top: -13px;
+    right: -25px;
+    background: #fff;
+    color: #000;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    transform: rotate(35deg);
+    transform-origin: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    white-space: nowrap;
 }
 
 /*#endregion */

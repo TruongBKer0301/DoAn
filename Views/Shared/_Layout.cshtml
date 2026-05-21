@@ -119,49 +119,60 @@
                             <i class="ri-shopping-cart-2-fill"></i>
                             <span class="badge cart-count">0</span>
                         </a>
-                    </div>
 
-                    <a href="@Url.Action("OrderConfirmation", "Cart")" class="btn icon-item">
-                        <i class="ri-shopping-bag-3-fill"></i>
-                        <span class="badge shopping-count">0</span>
-                    </a>
-
-                    @if (User?.Identity?.IsAuthenticated ?? false)
-                    {
-                        var userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value ?? "User";
-
-                        <button type="button" class="btn icon-item" id="page-header-user-dropdown" data-bs-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                            <i class="ri-user-3-fill"></i>
-                        </button>
-
-                        <div class="dropdown-menu dropdown-menu-end">
-                            <h6 class="dropdown-header">Xin chào @userName!</h6>
-
-                            <a href="@Url.Action("Profile", "UserAuth")" class="dropdown-item">
-                                <i class="mdi mdi-account text-muted fs-16 align-middle me-1"></i>
-                                <span class="align-middle">Hồ Sơ Cá Nhân</span>
-                            </a>
-
-                            <div class="dropdown-divider"></div>
-
-                            <form action="@Url.Action("Logout", "UserAuth")" method="post" style="display:inline;">
-                                @Html.AntiForgeryToken()
-                                <button type="submit" class="dropdown-item"
-                                        style="background:none;border:none;padding:0;color:inherit;text-align:left;width:100%;">
-                                    <i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>
-                                    <span class="align-middle">Đăng xuất</span>
-                                </button>
-                            </form>
-                        </div>
-                    }
-                    else
-                    {
-                        <a href="@Url.Action("Login", "UserAuth")" class="btn icon-item" id="login-link">
-                            <i class="ri-user-3-fill"></i>
-                            <span class="badge">Đăng nhập / Đăng ký</span>
+                    
+                        <a href="@Url.Action("OrderConfirmation", "Cart")" class="btn icon-item icon-confirm">
+                            <i class="ri-shopping-bag-3-fill"></i>
+                            <span class="badge shopping-count">0</span>
                         </a>
-                    }
+
+                        @if (User?.Identity?.IsAuthenticated ?? false)
+                        {
+                            var userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value ?? "User";
+                            var nameParts = (userName ?? string.Empty).Trim().Split(' ',
+                            StringSplitOptions.RemoveEmptyEntries);
+                            var displayName = nameParts.Length > 0 ? nameParts[nameParts.Length - 1] : userName;
+
+                            <div class="user-block d-inline-block position-relative">
+                                <div class="dropdown d-inline-block">
+                                    <button type="button" class="btn icon-item" id="page-header-user-dropdown"
+                                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="ri-user-3-fill"></i>
+                                    </button>
+
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <h6 class="dropdown-header">Xin chào @userName!</h6>
+
+                                        <a href="@Url.Action("Profile", "UserAuth")" class="dropdown-item">
+                                            <i class="mdi mdi-account text-muted fs-16 align-middle me-1"></i>
+                                            <span class="align-middle">Hồ Sơ Cá Nhân</span>
+                                        </a>
+
+                                        <div class="dropdown-divider"></div>
+
+                                        <form action="@Url.Action("Logout", "UserAuth")" method="post"
+                                              style="display:inline;">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="dropdown-item"
+                                                    style="background:none;border:none;padding:0;color:inherit;text-align:left;width:100%;">
+                                                <i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>
+                                                <span class="align-middle">Đăng xuất</span>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <span class="user-badge">@displayName</span>
+                            </div>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Login", "UserAuth")" class="btn icon-item" id="login-link">
+                                <i class="ri-user-3-fill"></i>
+                                <span class="badge">Đăng nhập / Đăng ký</span>
+                            </a>
+                        }
+                    </div>
                 </div>
             </div>
         </div>
@@ -592,42 +603,40 @@
 
     @@media (max-width: 768px) {
 
-    .top-search-box { width: 100%; }
-    .search-suggest-box { max-height: 350px; overflow-y: auto; }
+    .top-search-box {
+    width: 100%;
+    }
 
-    /* Header icons mobile: fav/cart occupy first row, each 50% width */
+    .search-suggest-box {
+    max-height: 350px;
+    overflow-y: auto;
+    }
+
+    /* Header icons mobile: evenly spaced icons */
     .header-icons {
     display: flex;
-    gap: 6px;
     align-items: center;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    overflow-x: hidden;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    padding: 20px 0 10px 0;
+    padding: 10px 0;
     width: 100%;
     box-sizing: border-box;
     }
 
     .header-icons .icon-item {
-    min-width: 44px;
+    flex: 1 1 0;
+    min-width: 0;
     height: 44px;
     border-radius: 8px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 0;
-    order: 2;
     box-sizing: border-box;
     position: relative;
-    }
-
-    .header-icons .icon-item.icon-fav,
-    .header-icons .icon-item.icon-cart {
-    flex: 0 0 50%;
-    justify-content: center;
-    order: 1;
-    padding: 0;
+    text-align: center;
     }
 
     /* show notification/count badges on header icons in mobile */
@@ -648,39 +657,52 @@
     }
 
     /* ── MOBILE LOGO + SEARCH ── */
-    .mobile-search-row { display: flex; align-items: center; gap: 10px; }
-    .mobile-logo-img { height: 42px; width: auto; object-fit: contain; display: block; }
+    .mobile-search-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    }
+
+    .mobile-logo-img {
+    height: 42px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    }
     }
 
     @@media (max-width: 400px) {
-        .header-icons {
-            overflow-x: visible !important;
-            padding-bottom: 6px;
-        }
+    .header-icons {
+    overflow-x: visible !important;
+    padding-bottom: 6px;
+    }
 
-        .header-icons .icon-item {
-            min-width: 36px;
-            height: 36px;
-        }
+    .header-icons .icon-item {
+    min-width: 36px;
+    height: 36px;
+    }
 
-        .header-icons .icon-item.icon-fav,
-        .header-icons .icon-item.icon-cart {
-            flex: 0 0 33%;
-            order: 1;
-        }
+    .header-icons .icon-item.icon-fav,
+    .header-icons .icon-item.icon-cart {
+    flex: 0 0 33%;
+    order: 1;
+    }
     }
 
     @@media (min-width: 992px) {
-    .mobile-logo { display: none !important; }
+    .mobile-logo {
+    display: none !important;
     }
+    }
+
     @@media (max-width: 768px) {
     .row.border-bottom {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background: #fff;
-        z-index: 9999;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    z-index: 9999;
     }
-}
+    }
 </style>

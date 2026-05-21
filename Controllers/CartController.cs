@@ -176,9 +176,10 @@ namespace LapTopBD.Controllers
                 return Json(new { success = false, cartItemCount = 0 });
             }
 
+            // Count distinct cart items (number of rows) rather than sum of quantities
             int cartItemCount = await _context.CartItems
                 .Where(c => c.UserId == userId)
-                .SumAsync(c => c.Quantity);
+                .CountAsync();
 
             return Json(new { success = true, cartItemCount });
         }
@@ -193,8 +194,9 @@ namespace LapTopBD.Controllers
                 return Json(new { success = false, orderCount = 0 });
             }
 
+            // Count all orders for the user (match what OrderConfirmation shows)
             int orderCount = await _context.Order
-                .Where(o => o.UserId == userId && o.OrderStatus != "Cancelled")
+                .Where(o => o.UserId == userId)
                 .CountAsync();
 
             return Json(new { success = true, orderCount });
@@ -757,7 +759,6 @@ namespace LapTopBD.Controllers
                 .Include(o => o.Product)
                 .Where(o => o.UserId == userId)
                 .OrderByDescending(o => o.OrderDate)
-                .Take(10) // Lấy 10 đơn hàng gần nhất
                 .ToListAsync();
             ViewBag.ShowBanner = false;
             return View(orders);

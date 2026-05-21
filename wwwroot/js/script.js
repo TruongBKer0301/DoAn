@@ -1834,12 +1834,15 @@ $(function () {
     });
 
     //Thêm vào giỏ hàng
-    $(document).on('click', '#add-to-fav-btn', function (e) {
+    $(document).on('click', '.btn-add-to-fav', function (e) {
         e.preventDefault();
         var productId = $(this).data('product-id');
-
         var favButton = $(this);
         var isFavorited = favButton.hasClass('is-favorited');
+
+        // prevent duplicate requests
+        if (favButton.data('processing')) return;
+        favButton.data('processing', true);
 
         $.ajax({
             url: isFavorited ? '/Fav/RemoveFromFav' : '/Fav/AddToFav',
@@ -1849,6 +1852,26 @@ $(function () {
             success: function (response) {
                 if (response.success) {
                     setFavoriteState(productId, !isFavorited);
+
+                    // If we removed a favorite while on the Favorites page, remove the product card
+                    var isFavoritesPage = window.location.pathname.toLowerCase().startsWith('/fav');
+                    if (isFavorited && isFavoritesPage) {
+                        var container = $('#productContainer');
+                        if (container.length) {
+                            var productCard = favButton.closest('[class*="col-"]');
+                            if (productCard.length) {
+                                productCard.css({ opacity: 0, transform: 'scale(0.95)' });
+                                setTimeout(function () {
+                                    productCard.remove();
+                                    // Nếu xóa xong mà không còn sp nào thì hiện thông báo trống
+                                    if ($('#productContainer').children().length === 0) {
+                                        $('#productContainer').html('<div class="col-12 text-center"><h3>Danh sách yêu thích trống!</h3></div>');
+                                    }
+                                }, 300);
+                            }
+                        }
+                    }
+
                     updateFavCount();
                 } else {
                     alert(response.message);
@@ -1857,6 +1880,8 @@ $(function () {
             error: function () {
                 alert('Đã xảy ra lỗi khi xử lý yêu thích!');
             }
+        }).always(function () {
+            favButton.removeData('processing');
         });
     });
 
@@ -1898,6 +1923,7 @@ $(function () {
             type: 'GET',
             success: function (response) {
                 if (response.success) {
+                    console.log('[DEBUG] GetCartCount response:', response);
                     $('.cart-count').text(response.cartItemCount).addClass('bounce');
                     setTimeout(() => $('.cart-count').removeClass('bounce'), 500);
                 }
@@ -1914,7 +1940,7 @@ $(function () {
             url: '/Cart/GetOrderCount',
             type: 'GET',
             success: function (response) {
-                console.log('[DEBUG] Phản hồi từ GetOrderCount:', response);
+                console.log('[DEBUG] GetOrderCount response:', response);
                 if (response.success) {
                     $('.shopping-count').text(response.orderCount);
                 } else {
@@ -2001,48 +2027,8 @@ $(function () {
         });
     });
 
-    // Xóa ưa thích
-    $(document).on('click', '.remove-fav-btn', function () {
-        console.log("Batman is cleaning the streets...");
-
-        var btn = $(this);
-        var productid = btn.data('id');
-        var productItem = btn.closest('.col-lg-3');
-
-        $.ajax({
-            url: '/Fav/RemoveFromFav',
-            type: 'POST',
-            data: { productid: productid },
-            success: function (response) {
-                if (response.success) {
-                    // Hiệu ứng biến mất mượt mà
-                    productItem.fadeOut(200, function () {
-                        $(this).remove();
-
-                        // Nếu xóa xong mà không còn sp nào thì hiện thông báo trống
-                        if ($('#productContainer').children().length === 0) {
-                            $('#productContainer').html('<div class="col-12 text-center"><h3>Danh sách yêu thích trống!</h3></div>');
-                        }
-                    });
-
-                    // Cập nhật lại số lượng trên icon trái tim ở Header
-                    // Bạn có thể dùng hàm updateFavCount() cũ hoặc lấy từ response nếu có
-                    setFavoriteState(productid, false);
-                    if (response.wishlistcount !== undefined) {
-                        $('.fav-count').text(response.wishlistcount);
-                    } else {
-                        updateFavCount();
-                    }
-
-                } else {
-                    alert(response.message);
-                }
-            },
-            error: function () {
-                alert('Đã xảy ra lỗi khi xóa sản phẩm!');
-            }
-        });
-    });
+    // Note: removal via favorites uses the same '.btn-add-to-fav' handler above —
+    // clicking a favorited button will call '/Fav/RemoveFromFav'.
 
 
 

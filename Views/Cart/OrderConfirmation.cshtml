@@ -21,10 +21,6 @@
 </div>
 <!-- Page Header End -->
 
-<div class="custom-container">
-    @if (TempData["Error"] != null)
-    {
-        <div class="alert alert-danger">@TempData["Error"]</div>
     }
     @if (TempData["Success"] != null)
     {
@@ -283,7 +279,8 @@
     /* ===== TABLE ===== */
     .custom-table-container {
         border-radius: 12px;
-        overflow: hidden;
+        /* Allow the table to expand to show all rows */
+        overflow: visible;
         border: 1px solid #e5e7eb;
         box-shadow: 0 1px 4px rgba(0,0,0,0.06);
     }

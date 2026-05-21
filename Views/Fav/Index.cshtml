@@ -42,7 +42,7 @@
                                                     <img class="w-100 h-100 object-fit-cover" src="@product.ProductImage1" alt="@(product.ProductName ?? "Product")" onerror="this.src='/images/laptop.png'" />
                                                 </a>
 
-                                                <button class="remove-fav-btn btn-add-to-fav is-favorited" data-id="@product.Id" title="Xóa khỏi yêu thích">
+                                                <button class="btn-add-to-fav is-favorited" data-product-id="@product.Id" title="Xóa khỏi yêu thích">
                                                     <i class="ri-heart-fill"></i>
                                                 </button>
 
@@ -319,104 +319,3 @@
         .hero-cart .hero-title { font-size: 28px; }
     }
 </style>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Handle remove from favorites
-        document.addEventListener('click', function(e) {
-            if (e.target.closest('.remove-fav-btn')) {
-                const button = e.target.closest('.remove-fav-btn');
-                const productId = button.dataset.id;
-
-                console.log('Removing product from favorites:', productId);
-
-                fetch('/Fav/RemoveFromFav', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ productid: productId })
-                })
-                .then(res => res.json())
-                .then(data => {
-                    console.log('Response:', data);
-                    if (data.success) {
-                        // Safely find the closest grid column container (works with col-6, col-md-6, col-lg-4, etc.)
-                        const productCard = button.closest('[class*="col-"]');
-                        if (productCard) {
-                            productCard.style.opacity = '0';
-                            productCard.style.transform = 'scale(0.95)';
-                            setTimeout(() => productCard.remove(), 300);
-                        }
-                    } else {
-                        alert(data.message || 'Có lỗi xảy ra!');
-                    }
-                })
-                .catch(err => {
-                    console.error('Error:', err);
-                    alert('Có lỗi xảy ra!');
-                });
-            }
-        });
-
-        // Handle add to cart
-        document.addEventListener('click', function(e) {
-            if (e.target.closest('.btn-add-to-cart') && e.target.closest('.btn-add-to-cart').dataset.productId) {
-                const button = e.target.closest('.btn-add-to-cart');
-                const productId = button.dataset.productId;
-                
-                console.log('Adding to cart:', productId);
-                
-                fetch('/Cart/AddToCart', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ productId: productId, quantity: 1 })
-                })
-                .then(res => res.json())
-                .then(data => {
-                    console.log('Response:', data);
-                    if (data.success) {
-                        alert(data.message || 'Thêm vào giỏ hàng thành công!');
-                    } else {
-                        alert(data.message || 'Có lỗi xảy ra!');
-                    }
-                })
-                .catch(err => {
-                    console.error('Error:', err);
-                    alert('Có lỗi xảy ra!');
-                });
-            }
-        });
-
-        // Handle buy now
-        document.addEventListener('click', function(e) {
-            if (e.target.closest('.btn-buy-now')) {
-                const button = e.target.closest('.btn-buy-now');
-                const productId = button.dataset.productId;
-                
-                console.log('Buy now:', productId);
-                
-                fetch('/Cart/AddToCart', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ productId: productId, quantity: 1 })
-                })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.success) {
-                        window.location.href = '/Cart/Index';
-                    } else {
-                        alert(data.message || 'Có lỗi xảy ra!');
-                    }
-                })
-                .catch(err => {
-                    console.error('Error:', err);
-                    alert('Có lỗi xảy ra!');
-                });
-            }
-        });
-    });
-</script>
