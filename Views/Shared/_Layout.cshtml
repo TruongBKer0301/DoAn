@@ -167,9 +167,9 @@
                         }
                         else
                         {
-                            <a href="@Url.Action("Login", "UserAuth")" class="btn icon-item" id="login-link">
+                            <a href="@Url.Action("Login", "UserAuth")" class="btn icon-item user-block" id="login-link">
                                 <i class="ri-user-3-fill"></i>
-                                <span class="badge">Đăng nhập / Đăng ký</span>
+                                <span class="badge"><span class="login-text">Đăng nhập/Đăng ký</span></span>
                             </a>
                         }
                     </div>
@@ -618,6 +618,7 @@
     align-items: center;
     justify-content: space-between;
     flex-wrap: nowrap;
+    gap: 20px;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     padding: 10px 0;
@@ -648,12 +649,27 @@
     min-width: 18px;
     height: 18px;
     padding: 0 5px;
-    font-size: 12px;
+    font-size: 8px;
     border-radius: 999px;
     background: #dc2626;
     color: #fff;
     align-items: center;
     justify-content: center;
+    }
+
+    /* Keep the header order consistent in both login states */
+    .header-icons .top-two-icons {
+    order: 1;
+    display: inline-flex;
+    align-items: center;
+    }
+
+    .header-icons .icon-confirm {
+    order: 2;
+    }
+
+    .header-icons .user-block {
+    order: 3;
     }
 
     /* ── MOBILE LOGO + SEARCH ── */
@@ -677,15 +693,23 @@
     padding-bottom: 6px;
     }
 
+    .header-icons .top-two-icons {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    }
+
     .header-icons .icon-item {
     min-width: 36px;
     height: 36px;
+    flex: 0 0 auto;
     }
 
     .header-icons .icon-item.icon-fav,
     .header-icons .icon-item.icon-cart {
-    flex: 0 0 33%;
-    order: 1;
+    flex: 0 0 auto;
+    order: initial;
     }
     }
 
