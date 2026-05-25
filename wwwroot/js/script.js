@@ -1752,10 +1752,14 @@ $(function () {
     }
 
     //Thêm vào giỏ hàng
-    $(document).on('click', '#add-to-cart-btn', function (e) {
+    $(document).on('click', '.btn-add-to-cart[data-product-id]', function (e) {
         e.preventDefault();
 
         var productId = $(this).data('product-id');
+        if (!productId) {
+            return;
+        }
+
         var quantity = parseInt($('#quantity').val()) || 1;
         var cartIcon = $('.icon-cart'); // Icon giỏ hàng
         var addToCartBtn = $(this); // Nút "Thêm vào giỏ hàng"
