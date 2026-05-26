@@ -270,9 +270,10 @@ namespace LapTopBD.Areas.Admin.Controllers
                 MonthlyVisits = monthlyVisitTotal,
                 TotalVisits = totalVisits,
 
-                BrowserStats = topProducts, // top sản phẩm bán chạy
+                BrowserStats = browserStats,
                 DeviceStats = deviceStats,
-                TopIps = ipStats
+                TopIps = ipStats,
+                TopProducts = topProducts
             };
         }
 

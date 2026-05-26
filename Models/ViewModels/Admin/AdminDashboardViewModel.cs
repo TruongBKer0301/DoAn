@@ -29,6 +29,7 @@
         public List<DashboardStatItem> BrowserStats { get; set; } = new();
         public List<DashboardStatItem> DeviceStats { get; set; } = new();
         public List<DashboardStatItem> TopIps { get; set; } = new();
+        public List<DashboardStatItem> TopProducts { get; set; } = new();
     }
 
     public class DashboardStatItem

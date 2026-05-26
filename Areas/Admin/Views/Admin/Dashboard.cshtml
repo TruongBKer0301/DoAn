@@ -83,7 +83,7 @@
                         Doanh thu theo ngày — Tháng @Model.SelectedMonth/@Model.SelectedYear
                     </h5>
                     <span class="badge-revenue">
-                        Tổng: @Model.MonthlyVisitSeries.Sum().ToString("N0") đ
+                        Tổng: @Model.MonthlyVisitSeries.Sum(x => (long)x).ToString("N0") đ
                     </span>
                 </div>
                 <div class="chart-holder-main">
@@ -106,7 +106,7 @@
                     </h5>
                 </div>
                 <div class="simple-list">
-                    @if (!Model.BrowserStats.Any())
+                    @if (!Model.TopProducts.Any())
                     {
                         <div class="empty-state">
                             <i class="ti ti-mood-empty"></i>
@@ -116,7 +116,7 @@
                     else
                     {
                         int rank = 1;
-                        foreach (var item in Model.BrowserStats)
+                        foreach (var item in Model.TopProducts)
                         {
                             <div class="simple-row">
                                 <div class="d-flex align-items-center gap-2">
