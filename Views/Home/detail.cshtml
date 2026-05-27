@@ -1,21 +1,11 @@
 ﻿@model LapTopBD.ViewModels.ProductViewModel
+@using System.Globalization
+@using System.Linq
 
 @{
     ViewData["Title"] = "Chi Tiết Sản Phẩm - " + Model?.ProductName;
+    var compareProducts = ViewBag.CompareProducts as IEnumerable<LapTopBD.ViewModels.ProductViewModel> ?? Enumerable.Empty<LapTopBD.ViewModels.ProductViewModel>();
 }
-
-@* <!-- Page Header Start -->
-<div class="container-fluid bg-secondary mb-5">
-    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
-        <h1 class="font-weight-semi-bold text-uppercase mb-3">Chi Tiết Sản Phẩm</h1>
-        <div class="d-inline-flex">
-            <p class="m-0"><a href="@Url.Action("Index", "Home")">Trang Chủ</a></p>
-            <p class="m-0 px-2">-</p>
-            <p class="text-danger m-0">@Model?.ProductName</p>
-        </div>
-    </div>
-</div>
-<!-- Page Header End --> *@
 
 <!-- Shop Detail Start -->
 <div class="container-fluid py-5">
@@ -52,29 +42,19 @@
             <h3 class="font-weight-semi-bold">@Model?.ProductName</h3>
             <div class="d-flex mb-3">
                 @{
-                    double averageRating = Model?.AverageRating ?? 0; 
-                    int fullStars = (int)averageRating; 
-                    bool hasHalfStar = (averageRating - fullStars) >= 0.5; 
-                    int emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0); 
+                    double averageRating = Model?.AverageRating ?? 0;
+                    int fullStars = (int)averageRating;
+                    bool hasHalfStar = (averageRating - fullStars) >= 0.5;
+                    int emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
                 }
-
                 <div class="review-star mr-2">
-                    @for (int i = 0; i < fullStars; i++)
-                    {
-                        <small class="fas fa-star"></small> <!-- Sao đầy -->
-                    }
-                    @if (hasHalfStar)
-                    {
-                        <small class="fas fa-star-half-alt"></small> <!-- Sao nửa -->
-                    }
-                    @for (int i = 0; i < emptyStars; i++)
-                    {
-                        <small class="far fa-star"></small> <!-- Sao rỗng -->
-                    }
+                    @for (int i = 0; i < fullStars; i++) { <small class="fas fa-star"></small> }
+                    @if (hasHalfStar) { <small class="fas fa-star-half-alt"></small> }
+                    @for (int i = 0; i < emptyStars; i++) { <small class="far fa-star"></small> }
                 </div>
                 <small class="pt-1">(@Model?.TotalReviews Đánh giá)</small>
-
             </div>
+
             <h3 class="font-weight-semi-bold mb-4">
                 @if (Model?.ProductPriceBeforeDiscount.HasValue == true && Model.ProductPriceBeforeDiscount.Value > Model.ProductPrice)
                 {
@@ -86,111 +66,159 @@
                     <span>@Model?.ProductPrice.ToString("N0") VND</span>
                 }
             </h3>
+
             <div class="d-flex mb-3">
                 <p class="text-dark font-weight-medium mb-0 mr-3">Thông số kỹ thuật:</p>
                 <ul class="list-unstyled">
-                    @if (!string.IsNullOrWhiteSpace(Model?.Brand))
-                    {
-                        <li><strong>Thương hiệu:</strong> @Model.Brand</li>
-                    }
-                    @if (!string.IsNullOrWhiteSpace(Model?.CPU))
-                    {
-                        <li><strong>CPU:</strong> @Model.CPU</li>
-                    }
-                    @if (!string.IsNullOrWhiteSpace(Model?.RAM))
-                    {
-                        <li><strong>RAM:</strong> @Model.RAM</li>
-                    }
-                    @if (!string.IsNullOrWhiteSpace(Model?.Storage))
-                    {
-                        <li><strong>Bộ nhớ:</strong> @Model.Storage</li>
-                    }
-                    @if (!string.IsNullOrWhiteSpace(Model?.GPU))
-                    {
-                        <li><strong>GPU:</strong> @Model.GPU</li>
-                    }
-                    @if (!string.IsNullOrWhiteSpace(Model?.VGA))
-                    {
-                        <li><strong>VGA:</strong> @Model.VGA</li>
-                    }
-                    @if (!string.IsNullOrWhiteSpace(Model?.PIN))
-                    {
-                        <li><strong>Thời lượng pin:</strong> @Model.PIN</li>
-                    }
-                    @if (!string.IsNullOrWhiteSpace(Model?.WEIGHT))
-                    {
-                        <li><strong>Khối lượng:</strong> @Model.WEIGHT</li>
-                    }
-                    @if (!string.IsNullOrWhiteSpace(Model?.SIZE))
-                    {
-                        <li><strong>Kích thước:</strong> @Model.SIZE</li>
-                    }
-                    @if (!string.IsNullOrWhiteSpace(Model?.BONUS))
-                    {
-                        <li><strong>Thông tin bổ sung:</strong> @Model.BONUS</li>
-                    }
+                    @if (!string.IsNullOrWhiteSpace(Model?.Brand))   { <li><strong>Thương hiệu:</strong> @Model.Brand</li> }
+                    @if (!string.IsNullOrWhiteSpace(Model?.CPU))     { <li><strong>CPU:</strong> @Model.CPU</li> }
+                    @if (!string.IsNullOrWhiteSpace(Model?.RAM))     { <li><strong>RAM:</strong> @Model.RAM</li> }
+                    @if (!string.IsNullOrWhiteSpace(Model?.Storage)) { <li><strong>Bộ nhớ:</strong> @Model.Storage</li> }
+                    @if (!string.IsNullOrWhiteSpace(Model?.GPU))     { <li><strong>GPU:</strong> @Model.GPU</li> }
+                    @if (!string.IsNullOrWhiteSpace(Model?.VGA))     { <li><strong>VGA:</strong> @Model.VGA</li> }
+                    @if (!string.IsNullOrWhiteSpace(Model?.PIN))     { <li><strong>Thời lượng pin:</strong> @Model.PIN</li> }
+                    @if (!string.IsNullOrWhiteSpace(Model?.WEIGHT))  { <li><strong>Khối lượng:</strong> @Model.WEIGHT</li> }
+                    @if (!string.IsNullOrWhiteSpace(Model?.SIZE))    { <li><strong>Kích thước:</strong> @Model.SIZE</li> }
+                    @if (!string.IsNullOrWhiteSpace(Model?.BONUS))   { <li><strong>Thông tin bổ sung:</strong> @Model.BONUS</li> }
                 </ul>
             </div>
 
             <div class="d-flex mb-3">
                 <p class="text-dark font-weight-medium mb-0 mr-3">Số lượng hàng còn lại: @Model?.quantity</p>
             </div>
+<div class="d-flex align-items-center mb-2 flex-nowrap gap-2 gap-md-3">
 
-            <div class="d-flex align-items-center mb-2 flex-wrap gap-2 gap-md-3">
-                <!-- Nút trừ -->
-                <button type="button" class="btn btn-primary" id="btn-minus" onclick="decreaseQty(event)">
-                    <i class="fa fa-minus"></i>
-                </button>
+    <button type="button"
+            class="btn btn-primary"
+            id="btn-minus"
+            onclick="decreaseQty(event)">
+        <i class="fa fa-minus"></i>
+    </button>
 
-                <!-- Input số lượng -->
-                  <input type="number" class="form-control text-center flex-shrink-0"
-                       value="1" id="quantity" min="1" max="@Model?.quantity"
-                      style="width: 90px; max-width: 100%;" />
+    <input type="number"
+           class="form-control text-center flex-shrink-0"
+           value="1"
+           id="quantity"
+           min="1"
+           max="@Model?.quantity"
+           style="width: 90px; max-width: 100%;" />
 
-                <!-- Nút cộng -->
-                <button type="button" class="btn btn-primary" id="btn-plus" onclick="increaseQty(event)">
-                    <i class="fa fa-plus"></i>
-                </button>
+    <button type="button"
+            class="btn btn-primary"
+            id="btn-plus"
+            onclick="increaseQty(event)">
+        <i class="fa fa-plus"></i>
+    </button>
 
-                <!-- Nút Thêm vào giỏ hàng -->
-                @if (Model?.quantity < 1)
-                {
-                    <button class="btn btn-danger" id="add-to-cart-btn">
-                        <i class="ri-phone-fill"></i> Tạm thời hết hàng - LH: 19006050
-                    </button>
-                }
-                else
-                {
-                    <div class="detail-action-row">
-                        <button class="btn btn-primary" id="add-to-cart-btn" data-product-id="@Model?.Id">
-                            <i class="fa fa-shopping-cart mr-1"></i> Thêm vào giỏ hàng
-                        </button>
-                        <button class="btn btn-warning btn-buy-now" data-product-id="@Model?.Id">
-                            <i class="fas fa-bolt mr-1"></i> Mua ngay
-                        </button>
-                    </div>
-                }
-                <button class="btn btn-outline-primary btn-add-to-fav ms-0 ms-md-3"
-                        id="add-to-fav-btn"
-                        data-product-id="@Model?.Id"
-                        title="Thêm vào yêu thích">
+    @if (Model?.quantity < 1)
+    {
+        <button
+            class="btn text-nowrap"
+            id="add-to-cart-btn"
+            style="
+                border:none;
+                border-radius:12px;
+                padding:11px 14px;
+                font-size:14px;
+                font-weight:600;
+                transition:all .25s ease;
+                cursor:pointer;
+                background:linear-gradient(135deg,#dc2626,#ef4444);
+                color:#fff;
+            "
+            onmouseover="this.style.transform='translateY(-2px)';this.style.opacity='0.92'"
+            onmouseout="this.style.transform='translateY(0)';this.style.opacity='1'"
+        >
+            <i class="ri-phone-fill"></i>
+            Tạm thời hết hàng - LH: 19006050
+        </button>
+    }
+    else
+    {
+        <button
+            class="btn text-nowrap"
+            id="add-to-cart-btn"
+            data-product-id="@Model?.Id"
+            style="
+                border:none;
+                border-radius:12px;
+                padding:11px 14px;
+                font-size:14px;
+                font-weight:600;
+                transition:all .25s ease;
+                cursor:pointer;
+                background:linear-gradient(135deg,#1a1a2e,#0f3460);
+                color:#fff;
+            "
+            onmouseover="this.style.transform='translateY(-2px)';this.style.opacity='0.92'"
+            onmouseout="this.style.transform='translateY(0)';this.style.opacity='1'"
+        >
+            <i class="fa fa-shopping-cart mr-1"></i>
+            Thêm vào giỏ hàng
+        </button>
+
+        <button
+            class="btn text-nowrap"
+            data-product-id="@Model?.Id"
+            style="
+                border:none;
+                border-radius:12px;
+                padding:11px 14px;
+                font-size:14px;
+                font-weight:600;
+                transition:all .25s ease;
+                cursor:pointer;
+                background:#eff6ff;
+                color:#1d4ed8;
+            "
+            onmouseover="this.style.background='#1d4ed8';this.style.color='#fff'"
+            onmouseout="this.style.background='#eff6ff';this.style.color='#1d4ed8'"
+        >
+            <i class="fas fa-bolt mr-1"></i>
+            Mua ngay
+        </button>
+
+        <button
+            type="button"
+            class="btn text-nowrap"
+            id="btnOpenCompareBar"
+            style="
+                border:1px solid #cbd5e1;
+                border-radius:12px;
+                padding:11px 14px;
+                font-size:14px;
+                font-weight:600;
+                transition:all .25s ease;
+                cursor:pointer;
+                background:#f8fafc;
+                color:#334155;
+            "
+            onmouseover="this.style.background='#334155';this.style.color='#fff'"
+            onmouseout="this.style.background='#f8fafc';this.style.color='#334155'"
+        >
+            <i class="fas fa-balance-scale me-1"></i>
+            So sánh
+        </button>
+    }
+                <button class="btn-add-to-fav ms-0 ms-md-3"
+                        id="add-to-fav-btn" data-product-id="@Model?.Id" title="Thêm vào yêu thích">
                     <i class="ri-heart-line"></i>
                 </button>
             </div>
 
-            <!-- Thông báo lỗi -->
             <div id="qty-message" class="text-danger small mt-1"></div>
-            
         </div>
     </div>
+
+    <!-- Tabs -->
     <div class="row px-xl-5">
         <div class="col">
             <div class="nav nav-tabs justify-content-center border-secondary mb-4">
-                <a class="nav-item nav-link active" data-bs-toggle="tab" data-bs-target="#tab-pane-1" role="tab" aria-controls="tab-pane-1" aria-selected="true">Mô tả</a>
-                <a class="nav-item nav-link" data-bs-toggle="tab" data-bs-target="#tab-pane-2" role="tab" aria-controls="tab-pane-2" aria-selected="false">Thông tin bổ sung</a>
-                <a class="nav-item nav-link" data-bs-toggle="tab" data-bs-target="#tab-pane-3" role="tab" aria-controls="tab-pane-3" aria-selected="false">Đánh giá ( @Model?.TotalReviews)</a>
+                <a class="nav-item nav-link active" data-bs-toggle="tab" data-bs-target="#tab-pane-1" role="tab">Mô tả</a>
+                <a class="nav-item nav-link" data-bs-toggle="tab" data-bs-target="#tab-pane-2" role="tab">Thông tin bổ sung</a>
+                <a class="nav-item nav-link" data-bs-toggle="tab" data-bs-target="#tab-pane-3" role="tab">Đánh giá (@Model?.TotalReviews)</a>
             </div>
-            <!-- Hiển thị thông báo thành công hoặc lỗi -->
+
             @if (TempData["SuccessMessage"] != null)
             {
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -226,8 +254,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <h4 class="mb-4">@Model?.Reviews.Count đánh giá hiển thị (Tổng: @Model?.TotalReviews)</h4>
-
-                            <ul class="list-group data-list hide-scrollbar" data-autoscroll>
+                            <ul class="list-group data-list hide-scrollbar">
                                 @if (Model?.Reviews?.Any() == true)
                                 {
                                     foreach (var review in Model.Reviews)
@@ -235,26 +262,16 @@
                                         <li class="list-group-item">
                                             <h6>@(string.IsNullOrEmpty(review.UserName) ? "Khách hàng" : review.UserName) <small>- @review.ReviewDate.ToString("dd/MM/yyyy")</small></h6>
                                             <div class="review-star mb-2">
-                                                @for (int i = 0; i < review.Rating; i++)
-                                                {
-                                                    <i class="fas fa-star"></i>
-                                                }
-                                                @for (int i = review.Rating; i < 5; i++)
-                                                {
-                                                    <i class="far fa-star"></i>
-                                                }
+                                                @for (int i = 0; i < review.Rating; i++) { <i class="fas fa-star"></i> }
+                                                @for (int i = review.Rating; i < 5; i++) { <i class="far fa-star"></i> }
                                             </div>
                                             <p>@review.Review</p>
                                         </li>
                                     }
                                 }
-                                else
-                                {
-                                    <li class="list-group-item">Chưa có đánh giá nào cho sản phẩm này.</li>
-                                }
+                                else { <li class="list-group-item">Chưa có đánh giá nào cho sản phẩm này.</li> }
                             </ul>
                         </div>
-
                         <div class="col-md-6">
                             <h4 class="mb-4">Để lại đánh giá</h4>
                             <small>Đánh giá của bạn sẽ được hiển thị công khai. Các trường bắt buộc được đánh dấu *</small>
@@ -288,7 +305,7 @@
 </div>
 <!-- Shop Detail End -->
 
-<!-- Product Start -->
+<!-- Sản phẩm liên quan -->
 <div class="container-fluid py-5">
     <div class="text-center mb-4">
         <h2 class="section-title px-5"><span class="px-2">Sản phẩm liên quan</span></h2>
@@ -298,44 +315,35 @@
             <div class="owl-carousel product-carousel owl-theme product-new">
                 @if (ViewBag.RelatedProduct != null && ViewBag.RelatedProduct.Count > 0)
                 {
-                    @foreach (var product in (ViewBag.RelatedProduct as List<LapTopBD.ViewModels.ProductViewModel>) ?? new List<LapTopBD.ViewModels.ProductViewModel>())
+                    foreach (var product in (ViewBag.RelatedProduct as List<LapTopBD.ViewModels.ProductViewModel>) ?? new List<LapTopBD.ViewModels.ProductViewModel>())
                     {
                         var hasDiscount = product.ProductPriceBeforeDiscount.HasValue && product.ProductPriceBeforeDiscount.Value > product.ProductPrice;
                         var discountPercentage = hasDiscount ? (1 - product.ProductPrice / product.ProductPriceBeforeDiscount.GetValueOrDefault()) * 100 : 0;
-
                         <div class="item" data-aos="fade-up" data-aos-duration="2500">
                             <div class="card shadow h-100">
                                 <div class="ratio ratio-1x1">
                                     <a href="@Url.Action("Detail", "Home", new { slug = product.Slug })">
                                         <img src="@product.ProductImage1" alt="@product.ProductName" />
                                     </a>
-                                    <button class="btn-add-to-fav" id="add-to-fav-btn" data-product-id="@product.Id" title="Thêm vào yêu thích">
+                                    <button class="btn-add-to-fav" data-product-id="@product.Id" title="Thêm vào yêu thích">
                                         <i class="ri-heart-line"></i>
                                     </button>
-                                    @if (hasDiscount)
-                                    {
-                                        <span class="discount-tag">Giảm @((int)discountPercentage)%</span>
-                                    }
+                                    @if (hasDiscount) { <span class="discount-tag">Giảm @((int)discountPercentage)%</span> }
                                 </div>
                                 <div class="card-body">
-                                    <div>
-                                        <a href="@Url.Action("Detail", "Home", new { slug = product.Slug })">
-                                            <p class="card-text">@product.ProductName</p>
-                                        </a>
-                                    </div>
+                                    <a href="@Url.Action("Detail", "Home", new { slug = product.Slug })">
+                                        <p class="card-text">@product.ProductName</p>
+                                    </a>
                                     <div class="price-wrapper">
                                         @if (hasDiscount)
                                         {
                                             <div class="original-price">@(product.ProductPriceBeforeDiscount?.ToString("N0") ?? "") VND</div>
                                             <div class="discount-price">@product.ProductPrice.ToString("N0") VND</div>
                                         }
-                                        else
-                                        {
-                                            <div class="original-price">@product.ProductPrice.ToString("N0") VND</div>
-                                        }
+                                        else { <div class="original-price">@product.ProductPrice.ToString("N0") VND</div> }
                                     </div>
-                                    <div class="product-action-row">
-                                        <button class="btn-add-to-cart" id="add-to-cart-btn" data-product-id="@product?.Id">
+                                    <div class="d-flex gap-2 flex-wrap w-100">
+                                        <button class="btn-add-to-cart" data-product-id="@product?.Id">
                                             <i class="fas fa-shopping-cart"></i> Thêm vào giỏ hàng
                                         </button>
                                         <button class="btn-buy-now" data-product-id="@product?.Id">
@@ -347,140 +355,590 @@
                         </div>
                     }
                 }
-                else
-                {
-                    <p>Không có sản phẩm liên quan nào để hiển thị.</p>
-                }
-            
+                else { <p>Không có sản phẩm liên quan nào để hiển thị.</p> }
             </div>
         </div>
     </div>
 </div>
 
+<!-- ============================================================
+     THANH SO SÁNH NỔI (ẩn mặc định, hiện khi bấm nút So sánh)
+     ============================================================ -->
+<div id="compareBar" class="compare-bar d-none">
+    <div class="compare-bar-inner">
 
-<script>
-    const input = document.getElementById('quantity');
-    const btnPlus = document.getElementById('btn-plus');
-    const btnMinus = document.getElementById('btn-minus');
-    const msg = document.getElementById('qty-message');
+        <!-- Sản phẩm hiện tại (cố định) -->
+        <div class="cbar-slot cbar-slot--current">
+            <button class="cbar-remove-btn d-none" id="removeCurrentBtn" title="Xóa">✕</button>
+            <div class="cbar-img-wrap">
+                <img src="@Model?.ProductImage1" alt="@Model?.ProductName" onerror="this.src='/images/laptop.png'" />
+            </div>
+            <div class="cbar-name">@Model?.ProductName</div>
+        </div>
 
-    const max = parseInt(input.max) || 1;
-    const min = parseInt(input.min) || 1;
+        <!-- Slot 1 -->
+        <div class="cbar-slot cbar-slot--empty" id="cbarSlot0" data-slot="0">
+            <button class="cbar-remove-btn d-none" data-slot="0" title="Xóa">✕</button>
+            <div class="cbar-plus"><i class="fas fa-plus"></i></div>
+            <div class="cbar-hint">Chọn sản phẩm so sánh</div>
+        </div>
 
-    // Khởi tạo disable nếu cần
-    updateButtons();
+        <!-- Slot 2 -->
+        <div class="cbar-slot cbar-slot--empty" id="cbarSlot1" data-slot="1">
+            <button class="cbar-remove-btn d-none" data-slot="1" title="Xóa">✕</button>
+            <div class="cbar-plus"><i class="fas fa-plus"></i></div>
+            <div class="cbar-hint">Chọn sản phẩm so sánh</div>
+        </div>
 
-    function increaseQty(e) {
-        e.preventDefault();
-        e.stopImmediatePropagation(); // chặn listener template
+        <!-- Actions -->
+        <div class="cbar-actions">
+            <button class="btn btn-secondary btn-sm" id="btnCloseCompareBar" style="border-radius : 5px;">Đóng</button>
+            <button class="btn btn-danger btn-sm" id="btnDoCompare" style="border-radius : 5px;">So sánh</button>
+        </div>
+    </div>
+</div>
 
-        let value = parseInt(input.value) || 1;
+<!-- ============================================================
+     MODAL: Chọn sản phẩm vào slot
+     ============================================================ -->
+<div class="modal fade" id="pickProductModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable pick-product-modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Chọn sản phẩm để so sánh</h5>
+                <button type="button" class="btn-close modal-close-btn" data-bs-dismiss="modal" aria-label="Đóng" title="Đóng"></button>
+            </div>
+            <div class="modal-body">
+                <input id="pickSearchInput" class="form-control mb-3" placeholder="Tìm sản phẩm theo tên..." />
+                <div id="pickGrid" class="pick-grid">
+                    @if (compareProducts.Any())
+                    {
+                        foreach (var c in compareProducts)
+                        {
+                            <div class="pick-card"
+                                 data-id="@c.Id"
+                                 data-name="@c.ProductName"
+                                 data-name-lower="@((c.ProductName ?? "").ToLowerInvariant())"
+                                 data-image="@c.ProductImage1"
+                                                                 data-price="@c.ProductPrice.ToString(CultureInfo.InvariantCulture)"
+                                                                 data-description="@Html.Raw(System.Net.WebUtility.HtmlEncode(c.ProductDescription ?? ""))"
+                                 data-brand="@c.Brand" data-cpu="@c.CPU" data-ram="@c.RAM"
+                                 data-storage="@c.Storage" data-gpu="@c.GPU" data-vga="@c.VGA"
+                                 data-pin="@c.PIN" data-weight="@c.WEIGHT" data-size="@c.SIZE"
+                                 data-bonus="@c.BONUS"
+                                 data-rating="@c.AverageRating.ToString("0.0", CultureInfo.InvariantCulture)"
+                                 data-quantity="@c.quantity">
+                                <div class="pick-card__img">
+                                    <img src="@c.ProductImage1" alt="@c.ProductName" onerror="this.src='/images/laptop.png'" />
+                                </div>
+                                <div class="pick-card__body">
+                                    <div class="pick-card__name">@c.ProductName</div>
+                                    <div class="pick-card__brand" style="font-weight: italic; color: #4054e9;">@c.Brand</div>
+                                    <div class="pick-card__price" style="font-weight: bold; color: #ff4757;">@c.ProductPrice.ToString("C", CultureInfo.InvariantCulture)Đ</div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p class="text-muted text-center py-4">Không có sản phẩm nào.</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-        if (value >= max) {
-            input.value = max;
-            showMessage(`Không được vượt quá số lượng tồn kho (${max})`);
-            updateButtons();
-            return;
-        }
+<!-- ============================================================
+     MODAL: Bảng kết quả so sánh
+     ============================================================ -->
+<div class="modal fade" id="compareResultModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Bảng so sánh sản phẩm</h5>
+                <button type="button" class="modal-close-btn" data-bs-dismiss="modal" aria-label="Đóng" title="Đóng">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered align-middle compare-table">
+                        <thead><tr id="cmpHead"></tr></thead>
+                        <tbody id="cmpBody"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline-primary me-auto" id="btnReCompare" style="border-radius : 5px;">
+                    <i class="fas fa-redo me-1" style="font-size: 16px;"></i>  So sánh lại
+                </button>
+                <button class="btn btn-secondary" data-bs-dismiss="modal" style="border-radius : 5px;">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-        input.value = value + 1;
-        clearMessage();
-        updateButtons();
-    }
-
-    function decreaseQty(e) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-
-        let value = parseInt(input.value) || 1;
-
-        if (value <= min) {
-            input.value = min;
-            showMessage(`Số lượng tối thiểu là ${min}`);
-            updateButtons();
-            return;
-        }
-
-        input.value = value - 1;
-        clearMessage();
-        updateButtons();
-    }
-
-    // Nếu user nhập trực tiếp
-    input.addEventListener('input', function() {
-        let value = parseInt(input.value) || 1;
-
-        if (value < min) {
-            input.value = min;
-            showMessage(`Số lượng tối thiểu là ${min}`);
-        } else if (value > max) {
-            input.value = max;
-            showMessage(`Không được vượt quá số lượng tồn kho (${max})`);
-        } else {
-            clearMessage();
-        }
-
-        updateButtons();
-    });
-
-    // Hiển thị thông báo
-    function showMessage(text) {
-        msg.textContent = text;
-    }
-
-    // Xóa thông báo
-    function clearMessage() {
-        msg.textContent = '';
-    }
-
-    // Disable/enable nút +/-
-    function updateButtons() {
-        let value = parseInt(input.value) || 1;
-        btnPlus.disabled = value >= max;
-        btnMinus.disabled = value <= min;
-    }
-</script>
-<!-- Product End -->
-
+<!-- ============================================================
+     STYLES
+     ============================================================ -->
 <style>
-    
-
-    .ratio {
-        position: relative;
-    }
-
-    /* Style cho nút yêu thích */
+    /* ---- Nút yêu thích ---- */
+    .ratio { position: relative; }
     .btn-add-to-fav {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        z-index: 10;
-        background: white;
-        border: 1px solid #ff4757;
-        border-radius: 50%;
-        width: 35px;
-        height: 35px;
+        position: absolute; top: 10px; right: 10px; z-index: 10;
+        background: white; border: 1px solid #ff4757; border-radius: 50%;
+        width: 35px; height: 35px; display: flex; align-items: center;
+        justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,.2);
+        color: #ff4757; transition: all .3s; cursor: pointer;
+    }
+    .btn-add-to-fav:hover, .btn-add-to-fav.is-favorited { background:#ff4757; color:#fff; transform:scale(1.1); }
+    .btn-add-to-fav i { font-size: 1.2rem; }
+
+    /* ======== THANH SO SÁNH NỔI ======== */
+    .compare-bar {
+        position: fixed;
+        bottom: 0;
+        width : 70%;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #fff;
+        border-top: 2px solid #e2e8f0;
+        box-shadow: 0 -4px 24px rgba(0,0,0,.12);
+        z-index: 1050;
+        padding: 12px 24px;
+        transition: transform .3s ease;
+        border-radius: 15px 15px 0 0;
+    }
+    .compare-bar.collapsed { transform: translateY(calc(100% - 44px)); }
+
+    .compare-bar-inner {
         display: flex;
         align-items: center;
-        justify-content: center;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        color: #ff4757; /* Màu đỏ trái tim */
-        transition: all 0.3s ease;
+        gap: 16px;
+        max-width: ;
+        margin: 0 auto;
+    }
+
+    /* Slot chung */
+    .cbar-slot {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 8px 12px;
+        min-width: 200px;
+        max-width: 260px;
+        flex: 1;
+        background: #f8fafc;
+        cursor: pointer;
+        transition: border-color .2s, box-shadow .2s;
+        min-height: 70px;
+    }
+    .cbar-slot--current { border-color: #2563eb; background:#eff6ff; cursor: default; }
+    .cbar-slot--empty { border-style: dashed; border-color: #cbd5e1; flex-direction: column; justify-content: center; text-align: center; }
+    .cbar-slot--empty:hover { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
+    .cbar-slot--filled { border-color: #16a34a; background:#f0fdf4; }
+
+    .cbar-img-wrap img {
+        width: 48px; height: 48px; object-fit: cover; border-radius: 8px; flex-shrink: 0;
+    }
+    .cbar-name {
+        font-size: 12px; font-weight: 600; color: #1f2937;
+        display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .cbar-plus { font-size: 22px; color: #94a3b8; line-height: 1; }
+    .cbar-hint { font-size: 12px; color: #94a3b8; margin-top: 4px; }
+
+    /* Nút X xóa slot */
+    .cbar-remove-btn {
+        position: absolute; top: 4px; right: 6px;
+        background: none; border: none; color: #94a3b8;
+        font-size: 14px; cursor: pointer; line-height: 1; padding: 2px 4px;
+        border-radius: 50%; transition: color .2s, background .2s;
+    }
+    .cbar-remove-btn:hover { color: #ef4444; background: #fee2e2; }
+
+    /* Actions */
+    .cbar-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; margin-left: auto; flex-shrink: 0; }
+    .cbar-count { font-size: 13px; font-weight: 600; color: #374151; white-space: nowrap; }
+    .cbar-actions .btn { min-width: 90px; }
+
+    /* ======== MODAL PICK GRID ======== */
+    .pick-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 14px;
+        max-height: 55vh;
+        overflow-y: auto;
+    }
+    .pick-card {
+        border: 2px solid #e2e8f0; border-radius: 14px; padding: 12px;
+        cursor: pointer; transition: all .2s; background: #fff;
+    }
+    .pick-card:hover { border-color: #93c5fd; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37,99,235,.1); }
+    .pick-card.selected { border-color: #2563eb; background: #eff6ff; }
+    .pick-card.selected::after {
+        content: '✓'; position: absolute; top: 8px; right: 10px;
+        color: #2563eb; font-weight: 900; font-size: 15px;
+    }
+    .pick-card { position: relative; }
+    .pick-card.disabled { opacity: .4; pointer-events: none; }
+    .pick-card__img { aspect-ratio: 1/1; border-radius: 10px; overflow: hidden; border: 1px solid #e2e8f0; margin-bottom: 8px; }
+    .pick-card__img img { width: 100%; height: 100%; object-fit: contain; }
+    .pick-card__name { font-size: 13px; font-weight: 600; line-height: 1.4; color: #1f2937; }
+    .pick-card__brand { font-size: 12px; color: #64748b; margin-top: 3px; }
+
+    .modal-close-btn {
+        appearance: none;
+        border: 0;
+        background: transparent;
+        color: #6b7280;
+        font-size: 2rem;
+        line-height: 1;
+        padding: 0;
+        margin-left: auto;
         cursor: pointer;
     }
+    .modal-close-btn:hover { color: #111827; }
+    .modal-header { align-items: center; }
 
-    .btn-add-to-fav.is-favorited {
-        background: #ff4757;
-        color: #fff;
+    .pick-product-modal-dialog {
+        max-width: 760px;
+        margin-top: -10px;
+   }
+
+    #pickProductModal .modal-body {
+        max-height: 62vh;
+        overflow-y: auto;
+        
     }
 
-        .btn-add-to-fav:hover {
-            background: #ff4757;
-            color: white;
-            transform: scale(1.1);
-        }
+    /* ======== BẢNG SO SÁNH ======== */
+    .compare-table {
+        table-layout: fixed;
+        width: 100%;
+    }
+    #cmpHead th, #cmpBody th, #cmpBody td { vertical-align: middle; }
+    #cmpHead th { background: #f1f5f9; font-weight: 700; text-align: center; }
+    #cmpBody td, #cmpHead th {
+        white-space: normal;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+    }
+    .cmp-current-col {
+        color: #dc3545;
+        font-weight: 700;
+        text-align: left !important;
+        padding-left: 12px !important;
+    }
+    .cmp-description {
+        max-height: 160px;
+        overflow-y: auto;
+        white-space: normal;
+        line-height: 1.55;
+        font-size: 13px;
+        font-family: inherit;
+    }
+    .cmp-img { width: 150px; object-fit: contain; display: block; margin: 6px auto; }
 
-        .btn-add-to-fav i {
-            font-size: 1.2rem;
-        }
+    @@media (max-width: 768px) {
+        .compare-bar-inner { flex-wrap: wrap; }
+        .cbar-slot { min-width: 140px; }
+    }
 </style>
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script>
+/* ---------- Quantity ---------- */
+(function () {
+    const input  = document.getElementById('quantity');
+    const btnP   = document.getElementById('btn-plus');
+    const btnM   = document.getElementById('btn-minus');
+    const msg    = document.getElementById('qty-message');
+    const max    = parseInt(input.max) || 1;
+    const min    = parseInt(input.min) || 1;
+    upd();
+
+    function increaseQty(e) {
+        e.preventDefault(); e.stopImmediatePropagation();
+        let v = parseInt(input.value) || 1;
+        if (v >= max) { input.value = max; show(`Không được vượt quá tồn kho (${max})`); }
+        else { input.value = v + 1; clear(); }
+        upd();
+    }
+    function decreaseQty(e) {
+        e.preventDefault(); e.stopImmediatePropagation();
+        let v = parseInt(input.value) || 1;
+        if (v <= min) { input.value = min; show(`Số lượng tối thiểu là ${min}`); }
+        else { input.value = v - 1; clear(); }
+        upd();
+    }
+    input.addEventListener('input', () => {
+        let v = parseInt(input.value) || 1;
+        if (v < min) { input.value = min; show(`Số lượng tối thiểu là ${min}`); }
+        else if (v > max) { input.value = max; show(`Không được vượt quá tồn kho (${max})`); }
+        else { clear(); }
+        upd();
+    });
+    function show(t) { msg.textContent = t; }
+    function clear() { msg.textContent = ''; }
+    function upd() { let v = parseInt(input.value)||1; btnP.disabled = v>=max; btnM.disabled = v<=min; }
+    window.increaseQty = increaseQty;
+    window.decreaseQty = decreaseQty;
+})();
+
+/* ---------- Compare ---------- */
+document.addEventListener('DOMContentLoaded', function () {
+    /* Dữ liệu sản phẩm hiện tại */
+    const CURRENT = {
+        id:      '@(Model?.Id)',
+        name:    '@(Model?.ProductName?.Replace("'","\\'")??"Sản phẩm hiện tại")',
+        image:   '@(Model?.ProductImage1??"")',
+        price:   '@(Model?.ProductPrice.ToString(System.Globalization.CultureInfo.InvariantCulture)??"0")',
+        description: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model?.ProductDescription ?? "")),
+        brand:   '@(Model?.Brand??"")',
+        cpu:     '@(Model?.CPU??"")',
+        ram:     '@(Model?.RAM??"")',
+        storage: '@(Model?.Storage??"")',
+        gpu:     '@(Model?.GPU??"")',
+        vga:     '@(Model?.VGA??"")',
+        pin:     '@(Model?.PIN??"")',
+        weight:  '@(Model?.WEIGHT??"")',
+        size:    '@(Model?.SIZE??"")',
+        bonus:   '@(Model?.BONUS??"")',
+        rating:  '@(Model?.AverageRating.ToString("0.0",System.Globalization.CultureInfo.InvariantCulture)??"0")',
+        quantity:'@(Model?.quantity??0)'
+    };
+
+    const FIELDS = [
+        {k:'price',   l:'Giá bán'},
+        {k:'description', l:'Mô tả sản phẩm'},
+        {k:'brand',   l:'Thương hiệu'},
+        {k:'cpu',     l:'CPU'},
+        {k:'ram',     l:'RAM'},
+        {k:'storage', l:'Bộ nhớ'},
+        {k:'gpu',     l:'GPU'},
+        {k:'vga',     l:'VGA'},
+        {k:'pin',     l:'Pin'},
+        {k:'weight',  l:'Khối lượng'},
+        {k:'size',    l:'Kích thước'},
+        {k:'rating',  l:'Đánh giá'},
+        {k:'quantity',l:'Tồn kho'},
+        {k:'bonus',   l:'Thông tin bổ sung'}
+    ];
+
+    /* State */
+    let slots       = [null, null];   // dữ liệu 2 slot
+    let activeSlot  = 0;              // slot đang chờ chọn
+
+    /* Elements */
+    const compareBar      = document.getElementById('compareBar');
+    const btnOpenBar      = document.getElementById('btnOpenCompareBar');
+    const btnCloseBar     = document.getElementById('btnCloseCompareBar');
+    const btnDoCompare    = document.getElementById('btnDoCompare');
+    const btnReCompare    = document.getElementById('btnReCompare');
+    const cbarCount       = document.getElementById('cbarCount');
+    const cbarSlotEls     = [document.getElementById('cbarSlot0'), document.getElementById('cbarSlot1')];
+
+    const pickModal       = new bootstrap.Modal(document.getElementById('pickProductModal'));
+    const resultModal     = new bootstrap.Modal(document.getElementById('compareResultModal'));
+    const pickGrid        = document.getElementById('pickGrid');
+    const pickSearch      = document.getElementById('pickSearchInput');
+
+    /* 1. Bấm nút "So sánh" → hiện thanh nổi */
+    btnOpenBar?.addEventListener('click', () => {
+        compareBar.classList.remove('d-none', 'collapsed');
+        compareBar.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    });
+
+    /* 2. Đóng thanh so sánh */
+    btnCloseBar?.addEventListener('click', () => {
+        compareBar.classList.add('d-none');
+    });
+
+    /* 3. Bấm slot trống → mở modal chọn sản phẩm */
+    cbarSlotEls.forEach((el, i) => {
+        el.addEventListener('click', function (e) {
+            if (e.target.classList.contains('cbar-remove-btn')) return;
+            activeSlot = i;
+            openPickModal();
+        });
+    });
+
+    /* 4. Nút X xóa slot */
+    document.querySelectorAll('.cbar-remove-btn[data-slot]').forEach(btn => {
+        btn.addEventListener('click', e => {
+            e.stopPropagation();
+            const i = parseInt(btn.dataset.slot);
+            clearSlot(i);
+        });
+    });
+
+    /* 5. Tìm kiếm trong modal */
+    pickSearch?.addEventListener('input', function () {
+        const q = this.value.trim().toLowerCase();
+        pickGrid.querySelectorAll('.pick-card').forEach(c => {
+            c.style.display = (!q || c.dataset.nameLower.includes(q)) ? '' : 'none';
+        });
+    });
+
+    /* 6. Click chọn card trong modal */
+    pickGrid?.addEventListener('click', function (e) {
+        const card = e.target.closest('.pick-card');
+        if (!card || card.classList.contains('disabled')) return;
+        pickGrid.querySelectorAll('.pick-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        // Tự động chọn ngay khi click (không cần nút Chọn riêng)
+        confirmPick(card);
+    });
+
+    /* 7. Nút So sánh → hiện bảng kết quả */
+    btnDoCompare?.addEventListener('click', () => {
+        const filled = slots.filter(s => s);
+        if (filled.length === 0) {
+            alert('Vui lòng chọn ít nhất 1 sản phẩm để so sánh.');
+            return;
+        }
+        buildResultTable();
+        resultModal.show();
+    });
+
+    /* 8. So sánh lại */
+    btnReCompare?.addEventListener('click', () => {
+        resultModal.hide();
+    });
+
+    /* ---- Helpers ---- */
+    function openPickModal() {
+        // reset search & selection
+        pickSearch.value = '';
+        const otherId = slots[1 - activeSlot]?.id;
+        pickGrid.querySelectorAll('.pick-card').forEach(c => {
+            c.classList.remove('selected');
+            c.style.display = '';
+            // disable card đang ở slot kia hoặc là sản phẩm hiện tại
+            c.classList.toggle('disabled', c.dataset.id === CURRENT.id || c.dataset.id === otherId);
+        });
+        pickModal.show();
+    }
+
+    function confirmPick(card) {
+        slots[activeSlot] = {
+            id:      card.dataset.id,
+            name:    card.dataset.name,
+            image:   card.dataset.image,
+            price:   card.dataset.price,
+            description: card.dataset.description,
+            brand:   card.dataset.brand,
+            cpu:     card.dataset.cpu,
+            ram:     card.dataset.ram,
+            storage: card.dataset.storage,
+            gpu:     card.dataset.gpu,
+            vga:     card.dataset.vga,
+            pin:     card.dataset.pin,
+            weight:  card.dataset.weight,
+            size:    card.dataset.size,
+            bonus:   card.dataset.bonus,
+            rating:  card.dataset.rating,
+            quantity:card.dataset.quantity
+        };
+        pickModal.hide();
+        renderSlot(activeSlot);
+        updateCount();
+    }
+
+    function renderSlot(i) {
+        const el  = cbarSlotEls[i];
+        const p   = slots[i];
+        const removeBtn = el.querySelector('.cbar-remove-btn');
+
+        if (p) {
+            el.classList.remove('cbar-slot--empty');
+            el.classList.add('cbar-slot--filled');
+            el.innerHTML = `
+                <button class="cbar-remove-btn" data-slot="${i}" title="Xóa">✕</button>
+                <div class="cbar-img-wrap">
+                    <img src="${p.image}" alt="${p.name}" onerror="this.src='/images/laptop.png'" />
+                </div>
+                <div class="cbar-name">${p.name}</div>`;
+            // Re-bind remove
+            el.querySelector('.cbar-remove-btn').addEventListener('click', e => {
+                e.stopPropagation(); clearSlot(i);
+            });
+            // Re-bind click to re-pick
+            el.onclick = function(e) {
+                if (e.target.classList.contains('cbar-remove-btn')) return;
+                activeSlot = i; openPickModal();
+            };
+        } else {
+            el.classList.add('cbar-slot--empty');
+            el.classList.remove('cbar-slot--filled');
+            el.innerHTML = `
+                <button class="cbar-remove-btn d-none" data-slot="${i}" title="Xóa">✕</button>
+                <div class="cbar-plus"><i class="fas fa-plus"></i></div>
+                <div class="cbar-hint">Chọn sản phẩm so sánh</div>`;
+            el.onclick = function() { activeSlot = i; openPickModal(); };
+        }
+    }
+
+    function clearSlot(i) {
+        slots[i] = null;
+        renderSlot(i);
+        updateCount();
+    }
+
+    function updateCount() {
+        const n = slots.filter(s => s).length;
+        cbarCount.textContent = `Đã chọn ${n} sản phẩm`;
+    }
+
+    function fmt(val) {
+        const n = Number(val);
+        return isNaN(n) ? 'Chưa có' : new Intl.NumberFormat('vi-VN').format(n) + ' VND';
+    }
+
+    function escapeHtml(val) {
+        return String(val ?? '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
+    function buildResultTable() {
+        const products = [CURRENT, ...slots.filter(s => s)];
+        const head = document.getElementById('cmpHead');
+        const body = document.getElementById('cmpBody');
+        const attributeWidth = '160px';
+        const productWidth = `calc((100% - ${attributeWidth}) / ${products.length})`;
+
+        head.innerHTML = `<th style="width:${attributeWidth};min-width:${attributeWidth}">Thuộc tính</th>` +
+            products.map((p, i) => {
+                const name  = p.name || '';
+                const currentClass = i === 0 ? ' cmp-current-col' : '';
+                return `<th class="${currentClass}" style="width:${productWidth}">${name}</th>`;
+            }).join('');
+
+        // first row: images
+        const imageRow = `<tr><th style="width:${attributeWidth};min-width:${attributeWidth}">Hình ảnh</th>` +
+            products.map(p => `<td style="width:${productWidth}"><img src="${p.image || '/images/laptop.png'}" alt="${(p.name||'').replace(/"/g,'&quot;')}" class="cmp-img"/></td>`).join('') + `</tr>`;
+
+        body.innerHTML = imageRow + FIELDS.map(f => {
+            const cells = products.map(p => {
+                let v = (p[f.k] || '').toString().trim();
+                if (!v) return `<td class="${p === CURRENT ? 'cmp-current-col' : ''}"><span class="text-muted">Chưa có</span></td>`;
+                if (f.k === 'price')    v = `<strong>${fmt(v)}</strong>`;
+                else if (f.k === 'description') v = `<div class="cmp-description">${v}</div>`;
+                if (f.k === 'rating')   v = `${v} / 5 ⭐`;
+                if (f.k === 'quantity') v = `${v} sản phẩm`;
+                return `<td class="${p === CURRENT ? 'cmp-current-col' : ''}" style="width:${productWidth}">${v}</td>`;
+            }).join('');
+            return `<tr><th style="width:${attributeWidth};min-width:${attributeWidth}">${f.l}</th>${cells}</tr>`;
+        }).join('');
+    }
+});
+</script>

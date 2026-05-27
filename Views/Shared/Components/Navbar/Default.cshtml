@@ -131,6 +131,32 @@
         color: #185FA5;
     }
 
+    /* Mega menu variant: single horizontal row for category dropdown */
+    .nav-links > li:hover > ul.mega-menu {
+        display: flex;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        max-width: min(980px, calc(100vw - 3rem));
+        background: #fff;
+        padding: 14px 18px;
+        gap: 20px !important;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        z-index: 9999;
+        box-shadow: 0 6px 20px rgba(0,0,0,.08);
+        border-radius: 10px;
+        border: 1px solid #e5e7eb;
+    }
+
+    .nav-links > li > ul.mega-menu > li {
+        width: auto;
+        flex: 0 0 auto;
+        display: flex;
+        flex-direction: column;
+    }
+
     /* ── HAMBURGER ── */
     .hamburger-btn {
         display: none;
@@ -328,7 +354,7 @@
                                     class="@(currentController == "Shop" ? "active-link" : "")">
                             Sản Phẩm
                 </a>
-                <ul>
+                <ul class="mega-menu">
                     <li>
                         <a href="@Url.Action("Index", "Shop", new { categoryId = 1 })" class="@(currentController == "Shop" && currentCategoryId == "1" ? "active-link" : "")">Điện Thoại</a>
                         <ul>

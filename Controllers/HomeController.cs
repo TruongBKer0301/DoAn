@@ -205,8 +205,44 @@ namespace LapTopBD.Controllers
                 })
                 .ToListAsync();
 
+            var compareProductsQuery = _context.Product
+                .Include(p => p.Category)
+                .Include(p => p.SubCategory)
+                .Include(p => p.ProductReviews)
+                .Where(p => p.Id != product.Id);
+
+            compareProductsQuery = compareProductsQuery.Where(p => p.CategoryId == product.CategoryId);
+
+            var compareProducts = await compareProductsQuery
+                .OrderByDescending(p => p.PostingDate)
+                .Take(8)
+                .Select(p => new ProductViewModel
+                {
+                    Id = p.Id,
+                    ProductName = p.ProductName,
+                    ProductImage1 = p.ProductImage1,
+                    ProductPrice = p.ProductPrice,
+                    ProductPriceBeforeDiscount = p.ProductPriceBeforeDiscount,
+                    ProductDescription = p.ProductDescription,
+                    Brand = p.Brand,
+                    CPU = p.CPU,
+                    RAM = p.RAM,
+                    Storage = p.Storage,
+                    GPU = p.GPU,
+                    VGA = p.VGA,
+                    PIN = p.PIN,
+                    WEIGHT = p.WEIGHT,
+                    SIZE = p.SIZE,
+                    BONUS = p.BONUS,
+                    quantity = p.quantity,
+                    Slug = p.Slug,
+                    AverageRating = p.ProductReviews.Any() ? p.ProductReviews.Average(pr => pr.Rating) : 0
+                })
+                .ToListAsync();
+
             ViewBag.ShowBanner = false;
             ViewBag.RelatedProduct = relatedProduct;
+            ViewBag.CompareProducts = compareProducts;
             ViewBag.TotalReviews = product.TotalReviews;
 
             return View(product);
