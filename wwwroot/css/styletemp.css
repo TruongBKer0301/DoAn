@@ -10422,7 +10422,7 @@ a.text-dark:hover, a.text-dark:focus {
     position: fixed;
     display: none;
     right: 30px;
-    bottom: 30px;
+    bottom: 100px;
     z-index: 11;
     animation: action 1s infinite alternate;
 }

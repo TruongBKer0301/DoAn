@@ -131,9 +131,23 @@ namespace LapTopBD.Controllers
             // ===== SMART SEARCH =====
             if (!string.IsNullOrWhiteSpace(search))
             {
-                search = search.Trim().ToLower();
+                search = search.Trim().ToLowerInvariant();
 
-                var keywords = search.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                var stopWords = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    "về", "cho", "của", "và", "là", "có", "một", "những", "các", "đang", "tìm", "kiếm", "muốn", "sản", "phẩm", "chiếc", "máy", "tính", "xách", "tay", "giá", "rẻ", "tốt", "nhất", "hơn", "phù", "hợp", "theo", "với"
+                };
+
+                var keywords = search
+                    .Split(' ', StringSplitOptions.RemoveEmptyEntries)
+                    .Select(k => k.Trim())
+                    .Where(k => k.Length > 1 && !stopWords.Contains(k))
+                    .ToArray();
+
+                if (keywords.Length == 0)
+                {
+                    keywords = new[] { search };
+                }
 
                 foreach (var keyword in keywords)
                 {

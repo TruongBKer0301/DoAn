@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Authentication;
 using LapTopBD.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using LapTopBD.Utilities;
-using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Logging;
 using System.Text.RegularExpressions;
 
@@ -18,20 +17,17 @@ namespace LapTopBD.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IVnPayService _vnPayService;
         private readonly IPendingCheckoutStore _pendingCheckoutStore;
-        private readonly IOptions<VnPayOptions> _vnPayOptions;
         private readonly ILogger<CartController> _logger;
 
         public CartController(
             ApplicationDbContext context,
             IVnPayService vnPayService,
             IPendingCheckoutStore pendingCheckoutStore,
-            IOptions<VnPayOptions> vnPayOptions,
             ILogger<CartController> logger)
         {
             _context = context;
             _vnPayService = vnPayService;
             _pendingCheckoutStore = pendingCheckoutStore;
-            _vnPayOptions = vnPayOptions;
             _logger = logger;
         }
 
@@ -221,37 +217,59 @@ namespace LapTopBD.Controllers
 
             _logger.LogInformation($"Checkout - User {userId} data: Name={user.Name}, City={user.City}, Ward={user.Ward}, Address={user.Address}");
 
-            // Fix for CS8602: Dereference of a possibly null reference.
-            var cartItems = await _context.CartItems
-                .Include(c => c.Product)
-                .Where(c => c.UserId == userId)
-                .Select(c => new LapTopBD.Models.ViewModels.CartItem
+            // Support alternative query formats for selectedProductIds (e.g. comma-separated strings produced by external links)
+            try
+            {
+                var raw = Request.Query["selectedProductIds"].ToString();
+                if ((selectedProductIds == null || !selectedProductIds.Any()) && !string.IsNullOrWhiteSpace(raw))
                 {
-                    ProductId = c.ProductId,
-                    ProductName = c.Product != null ? c.Product.ProductName : string.Empty,
-                    ProductPrice = c.Product != null ? c.Product.ProductPrice : 0,
-                    Quantity = c.Quantity,
-                    ProductImage = c.Product != null ? c.Product.ProductImage1 : string.Empty
-                })
-                .ToListAsync();
+                    // raw may be like "75,76" or "[75,76]" or "75%2C76" or "75"
+                    var cleaned = raw.Trim();
+                    // Remove surrounding brackets if present
+                    if (cleaned.StartsWith("[") && cleaned.EndsWith("]")) cleaned = cleaned.Substring(1, cleaned.Length - 2);
+                    var parts = cleaned.Split(new[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries)
+                        .Select(p => p.Trim())
+                        .Where(p => !string.IsNullOrWhiteSpace(p))
+                        .ToList();
+
+                    var parsed = new List<int>();
+                    foreach (var part in parts)
+                    {
+                        if (int.TryParse(part, out var v))
+                        {
+                            parsed.Add(v);
+                        }
+                        else
+                        {
+                            // fallback: extract digits
+                            var m = Regex.Matches(part, "\\d+");
+                            foreach (Match mm in m)
+                            {
+                                if (int.TryParse(mm.Value, out var vv)) parsed.Add(vv);
+                            }
+                        }
+                    }
+
+                    if (parsed.Any())
+                    {
+                        selectedProductIds = parsed.Distinct().ToList();
+                        _logger.LogInformation($"Parsed selectedProductIds from raw query: {string.Join(',', selectedProductIds)}");
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogWarning(ex, "Failed to parse raw selectedProductIds query string");
+            }
+
+            var cartItems = await ResolveCheckoutItemsAsync(userId, selectedProductIds);
 
             if (cartItems == null || !cartItems.Any())
             {
-                TempData["Error"] = "Giỏ hàng của bạn đang trống!";
+                TempData["Error"] = selectedProductIds != null && selectedProductIds.Any()
+                    ? "Không có sản phẩm được chọn để thanh toán!"
+                    : "Giỏ hàng của bạn đang trống!";
                 return RedirectToAction("Index");
-            }
-
-            if (selectedProductIds != null && selectedProductIds.Any())
-            {
-                cartItems = cartItems
-                    .Where(item => selectedProductIds.Contains(item.ProductId))
-                    .ToList();
-
-                if (!cartItems.Any())
-                {
-                    TempData["Error"] = "Không có sản phẩm được chọn để thanh toán!";
-                    return RedirectToAction("Index");
-                }
             }
 
             var finalSelectedIds = (selectedProductIds != null && selectedProductIds.Any())
@@ -294,16 +312,12 @@ namespace LapTopBD.Controllers
                 return Json(new { success = false, message = "Vui lòng đăng nhập để thanh toán!" });
             }
 
-            // Lấy giỏ hàng từ bảng CartItems
-            var cartItems = await _context.CartItems
-                .Include(c => c.Product)
-                .Where(c => c.UserId == userId)
-                .ToListAsync();
+            var cartItems = await ResolveCheckoutItemsAsync(userId, model.SelectedProductIds);
 
             if (cartItems == null || !cartItems.Any())
             {
-                Console.WriteLine("[DEBUG] Giỏ hàng trống");
-                return Json(new { success = false, message = "Giỏ hàng của bạn đang trống!" });
+                Console.WriteLine("[DEBUG] Giỏ hàng trống hoặc không có sản phẩm được chọn");
+                return Json(new { success = false, message = model.SelectedProductIds != null && model.SelectedProductIds.Any() ? "Không có sản phẩm được chọn để thanh toán!" : "Giỏ hàng của bạn đang trống!" });
             }
 
             model.Name = model.Name?.Trim();
@@ -336,14 +350,29 @@ namespace LapTopBD.Controllers
                 return Json(new { success = false, message = "Không có sản phẩm được chọn để thanh toán!" });
             }
 
-            var errors = cartItems
-                .Where(i => i.Product != null && i.Quantity > i.Product.quantity)
-                .Select(i => new
+            var errors = new List<object>();
+            foreach (var item in cartItems)
+            {
+                var product = await _context.Product.FindAsync(item.ProductId);
+                if (product == null)
                 {
-                    productId = i.ProductId,
-                    message = $"Sản phẩm {i.Product.ProductName} chỉ còn {i.Product.quantity}"
-                })
-                .ToList();
+                    errors.Add(new
+                    {
+                        productId = item.ProductId,
+                        message = $"Sản phẩm ID {item.ProductId} không tồn tại!"
+                    });
+                    continue;
+                }
+
+                if (item.Quantity > product.quantity)
+                {
+                    errors.Add(new
+                    {
+                        productId = item.ProductId,
+                        message = $"Sản phẩm {product.ProductName} chỉ còn {product.quantity}"
+                    });
+                }
+            }
 
             if (errors.Any())
             {
@@ -364,12 +393,11 @@ namespace LapTopBD.Controllers
             if (normalizedPaymentMethod == "VNPAY")
             {
                 var pendingItems = cartItems
-                    .Where(item => item.Product != null)
                     .Select(item => new PendingCheckoutItem
                     {
                         ProductId = item.ProductId,
                         Quantity = item.Quantity,
-                        UnitPrice = item.Product!.ProductPrice
+                        UnitPrice = item.ProductPrice
                     })
                     .ToList();
 
@@ -531,7 +559,7 @@ namespace LapTopBD.Controllers
         private async Task<(bool Success, string Message)> CreateOrdersFromCartAsync(
             int userId,
             CheckoutViewModel model,
-            List<LapTopBD.Models.CartItem> cartItems,
+            List<LapTopBD.Models.ViewModels.CartItem> cartItems,
             string paymentMethod)
         {
             using var transaction = await _context.Database.BeginTransactionAsync();
@@ -558,7 +586,7 @@ namespace LapTopBD.Controllers
 
                     if (item.Quantity > product.quantity)
                     {
-                        return (false, $"Sản phẩm {item.Product?.ProductName ?? "Unknown"} chỉ còn {product.quantity}");
+                        return (false, $"Sản phẩm {product.ProductName ?? "Unknown"} chỉ còn {product.quantity}");
                     }
 
                     var order = new Order
@@ -591,7 +619,15 @@ namespace LapTopBD.Controllers
                     _context.Users.Update(user);
                 }
 
-                _context.CartItems.RemoveRange(cartItems);
+                var productIds = cartItems.Select(item => item.ProductId).ToList();
+                var cartItemsToRemove = await _context.CartItems
+                    .Where(c => c.UserId == userId && productIds.Contains(c.ProductId))
+                    .ToListAsync();
+
+                if (cartItemsToRemove.Count > 0)
+                {
+                    _context.CartItems.RemoveRange(cartItemsToRemove);
+                }
                 await _context.SaveChangesAsync();
                 await transaction.CommitAsync();
 
@@ -737,6 +773,78 @@ namespace LapTopBD.Controllers
             return normalized is "COD" or "VNPAY" ? normalized : string.Empty;
         }
 
+        private async Task<List<LapTopBD.Models.ViewModels.CartItem>> ResolveCheckoutItemsAsync(int userId, IEnumerable<int>? selectedProductIds)
+        {
+            var cartItems = await _context.CartItems
+                .AsNoTracking()
+                .Include(c => c.Product)
+                .Where(c => c.UserId == userId)
+                .Select(c => new LapTopBD.Models.ViewModels.CartItem
+                {
+                    ProductId = c.ProductId,
+                    ProductName = c.Product != null ? c.Product.ProductName : string.Empty,
+                    ProductPrice = c.Product != null ? c.Product.ProductPrice : 0,
+                    Quantity = c.Quantity,
+                    ProductImage = c.Product != null ? c.Product.ProductImage1 : string.Empty
+                })
+                .ToListAsync();
+
+            var selectedIds = selectedProductIds?.Distinct().ToList() ?? new List<int>();
+            if (selectedIds.Count == 0)
+            {
+                return cartItems;
+            }
+
+            var cartByProductId = cartItems.ToDictionary(item => item.ProductId);
+            var resolvedItems = new List<LapTopBD.Models.ViewModels.CartItem>();
+            var missingIds = new List<int>();
+
+            foreach (var productId in selectedIds)
+            {
+                if (cartByProductId.TryGetValue(productId, out var cartItem))
+                {
+                    resolvedItems.Add(cartItem);
+                }
+                else
+                {
+                    missingIds.Add(productId);
+                }
+            }
+
+            if (missingIds.Count > 0)
+            {
+                var products = await _context.Product
+                    .AsNoTracking()
+                    .Where(p => missingIds.Contains(p.Id))
+                    .Select(p => new
+                    {
+                        p.Id,
+                        p.ProductName,
+                        p.ProductPrice,
+                        p.ProductImage1
+                    })
+                    .ToListAsync();
+
+                var productById = products.ToDictionary(p => p.Id);
+                foreach (var productId in missingIds)
+                {
+                    if (productById.TryGetValue(productId, out var product))
+                    {
+                        resolvedItems.Add(new LapTopBD.Models.ViewModels.CartItem
+                        {
+                            ProductId = product.Id,
+                            ProductName = product.ProductName ?? string.Empty,
+                            ProductPrice = product.ProductPrice,
+                            Quantity = 1,
+                            ProductImage = product.ProductImage1 ?? string.Empty
+                        });
+                    }
+                }
+            }
+
+            return resolvedItems;
+        }
+
         // Action OrderConfirmation
         [Authorize(AuthenticationSchemes = "UserAuth")]
         [HttpGet]
@@ -762,31 +870,6 @@ namespace LapTopBD.Controllers
                 .ToListAsync();
             ViewBag.ShowBanner = false;
             return View(orders);
-        }
-
-        [AllowAnonymous]
-        [HttpGet]
-        public IActionResult VnPayConfigDebug()
-        {
-            // REMOVE THIS ENDPOINT AFTER TESTING - SECURITY RISK
-            var options = _vnPayOptions.Value;
-            var secret = options.HashSecret ?? "NOT SET";
-            
-            // Mask secret for safety - show first 8 and last 4 chars only
-            var maskedSecret = secret.Length > 12 
-                ? $"{secret.Substring(0, 8)}***{secret.Substring(secret.Length - 4)}" 
-                : "***";
-            
-            return Json(new
-            {
-                environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production",
-                tmnCode = options.TmnCode,
-                hashSecret_masked = maskedSecret,
-                hashSecret_full = secret,
-                baseUrl = options.BaseUrl,
-                returnUrl = options.PaymentBackReturnUrl,
-                message = "DEBUG ENDPOINT - DELETE AFTER TESTING FOR SECURITY"
-            });
         }
 
         [Authorize(AuthenticationSchemes = "UserAuth")]

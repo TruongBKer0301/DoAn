@@ -243,6 +243,38 @@ namespace LapTopBD.Controllers
             ViewBag.ShowBanner = false;
             ViewBag.RelatedProduct = relatedProduct;
             ViewBag.CompareProducts = compareProducts;
+            // Accessories / phụ kiện phù hợp: ưu tiên cùng thương hiệu, hoặc có từ khóa phổ biến
+            var accessoryKeywords = new[] { "sạc", "tai nghe", "headphone", "headset", "bàn phím", "chuột", "tai-nghe", "earbuds" };
+            var accessoriesQuery = _context.Product
+                .Include(p => p.Category)
+                .Include(p => p.SubCategory)
+                .Where(p => p.Id != product.Id)
+                .Where(p => (
+                    (p.Category != null && EF.Functions.Like(p.Category.CategoryName, "%Phụ kiện%")) ||
+                    (p.SubCategory != null && EF.Functions.Like(p.SubCategory.SubCategoryName, "%Phụ kiện%")) ||
+                    accessoryKeywords.Any(kw => EF.Functions.Like(p.ProductName, "%" + kw + "%"))
+                ));
+
+            // Order so that same-brand accessories appear first
+            accessoriesQuery = accessoriesQuery.OrderByDescending(p => p.Brand == product.Brand)
+                                               .ThenByDescending(p => p.PostingDate);
+
+            var accessories = await accessoriesQuery
+                .Take(6)
+                .Select(p => new ProductViewModel
+                {
+                    Id = p.Id,
+                    ProductName = p.ProductName,
+                    ProductImage1 = p.ProductImage1,
+                    ProductPrice = p.ProductPrice,
+                    ProductPriceBeforeDiscount = p.ProductPriceBeforeDiscount,
+                    quantity = p.quantity,
+                    Slug = p.Slug,
+                    Brand = p.Brand
+                })
+                .ToListAsync();
+
+            ViewBag.Accessories = accessories;
             ViewBag.TotalReviews = product.TotalReviews;
 
             return View(product);
