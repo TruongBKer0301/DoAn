@@ -3,17 +3,17 @@
     ViewData["Title"] = Model.PageTitle;
 }
 
-<div class="container-fluid bg-secondary mb-5">
-    <div class="d-flex flex-column align-items-center justify-content-center min-hero-260">
-        <h1 class="font-weight-semi-bold text-uppercase mb-3">@Model.PageTitle</h1>
-        <div class="d-inline-flex">
-            <p class="m-0"><a href="@Url.Action("Index", "Home")">Trang chu</a></p>
-            <p class="m-0 px-2">-</p>
-            <p class="text-danger m-0">@Model.PageTitle</p>
+<div class="container-fluid hero-cart mb-5">
+    <div class="hero-inner">
+        <h1 class="hero-title">@Model.PageTitle</h1>
+        <div class="hero-divider"></div>
+        <div class="hero-breadcrumb">
+            <a href="@Url.Action("Index", "Home")">Trang Chủ >></a>
+            <i class="ti ti-chevron-right"></i>
+            <span class="hero-bc-cur">@Model.PageTitle</span>
         </div>
     </div>
 </div>
-
 <div class="container py-4 policy-page-content">
     @Html.Raw(Model.HtmlContent)
 </div>

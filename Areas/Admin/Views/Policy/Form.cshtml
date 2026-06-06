@@ -1,0 +1,87 @@
+@model LapTopBD.Models.ViewModels.Admin.PolicyFormViewModel
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var isEdit = Model.Id != Guid.Empty;
+    ViewData["Title"] = isEdit ? "Sua chinh sach" : "Them chinh sach";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-lg-10 col-xl-9 mx-auto">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0">@ViewData["Title"]</h2>
+                <a asp-action="Edit" asp-controller="Policy" asp-area="Admin" class="btn btn-secondary">Quay lai</a>
+            </div>
+
+            <form asp-action="@(isEdit ? "Update" : "Create")"
+                  asp-controller="Policy"
+                  asp-area="Admin"
+                  asp-route-id="@(isEdit ? Model.Id : null)"
+                  method="post"
+                  id="policyForm">
+                @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="Id" />
+
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label asp-for="Title" class="form-label fw-semibold">Tieu de</label>
+                            <input asp-for="Title" class="form-control" placeholder="Vi du: Chinh sach doi tra" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Slug" class="form-label fw-semibold">Slug</label>
+                            <input asp-for="Slug" class="form-control" placeholder="De trong de tu tao theo tieu de" />
+                            <div class="form-text">Duong dan se co dang /chinh-sach/slug.</div>
+                        </div>
+
+                        <div class="form-check form-switch">
+                            <input asp-for="IsPublished" class="form-check-input" type="checkbox" />
+                            <label asp-for="IsPublished" class="form-check-label">Hien thi tren website</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header fw-bold">Noi dung chinh sach</div>
+                    <div class="card-body">
+                        <textarea id="policyContentEditor" asp-for="HtmlContent" class="form-control" rows="18"></textarea>
+                        <span asp-validation-for="HtmlContent" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="text-end">
+                    <button type="submit" class="btn btn-primary">Luu chinh sach</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.ckeditor.com/ckeditor5/48.0.0/classic/ckeditor.js"></script>
+    <script>
+        let policyEditorInstance;
+
+        document.addEventListener("DOMContentLoaded", function () {
+            ClassicEditor
+                .create(document.querySelector("#policyContentEditor"))
+                .then(editor => {
+                    policyEditorInstance = editor;
+                    editor.ui.view.editable.element.style.minHeight = "420px";
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+
+            document.querySelector("#policyForm").addEventListener("submit", function () {
+                if (policyEditorInstance) {
+                    document.querySelector("#policyContentEditor").value = policyEditorInstance.getData();
+                }
+            });
+        });
+    </script>
+}

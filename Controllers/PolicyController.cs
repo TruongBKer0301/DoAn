@@ -15,26 +15,27 @@ public class PolicyController : Controller
     }
 
     [HttpGet("bao-hanh")]
-    public async Task<IActionResult> Warranty()
-    {
-        var content = await _policyStore.GetAsync();
-        ViewBag.ShowBanner = false;
-        return View("Page", new PolicyPageViewModel
-        {
-            PageTitle = "Chính Sách Bảo Hành",
-            HtmlContent = content.WarrantyHtml
-        });
-    }
+    public Task<IActionResult> Warranty() => ShowPolicy("bao-hanh");
 
     [HttpGet("giao-hang")]
-    public async Task<IActionResult> Shipping()
+    public Task<IActionResult> Shipping() => ShowPolicy("giao-hang");
+
+    [HttpGet("{slug}")]
+    public Task<IActionResult> Detail(string slug) => ShowPolicy(slug);
+
+    private async Task<IActionResult> ShowPolicy(string slug)
     {
-        var content = await _policyStore.GetAsync();
+        var policy = await _policyStore.GetBySlugAsync(slug);
+        if (policy is null)
+        {
+            return NotFound();
+        }
+
         ViewBag.ShowBanner = false;
         return View("Page", new PolicyPageViewModel
         {
-            PageTitle = "Chinh sach giao hang",
-            HtmlContent = content.ShippingHtml
+            PageTitle = policy.Title,
+            HtmlContent = policy.HtmlContent
         });
     }
 }
