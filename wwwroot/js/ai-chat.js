@@ -14,6 +14,44 @@ document.addEventListener('DOMContentLoaded', function () {
         aiMessages.scrollTop = aiMessages.scrollHeight;
     }
 
+    function addRichMessage(text, who) {
+        const div = document.createElement('div');
+        div.className = 'ai-message ' + (who === 'user' ? 'user' : 'assistant');
+
+        const lines = String(text || '').split(/\r?\n/);
+        let hasImage = false;
+
+        for (const line of lines) {
+            const trimmed = line.trim();
+            if (!trimmed) continue;
+
+            if (trimmed.toLowerCase().startsWith('ảnh:')) {
+                const imageUrl = trimmed.slice(4).trim();
+                if (imageUrl) {
+                    const img = document.createElement('img');
+                    img.src = imageUrl;
+                    img.alt = 'Ảnh sản phẩm';
+                    img.loading = 'lazy';
+                    img.className = 'ai-chat-product-image';
+                    div.appendChild(img);
+                    hasImage = true;
+                }
+                continue;
+            }
+
+            const p = document.createElement('div');
+            p.textContent = line;
+            div.appendChild(p);
+        }
+
+        if (!hasImage && div.childNodes.length === 0) {
+            div.textContent = text;
+        }
+
+        aiMessages.appendChild(div);
+        aiMessages.scrollTop = aiMessages.scrollHeight;
+    }
+
     chatHeader.addEventListener('click', () => {
         chatBody.classList.toggle('d-none');
         chatToggle.textContent = chatBody.classList.contains('d-none') ? '–' : '×';
@@ -35,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // remove 'Đang gửi...'
             const last = aiMessages.lastChild;
             if (last && last.textContent === 'Đang gửi...') last.remove();
-            addMessage(json.reply || 'Xin lỗi, không có phản hồi.', 'assistant');
+            addRichMessage(json.reply || 'Xin lỗi, không có phản hồi.', 'assistant');
         } catch (e) {
             const last = aiMessages.lastChild;
             if (last && last.textContent === 'Đang gửi...') last.remove();

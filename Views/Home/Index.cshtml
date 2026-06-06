@@ -1,7 +1,17 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<!-- Recent Viewed Products -->
+<div class="container-fluid" id="recentViewedSection" style="display:none;">
+    <div class="text-center">
+        <h2 class="section-title px-5">
+            <span class="px-2">Đã xem gần đây</span>
+        </h2>
+    </div>
 
+    <div class="owl-carousel product-carousel owl-theme" id="recentViewedCarousel">
+    </div>
+</div>
 <!-- Product New -->
 <div class="container-fluid">
     <div class="text-center">
@@ -10,11 +20,14 @@
     <div class="owl-carousel product-carousel owl-theme product-new">
         @if (ViewBag.NewProduct != null && ViewBag.NewProduct.Count > 0)
         {
-            @foreach (var product in (ViewBag.NewProduct as List<LapTopBD.ViewModels.ProductViewModel>) ?? new List<LapTopBD.ViewModels.ProductViewModel>())
+            @foreach (var product in (ViewBag.NewProduct as List<LapTopBD.ViewModels.ProductViewModel>) ?? new
+        List<LapTopBD.ViewModels.ProductViewModel>())
             {
                 // Sửa lại logic kiểm tra hasDiscount
-                var hasDiscount = product.ProductPriceBeforeDiscount.HasValue && product.ProductPriceBeforeDiscount.Value > product.ProductPrice;
-                var discountPercentage = hasDiscount ? (1 - product.ProductPrice / product.ProductPriceBeforeDiscount.GetValueOrDefault()) * 100 : 0;
+                var hasDiscount = product.ProductPriceBeforeDiscount.HasValue && product.ProductPriceBeforeDiscount.Value >
+        product.ProductPrice;
+                var discountPercentage = hasDiscount ? (1 - product.ProductPrice /
+        product.ProductPriceBeforeDiscount.GetValueOrDefault()) * 100 : 0;
 
                 <div class="item" data-aos="fade-up" data-aos-duration="2500">
                     <div class="card shadow h-100">
@@ -22,7 +35,8 @@
                             <a href="@Url.Action("Detail", "Home", new { slug = product.Slug })">
                                 <img class="img-fluid w-100" src="@product.ProductImage1" alt="@product.ProductName" />
                             </a>
-                            <button class="btn-add-to-fav" id="add-to-fav-btn" data-product-id="@product.Id" title="Thêm vào yêu thích">
+                            <button class="btn-add-to-fav" id="add-to-fav-btn" data-product-id="@product.Id"
+                                    title="Thêm vào yêu thích">
                                 <i class="ri-heart-line"></i>
                             </button>
 
@@ -68,7 +82,8 @@
                             <div class="price-wrapper">
                                 @if (hasDiscount)
                                 {
-                                    <div class="original-price">@(product.ProductPriceBeforeDiscount?.ToString("N0") ?? "") VND</div>
+                                    <div class="original-price">@(product.ProductPriceBeforeDiscount?.ToString("N0") ?? "") VND
+                                    </div>
                                     <div class="discount-price">@product.ProductPrice.ToString("N0") VND</div>
                                 }
                                 else
@@ -93,7 +108,7 @@
                                     </button>
                                 </div>
                             }
-                            
+
                         </div>
                     </div>
                 </div>
@@ -114,11 +129,14 @@
     <div class="owl-carousel product-carousel owl-theme product-hot-deal">
         @if (ViewBag.HotDeals != null && ViewBag.HotDeals.Count > 0)
         {
-            @foreach (var product in (ViewBag.HotDeals as List<LapTopBD.ViewModels.ProductViewModel>) ?? new List<LapTopBD.ViewModels.ProductViewModel>())
+            @foreach (var product in (ViewBag.HotDeals as List<LapTopBD.ViewModels.ProductViewModel>) ?? new
+        List<LapTopBD.ViewModels.ProductViewModel>())
             {
                 // Sửa lại logic kiểm tra hasDiscount
-                var hasDiscount = product.ProductPriceBeforeDiscount.HasValue && product.ProductPriceBeforeDiscount.Value > product.ProductPrice;
-                var discountPercentage = hasDiscount ? (1 - product.ProductPrice / product.ProductPriceBeforeDiscount.GetValueOrDefault()) * 100 : 0;
+                var hasDiscount = product.ProductPriceBeforeDiscount.HasValue && product.ProductPriceBeforeDiscount.Value >
+        product.ProductPrice;
+                var discountPercentage = hasDiscount ? (1 - product.ProductPrice /
+        product.ProductPriceBeforeDiscount.GetValueOrDefault()) * 100 : 0;
 
                 <div class="item" data-aos="fade-up" data-aos-duration="2500">
                     <div class="card shadow h-100">
@@ -127,7 +145,8 @@
                                 <img class="img-fluid w-100" src="@product.ProductImage1" alt="@product.ProductName" />
                             </a>
 
-                            <button class="btn-add-to-fav" id="add-to-fav-btn" data-product-id="@product.Id" title="Thêm vào yêu thích">
+                            <button class="btn-add-to-fav" id="add-to-fav-btn" data-product-id="@product.Id"
+                                    title="Thêm vào yêu thích">
                                 <i class="ri-heart-line"></i>
                             </button>
 
@@ -173,7 +192,8 @@
                             <div class="price-wrapper">
                                 @if (hasDiscount)
                                 {
-                                    <div class="original-price">@(product.ProductPriceBeforeDiscount?.ToString("N0") ?? "") VND</div>
+                                    <div class="original-price">@(product.ProductPriceBeforeDiscount?.ToString("N0") ?? "") VND
+                                    </div>
                                     <div class="discount-price">@product.ProductPrice.ToString("N0") VND</div>
                                 }
                                 else
@@ -209,6 +229,152 @@
         }
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const section = document.getElementById("recentViewedSection");
+        const carousel = $("#recentViewedCarousel");
+
+        let products = [];
+
+        try {
+            products = JSON.parse(localStorage.getItem("viewedProducts")) || [];
+        } catch {
+            products = [];
+        }
+
+        if (!products.length) {
+            section.style.display = "none";
+            return;
+        }
+
+        function escapeHtml(value) {
+            return String(value ?? "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function formatPrice(value) {
+            const number = Number(value || 0);
+            return number.toLocaleString("vi-VN") + " VND";
+        }
+
+        function renderStars(value) {
+            const rating = Number(value || 0);
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating - fullStars >= 0.5;
+            const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+            return `
+                <div class="review-star mr-2">
+                    ${'<small class="fas fa-star"></small>'.repeat(fullStars)}
+                    ${hasHalfStar ? '<small class="fas fa-star-half-alt"></small>' : ''}
+                    ${'<small class="far fa-star"></small>'.repeat(emptyStars)}
+                </div>
+            `;
+        }
+
+        function renderProductCard(product) {
+            const id = escapeHtml(product.id);
+            const name = escapeHtml(product.name);
+            const image = escapeHtml(product.image || "/images/laptop.png");
+            const slug = encodeURIComponent(product.slug || "");
+            const price = Number(product.price || 0);
+            const priceBeforeDiscount = Number(product.priceBeforeDiscount || 0);
+            const quantity = Number(product.quantity || 0);
+            const hasDiscount = priceBeforeDiscount > price;
+            const discountPercentage = hasDiscount ? Math.round((1 - price / priceBeforeDiscount) * 100) : 0;
+            const detailUrl = `/Home/Detail?slug=${slug}`;
+
+            return `
+                <div class="item" data-aos="fade-up" data-aos-duration="2500">
+                    <div class="card shadow h-100">
+                        <div class="ratio ratio-1x1">
+                            <a href="${detailUrl}">
+                                <img class="img-fluid w-100" src="${image}" alt="${name}" onerror="this.src='/images/laptop.png'" />
+                            </a>
+
+                            <button class="btn-add-to-fav" data-product-id="${id}" title="Thêm vào yêu thích">
+                                <i class="ri-heart-line"></i>
+                            </button>
+
+                            ${quantity < 1
+                    ? '<span class="discount-tag out-of-stock">Hết hàng</span>'
+                    : hasDiscount
+                        ? `<span class="discount-tag">Giảm ${discountPercentage}%</span>`
+                        : ''
+                }
+                        </div>
+
+                        <div class="card-body">
+                            <div>
+                                <a href="${detailUrl}">
+                                    <p class="card-text">${name}</p>
+                                </a>
+                            </div>
+
+                            <div class="d-flex mb-3">
+                                ${renderStars(product.averageRating)}
+                            </div>
+
+                            <div class="price-wrapper">
+                                ${hasDiscount
+                    ? `<div class="original-price">${formatPrice(priceBeforeDiscount)}</div>
+                                           <div class="discount-price">${formatPrice(price)}</div>`
+                    : `<div class="original-price">${formatPrice(price)}</div>`
+                }
+                            </div>
+
+                            ${quantity < 1
+                    ? `<button class="btn-add-to-cart bg-danger">
+                                           <i class="ri-phone-fill"></i> Tạm thời hết hàng
+                                       </button>`
+                    : `<div class="product-action-row flex-wrap gap-2">
+                                           <button class="btn-add-to-cart" data-product-id="${id}">
+                                               <i class="fas fa-shopping-cart"></i> Thêm vào giỏ hàng
+                                           </button>
+                                           <button class="btn-buy-now" data-product-id="${id}">
+                                               <i class="fas fa-bolt"></i> Mua ngay
+                                           </button>
+                                       </div>`
+                }
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        section.style.display = "";
+
+        if (carousel.hasClass("owl-loaded")) {
+            carousel.trigger("destroy.owl.carousel");
+            carousel.removeClass("owl-loaded");
+            carousel.find(".owl-stage-outer").children().unwrap();
+        }
+
+        carousel.empty().append(products.map(renderProductCard).join(""));
+
+        if ($.fn.owlCarousel) {
+            carousel.owlCarousel({
+                loop: products.length > 1,
+                margin: 20,
+                nav: true,
+                dots: false,
+                autoplay: false,
+                smartSpeed: 800,
+                responsive: {
+                    0: { items: 1 },
+                    576: { items: 2 },
+                    768: { items: 3 },
+                    992: { items: 4 },
+                    1200: { items: 5 }
+                }
+            });
+        }
+    });
+</script>
 <style>
     .ratio {
         position: relative;
@@ -227,8 +393,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        color: #ff4757; /* Màu đỏ trái tim */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        color: #ff4757;
+        /* Màu đỏ trái tim */
         transition: all 0.3s ease;
         cursor: pointer;
     }
@@ -239,14 +406,14 @@
     }
 
     .btn-add-to-fav:hover {
-            background: #ff4757;
-            color: white;
-            transform: scale(1.1);
-        }
+        background: #ff4757;
+        color: white;
+        transform: scale(1.1);
+    }
 
-        .btn-add-to-fav i {
-            font-size: 1.2rem;
-        }
+    .btn-add-to-fav i {
+        font-size: 1.2rem;
+    }
 
     /* ===== BUTTONS ===== */
     .product-action-row {
@@ -272,18 +439,74 @@
         color: #fff;
     }
 
-    .btn-add-to-cart:hover { transform: translateY(-2px); opacity: 0.92; }
+    .btn-add-to-cart:hover {
+        transform: translateY(-2px);
+        opacity: 0.92;
+    }
 
     .btn-add-to-cart.bg-danger {
         background: linear-gradient(135deg, #dc2626, #ef4444) !important;
     }
 
-    .btn-buy-now { background: #eff6ff; color: #1d4ed8; }
-    .btn-buy-now:hover { background: #1d4ed8; color: #fff; }
+    .btn-buy-now {
+        background: #eff6ff;
+        color: #1d4ed8;
+    }
+
+    .btn-buy-now:hover {
+        background: #1d4ed8;
+        color: #fff;
+    }
 
     @@media (max-width: 768px) {
-        .product-action-row { flex-direction: column; }
-        .card-text { min-height: auto; }
-        .bg-secondary h1 { font-size: 28px; }
+        .product-action-row {
+            flex-direction: column;
+        }
+
+        .card-text {
+            min-height: auto;
+        }
+
+        .bg-secondary h1 {
+            font-size: 28px;
+        }
+    }
+
+    .recent-product-card {
+        height: 100%;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, .1);
+        transition: .3s;
+        background: #fff;
+    }
+
+    .recent-product-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .recent-product-card img {
+        width: 100%;
+        height: 220px;
+        object-fit: contain;
+        padding: 10px;
+    }
+
+    .recent-product-card .content {
+        padding: 12px;
+    }
+
+    .recent-product-card .title {
+        font-size: 14px;
+        font-weight: 600;
+        height: 42px;
+        overflow: hidden;
+        color: #333;
+    }
+
+    .recent-product-card .price {
+        color: #dc3545;
+        font-weight: bold;
+        margin-top: 10px;
     }
 </style>
