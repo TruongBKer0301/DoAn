@@ -43,10 +43,7 @@
             <div class="col-lg-6 d-none d-lg-block">
                 <div class="d-inline-flex align-items-center">
                     <a class="text-dark" href="@Url.Action("Contact", "Home")">Liên hệ</a>
-                    <span class="text-muted px-2">|</span>
-                    <a class="text-dark" href="@Url.Action("Warranty", "Policy")">Chính sách bảo hành</a>
-                    <span class="text-muted px-2">|</span>
-                    <a class="text-dark" href="@Url.Action("Shipping", "Policy")">Chính sách giao hàng</a>
+                    @await Component.InvokeAsync("PolicyTopLinks")
                 </div>
             </div>
 

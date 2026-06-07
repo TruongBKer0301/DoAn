@@ -1,0 +1,7 @@
+@model IReadOnlyList<LapTopBD.Models.ViewModels.Users.PolicyLinkViewModel>
+
+@for (var i = 0; i < Model.Count; i++)
+{
+    <span class="text-muted px-2">|</span>
+    <a class="text-dark" href="@Url.Action("Detail", "Policy", new { slug = Model[i].Slug })">@Model[i].Title</a>
+}

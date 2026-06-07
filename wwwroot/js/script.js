@@ -1755,18 +1755,28 @@ $(function () {
     $(document).on('click', '.btn-add-to-cart[data-product-id]', function (e) {
         e.preventDefault();
 
-        var productId = $(this).data('product-id');
+        var addToCartBtn = $(this);
+        var productId = addToCartBtn.data('product-id');
         if (!productId) {
             return;
         }
 
-        var quantity = parseInt($('#quantity').val()) || 1;
+        if (addToCartBtn.data('processing')) {
+            return;
+        }
+
+        var quantityInput = addToCartBtn.data('quantity-input');
+        var quantity = quantityInput ? parseInt($(quantityInput).val(), 10) : 1;
+        quantity = Number.isFinite(quantity) && quantity > 0 ? quantity : 1;
         var cartIcon = $('.icon-cart'); // Icon giỏ hàng
-        var addToCartBtn = $(this); // Nút "Thêm vào giỏ hàng"
+        var originalHtml = addToCartBtn.html();
+
+        addToCartBtn.data('processing', true).prop('disabled', true);
+        addToCartBtn.html('<i class="fas fa-spinner fa-spin"></i> Đang thêm...');
 
         // Lấy ảnh sản phẩm gần nút "Thêm vào giỏ hàng" nhất
         var productImg = addToCartBtn.closest('.product-item').find('img').first();
-        if (productImg.length) {
+        if (!addToCartBtn.data('skip-cart-animation') && productImg.length && cartIcon.length) {
             var flyingImg = productImg.clone().css({
                 position: 'absolute',
                 width: productImg.width(),
@@ -1801,13 +1811,17 @@ $(function () {
             success: function (response) {
                 if (response.success) {
                     updateCartCount();
-
+                    showMessage(response.message || 'Đã thêm vào giỏ hàng!', 'success');
                 } else {
                     showMessage(response.message, 'danger');
                 }
             },
             error: function () {
                 showMessage('Đã xảy ra lỗi khi thêm vào giỏ hàng!', 'danger');
+            },
+            complete: function () {
+                addToCartBtn.data('processing', false).prop('disabled', false);
+                addToCartBtn.html(originalHtml);
             }
         });
     });

@@ -286,7 +286,7 @@
             const quantity = Number(product.quantity || 0);
             const hasDiscount = priceBeforeDiscount > price;
             const discountPercentage = hasDiscount ? Math.round((1 - price / priceBeforeDiscount) * 100) : 0;
-            const detailUrl = `/Home/Detail?slug=${slug}`;
+            const detailUrl = `/user/Detail/${slug}`;
 
             return `
                 <div class="item" data-aos="fade-up" data-aos-duration="2500">

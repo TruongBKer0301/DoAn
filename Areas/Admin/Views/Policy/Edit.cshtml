@@ -6,9 +6,9 @@
 
 <div class="container mt-4">
     <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-4">
-        <h2 class="mb-0">Quan ly chinh sach</h2>
+        <h2 class="mb-0">Quản lý chính sách</h2>
         <a asp-action="Create" asp-controller="Policy" asp-area="Admin" class="btn btn-primary">
-            <i class="ri-add-line me-1"></i> Them chinh sach
+            <i class="ri-add-line me-1"></i> Thêm chính sách
         </a>
     </div>
 
@@ -25,18 +25,18 @@
         <table class="table table-hover align-middle mb-0">
             <thead class="table-primary">
                 <tr>
-                    <th>Tieu de</th>
-                    <th>Duong dan</th>
-                    <th>Trang thai</th>
-                    <th>Cap nhat</th>
-                    <th class="text-center" style="width: 130px;">Hanh dong</th>
+                    <th>Tiêu đề</th>
+                    <th>Đường dẫn</th>
+                    <th>Trạng thái</th>
+                    <th>Cập nhật</th>
+                    <th class="text-center" style="width: 190px;">Hành động</th>
                 </tr>
             </thead>
             <tbody>
                 @if (Model.Policies.Count == 0)
                 {
                     <tr>
-                        <td colspan="5" class="text-center text-muted py-4">Chua co chinh sach nao.</td>
+                        <td colspan="5" class="text-center text-muted py-4">Chưa có chính sách nào.</td>
                     </tr>
                 }
                 else
@@ -51,24 +51,33 @@
                             <td>
                                 @if (policy.IsPublished)
                                 {
-                                    <span class="badge bg-success">Dang hien thi</span>
+                                    <span class="badge bg-success">Đang hiển thị</span>
                                 }
                                 else
                                 {
-                                    <span class="badge bg-secondary">An</span>
+                                    <span class="badge bg-secondary">Ẩn</span>
                                 }
                             </td>
                             <td>@policy.UpdatedAtUtc.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td>
                             <td class="text-center">
+                                <form asp-action="TogglePublished" asp-controller="Policy" asp-area="Admin" asp-route-id="@policy.Id"
+                                      method="post" class="d-inline">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit"
+                                            class="btn btn-sm @(policy.IsPublished ? "btn-outline-warning" : "btn-outline-success") me-1"
+                                            title="@(policy.IsPublished ? "Ẩn khỏi website" : "Hiển thị trên website")">
+                                        <i class="@(policy.IsPublished ? "ri-eye-off-line" : "ri-eye-line")"></i>
+                                    </button>
+                                </form>
                                 <a asp-action="Update" asp-controller="Policy" asp-area="Admin" asp-route-id="@policy.Id"
-                                   class="btn btn-sm btn-outline-primary me-1" title="Sua">
+                                   class="btn btn-sm btn-outline-primary me-1" title="Sửa">
                                     <i class="ri-pencil-line"></i>
                                 </a>
                                 <form asp-action="Delete" asp-controller="Policy" asp-area="Admin" asp-route-id="@policy.Id"
                                       method="post" class="d-inline"
                                       onsubmit="return confirm('Ban co chac muon xoa chinh sach nay?');">
                                     @Html.AntiForgeryToken()
-                                    <button type="submit" class="btn btn-sm btn-outline-danger" title="Xoa">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger" title="Xóa">
                                         <i class="ri-delete-bin-6-line"></i>
                                     </button>
                                 </form>

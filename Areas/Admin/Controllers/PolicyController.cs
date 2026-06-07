@@ -60,7 +60,7 @@ public class PolicyController : Controller
             IsPublished = vm.IsPublished
         });
 
-        TempData["Success"] = "Da them chinh sach thanh cong.";
+        TempData["Success"] = "Đã thêm chính sách thành công.";
         return RedirectToAction(nameof(Edit));
     }
 
@@ -105,7 +105,7 @@ public class PolicyController : Controller
         existing.IsPublished = vm.IsPublished;
 
         await _policyStore.UpsertAsync(existing);
-        TempData["Success"] = "Da cap nhat chinh sach thanh cong.";
+        TempData["Success"] = "Đã cập nhật chính sách thành công.";
         return RedirectToAction(nameof(Edit));
     }
 
@@ -115,8 +115,29 @@ public class PolicyController : Controller
     {
         var deleted = await _policyStore.DeleteAsync(id);
         TempData[deleted ? "Success" : "Error"] = deleted
-            ? "Da xoa chinh sach thanh cong."
-            : "Khong tim thay chinh sach can xoa.";
+            ? "Đã xóa chính sách thành công ."
+            : "Không tìm thấy chính sách cần xóa.";
+
+        return RedirectToAction(nameof(Edit));
+    }
+
+    [HttpPost("toggle/{id:guid}")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> TogglePublished(Guid id)
+    {
+        var policy = await _policyStore.GetByIdAsync(id);
+        if (policy is null)
+        {
+            TempData["Error"] = "Không tìm thấy chính sách cần cập nhật.";
+            return RedirectToAction(nameof(Edit));
+        }
+
+        policy.IsPublished = !policy.IsPublished;
+        await _policyStore.UpsertAsync(policy);
+
+        TempData["Success"] = policy.IsPublished
+            ? "Đã bật hiển thị chính sách."
+            : "Đã ẩn chính sách khỏi website.";
 
         return RedirectToAction(nameof(Edit));
     }
@@ -129,12 +150,12 @@ public class PolicyController : Controller
 
         if (string.IsNullOrWhiteSpace(vm.Title))
         {
-            ModelState.AddModelError(nameof(vm.Title), "Vui long nhap tieu de chinh sach.");
+            ModelState.AddModelError(nameof(vm.Title), "Vui lòng nhập tiêu đề chính sách.");
         }
 
         if (string.IsNullOrWhiteSpace(vm.HtmlContent))
         {
-            ModelState.AddModelError(nameof(vm.HtmlContent), "Vui long nhap noi dung chinh sach.");
+            ModelState.AddModelError(nameof(vm.HtmlContent), "Vui lòng nhập nội dung chính sách.");
         }
 
         return ModelState.IsValid;
