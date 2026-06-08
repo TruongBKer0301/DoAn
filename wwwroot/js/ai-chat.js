@@ -69,7 +69,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 method: 'POST', headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ message: text })
             });
-            const json = await res.json();
+            const json = await res.json().catch(() => ({}));
+            json.reply = json.reply || json.message;
             // remove 'Đang gửi...'
             const last = aiMessages.lastChild;
             if (last && last.textContent === 'Đang gửi...') last.remove();
