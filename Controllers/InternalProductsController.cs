@@ -122,6 +122,10 @@ namespace LapTopBD.Controllers
 
             if (m.Contains("laptop") || m.Contains("lap top")
                 || m.Contains("laptop gaming")
+                || m.Contains("gaming")
+                || m.Contains("game")
+                || m.Contains("choi game")
+                || m.Contains("ch\u01a1i game")
                 || m.Contains("notebook")
                 || m.Contains("máy tính") || m.Contains("may tinh")
                 || m.Contains("mt")

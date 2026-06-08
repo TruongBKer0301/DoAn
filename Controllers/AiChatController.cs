@@ -65,6 +65,7 @@ namespace LapTopBD.Controllers
         private static readonly string[] ChargerKeywords   = new[] { "sạc", "charger", "adapter", "cáp", "cable", "pin sạc" };
         private static readonly string[] KeyboardKeywords  = new[] { "bàn phím", "bàn phím cơ", "keyboard", "mechanical", "gaming keyboard" };
         private static readonly string[] HeadphoneKeywords = new[] { "tai nghe", "headphone", "headset", "earbuds", "bluetooth" };
+        private static readonly string[] GamingKeywords    = new[] { "game", "gaming", "choi game", "ch\u01a1i game", "laptop gaming", "gaming laptop", "stream game", "do hoa game", "\u0111\u1ed3 h\u1ecda game" };
 
         private static readonly string[] DetailKeywords = new[]
         {
@@ -75,7 +76,7 @@ namespace LapTopBD.Controllers
 
         private static string Normalize(string s) => (s ?? string.Empty).ToLowerInvariant();
 
-        private static bool IsLaptopIntent(string msg)    => LaptopKeywords.Any(Normalize(msg).Contains);
+        private static bool IsLaptopIntent(string msg)    => LaptopKeywords.Any(Normalize(msg).Contains) || GamingKeywords.Any(Normalize(msg).Contains);
         private static bool IsPhoneIntent(string msg)     => PhoneKeywords.Any(Normalize(msg).Contains);
         private static bool IsChargerIntent(string msg)   => ChargerKeywords.Any(Normalize(msg).Contains);
         private static bool IsKeyboardIntent(string msg)  => KeyboardKeywords.Any(Normalize(msg).Contains);
@@ -123,6 +124,8 @@ namespace LapTopBD.Controllers
                 groqModel);
 
             var products = new List<ChatProduct>();
+            var useBackendProductContext = true;
+            if (useBackendProductContext)
             try
             {
                 // FIX: thêm timeout ngắn để tránh self-call treo trên Azure
@@ -164,10 +167,8 @@ namespace LapTopBD.Controllers
                 _logger.LogWarning(ex, "[Chat] Không thể tải sản phẩm từ internal API — bỏ qua.");
             }
 
-            bool isDetail = IsDetailIntent(req.message);
-            var systemMessage = isDetail
-                ? BuildDetailSystemMessage(products)
-                : BuildSystemMessage(products);
+            bool isDetail = false;
+            var systemMessage = BuildFlexibleProductSystemMessage(products);
 
             try
             {
@@ -213,6 +214,64 @@ namespace LapTopBD.Controllers
                 _logger.LogError(ex, "[Chat] Groq API call failed");
                 return StatusCode(500, new { message = "AI chat failed." });
             }
+        }
+
+        private static string BuildNaturalSystemMessage()
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine("Ban la tro ly AI tu van mua sam cua shop laptop/linh kien.");
+            sb.AppendLine("Tra loi bang tieng Viet tu nhien, than thien, co suy nghi va linh hoat.");
+            sb.AppendLine("Khong bi rang buoc vao danh sach san pham backend, khong can tra dung mot mau co dinh.");
+            sb.AppendLine("Khong mo dau bang cau xin loi kieu 'toi khong co thong tin cu the ve san pham cua shop' khi nguoi dung chi hoi chung.");
+            sb.AppendLine("Neu nguoi dung hoi chung nhu 'laptop cua shop', 'shop co laptop gi', 'tu van laptop', hay tra loi nhu nhan vien shop: shop co nhieu nhom laptop theo nhu cau hoc tap, van phong, gaming, do hoa, mong nhe; sau do hoi ngan sach va nhu cau.");
+            sb.AppendLine("Neu nguoi dung hoi tu van mua laptop/san pham, hay hoi them ngan gon khi thieu thong tin quan trong nhu ngan sach, nhu cau, kich thuoc, uu tien pin/hieu nang/thiet ke.");
+            sb.AppendLine("Khi da du thong tin, dua ra goi y co ly do ro rang, so sanh uu/nhuoc diem va ket luan de nguoi dung de chon.");
+            sb.AppendLine("Chi nhac can kiem tra lai tren website/shop khi nguoi dung hoi gia chinh xac, hang con hay het, bao hanh, khuyen mai, hoac chinh sach hien tai.");
+            sb.AppendLine("Khong tao link mua hang, khong bia ID san pham, khong noi nhu the da xem duoc co so du lieu noi bo.");
+            sb.AppendLine("Giu cau tra loi vua du: khong qua dai, khong may moc, uu tien giai thich huu ich.");
+            return sb.ToString();
+        }
+
+        private static string BuildFlexibleProductSystemMessage(List<ChatProduct> products)
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine("Ban la nhan vien tu van AI cua shop laptop/linh kien.");
+            sb.AppendLine("Muc tieu: tra loi linh hoat, tu nhien, thong minh nhu dang tu van that, nhung khi de xuat san pham thi phai dung san pham trong danh sach duoi day de frontend render thanh box co nut mua ngay.");
+            sb.AppendLine("Khong mo dau bang cau xin loi kieu 'toi khong co thong tin cu the'. Neu cau hoi chung, hay gioi thieu ngan gon cac nhom lua chon va hoi them nhu cau/ngan sach.");
+            sb.AppendLine("Neu nguoi dung co nhu cau ro rang, hay chon 2-3 san pham phu hop nhat, giai thich vi sao hop, uu/nhuoc diem ngan gon.");
+            sb.AppendLine("Neu danh sach co san pham laptop va nguoi dung hoi choi game/laptop, phai uu tien de xuat laptop; khong chuyen sang dien thoai/tai nghe tru khi nguoi dung hoi ro ve dien thoai/tai nghe.");
+            sb.AppendLine("Duoc noi chuyen mem mai truoc va sau danh sach san pham. Khong can may moc theo mot mau duy nhat.");
+            sb.AppendLine("Quan trong: moi san pham de xuat phai viet thanh block rieng theo dung cau truc sau de hien thi box:");
+            sb.AppendLine("- [Ten san pham] - [Gia] VND - Mua ngay: /Cart/Checkout?selectedProductIds=[ID]");
+            sb.AppendLine("  Anh: [url anh neu co]");
+            sb.AppendLine("  Điểm phù hợp: [mot cau ngan gon]");
+            sb.AppendLine("Khong bia ID, link, gia, anh hoac ten san pham ngoai danh sach.");
+            sb.AppendLine("Neu danh sach trong hoac khong co san pham phu hop, hay tu van cach chon laptop theo nhu cau va hoi them thong tin, khong noi cut ngang.");
+            sb.AppendLine();
+
+            if (products == null || products.Count == 0)
+            {
+                sb.AppendLine("DANH SACH SAN PHAM: (trong)");
+                return sb.ToString();
+            }
+
+            sb.AppendLine($"DANH SACH SAN PHAM ({products.Count} san pham):");
+            foreach (var p in products.Take(12))
+            {
+                sb.Append($"[ID:{p.ProductId}] {p.ProductName}");
+                sb.Append($" | Gia: {p.ProductPrice:N0} VND");
+                sb.Append($" | Link: /Cart/Checkout?selectedProductIds={p.ProductId}");
+                if (!string.IsNullOrWhiteSpace(p.CategoryName))       sb.Append($" | Danh muc: {p.CategoryName}");
+                if (!string.IsNullOrWhiteSpace(p.Brand))              sb.Append($" | Hang: {Shorten(SanitizeInline(p.Brand), 40)}");
+                if (!string.IsNullOrWhiteSpace(p.CPU))                sb.Append($" | CPU: {Shorten(SanitizeInline(p.CPU), 80)}");
+                if (!string.IsNullOrWhiteSpace(p.RAM))                sb.Append($" | RAM: {Shorten(SanitizeInline(p.RAM), 50)}");
+                if (!string.IsNullOrWhiteSpace(p.Storage))            sb.Append($" | SSD: {Shorten(SanitizeInline(p.Storage), 60)}");
+                if (!string.IsNullOrWhiteSpace(p.ProductDescription)) sb.Append($" | Mo ta: {Shorten(SanitizeInline(p.ProductDescription), 180)}");
+                if (!string.IsNullOrWhiteSpace(p.ProductImage))       sb.Append($" | Anh: {p.ProductImage}");
+                sb.AppendLine();
+            }
+
+            return sb.ToString();
         }
 
         private static string BuildSystemMessage(List<ChatProduct> products)
@@ -407,9 +466,7 @@ namespace LapTopBD.Controllers
         private static string BuildLocalFallbackReply(List<ChatProduct> products, bool isDetail)
         {
             if (products == null || products.Count == 0)
-                return isDetail
-                    ? "Shop hi\u1ec7n ch\u01b0a c\u00f3 s\u1ea3n ph\u1ea9m ph\u00f9 h\u1ee3p."
-                    : "Shop hi\u1ec7n ch\u01b0a c\u00f3 s\u1ea3n ph\u1ea9m ph\u00f9 h\u1ee3p v\u1edbi y\u00eau c\u1ea7u n\u00e0y.";
+                return "M\u00ecnh ch\u01b0a nh\u1eadn \u0111\u01b0\u1ee3c ph\u1ea3n h\u1ed3i t\u1eeb AI l\u00fac n\u00e0y. B\u1ea1n th\u1eed h\u1ecfi l\u1ea1i ng\u1eafn h\u01a1n ho\u1eb7c cho m\u00ecnh th\u00eam ng\u00e2n s\u00e1ch, nhu c\u1ea7u s\u1eed d\u1ee5ng \u0111\u1ec3 m\u00ecnh t\u01b0 v\u1ea5n ti\u1ebfp nh\u00e9.";
 
             if (isDetail)
             {
@@ -477,3 +534,4 @@ namespace LapTopBD.Controllers
         }
     }
 }
+
