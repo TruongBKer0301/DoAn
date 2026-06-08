@@ -243,7 +243,6 @@ namespace LapTopBD.Controllers
             sb.AppendLine("Duoc noi chuyen mem mai truoc va sau danh sach san pham. Khong can may moc theo mot mau duy nhat.");
             sb.AppendLine("Quan trong: moi san pham de xuat phai viet thanh block rieng theo dung cau truc sau de hien thi box:");
             sb.AppendLine("- [Ten san pham] - [Gia] VND - Mua ngay: /Cart/Checkout?selectedProductIds=[ID]");
-            sb.AppendLine("  Anh: [url anh neu co]");
             sb.AppendLine("  Điểm phù hợp: [mot cau ngan gon]");
             sb.AppendLine("Khong bia ID, link, gia, anh hoac ten san pham ngoai danh sach.");
             sb.AppendLine("Neu danh sach trong hoac khong co san pham phu hop, hay tu van cach chon laptop theo nhu cau va hoi them thong tin, khong noi cut ngang.");
