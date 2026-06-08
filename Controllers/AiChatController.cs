@@ -4,7 +4,10 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using LapTopBD.Data;
+using LapTopBD.Utilities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
@@ -17,16 +20,30 @@ namespace LapTopBD.Controllers
         private readonly IHttpClientFactory _httpFactory;
         private readonly IConfiguration _config;
         private readonly ILogger<ChatController> _logger;
+        private readonly ApplicationDbContext _db;  // ← inject thẳng DbContext
 
-        public ChatController(IHttpClientFactory httpFactory, IConfiguration config, ILogger<ChatController> logger)
+        public ChatController(
+            IHttpClientFactory httpFactory,
+            IConfiguration config,
+            ILogger<ChatController> logger,
+            ApplicationDbContext db)  // ← thêm vào constructor
         {
             _httpFactory = httpFactory;
             _config = config;
             _logger = logger;
+            _db = db;
         }
 
-        public class ChatRequest { public string message { get; set; } = string.Empty; public List<ConversationItem> conversation { get; set; } = new(); }
-        public class ConversationItem { public string role { get; set; } = string.Empty; public string content { get; set; } = string.Empty; }
+        public class ChatRequest
+        {
+            public string message { get; set; } = string.Empty;
+            public List<ConversationItem> conversation { get; set; } = new();
+        }
+        public class ConversationItem
+        {
+            public string role { get; set; } = string.Empty;
+            public string content { get; set; } = string.Empty;
+        }
         public class ChatResponse { public string reply { get; set; } = string.Empty; }
 
         private sealed class ChatProduct
@@ -65,7 +82,7 @@ namespace LapTopBD.Controllers
         private static readonly string[] ChargerKeywords   = new[] { "sạc", "charger", "adapter", "cáp", "cable", "pin sạc" };
         private static readonly string[] KeyboardKeywords  = new[] { "bàn phím", "bàn phím cơ", "keyboard", "mechanical", "gaming keyboard" };
         private static readonly string[] HeadphoneKeywords = new[] { "tai nghe", "headphone", "headset", "earbuds", "bluetooth" };
-        private static readonly string[] GamingKeywords    = new[] { "game", "gaming", "choi game", "ch\u01a1i game", "laptop gaming", "gaming laptop", "stream game", "do hoa game", "\u0111\u1ed3 h\u1ecda game" };
+        private static readonly string[] GamingKeywords    = new[] { "game", "gaming", "choi game", "chơi game", "laptop gaming", "gaming laptop", "stream game", "do hoa game", "đồ họa game" };
 
         private static readonly string[] DetailKeywords = new[]
         {
@@ -74,31 +91,121 @@ namespace LapTopBD.Controllers
             "giá của", "giá bao nhiêu", "cho biết", "review"
         };
 
-        private static string Normalize(string s) => (s ?? string.Empty).ToLowerInvariant();
+        private static readonly string[] StopWords = new[]
+        {
+            "chi tiết", "thông tin", "thông số", "spec", "cấu hình",
+            "xem thêm", "giới thiệu", "mô tả", "tính năng", "đặc điểm",
+            "giá của", "giá bao nhiêu", "cho biết", "review",
+            "của", "bạn", "cho", "tôi", "biết", "về", "sản phẩm",
+            "là", "gì", "có", "không", "thế", "nào", "như", "vậy",
+            "ơi", "ai", "ạ", "nhé", "nha", "với"
+        };
 
-        private static bool IsLaptopIntent(string msg)    => LaptopKeywords.Any(Normalize(msg).Contains) || GamingKeywords.Any(Normalize(msg).Contains);
-        private static bool IsPhoneIntent(string msg)     => PhoneKeywords.Any(Normalize(msg).Contains);
+        private static string Normalize(string s) => (s ?? string.Empty).ToLowerInvariant();
+        private static bool IsDetailIntent(string msg) => DetailKeywords.Any(Normalize(msg).Contains);
+        private static bool IsLaptopIntent(string msg) => LaptopKeywords.Any(Normalize(msg).Contains) || GamingKeywords.Any(Normalize(msg).Contains);
+        private static bool IsPhoneIntent(string msg)  => PhoneKeywords.Any(Normalize(msg).Contains);
         private static bool IsChargerIntent(string msg)   => ChargerKeywords.Any(Normalize(msg).Contains);
         private static bool IsKeyboardIntent(string msg)  => KeyboardKeywords.Any(Normalize(msg).Contains);
         private static bool IsHeadphoneIntent(string msg) => HeadphoneKeywords.Any(Normalize(msg).Contains);
-        private static bool IsDetailIntent(string msg)    => DetailKeywords.Any(Normalize(msg).Contains);
 
-        private static List<ChatProduct> SelectRelevantProducts(List<ChatProduct> products, string message)
+        private static List<string> ExtractProductTokens(string message)
         {
-            if (products == null || products.Count == 0) return new List<ChatProduct>();
+            var lower = Normalize(message);
+            foreach (var sw in StopWords.OrderByDescending(s => s.Length))
+                lower = lower.Replace(sw, " ");
+            return lower.Split(new[] { ' ', ',', '.', '?', '!', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)
+                        .Where(t => t.Length >= 2)
+                        .Distinct()
+                        .ToList();
+        }
 
-            bool MatchesAny(ChatProduct p, string[] keywords) =>
-                keywords.Any(k =>
-                    (p.CategoryName ?? "").Contains(k, StringComparison.OrdinalIgnoreCase) ||
-                    (p.ProductName  ?? "").Contains(k, StringComparison.OrdinalIgnoreCase));
+        private static string DetectCategory(string message)
+        {
+            var m = Normalize(message);
+            if (m.Contains("sạc") || m.Contains("sac") || m.Contains("charger") || m.Contains("adapter") || m.Contains("cáp") || m.Contains("cable")) return "Sạc";
+            if (m.Contains("bàn phím") || m.Contains("ban phim") || m.Contains("keyboard") || m.Contains("mechanical")) return "Bàn phím cơ";
+            if (m.Contains("tai nghe") || m.Contains("headphone") || m.Contains("headset") || m.Contains("earbuds") || m.Contains("airpods")) return "Tai nghe";
+            if (m.Contains("điện thoại") || m.Contains("dien thoai") || m.Contains("phone") || m.Contains("iphone") || m.Contains("samsung") || m.Contains("xiaomi") || m.Contains("oppo")) return "Điện thoại";
+            if (IsLaptopIntent(message)) return "Laptop";
+            return string.Empty;
+        }
 
-            if (IsChargerIntent(message))    return products.Where(p => MatchesAny(p, ChargerKeywords)).OrderByDescending(p => p.ProductId).ToList();
-            if (IsKeyboardIntent(message))   return products.Where(p => MatchesAny(p, KeyboardKeywords)).OrderByDescending(p => p.ProductId).ToList();
-            if (IsHeadphoneIntent(message))  return products.Where(p => MatchesAny(p, HeadphoneKeywords)).OrderByDescending(p => p.ProductId).ToList();
-            if (IsPhoneIntent(message))      return products.Where(p => MatchesAny(p, PhoneKeywords)).OrderByDescending(p => p.ProductId).ToList();
-            if (IsLaptopIntent(message))     return products.Where(p => MatchesAny(p, LaptopKeywords)).OrderByDescending(p => p.ProductId).ToList();
+        // ── Thay self-call HTTP bằng query thẳng vào DB ─────────────────────────
+        private async Task<List<ChatProduct>> LoadProductsAsync(string message)
+        {
+            List<ChatProduct> result;
 
-            return products.OrderByDescending(p => p.ProductId).Take(12).ToList();
+            if (IsDetailIntent(message))
+            {
+                var tokens = ExtractProductTokens(message);
+                if (tokens.Count > 0)
+                {
+                    var all = await _db.Product
+                        .AsNoTracking()
+                        .Include(p => p.Category)
+                        .Select(p => new ChatProduct
+                        {
+                            ProductId          = p.Id,
+                            ProductName        = p.ProductName        ?? string.Empty,
+                            CategoryName       = p.Category != null ? p.Category.CategoryName : string.Empty,
+                            Brand              = p.Brand              ?? string.Empty,
+                            CPU                = p.CPU                ?? string.Empty,
+                            RAM                = p.RAM                ?? string.Empty,
+                            Storage            = p.Storage            ?? string.Empty,
+                            ProductPrice       = p.ProductPrice,
+                            ProductDescription = p.ProductDescription ?? string.Empty,
+                            Slug               = p.Slug               ?? string.Empty,
+                            ProductImage       = p.ProductImage1 != null && p.ProductImage1 != "" ? p.ProductImage1
+                                                 : p.ProductImage2 != null && p.ProductImage2 != "" ? p.ProductImage2
+                                                 : (p.ProductImage3 ?? string.Empty)
+                        })
+                        .ToListAsync();
+
+                    var scored = all
+                        .Select(p => new {
+                            Product = p,
+                            Score = tokens.Count(t =>
+                                p.ProductName.Contains(t, StringComparison.OrdinalIgnoreCase) ||
+                                p.Brand.Contains(t, StringComparison.OrdinalIgnoreCase))
+                        })
+                        .Where(x => x.Score > 0)
+                        .OrderByDescending(x => x.Score)
+                        .Take(3)
+                        .Select(x => x.Product)
+                        .ToList();
+
+                    if (scored.Count > 0) return scored;
+                }
+            }
+
+            var category = DetectCategory(message);
+            var raw = await _db.Product
+                .AsNoTracking()
+                .Include(p => p.Category)
+                .Where(p => category == string.Empty || (p.Category != null && p.Category.CategoryName == category))
+                .Select(p => new ChatProduct
+                {
+                    ProductId          = p.Id,
+                    ProductName        = p.ProductName        ?? string.Empty,
+                    CategoryName       = p.Category != null ? p.Category.CategoryName : string.Empty,
+                    Brand              = p.Brand              ?? string.Empty,
+                    CPU                = p.CPU                ?? string.Empty,
+                    RAM                = p.RAM                ?? string.Empty,
+                    Storage            = p.Storage            ?? string.Empty,
+                    ProductPrice       = p.ProductPrice,
+                    ProductDescription = p.ProductDescription ?? string.Empty,
+                    Slug               = p.Slug               ?? string.Empty,
+                    ProductImage       = p.ProductImage1 != null && p.ProductImage1 != "" ? p.ProductImage1
+                                         : p.ProductImage2 != null && p.ProductImage2 != "" ? p.ProductImage2
+                                         : (p.ProductImage3 ?? string.Empty)
+                })
+                .OrderByDescending(p => p.ProductImage != "")
+                .ThenByDescending(p => p.ProductId)
+                .Take(12)
+                .ToListAsync();
+
+            return raw;
         }
 
         [HttpPost]
@@ -117,57 +224,21 @@ namespace LapTopBD.Controllers
             var groqApiUrl = _config["Groq:ApiUrl"] ?? "https://api.groq.com/openai/v1/chat/completions";
             var groqModel  = _config["Groq:Model"]  ?? "llama-3.3-70b-versatile";
 
-            // ── Log để debug trên Azure ──────────────────────────────────────────
-            _logger.LogInformation("[Chat] ApiKey prefix={Prefix}, Url={Url}, Model={Model}",
-                groqApiKey.Length > 10 ? groqApiKey[..10] + "..." : "TOO_SHORT",
-                groqApiUrl,
-                groqModel);
+            _logger.LogInformation("[Chat] ApiKey prefix={Prefix}, Model={Model}",
+                groqApiKey.Length > 10 ? groqApiKey[..10] + "..." : "TOO_SHORT", groqModel);
 
+            // ── Query thẳng DB, không self-call HTTP ─────────────────────────────
             var products = new List<ChatProduct>();
-            var useBackendProductContext = true;
-            if (useBackendProductContext)
             try
             {
-                // FIX: thêm timeout ngắn để tránh self-call treo trên Azure
-                var internalClient = _httpFactory.CreateClient();
-                internalClient.Timeout = TimeSpan.FromSeconds(5);
-
-                var internalUrl = $"{Request.Scheme}://{Request.Host}/api/internal/products";
-                _logger.LogInformation("[Chat] Calling internal products API: {Url}", internalUrl);
-
-                var payload = JsonSerializer.Serialize(new { message = req.message, conversation = req.conversation });
-                var internalReq = new HttpRequestMessage(HttpMethod.Post, internalUrl)
-                {
-                    Content = new StringContent(payload, Encoding.UTF8, "application/json")
-                };
-
-                using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
-                var internalRes = await internalClient.SendAsync(internalReq, cts.Token);
-                var internalTxt = await internalRes.Content.ReadAsStringAsync();
-
-                if (internalRes.IsSuccessStatusCode)
-                {
-                    var parsed = JsonSerializer.Deserialize<List<ChatProduct>>(internalTxt, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-                    if (parsed != null) products = parsed;
-                    _logger.LogInformation("[Chat] Loaded {Count} products from internal API.", products.Count);
-                }
-                else
-                {
-                    _logger.LogWarning("[Chat] Internal products API {Status}: {Body}", (int)internalRes.StatusCode, internalTxt);
-                }
-
-                products = SelectRelevantProducts(products, req.message);
-            }
-            catch (TaskCanceledException)
-            {
-                _logger.LogWarning("[Chat] Internal products API timeout — bỏ qua, tiếp tục với danh sách trống.");
+                products = await LoadProductsAsync(req.message);
+                _logger.LogInformation("[Chat] Loaded {Count} products from DB.", products.Count);
             }
             catch (Exception ex)
             {
-                _logger.LogWarning(ex, "[Chat] Không thể tải sản phẩm từ internal API — bỏ qua.");
+                _logger.LogWarning(ex, "[Chat] Không thể tải sản phẩm từ DB — tiếp tục với danh sách trống.");
             }
 
-            bool isDetail = false;
             var systemMessage = BuildFlexibleProductSystemMessage(products);
 
             try
@@ -180,33 +251,22 @@ namespace LapTopBD.Controllers
 
                 if (string.IsNullOrWhiteSpace(reply))
                 {
-                    _logger.LogWarning(
-                        "[Chat] Groq khong co noi dung. Model={Model}, Status={Status}, Error={Error}, Body={Body}",
-                        result.Model,
-                        result.StatusCode,
-                        result.Error,
-                        Shorten(SanitizeInline(result.RawBody), 1000));
-
-                    reply = BuildLocalFallbackReply(products, isDetail);
+                    _logger.LogWarning("[Chat] Groq empty. Model={Model}, Status={Status}, Error={Error}, Body={Body}",
+                        result.Model, result.StatusCode, result.Error, Shorten(SanitizeInline(result.RawBody), 500));
+                    reply = BuildLocalFallbackReply(products);
                 }
 
                 if (string.IsNullOrWhiteSpace(reply))
-                {
-                    _logger.LogWarning("[Chat] Groq trả về phản hồi rỗng.");
                     return StatusCode(502, new { message = "AI trả về phản hồi rỗng." });
-                }
 
-                if (!isDetail)
-                {
-                    try { reply = EnsureProductImagesInReply(reply, products); }
-                    catch (Exception ex) { _logger.LogWarning(ex, "EnsureProductImages failed"); }
-                }
+                try { reply = EnsureProductImagesInReply(reply, products); }
+                catch (Exception ex) { _logger.LogWarning(ex, "EnsureProductImages failed"); }
 
                 return Ok(new ChatResponse { reply = reply });
             }
             catch (TaskCanceledException)
             {
-                _logger.LogError("[Chat] Groq API timeout sau 30 giây.");
+                _logger.LogError("[Chat] Groq API timeout.");
                 return StatusCode(504, new { message = "AI phản hồi quá chậm, vui lòng thử lại." });
             }
             catch (Exception ex)
@@ -216,22 +276,6 @@ namespace LapTopBD.Controllers
             }
         }
 
-        private static string BuildNaturalSystemMessage()
-        {
-            var sb = new StringBuilder();
-            sb.AppendLine("Ban la tro ly AI tu van mua sam cua shop laptop/linh kien.");
-            sb.AppendLine("Tra loi bang tieng Viet tu nhien, than thien, co suy nghi va linh hoat.");
-            sb.AppendLine("Khong bi rang buoc vao danh sach san pham backend, khong can tra dung mot mau co dinh.");
-            sb.AppendLine("Khong mo dau bang cau xin loi kieu 'toi khong co thong tin cu the ve san pham cua shop' khi nguoi dung chi hoi chung.");
-            sb.AppendLine("Neu nguoi dung hoi chung nhu 'laptop cua shop', 'shop co laptop gi', 'tu van laptop', hay tra loi nhu nhan vien shop: shop co nhieu nhom laptop theo nhu cau hoc tap, van phong, gaming, do hoa, mong nhe; sau do hoi ngan sach va nhu cau.");
-            sb.AppendLine("Neu nguoi dung hoi tu van mua laptop/san pham, hay hoi them ngan gon khi thieu thong tin quan trong nhu ngan sach, nhu cau, kich thuoc, uu tien pin/hieu nang/thiet ke.");
-            sb.AppendLine("Khi da du thong tin, dua ra goi y co ly do ro rang, so sanh uu/nhuoc diem va ket luan de nguoi dung de chon.");
-            sb.AppendLine("Chi nhac can kiem tra lai tren website/shop khi nguoi dung hoi gia chinh xac, hang con hay het, bao hanh, khuyen mai, hoac chinh sach hien tai.");
-            sb.AppendLine("Khong tao link mua hang, khong bia ID san pham, khong noi nhu the da xem duoc co so du lieu noi bo.");
-            sb.AppendLine("Giu cau tra loi vua du: khong qua dai, khong may moc, uu tien giai thich huu ich.");
-            return sb.ToString();
-        }
-
         private static string BuildFlexibleProductSystemMessage(List<ChatProduct> products)
         {
             var sb = new StringBuilder();
@@ -239,13 +283,12 @@ namespace LapTopBD.Controllers
             sb.AppendLine("Muc tieu: tra loi linh hoat, tu nhien, thong minh nhu dang tu van that, nhung khi de xuat san pham thi phai dung san pham trong danh sach duoi day de frontend render thanh box co nut mua ngay.");
             sb.AppendLine("Khong mo dau bang cau xin loi kieu 'toi khong co thong tin cu the'. Neu cau hoi chung, hay gioi thieu ngan gon cac nhom lua chon va hoi them nhu cau/ngan sach.");
             sb.AppendLine("Neu nguoi dung co nhu cau ro rang, hay chon 2-3 san pham phu hop nhat, giai thich vi sao hop, uu/nhuoc diem ngan gon.");
-            sb.AppendLine("Neu danh sach co san pham laptop va nguoi dung hoi choi game/laptop, phai uu tien de xuat laptop; khong chuyen sang dien thoai/tai nghe tru khi nguoi dung hoi ro ve dien thoai/tai nghe.");
             sb.AppendLine("Duoc noi chuyen mem mai truoc va sau danh sach san pham. Khong can may moc theo mot mau duy nhat.");
-            sb.AppendLine("Quan trong: moi san pham de xuat phai viet thanh block rieng theo dung cau truc sau de hien thi box:");
+            sb.AppendLine("Quan trong: moi san pham de xuat phai viet thanh block rieng theo dung cau truc sau:");
             sb.AppendLine("- [Ten san pham] - [Gia] VND - Mua ngay: /Cart/Checkout?selectedProductIds=[ID]");
             sb.AppendLine("  Điểm phù hợp: [mot cau ngan gon]");
             sb.AppendLine("Khong bia ID, link, gia, anh hoac ten san pham ngoai danh sach.");
-            sb.AppendLine("Neu danh sach trong hoac khong co san pham phu hop, hay tu van cach chon laptop theo nhu cau va hoi them thong tin, khong noi cut ngang.");
+            sb.AppendLine("Neu danh sach trong hoac khong co san pham phu hop, hay tu van cach chon laptop theo nhu cau va hoi them thong tin.");
             sb.AppendLine();
 
             if (products == null || products.Count == 0)
@@ -267,91 +310,6 @@ namespace LapTopBD.Controllers
                 if (!string.IsNullOrWhiteSpace(p.Storage))            sb.Append($" | SSD: {Shorten(SanitizeInline(p.Storage), 60)}");
                 if (!string.IsNullOrWhiteSpace(p.ProductDescription)) sb.Append($" | Mo ta: {Shorten(SanitizeInline(p.ProductDescription), 180)}");
                 if (!string.IsNullOrWhiteSpace(p.ProductImage))       sb.Append($" | Anh: {p.ProductImage}");
-                sb.AppendLine();
-            }
-
-            return sb.ToString();
-        }
-
-        private static string BuildSystemMessage(List<ChatProduct> products)
-        {
-            var sb = new StringBuilder();
-            sb.AppendLine("Bạn là nhân viên bán hàng AI của shop. Quy tắc BẮT BUỘC:");
-            sb.AppendLine("1. CHỈ được tư vấn sản phẩm có trong DANH SÁCH bên dưới. TUYỆT ĐỐI không được bịa, không đề xuất bất kỳ sản phẩm nào ngoài danh sách.");
-            sb.AppendLine("2. Nếu danh sách trống hoặc không có sản phẩm phù hợp, trả lời: 'Shop hiện chưa có sản phẩm phù hợp với yêu cầu này.'");
-            sb.AppendLine("3. Trả lời bằng tiếng Việt, ngắn gọn, thân thiện. Gợi ý 2-3 sản phẩm phù hợp nhất.");
-            sb.AppendLine("4. Mỗi sản phẩm gợi ý phải xuống dòng riêng theo đúng mẫu:");
-            sb.AppendLine("   - [Tên sản phẩm] — [Giá] VND — Mua ngay: /Cart/Checkout?selectedProductIds=[ID]");
-            sb.AppendLine("   Nếu có ảnh, dòng kế tiếp ghi:   Ảnh: [url ảnh]");
-            sb.AppendLine();
-
-            if (products == null || products.Count == 0)
-            {
-                sb.AppendLine("DANH SÁCH SẢN PHẨM: (trống)");
-                return sb.ToString();
-            }
-
-            sb.AppendLine($"DANH SÁCH SẢN PHẨM ({products.Count} sản phẩm — chỉ dùng các ID sau):");
-            foreach (var p in products)
-            {
-                sb.Append($"[ID:{p.ProductId}] {p.ProductName}");
-                sb.Append($" | Giá: {p.ProductPrice:N0} VND");
-                sb.Append($" | Link: /Cart/Checkout?selectedProductIds={p.ProductId}");
-                if (!string.IsNullOrWhiteSpace(p.CategoryName))       sb.Append($" | Danh mục: {p.CategoryName}");
-                if (!string.IsNullOrWhiteSpace(p.Brand))              sb.Append($" | Hãng: {Shorten(SanitizeInline(p.Brand), 40)}");
-                if (!string.IsNullOrWhiteSpace(p.CPU))                sb.Append($" | CPU: {Shorten(SanitizeInline(p.CPU), 80)}");
-                if (!string.IsNullOrWhiteSpace(p.RAM))                sb.Append($" | RAM: {Shorten(SanitizeInline(p.RAM), 40)}");
-                if (!string.IsNullOrWhiteSpace(p.Storage))            sb.Append($" | SSD: {Shorten(SanitizeInline(p.Storage), 60)}");
-                if (!string.IsNullOrWhiteSpace(p.ProductDescription)) sb.Append($" | Mô tả: {Shorten(SanitizeInline(p.ProductDescription), 150)}");
-                if (!string.IsNullOrWhiteSpace(p.ProductImage))       sb.Append($" | Ảnh: {p.ProductImage}");
-                sb.AppendLine();
-            }
-
-            return sb.ToString();
-        }
-
-        private static string BuildDetailSystemMessage(List<ChatProduct> products)
-        {
-            var sb = new StringBuilder();
-            sb.AppendLine("Bạn là nhân viên bán hàng AI của shop. Quy tắc BẮT BUỘC:");
-            sb.AppendLine("1. CHỈ dùng sản phẩm trong DANH SÁCH bên dưới. TUYỆT ĐỐI không bịa.");
-            sb.AppendLine("2. Khi người dùng hỏi thông tin / chi tiết / thông số của một sản phẩm, trả về ĐÚNG định dạng sau và KHÔNG thêm bất kỳ text nào khác ngoài block:");
-            sb.AppendLine();
-            sb.AppendLine("```product-detail");
-            sb.AppendLine("id: [ProductId]");
-            sb.AppendLine("name: [Tên sản phẩm]");
-            sb.AppendLine("price: [Giá dạng số, không có dấu phẩy]");
-            sb.AppendLine("brand: [Hãng]");
-            sb.AppendLine("cpu: [CPU nếu có, để trống nếu không]");
-            sb.AppendLine("ram: [RAM nếu có, để trống nếu không]");
-            sb.AppendLine("storage: [Storage nếu có, để trống nếu không]");
-            sb.AppendLine("description: [Mô tả ngắn gọn bằng tiếng Việt]");
-            sb.AppendLine("image: [url ảnh]");
-            sb.AppendLine("link: /Cart/Checkout?selectedProductIds=[ProductId]");
-            sb.AppendLine("```");
-            sb.AppendLine();
-            sb.AppendLine("3. Nếu không tìm thấy sản phẩm phù hợp, chỉ trả lời: 'Shop hiện chưa có sản phẩm phù hợp.'");
-            sb.AppendLine();
-
-            if (products == null || products.Count == 0)
-            {
-                sb.AppendLine("DANH SÁCH SẢN PHẨM: (trống)");
-                return sb.ToString();
-            }
-
-            sb.AppendLine($"DANH SÁCH SẢN PHẨM ({products.Count} sản phẩm):");
-            foreach (var p in products)
-            {
-                sb.Append($"[ID:{p.ProductId}] {p.ProductName}");
-                sb.Append($" | Giá: {p.ProductPrice:N0} VND");
-                sb.Append($" | Link: /Cart/Checkout?selectedProductIds={p.ProductId}");
-                if (!string.IsNullOrWhiteSpace(p.CategoryName))       sb.Append($" | Danh mục: {p.CategoryName}");
-                if (!string.IsNullOrWhiteSpace(p.Brand))              sb.Append($" | Hãng: {SanitizeInline(p.Brand)}");
-                if (!string.IsNullOrWhiteSpace(p.CPU))                sb.Append($" | CPU: {Shorten(SanitizeInline(p.CPU), 80)}");
-                if (!string.IsNullOrWhiteSpace(p.RAM))                sb.Append($" | RAM: {SanitizeInline(p.RAM)}");
-                if (!string.IsNullOrWhiteSpace(p.Storage))            sb.Append($" | SSD: {SanitizeInline(p.Storage)}");
-                if (!string.IsNullOrWhiteSpace(p.ProductDescription)) sb.Append($" | Mô tả: {Shorten(SanitizeInline(p.ProductDescription), 200)}");
-                if (!string.IsNullOrWhiteSpace(p.ProductImage))       sb.Append($" | Ảnh: {p.ProductImage}");
                 sb.AppendLine();
             }
 
@@ -429,17 +387,15 @@ namespace LapTopBD.Controllers
         private static List<object> BuildMessages(string systemMessage, string userMessage, List<ConversationItem> conversation)
         {
             var list = new List<object> { new { role = "system", content = systemMessage } };
-
             if (conversation != null)
             {
                 foreach (var c in conversation.TakeLast(10))
                 {
                     if (string.IsNullOrWhiteSpace(c.content)) continue;
                     var role = string.Equals(c.role, "assistant", StringComparison.OrdinalIgnoreCase) ? "assistant" : "user";
-                    list.Add(new { role, content = c.content ?? string.Empty });
+                    list.Add(new { role, content = c.content });
                 }
             }
-
             list.Add(new { role = "user", content = userMessage });
             return list;
         }
@@ -462,36 +418,18 @@ namespace LapTopBD.Controllers
             return txt;
         }
 
-        private static string BuildLocalFallbackReply(List<ChatProduct> products, bool isDetail)
+        private static string BuildLocalFallbackReply(List<ChatProduct> products)
         {
             if (products == null || products.Count == 0)
-                return "M\u00ecnh ch\u01b0a nh\u1eadn \u0111\u01b0\u1ee3c ph\u1ea3n h\u1ed3i t\u1eeb AI l\u00fac n\u00e0y. B\u1ea1n th\u1eed h\u1ecfi l\u1ea1i ng\u1eafn h\u01a1n ho\u1eb7c cho m\u00ecnh th\u00eam ng\u00e2n s\u00e1ch, nhu c\u1ea7u s\u1eed d\u1ee5ng \u0111\u1ec3 m\u00ecnh t\u01b0 v\u1ea5n ti\u1ebfp nh\u00e9.";
-
-            if (isDetail)
-            {
-                var p = products.First();
-                return
-                    "```product-detail\n" +
-                    $"id: {p.ProductId}\n" +
-                    $"name: {p.ProductName}\n" +
-                    $"price: {p.ProductPrice:0}\n" +
-                    $"brand: {p.Brand}\n" +
-                    $"cpu: {p.CPU}\n" +
-                    $"ram: {p.RAM}\n" +
-                    $"storage: {p.Storage}\n" +
-                    $"description: {Shorten(SanitizeInline(p.ProductDescription), 220)}\n" +
-                    $"image: {p.ProductImage}\n" +
-                    $"link: /Cart/Checkout?selectedProductIds={p.ProductId}\n" +
-                    "```";
-            }
+                return "Mình chưa nhận được phản hồi từ AI lúc này. Bạn thử hỏi lại ngắn hơn hoặc cho mình biết ngân sách, nhu cầu để mình tư vấn tiếp nhé.";
 
             var sb = new StringBuilder();
-            sb.AppendLine("M\u00ecnh g\u1ee3i \u00fd v\u00e0i s\u1ea3n ph\u1ea9m ph\u00f9 h\u1ee3p trong shop:");
+            sb.AppendLine("Mình gợi ý vài sản phẩm phù hợp trong shop:");
             foreach (var p in products.Take(3))
             {
                 sb.AppendLine($"- {p.ProductName} - {p.ProductPrice:N0} VND - Mua ngay: /Cart/Checkout?selectedProductIds={p.ProductId}");
                 if (!string.IsNullOrWhiteSpace(p.ProductImage))
-                    sb.AppendLine($"  \u1ea2nh: {p.ProductImage}");
+                    sb.AppendLine($"  Ảnh: {p.ProductImage}");
             }
             return sb.ToString();
         }
@@ -499,7 +437,6 @@ namespace LapTopBD.Controllers
         private static string EnsureProductImagesInReply(string reply, List<ChatProduct> products)
         {
             if (string.IsNullOrWhiteSpace(reply) || products == null || products.Count == 0) return reply;
-
             var text = reply;
             foreach (var p in products)
             {
@@ -533,4 +470,3 @@ namespace LapTopBD.Controllers
         }
     }
 }
-
