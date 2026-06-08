@@ -44,6 +44,15 @@ namespace LapTopBD.Controllers
             public string ProductImage { get; set; } = string.Empty;
         }
 
+        private sealed class GroqCallResult
+        {
+            public string? Reply { get; set; }
+            public string? Error { get; set; }
+            public int? StatusCode { get; set; }
+            public string Model { get; set; } = string.Empty;
+            public string RawBody { get; set; } = string.Empty;
+        }
+
         private static readonly string[] ModelFallbacks = new[]
         {
             "llama-3.3-70b-versatile",
@@ -165,7 +174,20 @@ namespace LapTopBD.Controllers
                 var groqClient = _httpFactory.CreateClient();
                 groqClient.Timeout = TimeSpan.FromSeconds(30);
 
-                var reply = await InvokeGroqAsync(groqClient, groqApiUrl, groqApiKey, groqModel, systemMessage, req.message, req.conversation ?? new());
+                var result = await InvokeGroqAsync(groqClient, groqApiUrl, groqApiKey, groqModel, systemMessage, req.message, req.conversation ?? new());
+                var reply = result.Reply;
+
+                if (string.IsNullOrWhiteSpace(reply))
+                {
+                    _logger.LogWarning(
+                        "[Chat] Groq khong co noi dung. Model={Model}, Status={Status}, Error={Error}, Body={Body}",
+                        result.Model,
+                        result.StatusCode,
+                        result.Error,
+                        Shorten(SanitizeInline(result.RawBody), 1000));
+
+                    reply = BuildLocalFallbackReply(products, isDetail);
+                }
 
                 if (string.IsNullOrWhiteSpace(reply))
                 {
@@ -278,7 +300,7 @@ namespace LapTopBD.Controllers
             return sb.ToString();
         }
 
-        private static async Task<string?> InvokeGroqAsync(
+        private static async Task<GroqCallResult> InvokeGroqAsync(
             HttpClient client, string apiUrl, string apiKey, string model,
             string systemMessage, string userMessage, List<ConversationItem> conversation)
         {
@@ -290,6 +312,7 @@ namespace LapTopBD.Controllers
 
             foreach (var candidateModel in modelsToTry)
             {
+                var currentResult = new GroqCallResult { Model = candidateModel };
                 var messages = BuildMessages(systemMessage, userMessage, conversation);
                 var payload  = JsonSerializer.Serialize(new
                 {
@@ -307,6 +330,8 @@ namespace LapTopBD.Controllers
 
                 var res = await client.SendAsync(request);
                 var txt = await res.Content.ReadAsStringAsync();
+                currentResult.StatusCode = (int)res.StatusCode;
+                currentResult.RawBody = txt;
 
                 if (!res.IsSuccessStatusCode)
                 {
@@ -318,6 +343,7 @@ namespace LapTopBD.Controllers
                         {
                             var code = errEl.TryGetProperty("code",    out var c) ? c.GetString() : null;
                             var msg  = errEl.TryGetProperty("message", out var m) ? m.GetString() : null;
+                            currentResult.Error = string.IsNullOrWhiteSpace(code) ? msg : $"{code}: {msg}";
                             retry = string.Equals(code, "model_decommissioned", StringComparison.OrdinalIgnoreCase)
                                  || (msg?.Contains("decommissioned", StringComparison.OrdinalIgnoreCase) ?? false)
                                  || ((int)res.StatusCode is 400 or 404);
@@ -326,14 +352,20 @@ namespace LapTopBD.Controllers
                     catch { retry = (int)res.StatusCode is 400 or 404; }
 
                     if (retry) continue;
-                    return null;
+                    if (string.IsNullOrWhiteSpace(currentResult.Error))
+                        currentResult.Error = $"Groq HTTP {(int)res.StatusCode}";
+                    return currentResult;
                 }
 
-                var reply = ParseGroqReply(txt);
-                if (!string.IsNullOrWhiteSpace(reply)) return reply;
+                currentResult.Reply = ParseGroqReply(txt);
+                if (!string.IsNullOrWhiteSpace(currentResult.Reply)) return currentResult;
             }
 
-            return null;
+            return new GroqCallResult
+            {
+                Model = string.Join(", ", modelsToTry),
+                Error = "Tat ca model fallback deu khong tra ve noi dung hop le."
+            };
         }
 
         private static List<object> BuildMessages(string systemMessage, string userMessage, List<ConversationItem> conversation)
@@ -344,6 +376,7 @@ namespace LapTopBD.Controllers
             {
                 foreach (var c in conversation.TakeLast(10))
                 {
+                    if (string.IsNullOrWhiteSpace(c.content)) continue;
                     var role = string.Equals(c.role, "assistant", StringComparison.OrdinalIgnoreCase) ? "assistant" : "user";
                     list.Add(new { role, content = c.content ?? string.Empty });
                 }
@@ -369,6 +402,42 @@ namespace LapTopBD.Controllers
             }
             catch { }
             return txt;
+        }
+
+        private static string BuildLocalFallbackReply(List<ChatProduct> products, bool isDetail)
+        {
+            if (products == null || products.Count == 0)
+                return isDetail
+                    ? "Shop hi\u1ec7n ch\u01b0a c\u00f3 s\u1ea3n ph\u1ea9m ph\u00f9 h\u1ee3p."
+                    : "Shop hi\u1ec7n ch\u01b0a c\u00f3 s\u1ea3n ph\u1ea9m ph\u00f9 h\u1ee3p v\u1edbi y\u00eau c\u1ea7u n\u00e0y.";
+
+            if (isDetail)
+            {
+                var p = products.First();
+                return
+                    "```product-detail\n" +
+                    $"id: {p.ProductId}\n" +
+                    $"name: {p.ProductName}\n" +
+                    $"price: {p.ProductPrice:0}\n" +
+                    $"brand: {p.Brand}\n" +
+                    $"cpu: {p.CPU}\n" +
+                    $"ram: {p.RAM}\n" +
+                    $"storage: {p.Storage}\n" +
+                    $"description: {Shorten(SanitizeInline(p.ProductDescription), 220)}\n" +
+                    $"image: {p.ProductImage}\n" +
+                    $"link: /Cart/Checkout?selectedProductIds={p.ProductId}\n" +
+                    "```";
+            }
+
+            var sb = new StringBuilder();
+            sb.AppendLine("M\u00ecnh g\u1ee3i \u00fd v\u00e0i s\u1ea3n ph\u1ea9m ph\u00f9 h\u1ee3p trong shop:");
+            foreach (var p in products.Take(3))
+            {
+                sb.AppendLine($"- {p.ProductName} - {p.ProductPrice:N0} VND - Mua ngay: /Cart/Checkout?selectedProductIds={p.ProductId}");
+                if (!string.IsNullOrWhiteSpace(p.ProductImage))
+                    sb.AppendLine($"  \u1ea2nh: {p.ProductImage}");
+            }
+            return sb.ToString();
         }
 
         private static string EnsureProductImagesInReply(string reply, List<ChatProduct> products)
