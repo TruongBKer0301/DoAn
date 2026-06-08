@@ -57,7 +57,6 @@ namespace LapTopBD.Controllers
         private static readonly string[] KeyboardKeywords  = new[] { "bàn phím", "bàn phím cơ", "keyboard", "mechanical", "gaming keyboard" };
         private static readonly string[] HeadphoneKeywords = new[] { "tai nghe", "headphone", "headset", "earbuds", "bluetooth" };
 
-        // ── NEW: detail intent keywords ──────────────────────────────────────────
         private static readonly string[] DetailKeywords = new[]
         {
             "chi tiết", "thông tin", "thông số", "spec", "cấu hình",
@@ -72,8 +71,6 @@ namespace LapTopBD.Controllers
         private static bool IsChargerIntent(string msg)   => ChargerKeywords.Any(Normalize(msg).Contains);
         private static bool IsKeyboardIntent(string msg)  => KeyboardKeywords.Any(Normalize(msg).Contains);
         private static bool IsHeadphoneIntent(string msg) => HeadphoneKeywords.Any(Normalize(msg).Contains);
-
-        // ── NEW ──────────────────────────────────────────────────────────────────
         private static bool IsDetailIntent(string msg)    => DetailKeywords.Any(Normalize(msg).Contains);
 
         private static List<ChatProduct> SelectRelevantProducts(List<ChatProduct> products, string message)
@@ -110,37 +107,54 @@ namespace LapTopBD.Controllers
             var groqApiUrl = _config["Groq:ApiUrl"] ?? "https://api.groq.com/openai/v1/chat/completions";
             var groqModel  = _config["Groq:Model"]  ?? "llama-3.3-70b-versatile";
 
+            // ── Log để debug trên Azure ──────────────────────────────────────────
+            _logger.LogInformation("[Chat] ApiKey prefix={Prefix}, Url={Url}, Model={Model}",
+                groqApiKey.Length > 10 ? groqApiKey[..10] + "..." : "TOO_SHORT",
+                groqApiUrl,
+                groqModel);
+
             var products = new List<ChatProduct>();
             try
             {
-                var client = _httpFactory.CreateClient();
+                // FIX: thêm timeout ngắn để tránh self-call treo trên Azure
+                var internalClient = _httpFactory.CreateClient();
+                internalClient.Timeout = TimeSpan.FromSeconds(5);
+
                 var internalUrl = $"{Request.Scheme}://{Request.Host}/api/internal/products";
+                _logger.LogInformation("[Chat] Calling internal products API: {Url}", internalUrl);
+
                 var payload = JsonSerializer.Serialize(new { message = req.message, conversation = req.conversation });
                 var internalReq = new HttpRequestMessage(HttpMethod.Post, internalUrl)
                 {
                     Content = new StringContent(payload, Encoding.UTF8, "application/json")
                 };
-                var internalRes = await client.SendAsync(internalReq);
+
+                using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
+                var internalRes = await internalClient.SendAsync(internalReq, cts.Token);
                 var internalTxt = await internalRes.Content.ReadAsStringAsync();
 
                 if (internalRes.IsSuccessStatusCode)
                 {
                     var parsed = JsonSerializer.Deserialize<List<ChatProduct>>(internalTxt, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
                     if (parsed != null) products = parsed;
+                    _logger.LogInformation("[Chat] Loaded {Count} products from internal API.", products.Count);
                 }
                 else
                 {
-                    _logger.LogWarning("Internal products API {Status}: {Body}", (int)internalRes.StatusCode, internalTxt);
+                    _logger.LogWarning("[Chat] Internal products API {Status}: {Body}", (int)internalRes.StatusCode, internalTxt);
                 }
 
                 products = SelectRelevantProducts(products, req.message);
             }
+            catch (TaskCanceledException)
+            {
+                _logger.LogWarning("[Chat] Internal products API timeout — bỏ qua, tiếp tục với danh sách trống.");
+            }
             catch (Exception ex)
             {
-                _logger.LogWarning(ex, "Không thể tải sản phẩm từ internal API.");
+                _logger.LogWarning(ex, "[Chat] Không thể tải sản phẩm từ internal API — bỏ qua.");
             }
 
-            // ── NEW: chọn system prompt theo intent ──────────────────────────────
             bool isDetail = IsDetailIntent(req.message);
             var systemMessage = isDetail
                 ? BuildDetailSystemMessage(products)
@@ -148,16 +162,17 @@ namespace LapTopBD.Controllers
 
             try
             {
-                var client = _httpFactory.CreateClient();
-                var reply  = await InvokeGroqAsync(client, groqApiUrl, groqApiKey, groqModel, systemMessage, req.message, req.conversation ?? new());
+                var groqClient = _httpFactory.CreateClient();
+                groqClient.Timeout = TimeSpan.FromSeconds(30);
+
+                var reply = await InvokeGroqAsync(groqClient, groqApiUrl, groqApiKey, groqModel, systemMessage, req.message, req.conversation ?? new());
 
                 if (string.IsNullOrWhiteSpace(reply))
                 {
-                    _logger.LogWarning("Groq trả về phản hồi rỗng.");
+                    _logger.LogWarning("[Chat] Groq trả về phản hồi rỗng.");
                     return StatusCode(502, new { message = "AI trả về phản hồi rỗng." });
                 }
 
-                // Chỉ inject ảnh cho mode gợi ý thông thường, không phải detail mode
                 if (!isDetail)
                 {
                     try { reply = EnsureProductImagesInReply(reply, products); }
@@ -166,14 +181,18 @@ namespace LapTopBD.Controllers
 
                 return Ok(new ChatResponse { reply = reply });
             }
+            catch (TaskCanceledException)
+            {
+                _logger.LogError("[Chat] Groq API timeout sau 30 giây.");
+                return StatusCode(504, new { message = "AI phản hồi quá chậm, vui lòng thử lại." });
+            }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Groq API call failed");
+                _logger.LogError(ex, "[Chat] Groq API call failed");
                 return StatusCode(500, new { message = "AI chat failed." });
             }
         }
 
-        // ── Prompt gợi ý sản phẩm (giữ nguyên logic cũ) ─────────────────────────
         private static string BuildSystemMessage(List<ChatProduct> products)
         {
             var sb = new StringBuilder();
@@ -211,7 +230,6 @@ namespace LapTopBD.Controllers
             return sb.ToString();
         }
 
-        // ── NEW: Prompt thông tin chi tiết → AI trả block ```product-detail``` ──
         private static string BuildDetailSystemMessage(List<ChatProduct> products)
         {
             var sb = new StringBuilder();
